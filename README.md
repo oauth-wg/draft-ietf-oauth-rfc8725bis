@@ -1,6 +1,6 @@
-# TODO - Your title
+# JSON Web Token Best Current Practices
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "JSON Web Token Best Current Practices" (RFC8725bis).
 
 * [Editor's Copy](https://yaronf.github.io/draft-sheffer-oauth-rfc8725bis/#go.draft-sheffer-oauth-rfc8725bis.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-sheffer-oauth-rfc8725bis)
