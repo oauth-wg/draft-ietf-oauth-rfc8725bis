@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-05T00:54:12.875916+00:00",
+  "timestamp": "2025-01-07T00:50:13.831733+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -49,6 +49,135 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDONgvdIs6lD8EI",
+      "title": "Mitigation for Billion Hashes Attack",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/1",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nDuring our testing, nine libraries were vulnerable to the Billion Hashes Attack. The root cause of this issue is that there is no limit on the size of the p2c claim in the JWE encrypted by the PBES2 algorithm, which causes the server to run billions of hash calculations when decrypting the JWE, causing a denial of service attack. Therefore, we propose adding a warning about this threat in RFC8725 and recommending an upper limit on the size of the p2c claim to mitigate the risk.\r\n",
+      "createdAt": "2025-01-05T13:22:41Z",
+      "updatedAt": "2025-01-05T14:07:43Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "See also https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
+          "createdAt": "2025-01-05T14:07:42Z",
+          "updatedAt": "2025-01-05T14:07:42Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDONgvdIs6lD8N6",
+      "title": "Mitigation for JWT Format Confusion",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/2",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nWe found four libraries that support JSON-type JWS when parsing JWT. If the user extracts the payload by string interception after verification, the attacker can forge the content, which leads to JWT Format Confusion. We found such an exploitation case in Openshift Telemeter (CVE-2024-5037[1]) and Kubernetes identity verification[2] that supports parsing JSON JWS and leading to authentication bypass. Therefore, we propose to include this threat in RFC8725 for systematic consideration and advise against parsing JSON JWSs.\r\n\r\n[1]: https://nvd.nist.gov/vuln/detail/cve-2024-5037\r\n[2]: https://github.com/kubernetes/kubernetes/pull/123540",
+      "createdAt": "2025-01-05T13:24:15Z",
+      "updatedAt": "2025-01-05T13:59:55Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "See also https://bugzilla.redhat.com/show_bug.cgi?id=2272339\r\n\r\nAnd \"polyglot JWS\" here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
+          "createdAt": "2025-01-05T13:59:54Z",
+          "updatedAt": "2025-01-05T13:59:54Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDONgvdIs6lD8aL",
+      "title": "Mitigation for Compression DoS",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/3",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWE allows the payload to be compressed and then decompressed after the recipient decrypts the JWE. However, we observed that 13 libraries did not check the length of the JWE when decompressing it. This means that an attacker can encrypt a very long and malicious JWT and send it to the recipient, causing a denial of service attack. Therefore, we suggest adding this issue in RFC8725 and recommending a upper limit on the length of JWE.",
+      "createdAt": "2025-01-05T13:26:15Z",
+      "updatedAt": "2025-01-05T13:26:15Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDONgvdIs6lD8gR",
+      "title": "Mitigation for JWS/JWE Confusion",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/4",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWT allows users to pass in JWS and JWE when parsing, but mixing these two tokens will cause security issues. During our testing, we found two libraries are vulnerable to this issue where attackers use public key encrypted JWE to bypass the parsing of JWT using asymmetric encryption algorithms. The root cause of this security issue is that the JWK implemented allows both public and private keys to be included, resulting in a bypass even if the algorithm is verified according to the method mentioned in RFC8725 3.1 (check whether the RSA algorithm is used). Therefore, we propose adding a warning about this threat in RFC8725 and advising developers not to include both public and private keys in JWK, and check the \"use\" claim in JWK before parsing JWT.",
+      "createdAt": "2025-01-05T13:27:14Z",
+      "updatedAt": "2025-01-05T14:01:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "See also \"sign/encrypt confusion\" here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
+          "createdAt": "2025-01-05T14:01:17Z",
+          "updatedAt": "2025-01-05T14:01:17Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDONgvdIs6lD-l3",
+      "title": "Key Identification guidance",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/5",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
+      "createdAt": "2025-01-05T13:48:38Z",
+      "updatedAt": "2025-01-05T19:53:37Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "It would be fine to describe how the `kid` header parameter should be used to perform key identification.\r\n\r\n@hannestschofenig warns against key identification information in the payload of a JWT but doesn't give any examples of when and why this is done.  I'd like to understand the nature of the problem before talking about solutions.\r\n\r\nThat said, it's normal to use claims from the payload - in particular, the `iss` claim - in the procedure to retrieve the keys.  For instance, [Obtaining OpenID Provider Configuration Information](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) requires appending `.well-known/openid-configuration` to the `iss` claim value in an ID Token as part of the process of retrieving the signing keys.  This is a feature - not a bug - as it guarantees that the keys belong to the issuer.\r\n\r\nOur target audience should be all kinds of developers - both library and application developers.",
+          "createdAt": "2025-01-05T19:53:37Z",
+          "updatedAt": "2025-01-05T19:53:37Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDONgvdIs6lEAKp",
+      "title": "Case sensitivity of algorithm names",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/6",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "See slide 11 here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
+      "createdAt": "2025-01-05T14:03:47Z",
+      "updatedAt": "2025-01-05T14:03:48Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
