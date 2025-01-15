@@ -7,7 +7,7 @@ Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
 Expires: 19 July 2025                                                   
                                                                 M. Jones
-                                                               Microsoft
+                                                  Self-Issued Consulting
                                                          15 January 2025
 
 
@@ -688,6 +688,6 @@ Authors' Addresses
 
 
    Michael B. Jones
-   Microsoft
-   Email: mbj@microsoft.com
+   Self-Issued Consulting
+   Email: michael_b_jones@hotmail.com
    URI:   https://self-issued.info/
