@@ -702,13 +702,11 @@ As discussed in  {{use-typ}}, for new JWT
 
 
 
---- back
 
 
 
 
 # Acknowledgements {#acknowledgements}
-{: numbered='false'}
 
  Thanks to  Antonio Sanso for bringing the
  "ECDH-ES" invalid point attack to the attention
@@ -722,5 +720,12 @@ and  Éric Vyncke
 for their reviews.
 
 
+--- back
 
+# Document History
 
+[[Note to RFC Editor: please remove before publication.]]
+
+## draft-sheffer-oauth-rfc8725bis-00
+
+* Initial version, text is identical to RFC 8725.
