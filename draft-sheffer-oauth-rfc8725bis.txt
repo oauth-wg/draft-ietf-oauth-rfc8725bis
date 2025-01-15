@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 24 June 2025                                                   
+Expires: 19 July 2025                                                   
                                                                 M. Jones
                                                                Microsoft
-                                                        21 December 2024
+                                                         15 January 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,11 +40,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 June 2025.
+   This Internet-Draft will expire on 19 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -87,10 +87,12 @@ Table of Contents
             of JWTs
    4.  Security Considerations
    5.  IANA Considerations
-   6.  References
-     6.1.  Normative References
-     6.2.  Informative References
-   Acknowledgements
+   6.  Acknowledgements
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
+   Appendix A.  Document History
+     A.1.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -523,9 +525,20 @@ Table of Contents
 
    This document has no IANA actions.
 
-6.  References
+6.  Acknowledgements
 
-6.1.  Normative References
+   Thanks to Antonio Sanso for bringing the "ECDH-ES" invalid point
+   attack to the attention of JWE and JWT implementers.  Tim McLean
+   published the RSA/HMAC confusion attack [McLean].  Thanks to Nat
+   Sakimura for advocating the use of explicit typing.  Thanks to Neil
+   Madden for his numerous comments, and to Carsten Bormann, Brian
+   Campbell, Brian Carpenter, Alissa Cooper, Roman Danyliw, Ben Kaduk,
+   Mirja Kühlewind, Barry Leiba, Eric Rescorla, Adam Roach, Martin
+   Vigoureux, and Éric Vyncke for their reviews.
+
+7.  References
+
+7.1.  Normative References
 
    [nist-sp-800-56a-r3]
               Barker, E., Chen, L., Roginsky, A., Vassilev, A., and R.
@@ -580,7 +593,7 @@ Table of Contents
               DOI 10.17487/RFC8259, December 2017,
               <https://www.rfc-editor.org/rfc/rfc8259>.
 
-6.2.  Informative References
+7.2.  Informative References
 
    [Alawatugoda]
               Alawatugoda, J., Stebila, D., and C. Boyd, "Protecting
@@ -655,16 +668,13 @@ Table of Contents
               implementations in the wild", March 2018,
               <https://ia.cr/2018/298>.
 
-Acknowledgements
+Appendix A.  Document History
 
-   Thanks to Antonio Sanso for bringing the "ECDH-ES" invalid point
-   attack to the attention of JWE and JWT implementers.  Tim McLean
-   published the RSA/HMAC confusion attack [McLean].  Thanks to Nat
-   Sakimura for advocating the use of explicit typing.  Thanks to Neil
-   Madden for his numerous comments, and to Carsten Bormann, Brian
-   Campbell, Brian Carpenter, Alissa Cooper, Roman Danyliw, Ben Kaduk,
-   Mirja Kühlewind, Barry Leiba, Eric Rescorla, Adam Roach, Martin
-   Vigoureux, and Éric Vyncke for their reviews.
+   [[Note to RFC Editor: please remove before publication.]]
+
+A.1.  draft-sheffer-oauth-rfc8725bis-00
+
+   *  Initial version, text is identical to RFC 8725.
 
 Authors' Addresses
 
