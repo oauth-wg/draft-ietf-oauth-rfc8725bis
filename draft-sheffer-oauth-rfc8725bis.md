@@ -9,10 +9,10 @@ author:
 - email: dick.hardt@gmail.com
   ins: D. Hardt
   name: Dick Hardt
-- email: mbj@microsoft.com
+- email: michael_b_jones@hotmail.com
   ins: M. Jones
   name: Michael B. Jones
-  organization: Microsoft
+  organization: Self-Issued Consulting
   uri: https://self-issued.info/
 category: bcp
 docname: draft-sheffer-oauth-rfc8725bis-latest
