@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-16T00:47:45.499366+00:00",
+  "timestamp": "2025-01-19T00:52:20.938291+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nDuring our testing, nine libraries were vulnerable to the Billion Hashes Attack. The root cause of this issue is that there is no limit on the size of the p2c claim in the JWE encrypted by the PBES2 algorithm, which causes the server to run billions of hash calculations when decrypting the JWE, causing a denial of service attack. Therefore, we propose adding a warning about this threat in RFC8725 and recommending an upper limit on the size of the p2c claim to mitigate the risk.\r\n",
       "createdAt": "2025-01-05T13:22:41Z",
-      "updatedAt": "2025-01-05T14:07:43Z",
+      "updatedAt": "2025-01-16T16:18:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -71,6 +71,13 @@
           "body": "See also https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
           "createdAt": "2025-01-05T14:07:42Z",
           "updatedAt": "2025-01-05T14:07:42Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "cc @P3ngu1nW\n",
+          "createdAt": "2025-01-16T16:18:31Z",
+          "updatedAt": "2025-01-16T16:18:31Z"
         }
       ]
     },
@@ -86,7 +93,7 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nWe found four libraries that support JSON-type JWS when parsing JWT. If the user extracts the payload by string interception after verification, the attacker can forge the content, which leads to JWT Format Confusion. We found such an exploitation case in Openshift Telemeter (CVE-2024-5037[1]) and Kubernetes identity verification[2] that supports parsing JSON JWS and leading to authentication bypass. Therefore, we propose to include this threat in RFC8725 for systematic consideration and advise against parsing JSON JWSs.\r\n\r\n[1]: https://nvd.nist.gov/vuln/detail/cve-2024-5037\r\n[2]: https://github.com/kubernetes/kubernetes/pull/123540",
       "createdAt": "2025-01-05T13:24:15Z",
-      "updatedAt": "2025-01-05T13:59:55Z",
+      "updatedAt": "2025-01-16T16:18:21Z",
       "closedAt": null,
       "comments": [
         {
@@ -95,6 +102,13 @@
           "body": "See also https://bugzilla.redhat.com/show_bug.cgi?id=2272339\r\n\r\nAnd \"polyglot JWS\" here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
           "createdAt": "2025-01-05T13:59:54Z",
           "updatedAt": "2025-01-05T13:59:54Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "cc @P3ngu1nW\n",
+          "createdAt": "2025-01-16T16:18:20Z",
+          "updatedAt": "2025-01-16T16:18:20Z"
         }
       ]
     },
@@ -110,9 +124,31 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWE allows the payload to be compressed and then decompressed after the recipient decrypts the JWE. However, we observed that 13 libraries did not check the length of the JWE when decompressing it. This means that an attacker can encrypt a very long and malicious JWT and send it to the recipient, causing a denial of service attack. Therefore, we suggest adding this issue in RFC8725 and recommending a upper limit on the length of JWE.",
       "createdAt": "2025-01-05T13:26:15Z",
-      "updatedAt": "2025-01-05T13:26:15Z",
+      "updatedAt": "2025-01-16T20:50:31Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "panva",
+          "authorAssociation": "NONE",
+          "body": "@P3ngu1nW and I did go through a [fix on my library a year ago](https://github.com/panva/jose/security/advisories/GHSA-hhhv-q57g-882q), https://github.com/panva/jose/commit/1b91d88d2f8233f3477a5f4579aa5f8057b2ee8b\n\nI don't believe checking for token length is the right solution, it's very crude and error prone. Instead, and that's what I've implemented, when working with compressed content it's important to set decompression output length limits. Routines responsible for decompresssion usually have such settings.\n\nThis way you're dealing with the high compression ration part without introducing arbitrary token length limits.",
+          "createdAt": "2025-01-16T15:58:47Z",
+          "updatedAt": "2025-01-16T15:59:04Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "NONE",
+          "body": "FWIW @b---c opted in for the same kind of mitigation in jose4j",
+          "createdAt": "2025-01-16T18:59:33Z",
+          "updatedAt": "2025-01-16T18:59:33Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "Thanks for the better memory than me, @panva. But I agree with your assessment (as I often do).  Here is the fix in my library https://bitbucket.org/b_c/jose4j/commits/19a90a64c47b - looks like I was a day before Filip with the fix :) ",
+          "createdAt": "2025-01-16T20:50:31Z",
+          "updatedAt": "2025-01-16T20:50:31Z"
+        }
+      ]
     },
     {
       "number": 4,
@@ -126,7 +162,7 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWT allows users to pass in JWS and JWE when parsing, but mixing these two tokens will cause security issues. During our testing, we found two libraries are vulnerable to this issue where attackers use public key encrypted JWE to bypass the parsing of JWT using asymmetric encryption algorithms. The root cause of this security issue is that the JWK implemented allows both public and private keys to be included, resulting in a bypass even if the algorithm is verified according to the method mentioned in RFC8725 3.1 (check whether the RSA algorithm is used). Therefore, we propose adding a warning about this threat in RFC8725 and advising developers not to include both public and private keys in JWK, and check the \"use\" claim in JWK before parsing JWT.",
       "createdAt": "2025-01-05T13:27:14Z",
-      "updatedAt": "2025-01-05T14:01:19Z",
+      "updatedAt": "2025-01-16T16:17:59Z",
       "closedAt": null,
       "comments": [
         {
@@ -135,6 +171,13 @@
           "body": "See also \"sign/encrypt confusion\" here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
           "createdAt": "2025-01-05T14:01:17Z",
           "updatedAt": "2025-01-05T14:01:17Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "cc @P3ngu1nW\n",
+          "createdAt": "2025-01-16T16:17:59Z",
+          "updatedAt": "2025-01-16T16:17:59Z"
         }
       ]
     },
