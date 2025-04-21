@@ -388,8 +388,14 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
 
  For mitigations, see  {{do-not-trust-claims}}.
 
+## Security Policy Is Not Defensive
 
+Some JWT libraries used a blocklist for algorithm names, but misinterpreted
+the JOSE specifications when parsing the token, reading algorithm values
+as if they were case-insensitive. The end result was that an attacker
+could change the "alg" value to "noNE" and bypass the policy.
 
+For mitigations, see {{algorithm-verification}}.
 
 
 
@@ -410,6 +416,10 @@ that is used for the cryptographic operation.
 Moreover, each key  MUST be used with exactly one algorithm,
 and this  MUST be checked when the cryptographic operation is performed.
 
+Libraries SHOULD opt for defensive security policies to cope
+with potential issues in the underlying infrastructure, such
+as the JSON parser. In particular, use allowlists for critical
+parameters such as "alg" instead of blocklists.
 
 
 
