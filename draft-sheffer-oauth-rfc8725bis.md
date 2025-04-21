@@ -736,6 +736,10 @@ for their reviews.
 
 [[Note to RFC Editor: please remove before publication.]]
 
+## draft-sheffer-oauth-rfc8725bis-01
+
+* Incorrect reading of values as case-insensitive.
+
 ## draft-sheffer-oauth-rfc8725bis-00
 
 * Initial version, text is identical to RFC 8725.
