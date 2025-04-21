@@ -93,7 +93,8 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Document History
-     A.1.  draft-sheffer-oauth-rfc8725bis-00
+     A.1.  draft-sheffer-oauth-rfc8725bis-01
+     A.2.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -688,7 +689,11 @@ Appendix A.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-A.1.  draft-sheffer-oauth-rfc8725bis-00
+A.1.  draft-sheffer-oauth-rfc8725bis-01
+
+   *  Incorrect reading of values as case-insensitive.
+
+A.2.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
