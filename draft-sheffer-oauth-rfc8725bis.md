@@ -388,12 +388,13 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
 
  For mitigations, see  {{do-not-trust-claims}}.
 
-## Security Policy Is Not Defensive
+## Algorithm Verification Code Not Defensively Written
 
-Some JWT libraries used a blocklist for algorithm names, but misinterpreted
+Some JWT implementations included a list of disallowed algorithm names, e.g. Do not use "none".
+These same applications misinterpreted
 the JOSE specifications when parsing the token, reading algorithm values
 as if they were case-insensitive. The end result was that an attacker
-could change the "alg" value to "noNE" and bypass the policy.
+could change the "alg" value to "noNE" and bypass the security check.
 
 For mitigations, see {{algorithm-verification}}.
 
