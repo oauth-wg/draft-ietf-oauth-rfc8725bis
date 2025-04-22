@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 23 October 2025                                                
+Expires: 24 October 2025                                                
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                           21 April 2025
+                                                           22 April 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 October 2025.
+   This Internet-Draft will expire on 24 October 2025.
 
 Copyright Notice
 
@@ -71,7 +71,7 @@ Table of Contents
      2.7.  Substitution Attacks
      2.8.  Cross-JWT Confusion
      2.9.  Indirect Attacks on the Server
-     2.10. Security Policy Is Not Defensive
+     2.10. Algorithm Verification Code Not Defensively Written
    3.  Best Practices
      3.1.  Perform Algorithm Verification
      3.2.  Use Appropriate Algorithms
@@ -284,13 +284,14 @@ Table of Contents
 
    For mitigations, see Section 3.10.
 
-2.10.  Security Policy Is Not Defensive
+2.10.  Algorithm Verification Code Not Defensively Written
 
-   Some JWT libraries used a blocklist for algorithm names, but
+   Some JWT implementations included a list of disallowed algorithm
+   names, e.g. Do not use "none".  These same applications
    misinterpreted the JOSE specifications when parsing the token,
    reading algorithm values as if they were case-insensitive.  The end
    result was that an attacker could change the "alg" value to "noNE"
-   and bypass the policy.
+   and bypass the security check.
 
    For mitigations, see Section 3.1.
 
