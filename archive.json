@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-20T00:58:54.394505+00:00",
+  "timestamp": "2025-04-22T00:55:02.088998+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -58,11 +58,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nDuring our testing, nine libraries were vulnerable to the Billion Hashes Attack. The root cause of this issue is that there is no limit on the size of the p2c claim in the JWE encrypted by the PBES2 algorithm, which causes the server to run billions of hash calculations when decrypting the JWE, causing a denial of service attack. Therefore, we propose adding a warning about this threat in RFC8725 and recommending an upper limit on the size of the p2c claim to mitigate the risk.\r\n",
       "createdAt": "2025-01-05T13:22:41Z",
-      "updatedAt": "2025-01-16T16:18:33Z",
+      "updatedAt": "2025-04-21T14:51:26Z",
       "closedAt": null,
       "comments": [
         {
@@ -89,11 +91,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "dickhardt"
+      ],
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nWe found four libraries that support JSON-type JWS when parsing JWT. If the user extracts the payload by string interception after verification, the attacker can forge the content, which leads to JWT Format Confusion. We found such an exploitation case in Openshift Telemeter (CVE-2024-5037[1]) and Kubernetes identity verification[2] that supports parsing JSON JWS and leading to authentication bypass. Therefore, we propose to include this threat in RFC8725 for systematic consideration and advise against parsing JSON JWSs.\r\n\r\n[1]: https://nvd.nist.gov/vuln/detail/cve-2024-5037\r\n[2]: https://github.com/kubernetes/kubernetes/pull/123540",
       "createdAt": "2025-01-05T13:24:15Z",
-      "updatedAt": "2025-01-16T16:18:21Z",
+      "updatedAt": "2025-04-21T14:52:53Z",
       "closedAt": null,
       "comments": [
         {
@@ -120,11 +124,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "dickhardt"
+      ],
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWE allows the payload to be compressed and then decompressed after the recipient decrypts the JWE. However, we observed that 13 libraries did not check the length of the JWE when decompressing it. This means that an attacker can encrypt a very long and malicious JWT and send it to the recipient, causing a denial of service attack. Therefore, we suggest adding this issue in RFC8725 and recommending a upper limit on the length of JWE.",
       "createdAt": "2025-01-05T13:26:15Z",
-      "updatedAt": "2025-01-16T20:50:31Z",
+      "updatedAt": "2025-04-21T14:52:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -158,11 +164,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "yaronf"
+      ],
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWT allows users to pass in JWS and JWE when parsing, but mixing these two tokens will cause security issues. During our testing, we found two libraries are vulnerable to this issue where attackers use public key encrypted JWE to bypass the parsing of JWT using asymmetric encryption algorithms. The root cause of this security issue is that the JWK implemented allows both public and private keys to be included, resulting in a bypass even if the algorithm is verified according to the method mentioned in RFC8725 3.1 (check whether the RSA algorithm is used). Therefore, we propose adding a warning about this threat in RFC8725 and advising developers not to include both public and private keys in JWK, and check the \"use\" claim in JWK before parsing JWT.",
       "createdAt": "2025-01-05T13:27:14Z",
-      "updatedAt": "2025-01-16T16:17:59Z",
+      "updatedAt": "2025-04-21T14:50:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -178,6 +186,20 @@
           "body": "cc @P3ngu1nW\n",
           "createdAt": "2025-01-16T16:17:59Z",
           "updatedAt": "2025-01-16T16:17:59Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm fine warning people not to publish their private keys.",
+          "createdAt": "2025-04-21T14:25:35Z",
+          "updatedAt": "2025-04-21T14:25:35Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I'm fine warning people that if they require a signature on a JWT, that they must verify that the content was signed.",
+          "createdAt": "2025-04-21T14:42:10Z",
+          "updatedAt": "2025-04-21T14:42:10Z"
         }
       ]
     },
@@ -189,11 +211,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-01-05T19:53:37Z",
+      "updatedAt": "2025-04-21T16:49:55Z",
       "closedAt": null,
       "comments": [
         {
@@ -202,6 +226,13 @@
           "body": "It would be fine to describe how the `kid` header parameter should be used to perform key identification.\r\n\r\n@hannestschofenig warns against key identification information in the payload of a JWT but doesn't give any examples of when and why this is done.  I'd like to understand the nature of the problem before talking about solutions.\r\n\r\nThat said, it's normal to use claims from the payload - in particular, the `iss` claim - in the procedure to retrieve the keys.  For instance, [Obtaining OpenID Provider Configuration Information](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) requires appending `.well-known/openid-configuration` to the `iss` claim value in an ID Token as part of the process of retrieving the signing keys.  This is a feature - not a bug - as it guarantees that the keys belong to the issuer.\r\n\r\nOur target audience should be all kinds of developers - both library and application developers.",
           "createdAt": "2025-01-05T19:53:37Z",
           "updatedAt": "2025-01-05T19:53:37Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "NONE",
+          "body": "The point of the draft was the following:\n\nYou need to give the recipient some means to identify the key it has to use for verification. This is information that needs to be either explit in the JWT (or in a COSE structure in general) or implicit (typically through some other layer outside).\n\nOnce you have this information you do not need other information anymore, such as algorithm identifiers, since the recipient needs to also know (in addition to the key identifier) what algorithm to use. If the recipient does not already possess this information then there is a risk that an attacker modifies information, such as the algorithm.",
+          "createdAt": "2025-04-21T16:49:53Z",
+          "updatedAt": "2025-04-21T16:49:53Z"
         }
       ]
     },
@@ -213,14 +244,84 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "OWNER",
-      "assignees": [],
+      "assignees": [
+        "yaronf"
+      ],
       "labels": [],
       "body": "See slide 11 here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
       "createdAt": "2025-01-05T14:03:47Z",
-      "updatedAt": "2025-01-05T14:03:48Z",
+      "updatedAt": "2025-04-21T14:51:51Z",
       "closedAt": null,
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 7,
+      "id": "PR_kwDONgvdIs6TU96R",
+      "title": "Case insensitivity",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/7",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This issue is mentioned in several sources but I couldn't find a good reference or a CVE.\r\n\r\nCloses #6.",
+      "createdAt": "2025-04-21T17:55:18Z",
+      "updatedAt": "2025-04-21T18:36:58Z",
+      "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
+      "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "headRefName": "ys-6",
+      "headRefOid": "b7a85135f94fb2b95f61f8a265b23fe428c86ab4",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6l0ZYO",
+          "commit": {
+            "abbreviatedOid": "b7a8513"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-21T18:35:25Z",
+          "updatedAt": "2025-04-21T18:35:25Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "If we're going to use the term \"blocklist\", we either need to define it or add a reference for it, as it's not a commonly understood term.  I would suggest rewording to not use the term, as that may result in text that's easier to read.",
+              "createdAt": "2025-04-21T18:35:25Z",
+              "updatedAt": "2025-04-21T18:35:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6l0Z_v",
+          "commit": {
+            "abbreviatedOid": "b7a8513"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-04-21T18:36:57Z",
+          "updatedAt": "2025-04-21T18:36:58Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "The term \"Security Policy\" will mean different things than intended to some readers.\r\n\r\nMaybe change the title to something more like \"Algorithm Verification Code Not Defensively Written\".",
+              "createdAt": "2025-04-21T18:36:58Z",
+              "updatedAt": "2025-04-21T18:36:58Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
