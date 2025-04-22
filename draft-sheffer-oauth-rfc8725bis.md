@@ -76,6 +76,13 @@ informative:
     refcontent: National Vulnerability Database
     target: https://nvd.nist.gov/vuln/detail/CVE-2015-9235
     title: CVE-2015-9235 Detail
+  CVE-2023-51774:
+    author:
+    - organization: NIST
+    date: Feb. 2024
+    refcontent: National Vulnerability Database
+    target: https://nvd.nist.gov/vuln/detail/CVE-2023-51774
+    title: CVE-2023-51774 Detail
   Kelsey: DOI.10.1007/3-540-45661-9_21
   Langkemper:
     author:
@@ -276,16 +283,14 @@ attacker gets hold of such a token  {{Langkemper}}.
 
 
 
-## Incorrect Composition of Encryption and Signature {#incorrect-composition-of-encryption-and-signature}
+## Incorrect Use and Composition of Encryption and Signature {#incorrect-composition-of-encryption-and-signature}
 
+Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities, in particular when the verifier's asymmetric key includes the private key, and when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.
 
- Some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
+In the more compicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.
 
- For mitigations, see  {{validate-crypto}}.
-
-
-
+For mitigations, see  {{validate-crypto}}.
 
 ## Plaintext Leakage through Analysis of Ciphertext Length {#plaintext-leakage-through-analysis-of-ciphertext-length}
 
@@ -467,16 +472,15 @@ without new algorithm identifiers being required.
 
 ## Validate All Cryptographic Operations {#validate-crypto}
 
-
- All cryptographic operations used in the JWT  MUST be
- validated and the entire JWT  MUST be rejected
+All cryptographic operations used in the JWT MUST be validated and the entire JWT MUST be rejected
 if any of them fail to validate.
 This is true not only of JWTs with a single set of Header Parameters
 but also for Nested JWTs in which both outer and inner operations  MUST be validated
 using the keys and algorithms supplied by the application.
 
+Libraries MUST allow the verifier to distingush between JWS-signed and JWE-encrypted JWTs, and to only accept the former.
 
-
+When some claims of the JWT require confidentiality protection, it is RECOMMENDED to nest encrypted JWEs within signed JWSs instead of vice versa.
 
 ## Validate Cryptographic Inputs {#validate-inputs}
 
