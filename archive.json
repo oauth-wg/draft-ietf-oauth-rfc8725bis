@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-22T00:55:02.088998+00:00",
+  "timestamp": "2025-04-24T00:55:16.964922+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -170,7 +170,7 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWT allows users to pass in JWS and JWE when parsing, but mixing these two tokens will cause security issues. During our testing, we found two libraries are vulnerable to this issue where attackers use public key encrypted JWE to bypass the parsing of JWT using asymmetric encryption algorithms. The root cause of this security issue is that the JWK implemented allows both public and private keys to be included, resulting in a bypass even if the algorithm is verified according to the method mentioned in RFC8725 3.1 (check whether the RSA algorithm is used). Therefore, we propose adding a warning about this threat in RFC8725 and advising developers not to include both public and private keys in JWK, and check the \"use\" claim in JWK before parsing JWT.",
       "createdAt": "2025-01-05T13:27:14Z",
-      "updatedAt": "2025-04-21T14:50:36Z",
+      "updatedAt": "2025-04-22T13:11:39Z",
       "closedAt": null,
       "comments": [
         {
@@ -200,6 +200,20 @@
           "body": "I'm fine warning people that if they require a signature on a JWT, that they must verify that the content was signed.",
           "createdAt": "2025-04-21T14:42:10Z",
           "updatedAt": "2025-04-21T14:42:10Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": " @P3ngu1nW Do you have any references or CVEs for this vulnerability?",
+          "createdAt": "2025-04-22T08:00:56Z",
+          "updatedAt": "2025-04-22T08:00:56Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "https://www.cve.org/CVERecord?id=CVE-2023-51774",
+          "createdAt": "2025-04-22T13:11:38Z",
+          "updatedAt": "2025-04-22T13:11:38Z"
         }
       ]
     },
@@ -268,13 +282,13 @@
       "labels": [],
       "body": "This issue is mentioned in several sources but I couldn't find a good reference or a CVE.\r\n\r\nCloses #6.",
       "createdAt": "2025-04-21T17:55:18Z",
-      "updatedAt": "2025-04-21T18:36:58Z",
+      "updatedAt": "2025-04-22T07:53:51Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "ys-6",
-      "headRefOid": "b7a85135f94fb2b95f61f8a265b23fe428c86ab4",
+      "headRefOid": "009db6d17b81040c8bf7cb8cca14aa72baf265a6",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -322,6 +336,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDONgvdIs6TcKyL",
+      "title": "Encryption/signature confusion",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/8",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #4.",
+      "createdAt": "2025-04-22T13:27:00Z",
+      "updatedAt": "2025-04-22T13:27:00Z",
+      "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
+      "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "headRefName": "ys-4",
+      "headRefOid": "0389ddab59556524aecc4426f759d9c415ebcce5",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
