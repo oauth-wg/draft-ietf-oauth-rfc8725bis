@@ -389,8 +389,14 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
  For mitigations, see  {{do-not-trust-claims}}.
 
 
+## Computation Cost of Unreasonable Number of Hash Iterations (#unreasonable-iterations)
 
+The `p2c` (PBES2 Count) header parameter for the PBES2 encryption algorithms
+specifies the number of iterative hash computations to be performed.
+Attackers can use a very large count,
+thereby imposing an unreasonable computational burden on recipients.
 
+For mitigations, see {{limit-iterations}}.
 
 
 # Best Practices {#BP}
@@ -681,8 +687,14 @@ As discussed in  {{use-typ}}, for new JWT
   RECOMMENDED.
 
 
+## Limit Hash Iteration Count {#limit-iterations}
 
-
+Implementations are RECOMMENDED to set a reasonable upper limit on
+the number of hash iterations that can be performed
+when validating encrypted content using PBES2 encryption algorithms,
+so as to prevent attackers from imposing
+an unreasonable computational burden on recipients.
+Rejecting inputs with a `p2c` (PBES2 Count) value over 10,000 is RECOMMENDED.
 
 
 # Security Considerations {#security-considerations}
@@ -725,6 +737,12 @@ for their reviews.
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+
+## draft-sheffer-oauth-rfc8725bis-01
+
+* Reject unreasonably large `p2c` (PBES2 Count) values.
+
 
 ## draft-sheffer-oauth-rfc8725bis-00
 
