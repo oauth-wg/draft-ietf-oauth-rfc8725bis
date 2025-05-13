@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-29T00:55:29.345111+00:00",
+  "timestamp": "2025-05-13T00:57:26.895029+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -97,7 +97,7 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nWe found four libraries that support JSON-type JWS when parsing JWT. If the user extracts the payload by string interception after verification, the attacker can forge the content, which leads to JWT Format Confusion. We found such an exploitation case in Openshift Telemeter (CVE-2024-5037[1]) and Kubernetes identity verification[2] that supports parsing JSON JWS and leading to authentication bypass. Therefore, we propose to include this threat in RFC8725 for systematic consideration and advise against parsing JSON JWSs.\r\n\r\n[1]: https://nvd.nist.gov/vuln/detail/cve-2024-5037\r\n[2]: https://github.com/kubernetes/kubernetes/pull/123540",
       "createdAt": "2025-01-05T13:24:15Z",
-      "updatedAt": "2025-04-21T14:52:53Z",
+      "updatedAt": "2025-05-12T14:51:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -113,6 +113,13 @@
           "body": "cc @P3ngu1nW\n",
           "createdAt": "2025-01-16T16:18:20Z",
           "updatedAt": "2025-01-16T16:18:20Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://www.rfc-editor.org/rfc/rfc7519.html#section-1 says:\n> JWTs are always   represented using the JWS Compact Serialization or the JWE Compact   Serialization.\n\nJWT parsers need to enforce this.",
+          "createdAt": "2025-05-12T14:51:57Z",
+          "updatedAt": "2025-05-12T14:51:57Z"
         }
       ]
     },
@@ -130,7 +137,7 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWE allows the payload to be compressed and then decompressed after the recipient decrypts the JWE. However, we observed that 13 libraries did not check the length of the JWE when decompressing it. This means that an attacker can encrypt a very long and malicious JWT and send it to the recipient, causing a denial of service attack. Therefore, we suggest adding this issue in RFC8725 and recommending a upper limit on the length of JWE.",
       "createdAt": "2025-01-05T13:26:15Z",
-      "updatedAt": "2025-04-21T14:52:09Z",
+      "updatedAt": "2025-05-12T15:26:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -153,6 +160,20 @@
           "body": "Thanks for the better memory than me, @panva. But I agree with your assessment (as I often do).  Here is the fix in my library https://bitbucket.org/b_c/jose4j/commits/19a90a64c47b - looks like I was a day before Filip with the fix :) ",
           "createdAt": "2025-01-16T20:50:31Z",
           "updatedAt": "2025-01-16T20:50:31Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "notes for @dickhardt \n\n- set a max size for decompression - 250 MB is commonly used??",
+          "createdAt": "2025-05-12T14:57:10Z",
+          "updatedAt": "2025-05-12T14:57:10Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "> notes for [@dickhardt](https://github.com/dickhardt)\n> \n>    * set a max size for decompression - 250 MB is commonly used??\n\nno, I think the commonly used limits are over one thousand times smaller than that ",
+          "createdAt": "2025-05-12T15:26:47Z",
+          "updatedAt": "2025-05-12T15:26:57Z"
         }
       ]
     },
@@ -231,7 +252,7 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-04-21T16:49:55Z",
+      "updatedAt": "2025-05-12T13:54:08Z",
       "closedAt": null,
       "comments": [
         {
@@ -247,6 +268,13 @@
           "body": "The point of the draft was the following:\n\nYou need to give the recipient some means to identify the key it has to use for verification. This is information that needs to be either explit in the JWT (or in a COSE structure in general) or implicit (typically through some other layer outside).\n\nOnce you have this information you do not need other information anymore, such as algorithm identifiers, since the recipient needs to also know (in addition to the key identifier) what algorithm to use. If the recipient does not already possess this information then there is a risk that an attacker modifies information, such as the algorithm.",
           "createdAt": "2025-04-21T16:49:53Z",
           "updatedAt": "2025-04-21T16:49:53Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@hannestschofenig, I'm still not sure what attack you're describing or how it should be mitigated.\n\nFor instance, when the \"alg\" value is a protected header parameter, the attacker can't modify it.  This is true both for signed JWTs and encrypted JWTs using an AEAD algorithm.  The only case where it's not true is \"alg\": \"none\", which RFC 8725 already discusses.",
+          "createdAt": "2025-05-12T13:54:06Z",
+          "updatedAt": "2025-05-12T13:54:06Z"
         }
       ]
     },
@@ -282,7 +310,7 @@
       "labels": [],
       "body": "This issue is mentioned in several sources but I couldn't find a good reference or a CVE.\r\n\r\nCloses #6.",
       "createdAt": "2025-04-21T17:55:18Z",
-      "updatedAt": "2025-04-27T08:17:41Z",
+      "updatedAt": "2025-05-12T12:59:30Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
@@ -293,7 +321,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The bug is not that there is a blacklist.  The bug is that case-insensitive comparisons were used.  The fix should be about that.",
+          "createdAt": "2025-05-12T12:59:29Z",
+          "updatedAt": "2025-05-12T12:59:29Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONgvdIs6l0ZYO",
@@ -349,7 +385,7 @@
       "labels": [],
       "body": "Closes #4.",
       "createdAt": "2025-04-22T13:27:00Z",
-      "updatedAt": "2025-04-27T08:18:41Z",
+      "updatedAt": "2025-05-12T14:38:50Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
@@ -361,7 +397,135 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6o3laS",
+          "commit": {
+            "abbreviatedOid": "0389dda"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-12T13:02:42Z",
+          "updatedAt": "2025-05-12T13:02:43Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "```suggestion\r\nLibraries MUST allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs, enabling callers to accept only JWTs that meet their security criteria.\r\n```",
+              "createdAt": "2025-05-12T13:02:42Z",
+              "updatedAt": "2025-05-12T13:02:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6o40RM",
+          "commit": {
+            "abbreviatedOid": "0389dda"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-12T14:32:01Z",
+          "updatedAt": "2025-05-12T14:32:01Z",
+          "comments": [
+            {
+              "originalPosition": 48,
+              "body": "That would allow the verifier to only accept JWS, if that's their policy.",
+              "createdAt": "2025-05-12T14:32:01Z",
+              "updatedAt": "2025-05-12T14:32:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6o42ec",
+          "commit": {
+            "abbreviatedOid": "0389dda"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-12T14:34:50Z",
+          "updatedAt": "2025-05-12T14:34:50Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "```suggestion\r\n```\r\n\r\nThis is unrelated to the other changes in this PR.  Please remove it.\r\n\r\nThis also contradicts https://www.rfc-editor.org/rfc/rfc7519.html#section-11.2.",
+              "createdAt": "2025-05-12T14:34:50Z",
+              "updatedAt": "2025-05-12T14:42:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6o45j-",
+          "commit": {
+            "abbreviatedOid": "0389dda"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-12T14:38:49Z",
+          "updatedAt": "2025-05-12T14:38:50Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "Move into a separate PR.\r\n\r\nThis would contradict https://www.rfc-editor.org/rfc/rfc7519.html#section-11.2",
+              "createdAt": "2025-05-12T14:38:50Z",
+              "updatedAt": "2025-05-12T14:41:48Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDONgvdIs6V1wo7",
+      "title": "Reject unreasonably large \"p2c\" values",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/9",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #1 ",
+      "createdAt": "2025-05-12T13:33:45Z",
+      "updatedAt": "2025-05-12T14:47:37Z",
+      "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
+      "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "headRefName": "mbj-p2c",
+      "headRefOid": "2a37ab4ae2f21513054f434e20912c0dcd894ca6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6o5Cip",
+          "commit": {
+            "abbreviatedOid": "2a37ab4"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-12T14:47:37Z",
+          "updatedAt": "2025-05-12T14:47:37Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "1M?\r\n\r\nhttps://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
+              "createdAt": "2025-05-12T14:47:37Z",
+              "updatedAt": "2025-05-12T14:47:37Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
