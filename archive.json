@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-13T00:57:26.895029+00:00",
+  "timestamp": "2025-05-15T00:55:15.078898+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -137,15 +137,15 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWE allows the payload to be compressed and then decompressed after the recipient decrypts the JWE. However, we observed that 13 libraries did not check the length of the JWE when decompressing it. This means that an attacker can encrypt a very long and malicious JWT and send it to the recipient, causing a denial of service attack. Therefore, we suggest adding this issue in RFC8725 and recommending a upper limit on the length of JWE.",
       "createdAt": "2025-01-05T13:26:15Z",
-      "updatedAt": "2025-05-12T15:26:58Z",
+      "updatedAt": "2025-05-13T08:47:07Z",
       "closedAt": null,
       "comments": [
         {
           "author": "panva",
           "authorAssociation": "NONE",
-          "body": "@P3ngu1nW and I did go through a [fix on my library a year ago](https://github.com/panva/jose/security/advisories/GHSA-hhhv-q57g-882q), https://github.com/panva/jose/commit/1b91d88d2f8233f3477a5f4579aa5f8057b2ee8b\n\nI don't believe checking for token length is the right solution, it's very crude and error prone. Instead, and that's what I've implemented, when working with compressed content it's important to set decompression output length limits. Routines responsible for decompresssion usually have such settings.\n\nThis way you're dealing with the high compression ration part without introducing arbitrary token length limits.",
+          "body": "@P3ngu1nW and I did go through a [fix on my library a year ago](https://github.com/panva/jose/security/advisories/GHSA-hhhv-q57g-882q), https://github.com/panva/jose/commit/1b91d88d2f8233f3477a5f4579aa5f8057b2ee8b\n\nI don't believe checking for token length is the right solution, it's very crude and error prone. Instead, and that's what I've implemented, when working with compressed content it's important to set decompression output length limits. Routines responsible for decompresssion usually have such settings.\n\nThis way you're dealing with the high compression ratio part without introducing arbitrary token length limits.",
           "createdAt": "2025-01-16T15:58:47Z",
-          "updatedAt": "2025-01-16T15:59:04Z"
+          "updatedAt": "2025-05-13T08:47:07Z"
         },
         {
           "author": "panva",
