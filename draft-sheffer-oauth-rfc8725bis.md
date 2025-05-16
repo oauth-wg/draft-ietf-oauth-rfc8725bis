@@ -103,9 +103,9 @@ informative:
       name: Breno de Medeiros
     - ins: C. Mortimore
       name: Chuck Mortimore
-    date: November 2014
+    date: December 2023
     target: https://openid.net/specs/openid-connect-core-1_0.html
-    title: OpenID Connect Core 1.0 incorporating errata set 1
+    title: OpenID Connect Core 1.0 incorporating errata set 2
   RFC6749:
   RFC7159:
   RFC7517:
@@ -132,6 +132,13 @@ informative:
     target: https://ia.cr/2018/298
     title: 'In search of CurveSwap: Measuring elliptic curve implementations in the
       wild'
+  OWASP-Password-Storage:
+    author:
+    - organization: OWASP
+    title: Password Storage Cheat Sheet
+    seriesinfo: OWASP Cheat Sheet Series
+    target: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+    date: 2025
 
 --- abstract
 
@@ -694,7 +701,8 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-Rejecting inputs with a `p2c` (PBES2 Count) value over 10,000 is RECOMMENDED.
+{{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
+Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
 
 
 # Security Considerations {#security-considerations}
