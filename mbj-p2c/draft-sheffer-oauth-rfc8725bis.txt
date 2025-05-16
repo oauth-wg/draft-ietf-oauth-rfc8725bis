@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 13 November 2025                                               
+Expires: 17 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                             12 May 2025
+                                                             16 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 November 2025.
+   This Internet-Draft will expire on 17 November 2025.
 
 Copyright Notice
 
@@ -536,8 +536,10 @@ Table of Contents
    the number of hash iterations that can be performed when validating
    encrypted content using PBES2 encryption algorithms, so as to prevent
    attackers from imposing an unreasonable computational burden on
-   recipients.  Rejecting inputs with a p2c (PBES2 Count) value over
-   10,000 is RECOMMENDED.
+   recipients.  [OWASP-Password-Storage] states that an iteration count
+   of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140
+   compliance.  Thus, rejecting inputs with a p2c (PBES2 Count) value
+   over 1,200,000 (double that) is RECOMMENDED.
 
 4.  Security Considerations
 
@@ -656,8 +658,14 @@ Table of Contents
    [OpenID.Core]
               Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0 incorporating
-              errata set 1", November 2014,
+              errata set 2", December 2023,
               <https://openid.net/specs/openid-connect-core-1_0.html>.
+
+   [OWASP-Password-Storage]
+              OWASP, "Password Storage Cheat Sheet", OWASP Cheat Sheet
+              Series , 2025,
+              <https://cheatsheetseries.owasp.org/cheatsheets/
+              Password_Storage_Cheat_Sheet.html>.
 
    [RFC6749]  Hardt, D., Ed., "The OAuth 2.0 Authorization Framework",
               RFC 6749, DOI 10.17487/RFC6749, October 2012,
