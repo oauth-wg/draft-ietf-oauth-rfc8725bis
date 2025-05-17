@@ -478,9 +478,8 @@ This is true not only of JWTs with a single set of Header Parameters
 but also for Nested JWTs in which both outer and inner operations  MUST be validated
 using the keys and algorithms supplied by the application.
 
-Libraries MUST allow the verifier to distingush between JWS-signed and JWE-encrypted JWTs, and to only accept the former.
-
-When some claims of the JWT require confidentiality protection, it is RECOMMENDED to nest encrypted JWEs within signed JWSs instead of vice versa.
+Libraries MUST allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs.
+This would allow verifiers to easily establish a policy of only accepting JWS-signed JWTs.
 
 ## Validate Cryptographic Inputs {#validate-inputs}
 
