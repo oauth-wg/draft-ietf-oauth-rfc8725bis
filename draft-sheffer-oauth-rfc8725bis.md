@@ -287,7 +287,7 @@ attacker gets hold of such a token  {{Langkemper}}.
 
 Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities, in particular when the verifier's asymmetric key includes the private key, and when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.
 
-In the more compicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
+In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.
 
 For mitigations, see  {{validate-crypto}}.
