@@ -388,8 +388,15 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
 
  For mitigations, see  {{do-not-trust-claims}}.
 
+## Algorithm Verification Code Not Defensively Written
 
+Some JWT implementations included a list of disallowed algorithm names, e.g. Do not use "none".
+These same applications misinterpreted
+the JOSE specifications when parsing the token, reading algorithm values
+as if they were case-insensitive. The end result was that an attacker
+could change the "alg" value to "noNE" and bypass the security check.
 
+For mitigations, see {{algorithm-verification}}.
 
 
 
@@ -410,6 +417,10 @@ that is used for the cryptographic operation.
 Moreover, each key  MUST be used with exactly one algorithm,
 and this  MUST be checked when the cryptographic operation is performed.
 
+Libraries SHOULD opt for defensive security policies to cope
+with potential issues in the underlying infrastructure, such
+as the JSON parser. In particular, use allowlists for critical
+parameters such as "alg" instead of blocklists.
 
 
 
@@ -725,6 +736,10 @@ for their reviews.
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-sheffer-oauth-rfc8725bis-01
+
+* Incorrect reading of values as case-insensitive.
 
 ## draft-sheffer-oauth-rfc8725bis-00
 
