@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 24 October 2025                                                
+Expires: 18 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                           22 April 2025
+                                                             17 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 October 2025.
+   This Internet-Draft will expire on 18 November 2025.
 
 Copyright Notice
 
@@ -360,12 +360,9 @@ Table of Contents
    MUST be validated using the keys and algorithms supplied by the
    application.
 
-   Libraries MUST allow the verifier to distingush between JWS-signed
-   and JWE-encrypted JWTs, and to only accept the former.
-
-   When some claims of the JWT require confidentiality protection, it is
-   RECOMMENDED to nest encrypted JWEs within signed JWSs instead of vice
-   versa.
+   Libraries MUST allow the verifier to distinguish between JWS-signed
+   and JWE-encrypted JWTs.  This would allow verifiers to easily
+   establish a policy of only accepting JWS-signed JWTs.
 
 3.4.  Validate Cryptographic Inputs
 
