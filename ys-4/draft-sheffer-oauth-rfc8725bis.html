@@ -1408,7 +1408,7 @@ attacker gets hold of such a token  <span>[<a href="#Langkemper" class="cite xre
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-incorrect-use-and-compositi" class="section-name selfRef">Incorrect Use and Composition of Encryption and Signature</a>
         </h3>
 <p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities, in particular when the verifier's asymmetric key includes the private key, and when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">In the more compicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
+<p id="section-2.3-2">In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">For mitigations, see  <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>

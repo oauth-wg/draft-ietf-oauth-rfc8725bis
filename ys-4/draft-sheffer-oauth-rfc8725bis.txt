@@ -204,7 +204,7 @@ Table of Contents
    library does not distinguish between successful decryption and
    successful signature validation [CVE-2023-51774].
 
-   In the more compicated use cases where confidentiality is required,
+   In the more complicated use cases where confidentiality is required,
    some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-
    signed object do not always validate the internal signature.
 
