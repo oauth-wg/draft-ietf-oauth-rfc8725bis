@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-15T00:55:15.078898+00:00",
+  "timestamp": "2025-05-18T01:01:04.701535+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -252,7 +252,7 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-05-12T13:54:08Z",
+      "updatedAt": "2025-05-17T15:40:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -275,6 +275,20 @@
           "body": "@hannestschofenig, I'm still not sure what attack you're describing or how it should be mitigated.\n\nFor instance, when the \"alg\" value is a protected header parameter, the attacker can't modify it.  This is true both for signed JWTs and encrypted JWTs using an AEAD algorithm.  The only case where it's not true is \"alg\": \"none\", which RFC 8725 already discusses.",
           "createdAt": "2025-05-12T13:54:06Z",
           "updatedAt": "2025-05-12T13:54:06Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "> That said, it's normal to use claims from the payload - in particular, the `iss` claim - in the procedure to retrieve the keys. For instance, [Obtaining OpenID Provider Configuration Information](https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig) requires appending `.well-known/openid-configuration` to the `iss` claim value in an ID Token as part of the process of retrieving the signing keys. This is a feature - not a bug - as it guarantees that the keys belong to the issuer.\n\nI disagree. IMHO this is a bug: the original JOSE architecture only requires the recipient to parse the smaller/simpler header in order to validate the whole JWS.\n\nThe OIDC solution means the recipient should go through hoops instead:\n* Parse an **untrusted** JWS (which may try to exploit JSON parsing vulnerabilities) to obtain `iss`.\n* Use that value to access an **untrusted** URL to read a public key.\n* Verify the JWS.\n* If this fails, make sure to throw away the already parsed JWS, whose claims may already be cached somewhere.\n\n[CVE-2025-30144](https://nvd.nist.gov/vuln/detail/CVE-2025-30144) is a related vulnerability.\n",
+          "createdAt": "2025-05-17T14:36:59Z",
+          "updatedAt": "2025-05-17T14:36:59Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> the original JOSE architecture only requires the recipient to parse the smaller/simpler header in order to validate the whole JWS.\n\nThat's not a complete description of the situation.  JWS does not define a way to know the keys or validate control of them.  Nor does JWT.  OpenID Connect ID Tokens do, for example.\n\nJWT does define claims used to validate control of the keys - especially \"iss\".  That's not a bug - it's a super-useful and widely used feature.\n\n> Parse an untrusted JWS (which may try to exploit JSON parsing vulnerabilities) to obtain iss.\n\nAll JWTs are untrusted until their integrity and issuer have been validated.  Nothing new.\n\nIf you can't parse bytes that purport to be JSON without exercising JSON parsing vulnerabilities in your code, you have bigger problems than those related to JWTs.\n\n> Use that value to access an untrusted URL to read a public key.\n\nThat the URL trustworthy is confirmed by validating the signature using a key obtained.  If the signature doesn't validate using a key obtained by the issuer, the JWT is rejected, along with any content retrieved from the URL.\n\n> If this fails, make sure to throw away the already parsed JWS, whose claims may already be cached somewhere.\n\nIf you cache claims from a rejected JWT, that's simply a code bug.",
+          "createdAt": "2025-05-17T15:40:04Z",
+          "updatedAt": "2025-05-17T15:40:04Z"
         }
       ]
     },
@@ -283,7 +297,7 @@
       "id": "I_kwDONgvdIs6lEAKp",
       "title": "Case sensitivity of algorithm names",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -292,9 +306,17 @@
       "labels": [],
       "body": "See slide 11 here: https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf",
       "createdAt": "2025-01-05T14:03:47Z",
-      "updatedAt": "2025-04-21T14:51:51Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-05-17T15:35:50Z",
+      "closedAt": "2025-05-17T15:35:50Z",
+      "comments": [
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "Adding references - all related to Auth0.\n\n* https://stytch.com/blog/auth0-security-incidents/\n* https://cybercx.co.nz/blog/json-web-token-validation-bypass-in-auth0-authentication-api/\n\nBTW the Stytch blog gets the issue wrong: the problem is less about the case sensitive filtering and more about normalization of the \"alg\" field which is defined as case sensitive.\n\nAlso, this is an issue in proprietary, closed software. So full implementation details are not available.",
+          "createdAt": "2025-05-17T15:21:50Z",
+          "updatedAt": "2025-05-17T15:21:50Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -303,24 +325,26 @@
       "id": "PR_kwDONgvdIs6TU96R",
       "title": "Case insensitivity",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "This issue is mentioned in several sources but I couldn't find a good reference or a CVE.\r\n\r\nCloses #6.",
       "createdAt": "2025-04-21T17:55:18Z",
-      "updatedAt": "2025-05-12T12:59:30Z",
+      "updatedAt": "2025-05-17T15:35:59Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "ys-6",
       "headRefOid": "009db6d17b81040c8bf7cb8cca14aa72baf265a6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-17T15:35:49Z",
+      "mergedAt": "2025-05-17T15:35:49Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "7e104a7798e8d375382967df02ca275e328dbebf"
+      },
       "comments": [
         {
           "author": "selfissued",
@@ -328,6 +352,13 @@
           "body": "The bug is not that there is a blacklist.  The bug is that case-insensitive comparisons were used.  The fix should be about that.",
           "createdAt": "2025-05-12T12:59:29Z",
           "updatedAt": "2025-05-12T12:59:29Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "> The bug is not that there is a blacklist. The bug is that case-insensitive comparisons were used. The fix should be about that.\r\n\r\nI agree on the principle. The value \"noNE\" should not be accepted by the library as a valid algorithm. But this was probably a problem in the JSON parser that was overeager to normalize JSON claims. As such it may be outside the JOSE library's control.  The mitigation is a proposed way to harden the library against such unknown issues.",
+          "createdAt": "2025-05-17T15:29:55Z",
+          "updatedAt": "2025-05-17T15:29:55Z"
         }
       ],
       "reviews": [
@@ -370,6 +401,19 @@
               "updatedAt": "2025-04-21T18:36:58Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxgyB",
+          "commit": {
+            "abbreviatedOid": "009db6d"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-17T15:30:36Z",
+          "updatedAt": "2025-05-17T15:30:36Z",
+          "comments": []
         }
       ]
     },
@@ -385,18 +429,33 @@
       "labels": [],
       "body": "Closes #4.",
       "createdAt": "2025-04-22T13:27:00Z",
-      "updatedAt": "2025-05-12T14:38:50Z",
+      "updatedAt": "2025-05-17T22:14:02Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "ys-4",
-      "headRefOid": "0389ddab59556524aecc4426f759d9c415ebcce5",
+      "headRefOid": "782fb0216394dea6940db75001caed8f90c409c1",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> if you're accepting a JWE, you also need a private key in the JWK to decrypt the thing. So the attack (sending a JWE instead of a JWS) only works if there's a private key on the receiver's side.\r\n\r\nIt's true that the recipient needs a private key to decrypt the encrypted JWT.  But it's not true that the private key needs to be in the JWK.  Typically only the public keys would be in the JWK.  The private key would normally be privately held by the recipient - not published in a JWK.",
+          "createdAt": "2025-05-17T15:47:44Z",
+          "updatedAt": "2025-05-17T15:47:44Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "> > if you're accepting a JWE, you also need a private key in the JWK to decrypt the thing. So the attack (sending a JWE instead of a JWS) only works if there's a private key on the receiver's side.\r\n> \r\n> It's true that the recipient needs a private key to decrypt the encrypted JWT. But it's not true that the private key needs to be in the JWK. Typically only the public keys would be in the JWK. The private key would normally be privately held by the recipient - not published in a JWK.\r\n\r\nFirst, I'm quoting the researcher who reported the issue in #4. For more detail see slides 17-19 [here](https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf).\r\n\r\nAlso, the point is not that the private key is published along with the JWK, but that when the JWK is used locally in the receiver's call to the JOSE library, in includes the private key.",
+          "createdAt": "2025-05-17T21:58:24Z",
+          "updatedAt": "2025-05-17T21:58:24Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONgvdIs6o3laS",
@@ -477,6 +536,106 @@
               "updatedAt": "2025-05-12T14:41:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxabG",
+          "commit": {
+            "abbreviatedOid": "0389dda"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T14:48:27Z",
+          "updatedAt": "2025-05-17T14:48:27Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "For the record, the following in RFC 7519 convinced me:\r\n\r\n> Note that potential concerns about security issues related to the order of signing and encryption operations are already addressed by the underlying JWS and JWE specifications; in particular, because JWE **only supports the use of authenticated encryption algorithms**, cryptographic concerns about the potential need to sign after encryption that apply in many contexts do not apply to this specification.",
+              "createdAt": "2025-05-17T14:48:27Z",
+              "updatedAt": "2025-05-17T14:48:27Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxf-K",
+          "commit": {
+            "abbreviatedOid": "bd1f190"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T15:27:28Z",
+          "updatedAt": "2025-05-17T15:27:28Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "I don't understand what the phrase \"when the verifier's asymmetric key includes the private key\" is getting at.  How does this relate to the vulnerability?",
+              "createdAt": "2025-05-17T15:27:28Z",
+              "updatedAt": "2025-05-17T15:27:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxgJB",
+          "commit": {
+            "abbreviatedOid": "bd1f190"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T15:28:01Z",
+          "updatedAt": "2025-05-17T15:28:02Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\r\nIn the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object\r\n```",
+              "createdAt": "2025-05-17T15:28:02Z",
+              "updatedAt": "2025-05-17T15:28:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxiMv",
+          "commit": {
+            "abbreviatedOid": "bd1f190"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T15:41:01Z",
+          "updatedAt": "2025-05-17T15:41:02Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "On the receiver side, if all you want is a JWS then you only need a public key in the JWK, to verify the signature.\r\n\r\nBut if you're accepting a JWE, you also need a private key in the JWK to decrypt the thing. So the attack (sending a JWE instead of a JWS) only works if there's a private key on the receiver's side.",
+              "createdAt": "2025-05-17T15:41:01Z",
+              "updatedAt": "2025-05-17T15:41:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6px1mf",
+          "commit": {
+            "abbreviatedOid": "782fb02"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T22:14:01Z",
+          "updatedAt": "2025-05-17T22:14:02Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\r\nMost authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.\r\n```\r\n\r\nDelete the ambiguous phrase",
+              "createdAt": "2025-05-17T22:14:01Z",
+              "updatedAt": "2025-05-17T22:14:02Z"
+            }
+          ]
         }
       ]
     },
@@ -492,13 +651,13 @@
       "labels": [],
       "body": "Fixes #1 ",
       "createdAt": "2025-05-12T13:33:45Z",
-      "updatedAt": "2025-05-12T14:47:37Z",
+      "updatedAt": "2025-05-18T00:08:23Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "mbj-p2c",
-      "headRefOid": "2a37ab4ae2f21513054f434e20912c0dcd894ca6",
+      "headRefOid": "af7a71e1d4c00583a041e1b961ac25f959e965b2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -522,6 +681,79 @@
               "body": "1M?\r\n\r\nhttps://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
               "createdAt": "2025-05-12T14:47:37Z",
               "updatedAt": "2025-05-12T14:47:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxR4T",
+          "commit": {
+            "abbreviatedOid": "af7a71e"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-17T12:29:19Z",
+          "updatedAt": "2025-05-17T12:29:19Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxrfq",
+          "commit": {
+            "abbreviatedOid": "2a37ab4"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T18:46:12Z",
+          "updatedAt": "2025-05-17T18:46:12Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "I thought 1M was what was recommended as well -- is 10,000 too low?",
+              "createdAt": "2025-05-17T18:46:12Z",
+              "updatedAt": "2025-05-17T18:46:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pxrlt",
+          "commit": {
+            "abbreviatedOid": "2a37ab4"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-17T18:48:14Z",
+          "updatedAt": "2025-05-17T18:48:14Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "You're looking at outdated text.  Look at the files changed.  It's now 1.2M - double the NIST value.",
+              "createdAt": "2025-05-17T18:48:14Z",
+              "updatedAt": "2025-05-17T18:48:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6pyDNd",
+          "commit": {
+            "abbreviatedOid": "af7a71e"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-18T00:08:08Z",
+          "updatedAt": "2025-05-18T00:08:23Z",
+          "comments": [
+            {
+              "originalPosition": 27,
+              "body": "I am looking at the files changed -- at least I think I am! If 1.2M then I'm fine. ",
+              "createdAt": "2025-05-18T00:08:09Z",
+              "updatedAt": "2025-05-18T00:08:23Z"
             }
           ]
         }
