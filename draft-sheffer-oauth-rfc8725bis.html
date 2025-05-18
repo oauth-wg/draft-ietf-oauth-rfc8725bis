@@ -1067,7 +1067,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 18 November 2025</td>
+<td class="center">Expires 19 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-sheffer-oauth-rfc8725bis-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-17" class="published">17 May 2025</time>
+<time datetime="2025-05-18" class="published">18 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-18">18 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-19">19 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1203,7 +1203,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.2.2.9.1"><a href="#section-2.9" class="auto internal xref">2.9</a>.  <a href="#name-indirect-attacks-on-the-ser" class="internal xref">Indirect Attacks on the Server</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10">
-                <p id="section-toc.1-1.2.2.10.1"><a href="#section-2.10" class="auto internal xref">2.10</a>. <a href="#name-algorithm-verification-code" class="internal xref">Algorithm Verification Code Not Defensively Written</a></p>
+                <p id="section-toc.1-1.2.2.10.1"><a href="#section-2.10" class="auto internal xref">2.10</a>. <a href="#name-computation-cost-of-unreaso" class="internal xref">Computation Cost of Unreasonable Number of Hash Iterations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.11">
+                <p id="section-toc.1-1.2.2.11.1"><a href="#section-2.11" class="auto internal xref">2.11</a>. <a href="#name-algorithm-verification-code" class="internal xref">Algorithm Verification Code Not Defensively Written</a></p>
 </li>
             </ul>
 </li>
@@ -1245,6 +1248,9 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.12">
                 <p id="section-toc.1-1.3.2.12.1"><a href="#section-3.12" class="auto internal xref">3.12</a>. <a href="#name-use-mutually-exclusive-vali" class="internal xref">Use Mutually Exclusive Validation Rules for Different Kinds of JWTs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.13">
+                <p id="section-toc.1-1.3.2.13.1"><a href="#section-3.13" class="auto internal xref">3.13</a>. <a href="#name-limit-hash-iteration-count" class="internal xref">Limit Hash Iteration Count</a></p>
 </li>
             </ul>
 </li>
@@ -1391,7 +1397,7 @@ HMAC shared secret (see  <span>[<a href="#McLean" class="cite xref">McLean</a>]<
   <span>[<a href="#CVE-2015-9235" class="cite xref">CVE-2015-9235</a>]</span>).<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.1-3">For mitigations, see Sections  <a href="#algorithm-verification" class="auto internal xref">3.1</a> and  <a href="#appropriate-algorithms" class="auto internal xref">3.2</a>.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a> and <a href="#appropriate-algorithms" class="auto internal xref">Section 3.2</a>.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="weak-symmetric-keys">
@@ -1515,17 +1521,30 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
 <p id="section-2.9-2">For mitigations, see  <a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>.<a href="#section-2.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-algorithm-verification-code-not-defensively-written">
+<div id="unreasonable-iterations">
 <section id="section-2.10">
-        <h3 id="name-algorithm-verification-code">
-<a href="#section-2.10" class="section-number selfRef">2.10. </a><a href="#name-algorithm-verification-code" class="section-name selfRef">Algorithm Verification Code Not Defensively Written</a>
+        <h3 id="name-computation-cost-of-unreaso">
+<a href="#section-2.10" class="section-number selfRef">2.10. </a><a href="#name-computation-cost-of-unreaso" class="section-name selfRef">Computation Cost of Unreasonable Number of Hash Iterations</a>
         </h3>
-<p id="section-2.10-1">Some JWT implementations included a list of disallowed algorithm names, e.g. Do not use "none".
+<p id="section-2.10-1">The <code>p2c</code> (PBES2 Count) header parameter for the PBES2 encryption algorithms
+specifies the number of iterative hash computations to be performed.
+Attackers can use a very large count,
+thereby imposing an unreasonable computational burden on recipients.<a href="#section-2.10-1" class="pilcrow">¶</a></p>
+<p id="section-2.10-2">For mitigations, see <a href="#limit-iterations" class="auto internal xref">Section 3.13</a>.<a href="#section-2.10-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="autogen-algorithm-verification-code-not-defensively-written">
+<section id="section-2.11">
+        <h3 id="name-algorithm-verification-code">
+<a href="#section-2.11" class="section-number selfRef">2.11. </a><a href="#name-algorithm-verification-code" class="section-name selfRef">Algorithm Verification Code Not Defensively Written</a>
+        </h3>
+<p id="section-2.11-1">Some JWT implementations included a list of disallowed algorithm names,
+e.g., do not use "none".
 These same applications misinterpreted
 the JOSE specifications when parsing the token, reading algorithm values
 as if they were case-insensitive. The end result was that an attacker
-could change the "alg" value to "noNE" and bypass the security check.<a href="#section-2.10-1" class="pilcrow">¶</a></p>
-<p id="section-2.10-2">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>.<a href="#section-2.10-2" class="pilcrow">¶</a></p>
+could change the "alg" value to "noNE" and bypass the security check.<a href="#section-2.11-1" class="pilcrow">¶</a></p>
+<p id="section-2.11-2">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>.<a href="#section-2.11-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1820,6 +1839,20 @@ As discussed in  <a href="#use-typ" class="auto internal xref">Section 3.11</a>,
   RECOMMENDED.<a href="#section-3.12-3" class="pilcrow">¶</a></p>
 </section>
 </div>
+<div id="limit-iterations">
+<section id="section-3.13">
+        <h3 id="name-limit-hash-iteration-count">
+<a href="#section-3.13" class="section-number selfRef">3.13. </a><a href="#name-limit-hash-iteration-count" class="section-name selfRef">Limit Hash Iteration Count</a>
+        </h3>
+<p id="section-3.13-1">Implementations are RECOMMENDED to set a reasonable upper limit on
+the number of hash iterations that can be performed
+when validating encrypted content using PBES2 encryption algorithms,
+so as to prevent attackers from imposing
+an unreasonable computational burden on recipients.
+<span>[<a href="#OWASP-Password-Storage" class="cite xref">OWASP-Password-Storage</a>]</span> states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
+Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="security-considerations">
@@ -1946,7 +1979,11 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="OpenID.Core">[OpenID.Core]</dt>
         <dd>
-<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 incorporating errata set 1"</span>, <time datetime="2014-11" class="refDate">November 2014</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 incorporating errata set 2"</span>, <time datetime="2023-12" class="refDate">December 2023</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-core-1_0.html">https://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OWASP-Password-Storage">[OWASP-Password-Storage]</dt>
+        <dd>
+<span class="refAuthor">OWASP</span>, <span class="refTitle">"Password Storage Cheat Sheet"</span>, <span class="seriesInfo">OWASP Cheat Sheet Series </span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6749">[RFC6749]</dt>
         <dd>
@@ -1994,7 +2031,10 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">
-            <p id="appendix-A.1-1.1.1">Incorrect reading of values as case-insensitive.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.1-1.1.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.1-1.2">
+            <p id="appendix-A.1-1.2.1">Address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
