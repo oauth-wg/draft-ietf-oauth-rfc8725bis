@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 17 November 2025                                               
+Expires: 19 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                             16 May 2025
+                                                             18 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2025.
+   This Internet-Draft will expire on 19 November 2025.
 
 Copyright Notice
 
@@ -72,7 +72,7 @@ Table of Contents
      2.8.  Cross-JWT Confusion
      2.9.  Indirect Attacks on the Server
      2.10. Computation Cost of Unreasonable Number of Hash Iterations
-            (#unreasonable-iterations)
+     2.11. Algorithm Verification Code Not Defensively Written
    3.  Best Practices
      3.1.  Perform Algorithm Verification
      3.2.  Use Appropriate Algorithms
@@ -185,7 +185,7 @@ Table of Contents
       the signature using HMAC-SHA256 and using the RSA public key as
       the HMAC shared secret (see [McLean] and [CVE-2015-9235]).
 
-   For mitigations, see Sections 3.1 and 3.2.
+   For mitigations, see Section 3.1 and Section 3.2.
 
 2.2.  Weak Symmetric Keys
 
@@ -287,7 +287,6 @@ Table of Contents
    For mitigations, see Section 3.10.
 
 2.10.  Computation Cost of Unreasonable Number of Hash Iterations
-       (#unreasonable-iterations)
 
    The p2c (PBES2 Count) header parameter for the PBES2 encryption
    algorithms specifies the number of iterative hash computations to be
@@ -295,6 +294,17 @@ Table of Contents
    unreasonable computational burden on recipients.
 
    For mitigations, see Section 3.13.
+
+2.11.  Algorithm Verification Code Not Defensively Written
+
+   Some JWT implementations included a list of disallowed algorithm
+   names, e.g., do not use "none".  These same applications
+   misinterpreted the JOSE specifications when parsing the token,
+   reading algorithm values as if they were case-insensitive.  The end
+   result was that an attacker could change the "alg" value to "noNE"
+   and bypass the security check.
+
+   For mitigations, see Section 3.1.
 
 3.  Best Practices
 
@@ -310,6 +320,11 @@ Table of Contents
    cryptographic operation.  Moreover, each key MUST be used with
    exactly one algorithm, and this MUST be checked when the
    cryptographic operation is performed.
+
+   Libraries SHOULD opt for defensive security policies to cope with
+   potential issues in the underlying infrastructure, such as the JSON
+   parser.  In particular, use allowlists for critical parameters such
+   as "alg" instead of blocklists.
 
 3.2.  Use Appropriate Algorithms
 
@@ -706,6 +721,8 @@ Appendix A.  Document History
 A.1.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Reject unreasonably large p2c (PBES2 Count) values.
+
+   *  Address incorrect reading of alg values as being case-insensitive.
 
 A.2.  draft-sheffer-oauth-rfc8725bis-00
 

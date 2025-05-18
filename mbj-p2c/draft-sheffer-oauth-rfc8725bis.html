@@ -1067,7 +1067,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 17 November 2025</td>
+<td class="center">Expires 19 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-sheffer-oauth-rfc8725bis-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-16" class="published">16 May 2025</time>
+<time datetime="2025-05-18" class="published">18 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-17">17 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-19">19 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 19 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1203,7 +1203,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.2.2.9.1"><a href="#section-2.9" class="auto internal xref">2.9</a>.  <a href="#name-indirect-attacks-on-the-ser" class="internal xref">Indirect Attacks on the Server</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.10">
-                <p id="section-toc.1-1.2.2.10.1"><a href="#section-2.10" class="auto internal xref">2.10</a>. <a href="#name-computation-cost-of-unreaso" class="internal xref">Computation Cost of Unreasonable Number of Hash Iterations (#unreasonable-iterations)</a></p>
+                <p id="section-toc.1-1.2.2.10.1"><a href="#section-2.10" class="auto internal xref">2.10</a>. <a href="#name-computation-cost-of-unreaso" class="internal xref">Computation Cost of Unreasonable Number of Hash Iterations</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.11">
+                <p id="section-toc.1-1.2.2.11.1"><a href="#section-2.11" class="auto internal xref">2.11</a>. <a href="#name-algorithm-verification-code" class="internal xref">Algorithm Verification Code Not Defensively Written</a></p>
 </li>
             </ul>
 </li>
@@ -1394,7 +1397,7 @@ HMAC shared secret (see  <span>[<a href="#McLean" class="cite xref">McLean</a>]<
   <span>[<a href="#CVE-2015-9235" class="cite xref">CVE-2015-9235</a>]</span>).<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.1-3">For mitigations, see Sections  <a href="#algorithm-verification" class="auto internal xref">3.1</a> and  <a href="#appropriate-algorithms" class="auto internal xref">3.2</a>.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a> and <a href="#appropriate-algorithms" class="auto internal xref">Section 3.2</a>.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="weak-symmetric-keys">
@@ -1518,16 +1521,30 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
 <p id="section-2.9-2">For mitigations, see  <a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>.<a href="#section-2.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-computation-cost-of-unreasonable-number-of-hash-iterations-unreasonable-iterations">
+<div id="unreasonable-iterations">
 <section id="section-2.10">
         <h3 id="name-computation-cost-of-unreaso">
-<a href="#section-2.10" class="section-number selfRef">2.10. </a><a href="#name-computation-cost-of-unreaso" class="section-name selfRef">Computation Cost of Unreasonable Number of Hash Iterations (#unreasonable-iterations)</a>
+<a href="#section-2.10" class="section-number selfRef">2.10. </a><a href="#name-computation-cost-of-unreaso" class="section-name selfRef">Computation Cost of Unreasonable Number of Hash Iterations</a>
         </h3>
 <p id="section-2.10-1">The <code>p2c</code> (PBES2 Count) header parameter for the PBES2 encryption algorithms
 specifies the number of iterative hash computations to be performed.
 Attackers can use a very large count,
 thereby imposing an unreasonable computational burden on recipients.<a href="#section-2.10-1" class="pilcrow">¶</a></p>
 <p id="section-2.10-2">For mitigations, see <a href="#limit-iterations" class="auto internal xref">Section 3.13</a>.<a href="#section-2.10-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="autogen-algorithm-verification-code-not-defensively-written">
+<section id="section-2.11">
+        <h3 id="name-algorithm-verification-code">
+<a href="#section-2.11" class="section-number selfRef">2.11. </a><a href="#name-algorithm-verification-code" class="section-name selfRef">Algorithm Verification Code Not Defensively Written</a>
+        </h3>
+<p id="section-2.11-1">Some JWT implementations included a list of disallowed algorithm names,
+e.g., do not use "none".
+These same applications misinterpreted
+the JOSE specifications when parsing the token, reading algorithm values
+as if they were case-insensitive. The end result was that an attacker
+could change the "alg" value to "noNE" and bypass the security check.<a href="#section-2.11-1" class="pilcrow">¶</a></p>
+<p id="section-2.11-2">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>.<a href="#section-2.11-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1550,6 +1567,10 @@ The library  MUST ensure that the "alg" or "enc" header specifies the same algor
 that is used for the cryptographic operation.
 Moreover, each key  MUST be used with exactly one algorithm,
 and this  MUST be checked when the cryptographic operation is performed.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Libraries SHOULD opt for defensive security policies to cope
+with potential issues in the underlying infrastructure, such
+as the JSON parser. In particular, use allowlists for critical
+parameters such as "alg" instead of blocklists.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="appropriate-algorithms">
@@ -2011,6 +2032,9 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">
             <p id="appendix-A.1-1.1.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.1-1.2">
+            <p id="appendix-A.1-1.2.1">Address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
