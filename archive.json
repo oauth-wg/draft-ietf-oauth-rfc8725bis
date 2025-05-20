@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-18T01:01:04.701535+00:00",
+  "timestamp": "2025-05-20T00:58:14.499262+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -55,7 +55,7 @@
       "id": "I_kwDONgvdIs6lD8EI",
       "title": "Mitigation for Billion Hashes Attack",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -64,8 +64,8 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nDuring our testing, nine libraries were vulnerable to the Billion Hashes Attack. The root cause of this issue is that there is no limit on the size of the p2c claim in the JWE encrypted by the PBES2 algorithm, which causes the server to run billions of hash calculations when decrypting the JWE, causing a denial of service attack. Therefore, we propose adding a warning about this threat in RFC8725 and recommending an upper limit on the size of the p2c claim to mitigate the risk.\r\n",
       "createdAt": "2025-01-05T13:22:41Z",
-      "updatedAt": "2025-04-21T14:51:26Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-18T01:14:46Z",
+      "closedAt": "2025-05-18T01:14:46Z",
       "comments": [
         {
           "author": "yaronf",
@@ -644,24 +644,26 @@
       "id": "PR_kwDONgvdIs6V1wo7",
       "title": "Reject unreasonably large \"p2c\" values",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/9",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #1 ",
       "createdAt": "2025-05-12T13:33:45Z",
-      "updatedAt": "2025-05-18T00:08:23Z",
+      "updatedAt": "2025-05-18T01:14:45Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
-      "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
+      "baseRefOid": "7e104a7798e8d375382967df02ca275e328dbebf",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "mbj-p2c",
-      "headRefOid": "af7a71e1d4c00583a041e1b961ac25f959e965b2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fc8840a620791bf1486466bd334a7ee512ffd52c",
+      "closedAt": "2025-05-18T01:14:45Z",
+      "mergedAt": "2025-05-18T01:14:45Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "e624354927ac64871ba37a948891449791daf824"
+      },
       "comments": [],
       "reviews": [
         {
