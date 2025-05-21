@@ -414,6 +414,13 @@ could change the "alg" value to "noNE" and bypass the security check.
 For mitigations, see {{algorithm-verification}}.
 
 
+## JWT Format Confusion
+
+Some implementations support both Compact and JSON Serialization formats. If an application verifies a JWT in JSON format but extracts claims by parsing it as a Compact JWT (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
+
+For mitigations, see {{token-format}}.
+
+
 # Best Practices {#BP}
 
 
@@ -714,6 +721,10 @@ an unreasonable computational burden on recipients.
 {{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
 Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
 
+
+## Check JWT Format Type {#token-format}
+
+Implementations are RECOMMENDED to confirm if the JWT is a supported format before parsing the JWT. If the implementation only supports the compact format, the token with start with e (ASCII 0x65) and if the implementation supports the JSON format, the token will start with { (ASCII 0x7B). 
 
 # Security Considerations {#security-considerations}
 
