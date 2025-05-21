@@ -413,6 +413,13 @@ could change the "alg" value to "noNE" and bypass the security check.
 
 For mitigations, see {{algorithm-verification}}.
 
+## JWE Decompression Bomb Attack
+
+
+JWE supports the optional compression of the plaintext prior to encryption via the "zip" header parameter as defined in {{RFC7516}} Section 4.1.3. Upon decryption, recipients are expected to decompress the payload before further processing. However, if the recipient does not enforce limits on the size of the decompressed output, an attacker can craft a malicious JWE with a highly compressed, arbitrarily large payload. This can cause excessive resource consumption (CPU, memory), resulting in Denial of Service (DoS).
+
+For mitigation, see {{limit-decompression}}.
+
 
 # Best Practices {#BP}
 
@@ -714,6 +721,11 @@ an unreasonable computational burden on recipients.
 {{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
 Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
 
+
+## Limit JWE Decompression Size {#limit-decompression}
+
+
+Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.
 
 # Security Considerations {#security-considerations}
 
