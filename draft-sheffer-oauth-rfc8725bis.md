@@ -416,7 +416,7 @@ For mitigations, see {{algorithm-verification}}.
 
 ## JWT Format Confusion
 
-Some implementations support both Compact and JSON Serialization formats. If an application verifies a JWT in JSON format but extracts claims by parsing it as a Compact JWT (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
+Some JWS implementations support both the Compact and JSON Serializations. While JWTs MUST use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
 
 For mitigations, see {{token-format}}.
 
