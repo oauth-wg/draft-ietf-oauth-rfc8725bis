@@ -725,7 +725,7 @@ Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double t
 ## Limit JWE Decompression Size {#limit-decompression}
 
 
-Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB. 
+Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.
 
 # Security Considerations {#security-considerations}
 
