@@ -1873,7 +1873,7 @@ Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,00
         <h3 id="name-check-jwt-format-type">
 <a href="#section-3.14" class="section-number selfRef">3.14. </a><a href="#name-check-jwt-format-type" class="section-name selfRef">Check JWT Format Type</a>
         </h3>
-<p id="section-3.14-1">Implementations are RECOMMENDED to confirm if the JWT is a supported format before parsing the JWT. If the implementation only supports the compact format, the token with start with e (ASCII 0x65) and if the implementation supports the JSON format, the token will start with { (ASCII 0x7B).<a href="#section-3.14-1" class="pilcrow">¶</a></p>
+<p id="section-3.14-1">Implementations are MUST to confirm if the JWT is a supported format before parsing the JWT. If the implementation only supports the compact format, the token will start with 'e' (ASCII 0x65) and if the implementation supports the JSON format, the token will start with '{' (ASCII 0x7B).<a href="#section-3.14-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
