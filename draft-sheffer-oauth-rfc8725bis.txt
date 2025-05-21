@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 19 November 2025                                               
+Expires: 22 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                             18 May 2025
+                                                             21 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 November 2025.
+   This Internet-Draft will expire on 22 November 2025.
 
 Copyright Notice
 
@@ -73,6 +73,7 @@ Table of Contents
      2.9.  Indirect Attacks on the Server
      2.10. Computation Cost of Unreasonable Number of Hash Iterations
      2.11. Algorithm Verification Code Not Defensively Written
+     2.12. JWE Decompression Bomb Attack
    3.  Best Practices
      3.1.  Perform Algorithm Verification
      3.2.  Use Appropriate Algorithms
@@ -88,6 +89,7 @@ Table of Contents
      3.12. Use Mutually Exclusive Validation Rules for Different Kinds
             of JWTs
      3.13. Limit Hash Iteration Count
+     3.14. Limit JWE Decompression Size
    4.  Security Considerations
    5.  IANA Considerations
    6.  Acknowledgements
@@ -305,6 +307,20 @@ Table of Contents
    and bypass the security check.
 
    For mitigations, see Section 3.1.
+
+2.12.  JWE Decompression Bomb Attack
+
+   JWE supports the optional compression of the plaintext prior to
+   encryption via the "zip" header parameter as defined in [RFC7516]
+   Section 4.1.3.  Upon decryption, recipients are expected to
+   decompress the payload before further processing.  However, if the
+   recipient does not enforce limits on the size of the decompressed
+   output, an attacker can craft a malicious JWE with a highly
+   compressed, arbitrarily large payload.  This can cause excessive
+   resource consumption (CPU, memory), resulting in Denial of Service
+   (DoS).
+
+   For mitigation, see Section 3.14.
 
 3.  Best Practices
 
@@ -555,6 +571,11 @@ Table of Contents
    of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140
    compliance.  Thus, rejecting inputs with a p2c (PBES2 Count) value
    over 1,200,000 (double that) is RECOMMENDED.
+
+3.14.  Limit JWE Decompression Size
+
+   Implementations are RECOMMENDED to set a reasonable upper limit on
+   the decompressed size of a JWE such as 250 KB.
 
 4.  Security Considerations
 
