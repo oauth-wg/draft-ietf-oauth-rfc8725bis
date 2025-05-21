@@ -1558,7 +1558,7 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
         <h3 id="name-jwt-format-confusion">
 <a href="#section-2.12" class="section-number selfRef">2.12. </a><a href="#name-jwt-format-confusion" class="section-name selfRef">JWT Format Confusion</a>
         </h3>
-<p id="section-2.12-1">Some implementations support both Compact and JSON Serialization formats. If an application verifies a JWT in JSON format but extracts claims by parsing it as a Compact JWT (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.12-1" class="pilcrow">¶</a></p>
+<p id="section-2.12-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs MUST use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.12-1" class="pilcrow">¶</a></p>
 <p id="section-2.12-2">For mitigations, see <a href="#token-format" class="auto internal xref">Section 3.14</a>.<a href="#section-2.12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
