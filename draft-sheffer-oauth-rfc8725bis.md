@@ -416,7 +416,7 @@ For mitigations, see {{algorithm-verification}}.
 ## JWE Decompression Bomb Attack
 
 
-JWE supports the optional compression of the plaintext prior to encryption via the "zip" header parameter as defined in {{RFC7515}} Section 4.1.3. Upon decryption, recipients are expected to decompress the payload before further processing. However, if the recipient does not enforce limits on the size of the decompressed output, an attacker can craft a malicious JWE with a highly compressed, arbitrarily large payload. This can cause excessive resource consumption (CPU, memory), resulting in Denial of Service (DoS).
+JWE supports the optional compression of the plaintext prior to encryption via the "zip" header parameter as defined in {{RFC7516}} Section 4.1.3. Upon decryption, recipients are expected to decompress the payload before further processing. However, if the recipient does not enforce limits on the size of the decompressed output, an attacker can craft a malicious JWE with a highly compressed, arbitrarily large payload. This can cause excessive resource consumption (CPU, memory), resulting in Denial of Service (DoS).
 
 For mitigation, see {{limit-decompression}}.
 
