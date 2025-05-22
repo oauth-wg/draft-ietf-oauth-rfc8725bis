@@ -110,9 +110,9 @@ informative:
       name: Breno de Medeiros
     - ins: C. Mortimore
       name: Chuck Mortimore
-    date: November 2014
+    date: December 2023
     target: https://openid.net/specs/openid-connect-core-1_0.html
-    title: OpenID Connect Core 1.0 incorporating errata set 1
+    title: OpenID Connect Core 1.0 incorporating errata set 2
   RFC6749:
   RFC7159:
   RFC7517:
@@ -139,6 +139,13 @@ informative:
     target: https://ia.cr/2018/298
     title: 'In search of CurveSwap: Measuring elliptic curve implementations in the
       wild'
+  OWASP-Password-Storage:
+    author:
+    - organization: OWASP
+    title: Password Storage Cheat Sheet
+    seriesinfo: OWASP Cheat Sheet Series
+    target: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
+    date: 2025
 
 --- abstract
 
@@ -262,10 +269,7 @@ would try to validate the signature using HMAC-SHA256 and using the RSA public k
 HMAC shared secret (see  {{McLean}} and
   {{CVE-2015-9235}}).
 
-
- For mitigations, see Sections  {{<algorithm-verification}} and  {{<appropriate-algorithms}}.
-
-
+For mitigations, see {{algorithm-verification}} and {{appropriate-algorithms}}.
 
 
 ## Weak Symmetric Keys {#weak-symmetric-keys}
@@ -393,9 +397,33 @@ an attacker as vectors for injection attacks or server-side request forgery (SSR
 
  For mitigations, see  {{do-not-trust-claims}}.
 
+## Computation Cost of Unreasonable Number of Hash Iterations {#unreasonable-iterations}
+
+The `p2c` (PBES2 Count) header parameter for the PBES2 encryption algorithms
+specifies the number of iterative hash computations to be performed.
+Attackers can use a very large count,
+thereby imposing an unreasonable computational burden on recipients.
+
+For mitigations, see {{limit-iterations}}.
 
 
+## Algorithm Verification Code Not Defensively Written
 
+Some JWT implementations included a list of disallowed algorithm names,
+e.g., do not use "none".
+These same applications misinterpreted
+the JOSE specifications when parsing the token, reading algorithm values
+as if they were case-insensitive. The end result was that an attacker
+could change the "alg" value to "noNE" and bypass the security check.
+
+For mitigations, see {{algorithm-verification}}.
+
+## JWE Decompression Bomb Attack
+
+
+JWE supports the optional compression of the plaintext prior to encryption via the "zip" header parameter as defined in {{RFC7516}} Section 4.1.3. Upon decryption, recipients are expected to decompress the payload before further processing. However, if the recipient does not enforce limits on the size of the decompressed output, an attacker can craft a malicious JWE with a highly compressed, arbitrarily large payload. This can cause excessive resource consumption (CPU, memory), resulting in Denial of Service (DoS).
+
+For mitigation, see {{limit-decompression}}.
 
 
 # Best Practices {#BP}
@@ -407,7 +435,6 @@ to mitigate the threats listed in the preceding section.
 
 ## Perform Algorithm Verification {#algorithm-verification}
 
-
  Libraries  MUST enable the caller to specify a
  supported set of algorithms and  MUST NOT use any other algorithms when performing cryptographic operations.
 The library  MUST ensure that the "alg" or "enc" header specifies the same algorithm
@@ -415,7 +442,10 @@ that is used for the cryptographic operation.
 Moreover, each key  MUST be used with exactly one algorithm,
 and this  MUST be checked when the cryptographic operation is performed.
 
-
+Libraries SHOULD opt for defensive security policies to cope
+with potential issues in the underlying infrastructure, such
+as the JSON parser. In particular, use allowlists for critical
+parameters such as "alg" instead of blocklists.
 
 
 ## Use Appropriate Algorithms {#appropriate-algorithms}
@@ -684,9 +714,21 @@ As discussed in  {{use-typ}}, for new JWT
   RECOMMENDED.
 
 
+## Limit Hash Iteration Count {#limit-iterations}
+
+Implementations are RECOMMENDED to set a reasonable upper limit on
+the number of hash iterations that can be performed
+when validating encrypted content using PBES2 encryption algorithms,
+so as to prevent attackers from imposing
+an unreasonable computational burden on recipients.
+{{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
+Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
 
 
+## Limit JWE Decompression Size {#limit-decompression}
 
+
+Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.
 
 # Security Considerations {#security-considerations}
 
@@ -732,6 +774,8 @@ for their reviews.
 ## draft-sheffer-oauth-rfc8725bis-01
 
 * Mitigate encryption-signature confusion.
+* Reject unreasonably large `p2c` (PBES2 Count) values.
+* Address incorrect reading of `alg` values as being case-insensitive.
 
 ## draft-sheffer-oauth-rfc8725bis-00
 
