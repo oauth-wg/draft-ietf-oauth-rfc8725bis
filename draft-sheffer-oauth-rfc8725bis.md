@@ -730,7 +730,7 @@ Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double t
 
 ## Check JWT Format Type {#token-format}
 
-Implementations MUST confirm if the JWT is a supported format before parsing the JWT. If the implementation only supports the compact format, the token will start with 'e' (ASCII 0x65) and if the implementation supports the JSON format, the token will start with '{' (ASCII 0x7B).
+Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.
 
 
 ## Limit JWE Decompression Size {#limit-decompression}
