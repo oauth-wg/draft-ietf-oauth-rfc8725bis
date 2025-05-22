@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 22 November 2025                                               
+Expires: 23 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                             21 May 2025
+                                                             22 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2025.
+   This Internet-Draft will expire on 23 November 2025.
 
 Copyright Notice
 
@@ -74,6 +74,7 @@ Table of Contents
      2.10. Computation Cost of Unreasonable Number of Hash Iterations
      2.11. Algorithm Verification Code Not Defensively Written
      2.12. JWE Decompression Bomb Attack
+     2.13. JWT Format Confusion
    3.  Best Practices
      3.1.  Perform Algorithm Verification
      3.2.  Use Appropriate Algorithms
@@ -89,7 +90,8 @@ Table of Contents
      3.12. Use Mutually Exclusive Validation Rules for Different Kinds
             of JWTs
      3.13. Limit Hash Iteration Count
-     3.14. Limit JWE Decompression Size
+     3.14. Check JWT Format Type
+     3.15. Limit JWE Decompression Size
    4.  Security Considerations
    5.  IANA Considerations
    6.  Acknowledgements
@@ -320,7 +322,19 @@ Table of Contents
    resource consumption (CPU, memory), resulting in Denial of Service
    (DoS).
 
-   For mitigation, see Section 3.14.
+   For mitigation, see Section 3.15.
+
+2.13.  JWT Format Confusion
+
+   Some JWS implementations support both the Compact and JSON
+   Serializations.  While JWTs MUST use the Compact Serialization, if an
+   application by mistake verifies a JWT using the JSON Serialization
+   but extracts claims by parsing it as a JWT using the Compact
+   Serialization (e.g., via string splitting), an attacker can craft a
+   valid JSON JWS with a forged payload.  This mismatch in format
+   handling can lead to authentication bypass or impersonation.
+
+   For mitigations, see Section 3.14.
 
 3.  Best Practices
 
@@ -572,7 +586,15 @@ Table of Contents
    compliance.  Thus, rejecting inputs with a p2c (PBES2 Count) value
    over 1,200,000 (double that) is RECOMMENDED.
 
-3.14.  Limit JWE Decompression Size
+3.14.  Check JWT Format Type
+
+   Implementations MUST confirm the JWT is in a legal format while
+   parsing it.  Legal JWTs contain only the ASCII characters for
+   letters, numbers, dash, underscore, and period.  Content with any
+   other characters - especially braces and quotation marks - is not a
+   JWT and MUST be rejected.
+
+3.15.  Limit JWE Decompression Size
 
    Implementations are RECOMMENDED to set a reasonable upper limit on
    the decompressed size of a JWE such as 250 KB.
