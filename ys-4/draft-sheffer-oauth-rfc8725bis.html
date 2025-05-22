@@ -39,7 +39,7 @@
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.7
+    platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1067,7 +1067,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 18 November 2025</td>
+<td class="center">Expires 23 November 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1080,12 +1080,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-sheffer-oauth-rfc8725bis-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-17" class="published">17 May 2025</time>
+<time datetime="2025-05-22" class="published">22 May 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-18">18 November 2025</time></dd>
+<dd class="expires"><time datetime="2025-11-23">23 November 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1132,7 +1132,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 18 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1269,7 +1269,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
 </li>
             </ul>
 </li>
@@ -1407,7 +1410,7 @@ attacker gets hold of such a token  <span>[<a href="#Langkemper" class="cite xre
         <h3 id="name-incorrect-use-and-compositi">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-incorrect-use-and-compositi" class="section-name selfRef">Incorrect Use and Composition of Encryption and Signature</a>
         </h3>
-<p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities, in particular when the verifier's asymmetric key includes the private key, and when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">For mitigations, see  <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
@@ -1970,14 +1973,26 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-A-1">[[Note to RFC Editor: please remove before publication.]]<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div id="autogen-draft-sheffer-oauth-rfc8725bis-00">
+<div id="autogen-draft-sheffer-oauth-rfc8725bis-01">
 <section id="appendix-A.1">
         <h3 id="name-draft-sheffer-oauth-rfc8725">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">
-            <p id="appendix-A.1-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.1-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="autogen-draft-sheffer-oauth-rfc8725bis-00">
+<section id="appendix-A.2">
+        <h3 id="name-draft-sheffer-oauth-rfc8725b">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-A.2-1.1">
+            <p id="appendix-A.2-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-A.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>

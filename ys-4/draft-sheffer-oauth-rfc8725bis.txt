@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 18 November 2025                                               
+Expires: 23 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                             17 May 2025
+                                                             22 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 November 2025.
+   This Internet-Draft will expire on 23 November 2025.
 
 Copyright Notice
 
@@ -92,7 +92,8 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Document History
-     A.1.  draft-sheffer-oauth-rfc8725bis-00
+     A.1.  draft-sheffer-oauth-rfc8725bis-01
+     A.2.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -199,10 +200,9 @@ Table of Contents
    Most authentication use cases only require a simple signed JWT as
    their token.  However verifiers don't always check that the received
    JWT is a signed JWS as opposed to an encrypted JWE structure.  This
-   can result in vulnerabilities, in particular when the verifier's
-   asymmetric key includes the private key, and when the verifier's
-   library does not distinguish between successful decryption and
-   successful signature validation [CVE-2023-51774].
+   can result in vulnerabilities when the verifier's library does not
+   distinguish between successful decryption and successful signature
+   validation [CVE-2023-51774].
 
    In the more complicated use cases where confidentiality is required,
    some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-
@@ -690,7 +690,11 @@ Appendix A.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-A.1.  draft-sheffer-oauth-rfc8725bis-00
+A.1.  draft-sheffer-oauth-rfc8725bis-01
+
+   *  Mitigate encryption-signature confusion.
+
+A.2.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
