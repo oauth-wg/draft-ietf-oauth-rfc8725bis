@@ -5,10 +5,10 @@
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
 Intended status: Best Current Practice                          D. Hardt
-Expires: 22 November 2025                                               
+Expires: 23 November 2025                                               
                                                                 M. Jones
                                                   Self-Issued Consulting
-                                                             21 May 2025
+                                                             22 May 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 November 2025.
+   This Internet-Draft will expire on 23 November 2025.
 
 Copyright Notice
 
@@ -588,11 +588,11 @@ Table of Contents
 
 3.14.  Check JWT Format Type
 
-   Implementations MUST confirm if the JWT is a supported format before
-   parsing the JWT.  If the implementation only supports the compact
-   format, the token will start with 'e' (ASCII 0x65) and if the
-   implementation supports the JSON format, the token will start with
-   '{' (ASCII 0x7B).
+   Implementations MUST confirm the JWT is in a legal format while
+   parsing it.  Legal JWTs contain only the ASCII characters for
+   letters, numbers, dash, underscore, and period.  Content with any
+   other characters - especially braces and quotation marks - is not a
+   JWT and MUST be rejected.
 
 3.15.  Limit JWE Decompression Size
 
