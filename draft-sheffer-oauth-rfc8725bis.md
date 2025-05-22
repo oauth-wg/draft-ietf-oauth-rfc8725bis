@@ -421,6 +421,13 @@ JWE supports the optional compression of the plaintext prior to encryption via t
 For mitigation, see {{limit-decompression}}.
 
 
+## JWT Format Confusion
+
+Some JWS implementations support both the Compact and JSON Serializations. While JWTs MUST use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
+
+For mitigations, see {{token-format}}.
+
+
 # Best Practices {#BP}
 
 
@@ -721,11 +728,15 @@ an unreasonable computational burden on recipients.
 {{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
 Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
 
+## Check JWT Format Type {#token-format}
+
+Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.
+
 
 ## Limit JWE Decompression Size {#limit-decompression}
 
-
 Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.
+
 
 # Security Considerations {#security-considerations}
 
