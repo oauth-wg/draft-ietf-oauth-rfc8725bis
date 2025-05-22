@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-20T00:58:14.499262+00:00",
+  "timestamp": "2025-05-22T00:57:15.502170+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -128,7 +128,7 @@
       "id": "I_kwDONgvdIs6lD8aL",
       "title": "Mitigation for Compression DoS",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -137,8 +137,8 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWE allows the payload to be compressed and then decompressed after the recipient decrypts the JWE. However, we observed that 13 libraries did not check the length of the JWE when decompressing it. This means that an attacker can encrypt a very long and malicious JWT and send it to the recipient, causing a denial of service attack. Therefore, we suggest adding this issue in RFC8725 and recommending a upper limit on the length of JWE.",
       "createdAt": "2025-01-05T13:26:15Z",
-      "updatedAt": "2025-05-13T08:47:07Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-21T22:24:45Z",
+      "closedAt": "2025-05-21T22:24:45Z",
       "comments": [
         {
           "author": "panva",
@@ -174,6 +174,13 @@
           "body": "> notes for [@dickhardt](https://github.com/dickhardt)\n> \n>    * set a max size for decompression - 250 MB is commonly used??\n\nno, I think the commonly used limits are over one thousand times smaller than that ",
           "createdAt": "2025-05-12T15:26:47Z",
           "updatedAt": "2025-05-12T15:26:57Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> > notes for [@dickhardt](https://github.com/dickhardt)\n> > \n> > * set a max size for decompression - 250 MB is commonly used??\n> \n> no, I think the commonly used limits are over one thousand times smaller than that\n\ndoh! -- meant KB ",
+          "createdAt": "2025-05-21T01:34:19Z",
+          "updatedAt": "2025-05-21T01:34:19Z"
         }
       ]
     },
@@ -252,7 +259,7 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-05-17T15:40:05Z",
+      "updatedAt": "2025-05-21T22:52:15Z",
       "closedAt": null,
       "comments": [
         {
@@ -289,6 +296,13 @@
           "body": "> the original JOSE architecture only requires the recipient to parse the smaller/simpler header in order to validate the whole JWS.\n\nThat's not a complete description of the situation.  JWS does not define a way to know the keys or validate control of them.  Nor does JWT.  OpenID Connect ID Tokens do, for example.\n\nJWT does define claims used to validate control of the keys - especially \"iss\".  That's not a bug - it's a super-useful and widely used feature.\n\n> Parse an untrusted JWS (which may try to exploit JSON parsing vulnerabilities) to obtain iss.\n\nAll JWTs are untrusted until their integrity and issuer have been validated.  Nothing new.\n\nIf you can't parse bytes that purport to be JSON without exercising JSON parsing vulnerabilities in your code, you have bigger problems than those related to JWTs.\n\n> Use that value to access an untrusted URL to read a public key.\n\nThat the URL trustworthy is confirmed by validating the signature using a key obtained.  If the signature doesn't validate using a key obtained by the issuer, the JWT is rejected, along with any content retrieved from the URL.\n\n> If this fails, make sure to throw away the already parsed JWS, whose claims may already be cached somewhere.\n\nIf you cache claims from a rejected JWT, that's simply a code bug.",
           "createdAt": "2025-05-17T15:40:04Z",
           "updatedAt": "2025-05-17T15:40:04Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "To address this issue, we need to identify the attacks we will describe in the text and how we're mitigating them.  @hannestschofenig?\n\nUnless we identify attacks and mitigations, we should close this issue with no action.",
+          "createdAt": "2025-05-21T22:52:14Z",
+          "updatedAt": "2025-05-21T22:52:14Z"
         }
       ]
     },
@@ -429,7 +443,7 @@
       "labels": [],
       "body": "Closes #4.",
       "createdAt": "2025-04-22T13:27:00Z",
-      "updatedAt": "2025-05-17T22:14:02Z",
+      "updatedAt": "2025-05-22T00:49:28Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
@@ -454,6 +468,20 @@
           "body": "> > if you're accepting a JWE, you also need a private key in the JWK to decrypt the thing. So the attack (sending a JWE instead of a JWS) only works if there's a private key on the receiver's side.\r\n> \r\n> It's true that the recipient needs a private key to decrypt the encrypted JWT. But it's not true that the private key needs to be in the JWK. Typically only the public keys would be in the JWK. The private key would normally be privately held by the recipient - not published in a JWK.\r\n\r\nFirst, I'm quoting the researcher who reported the issue in #4. For more detail see slides 17-19 [here](https://i.blackhat.com/BH-US-23/Presentations/US-23-Tervoort-Three-New-Attacks-Against-JSON-Web-Tokens.pdf).\r\n\r\nAlso, the point is not that the private key is published along with the JWK, but that when the JWK is used locally in the receiver's call to the JOSE library, in includes the private key.",
           "createdAt": "2025-05-17T21:58:24Z",
           "updatedAt": "2025-05-17T21:58:24Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Please add a history entry for this change.",
+          "createdAt": "2025-05-21T22:43:23Z",
+          "updatedAt": "2025-05-21T22:43:23Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Also, the point is not that the private key is published along with the JWK, but that when the JWK is used locally in the receiver's call to the JOSE library, in includes the private key.\r\n\r\nJWK is a format for a key. Libraries also take PEM format for the key as well -> 'JWK' is not a correct way to refer to the key -- not that it matters for this PR ",
+          "createdAt": "2025-05-22T00:18:50Z",
+          "updatedAt": "2025-05-22T00:49:27Z"
         }
       ],
       "reviews": [
@@ -636,6 +664,26 @@
               "updatedAt": "2025-05-17T22:14:02Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbPDv",
+          "commit": {
+            "abbreviatedOid": "782fb02"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T22:22:56Z",
+          "updatedAt": "2025-05-21T22:22:56Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "Please apply my suggestion deleting the ambiguous phrase, then I will approve.",
+              "createdAt": "2025-05-21T22:22:56Z",
+              "updatedAt": "2025-05-21T22:22:56Z"
+            }
+          ]
         }
       ]
     },
@@ -756,6 +804,327 @@
               "body": "I am looking at the files changed -- at least I think I am! If 1.2M then I'm fine. ",
               "createdAt": "2025-05-18T00:08:09Z",
               "updatedAt": "2025-05-18T00:08:23Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDONgvdIs6W-pJd",
+      "title": "Mitigation for Compression DoS #3",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/10",
+      "state": "MERGED",
+      "author": "dickhardt",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "yaronf",
+        "selfissued"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-21T02:04:15Z",
+      "updatedAt": "2025-05-21T22:24:26Z",
+      "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "e624354927ac64871ba37a948891449791daf824",
+      "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "headRefName": "Mitigation-for-Compression-DoS-#3",
+      "headRefOid": "4f5f1478a28ecc2278d1f0f563bf649d7e3b0b5a",
+      "closedAt": "2025-05-21T22:24:26Z",
+      "mergedAt": "2025-05-21T22:24:26Z",
+      "mergedBy": "dickhardt",
+      "mergeCommit": {
+        "oid": "6ed92926d8726fa357eb1d62aba88e1945520d73"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6qTP7J",
+          "commit": {
+            "abbreviatedOid": "79e83f0"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T10:28:55Z",
+          "updatedAt": "2025-05-21T10:28:55Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Wrong RFC number, didn't check the section number.",
+              "createdAt": "2025-05-21T10:28:55Z",
+              "updatedAt": "2025-05-21T10:28:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qaxRi",
+          "commit": {
+            "abbreviatedOid": "4f5f147"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-21T21:15:21Z",
+          "updatedAt": "2025-05-21T21:15:21Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbNBL",
+          "commit": {
+            "abbreviatedOid": "4f5f147"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-21T22:16:15Z",
+          "updatedAt": "2025-05-21T22:16:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDONgvdIs6W-xZP",
+      "title": "Mitigation for JWT Format Confusion #2",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/11",
+      "state": "OPEN",
+      "author": "dickhardt",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "yaronf",
+        "selfissued"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-21T02:29:15Z",
+      "updatedAt": "2025-05-22T00:14:28Z",
+      "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "6ed92926d8726fa357eb1d62aba88e1945520d73",
+      "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "headRefName": "Mitigation-for-JWT-Format-Confusion-#2",
+      "headRefOid": "b66067420a6291a03f421debb09924fdeeab4f99",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@yaronf does Mike's suggestion (which I accepted resolve your concern?",
+          "createdAt": "2025-05-21T22:29:11Z",
+          "updatedAt": "2025-05-21T22:29:11Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Please add a history entry for this change.",
+          "createdAt": "2025-05-21T22:42:50Z",
+          "updatedAt": "2025-05-21T22:42:50Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6qUfAP",
+          "commit": {
+            "abbreviatedOid": "b384f7d"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-05-21T12:20:02Z",
+          "updatedAt": "2025-05-21T14:39:58Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I think we should mention that JSON Serialization is not compliant with the RFC. (To be clear, we should still mention it because it happens in reality).",
+              "createdAt": "2025-05-21T12:20:02Z",
+              "updatedAt": "2025-05-21T14:39:58Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "RECOMMENDED means SHOULD. Why not make it a MUST?",
+              "createdAt": "2025-05-21T14:39:04Z",
+              "updatedAt": "2025-05-21T14:39:58Z"
+            },
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nImplementations are RECOMMENDED to confirm if the JWT is a supported format before parsing the JWT. If the implementation only supports the compact format, the token will start with 'e' (ASCII 0x65) and if the implementation supports the JSON format, the token will start with '{' (ASCII 0x7B). \r\n```",
+              "createdAt": "2025-05-21T14:39:45Z",
+              "updatedAt": "2025-05-21T14:39:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qZbg4",
+          "commit": {
+            "abbreviatedOid": "b384f7d"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T18:47:09Z",
+          "updatedAt": "2025-05-21T18:47:09Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "I thought JSON serialization was a valid format. No?",
+              "createdAt": "2025-05-21T18:47:09Z",
+              "updatedAt": "2025-05-21T18:47:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qayQB",
+          "commit": {
+            "abbreviatedOid": "c2a21e8"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-05-21T21:17:28Z",
+          "updatedAt": "2025-05-21T21:20:32Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nImplementations MUST confirm that the JWT is a supported format before parsing the JWT. If the implementation only supports the compact format, the token will start with 'e' (ASCII 0x65) and if the implementation supports the JSON format, the token will start with '{' (ASCII 0x7B).\r\n```",
+              "createdAt": "2025-05-21T21:17:28Z",
+              "updatedAt": "2025-05-21T21:20:32Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "Quoting RFC 7519: \"JWTs are always represented using the JWS Compact Serialization or the JWE Compact Serialization.\"",
+              "createdAt": "2025-05-21T21:20:23Z",
+              "updatedAt": "2025-05-21T21:20:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbPiM",
+          "commit": {
+            "abbreviatedOid": "b384f7d"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T22:24:05Z",
+          "updatedAt": "2025-05-21T22:24:06Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "While 7519 defines a JWT and that it is the compact serialization, 7515 (JWS) and 7516 (JWE) both define a compact and JSON serialization, and the attack was a library that would take both of those serializations, which sortof makes sense as they are both defined in 7515 and 7516.\r\n\r\nhttps://datatracker.ietf.org/doc/html/rfc7515#section-7\r\n\r\nhttps://datatracker.ietf.org/doc/html/rfc7516#section-7\r\n\r\n@selfissued what are your thoughts?\r\n\r\n",
+              "createdAt": "2025-05-21T22:24:05Z",
+              "updatedAt": "2025-05-21T22:24:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbQ3R",
+          "commit": {
+            "abbreviatedOid": "c2a21e8"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T22:26:51Z",
+          "updatedAt": "2025-05-21T22:26:52Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nSome JWS implementations support both the Compact and JSON Serializations. While JWTs MUST use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.\r\n```",
+              "createdAt": "2025-05-21T22:26:52Z",
+              "updatedAt": "2025-05-21T22:26:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbaX1",
+          "commit": {
+            "abbreviatedOid": "c2a21e8"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T22:39:44Z",
+          "updatedAt": "2025-05-21T22:39:44Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nImplementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.\r\n```\r\n\r\nJWTs don't have to start with an \"e\" if there is leading space in the JSON before base64url-encoding.  Similarly, content using the JWS JSON Serialization doesn't have to start with \"{\" because it can have leading spaces.",
+              "createdAt": "2025-05-21T22:39:44Z",
+              "updatedAt": "2025-05-21T22:41:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbdP4",
+          "commit": {
+            "abbreviatedOid": "b385151"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T22:46:32Z",
+          "updatedAt": "2025-05-21T22:46:32Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\r\nImplementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.\r\n```\r\n\r\nBecause of leading spaces being legal in JSON, neither of the \"e\" nor \"{\" statements is true.",
+              "createdAt": "2025-05-21T22:46:32Z",
+              "updatedAt": "2025-05-21T22:46:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qbdeQ",
+          "commit": {
+            "abbreviatedOid": "b384f7d"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-21T22:47:26Z",
+          "updatedAt": "2025-05-21T22:47:26Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "My thoughts are in my change suggestion about JWTs containing only letters, numbers, dash, underscore, and period.",
+              "createdAt": "2025-05-21T22:47:26Z",
+              "updatedAt": "2025-05-21T22:47:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qb3Xk",
+          "commit": {
+            "abbreviatedOid": "c2a21e8"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-05-22T00:14:28Z",
+          "updatedAt": "2025-05-22T00:14:28Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "That is a better check, thanks Mike.",
+              "createdAt": "2025-05-22T00:14:28Z",
+              "updatedAt": "2025-05-22T00:14:28Z"
             }
           ]
         }
