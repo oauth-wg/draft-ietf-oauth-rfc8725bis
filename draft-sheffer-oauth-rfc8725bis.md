@@ -786,7 +786,9 @@ for their reviews.
 
 * Mitigate encryption-signature confusion.
 * Reject unreasonably large `p2c` (PBES2 Count) values.
-* Address incorrect reading of `alg` values as being case-insensitive.
+* Defensive checking to address incorrect reading of `alg` values as being case-insensitive.
+* Mitigate DoS attacks resulting from abuse of compression.
+* Mitigate JWT serialization format confusion.
 
 ## draft-sheffer-oauth-rfc8725bis-00
 
