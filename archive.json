@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-05-22T00:57:15.502170+00:00",
+  "timestamp": "2025-05-25T01:02:34.946218+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -88,7 +88,7 @@
       "id": "I_kwDONgvdIs6lD8N6",
       "title": "Mitigation for JWT Format Confusion",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -97,8 +97,8 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nWe found four libraries that support JSON-type JWS when parsing JWT. If the user extracts the payload by string interception after verification, the attacker can forge the content, which leads to JWT Format Confusion. We found such an exploitation case in Openshift Telemeter (CVE-2024-5037[1]) and Kubernetes identity verification[2] that supports parsing JSON JWS and leading to authentication bypass. Therefore, we propose to include this threat in RFC8725 for systematic consideration and advise against parsing JSON JWSs.\r\n\r\n[1]: https://nvd.nist.gov/vuln/detail/cve-2024-5037\r\n[2]: https://github.com/kubernetes/kubernetes/pull/123540",
       "createdAt": "2025-01-05T13:24:15Z",
-      "updatedAt": "2025-05-12T14:51:58Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-23T09:23:04Z",
+      "closedAt": "2025-05-23T09:23:03Z",
       "comments": [
         {
           "author": "yaronf",
@@ -120,6 +120,13 @@
           "body": "https://www.rfc-editor.org/rfc/rfc7519.html#section-1 says:\n> JWTs are always   represented using the JWS Compact Serialization or the JWE Compact   Serialization.\n\nJWT parsers need to enforce this.",
           "createdAt": "2025-05-12T14:51:57Z",
           "updatedAt": "2025-05-12T14:51:57Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "Fixed by #11 .",
+          "createdAt": "2025-05-23T09:23:03Z",
+          "updatedAt": "2025-05-23T09:23:03Z"
         }
       ]
     },
@@ -189,7 +196,7 @@
       "id": "I_kwDONgvdIs6lD8gR",
       "title": "Mitigation for JWS/JWE Confusion",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [
@@ -198,8 +205,8 @@
       "labels": [],
       "body": "From Jesse Yang <p3ngu1nw@gmail.com>\r\n\r\nJWT allows users to pass in JWS and JWE when parsing, but mixing these two tokens will cause security issues. During our testing, we found two libraries are vulnerable to this issue where attackers use public key encrypted JWE to bypass the parsing of JWT using asymmetric encryption algorithms. The root cause of this security issue is that the JWK implemented allows both public and private keys to be included, resulting in a bypass even if the algorithm is verified according to the method mentioned in RFC8725 3.1 (check whether the RSA algorithm is used). Therefore, we propose adding a warning about this threat in RFC8725 and advising developers not to include both public and private keys in JWK, and check the \"use\" claim in JWK before parsing JWT.",
       "createdAt": "2025-01-05T13:27:14Z",
-      "updatedAt": "2025-04-22T13:11:39Z",
-      "closedAt": null,
+      "updatedAt": "2025-05-23T09:21:56Z",
+      "closedAt": "2025-05-23T09:21:56Z",
       "comments": [
         {
           "author": "yaronf",
@@ -331,6 +338,37 @@
           "updatedAt": "2025-05-17T15:21:50Z"
         }
       ]
+    },
+    {
+      "number": 13,
+      "id": "I_kwDONgvdIs637873",
+      "title": "Acknowledgements",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/13",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "We need to acknowledge Jesse Yang @p3ngu1nw who effectively initiated the bis document.",
+      "createdAt": "2025-05-23T10:34:08Z",
+      "updatedAt": "2025-05-24T02:16:07Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "And maybe also Tom Tervoort who found several of these attacks.",
+          "createdAt": "2025-05-23T10:36:51Z",
+          "updatedAt": "2025-05-23T10:36:51Z"
+        },
+        {
+          "author": "P3ngu1nW",
+          "authorAssociation": "NONE",
+          "body": "Thank you for your work on the updated JWT BCP, which further secures the JWT protocol.\nIf possible, we would be honored to be included in the acknowledgements section. In that case, please kindly list us as follows:\nJingcheng Yang(@P3ngu1nW), Mentor: Prof. Jianjun Chen(@chenjj), Collaborator: Enze Wang(@zer0yu)",
+          "createdAt": "2025-05-24T02:16:06Z",
+          "updatedAt": "2025-05-24T02:16:06Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -436,24 +474,26 @@
       "id": "PR_kwDONgvdIs6TcKyL",
       "title": "Encryption/signature confusion",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/8",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Closes #4.",
       "createdAt": "2025-04-22T13:27:00Z",
-      "updatedAt": "2025-05-22T00:49:28Z",
+      "updatedAt": "2025-05-23T09:21:55Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
-      "baseRefOid": "a77673ae22b8366274c42e04a44145217725f1ec",
+      "baseRefOid": "6ed92926d8726fa357eb1d62aba88e1945520d73",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "ys-4",
-      "headRefOid": "782fb0216394dea6940db75001caed8f90c409c1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "de175a4f5afaa5190f907f219a06fca0ca6e8ae2",
+      "closedAt": "2025-05-23T09:21:55Z",
+      "mergedAt": "2025-05-23T09:21:55Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "41f1359749ae6ab35b87f45ebdf8003b4713e801"
+      },
       "comments": [
         {
           "author": "selfissued",
@@ -684,6 +724,51 @@
               "updatedAt": "2025-05-21T22:22:56Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qcC5Q",
+          "commit": {
+            "abbreviatedOid": "de175a4"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-22T00:53:59Z",
+          "updatedAt": "2025-05-22T18:53:48Z",
+          "comments": [
+            {
+              "originalPosition": 21,
+              "body": "> in particular when the verifier's asymmetric key includes the private key\r\n\r\nI think I know what this means -- but I think it can be more crisp.\r\n```suggestion\r\nMost authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities, in particular when the verifier asymmetric key material includes both a public key and a private key, and when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.\r\n```",
+              "createdAt": "2025-05-22T00:53:59Z",
+              "updatedAt": "2025-05-22T18:53:48Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "I provided a more crisp phrase -- I hope!",
+              "createdAt": "2025-05-22T00:54:33Z",
+              "updatedAt": "2025-05-22T18:53:48Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "I'm also fine with Mike's phrasing ... ",
+              "createdAt": "2025-05-22T18:52:49Z",
+              "updatedAt": "2025-05-22T18:53:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qoRHO",
+          "commit": {
+            "abbreviatedOid": "de175a4"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-22T22:13:42Z",
+          "updatedAt": "2025-05-22T22:13:42Z",
+          "comments": []
         }
       ]
     },
@@ -892,7 +977,7 @@
       "id": "PR_kwDONgvdIs6W-xZP",
       "title": "Mitigation for JWT Format Confusion #2",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/11",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "dickhardt",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -902,17 +987,19 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-05-21T02:29:15Z",
-      "updatedAt": "2025-05-22T00:14:28Z",
+      "updatedAt": "2025-05-22T18:50:34Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "6ed92926d8726fa357eb1d62aba88e1945520d73",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "Mitigation-for-JWT-Format-Confusion-#2",
       "headRefOid": "b66067420a6291a03f421debb09924fdeeab4f99",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-05-22T18:50:34Z",
+      "mergedAt": "2025-05-22T18:50:34Z",
+      "mergedBy": "dickhardt",
+      "mergeCommit": {
+        "oid": "8ef55aac26eeaaf99bf65ec66d7576ed35c5cf90"
+      },
       "comments": [
         {
           "author": "dickhardt",
@@ -927,6 +1014,13 @@
           "body": "Please add a history entry for this change.",
           "createdAt": "2025-05-21T22:42:50Z",
           "updatedAt": "2025-05-21T22:42:50Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "body": "> @yaronf does Mike's suggestion (which I accepted resolve your concern?\r\n\r\nYes it does.",
+          "createdAt": "2025-05-22T05:34:53Z",
+          "updatedAt": "2025-05-22T05:34:53Z"
         }
       ],
       "reviews": [
@@ -1127,8 +1221,49 @@
               "updatedAt": "2025-05-22T00:14:28Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs6qdaVt",
+          "commit": {
+            "abbreviatedOid": "b660674"
+          },
+          "author": "yaronf",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-05-22T05:35:07Z",
+          "updatedAt": "2025-05-22T05:35:07Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDONgvdIs6XW2qK",
+      "title": "Add missing items to doc history",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/12",
+      "state": "MERGED",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-05-23T09:36:27Z",
+      "updatedAt": "2025-05-23T09:37:10Z",
+      "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "41f1359749ae6ab35b87f45ebdf8003b4713e801",
+      "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
+      "headRefName": "ys-hist-01",
+      "headRefOid": "4bf8fc717549f569487786aed2fb095712e21ba6",
+      "closedAt": "2025-05-23T09:37:09Z",
+      "mergedAt": "2025-05-23T09:37:09Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "639b52266ab174c41e750077f4193d362592e485"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
