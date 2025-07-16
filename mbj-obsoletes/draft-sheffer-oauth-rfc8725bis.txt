@@ -4,11 +4,11 @@
 
 OAuth Working Group                                           Y. Sheffer
 Internet-Draft                                                    Intuit
-Intended status: Best Current Practice                          D. Hardt
-Expires: 19 November 2025                                               
-                                                                M. Jones
+Obsoletes: 8725 (if approved)                                   D. Hardt
+Intended status: Best Current Practice                                  
+Expires: 17 January 2026                                        M. Jones
                                                   Self-Issued Consulting
-                                                             18 May 2025
+                                                            16 July 2025
 
 
                  JSON Web Token Best Current Practices
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 November 2025.
+   This Internet-Draft will expire on 17 January 2026.
 
 Copyright Notice
 
@@ -64,7 +64,7 @@ Table of Contents
    2.  Threats and Vulnerabilities
      2.1.  Weak Signatures and Insufficient Signature Validation
      2.2.  Weak Symmetric Keys
-     2.3.  Incorrect Composition of Encryption and Signature
+     2.3.  Incorrect Use and Composition of Encryption and Signature
      2.4.  Plaintext Leakage through Analysis of Ciphertext Length
      2.5.  Insecure Use of Elliptic Curve Encryption
      2.6.  Multiplicity of JSON Encodings
@@ -73,6 +73,8 @@ Table of Contents
      2.9.  Indirect Attacks on the Server
      2.10. Computation Cost of Unreasonable Number of Hash Iterations
      2.11. Algorithm Verification Code Not Defensively Written
+     2.12. JWE Decompression Bomb Attack
+     2.13. JWT Format Confusion
    3.  Best Practices
      3.1.  Perform Algorithm Verification
      3.2.  Use Appropriate Algorithms
@@ -88,6 +90,8 @@ Table of Contents
      3.12. Use Mutually Exclusive Validation Rules for Different Kinds
             of JWTs
      3.13. Limit Hash Iteration Count
+     3.14. Check JWT Format Type
+     3.15. Limit JWE Decompression Size
    4.  Security Considerations
    5.  IANA Considerations
    6.  Acknowledgements
@@ -95,8 +99,9 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Document History
-     A.1.  draft-sheffer-oauth-rfc8725bis-01
-     A.2.  draft-sheffer-oauth-rfc8725bis-00
+     A.1.  draft-sheffer-oauth-rfc8725bis-02
+     A.2.  draft-sheffer-oauth-rfc8725bis-01
+     A.3.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -198,9 +203,17 @@ Table of Contents
 
    For mitigations, see Section 3.5.
 
-2.3.  Incorrect Composition of Encryption and Signature
+2.3.  Incorrect Use and Composition of Encryption and Signature
 
-   Some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-
+   Most authentication use cases only require a simple signed JWT as
+   their token.  However verifiers don't always check that the received
+   JWT is a signed JWS as opposed to an encrypted JWE structure.  This
+   can result in vulnerabilities when the verifier's library does not
+   distinguish between successful decryption and successful signature
+   validation [CVE-2023-51774].
+
+   In the more complicated use cases where confidentiality is required,
+   some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-
    signed object do not always validate the internal signature.
 
    For mitigations, see Section 3.3.
@@ -306,6 +319,32 @@ Table of Contents
 
    For mitigations, see Section 3.1.
 
+2.12.  JWE Decompression Bomb Attack
+
+   JWE supports the optional compression of the plaintext prior to
+   encryption via the "zip" header parameter as defined in [RFC7516]
+   Section 4.1.3.  Upon decryption, recipients are expected to
+   decompress the payload before further processing.  However, if the
+   recipient does not enforce limits on the size of the decompressed
+   output, an attacker can craft a malicious JWE with a highly
+   compressed, arbitrarily large payload.  This can cause excessive
+   resource consumption (CPU, memory), resulting in Denial of Service
+   (DoS).
+
+   For mitigation, see Section 3.15.
+
+2.13.  JWT Format Confusion
+
+   Some JWS implementations support both the Compact and JSON
+   Serializations.  While JWTs MUST use the Compact Serialization, if an
+   application by mistake verifies a JWT using the JSON Serialization
+   but extracts claims by parsing it as a JWT using the Compact
+   Serialization (e.g., via string splitting), an attacker can craft a
+   valid JSON JWS with a forged payload.  This mismatch in format
+   handling can lead to authentication bypass or impersonation.
+
+   For mitigations, see Section 3.14.
+
 3.  Best Practices
 
    The best practices listed below should be applied by practitioners to
@@ -379,6 +418,10 @@ Table of Contents
    but also for Nested JWTs in which both outer and inner operations
    MUST be validated using the keys and algorithms supplied by the
    application.
+
+   Libraries MUST allow the verifier to distinguish between JWS-signed
+   and JWE-encrypted JWTs.  This would allow verifiers to easily
+   establish a policy of only accepting JWS-signed JWTs.
 
 3.4.  Validate Cryptographic Inputs
 
@@ -556,6 +599,19 @@ Table of Contents
    compliance.  Thus, rejecting inputs with a p2c (PBES2 Count) value
    over 1,200,000 (double that) is RECOMMENDED.
 
+3.14.  Check JWT Format Type
+
+   Implementations MUST confirm the JWT is in a legal format while
+   parsing it.  Legal JWTs contain only the ASCII characters for
+   letters, numbers, dash, underscore, and period.  Content with any
+   other characters - especially braces and quotation marks - is not a
+   JWT and MUST be rejected.
+
+3.15.  Limit JWE Decompression Size
+
+   Implementations are RECOMMENDED to set a reasonable upper limit on
+   the decompressed size of a JWE such as 250 KB.
+
 4.  Security Considerations
 
    This entire document is about security considerations when
@@ -654,6 +710,11 @@ Table of Contents
               Database, May 2018,
               <https://nvd.nist.gov/vuln/detail/CVE-2015-9235>.
 
+   [CVE-2023-51774]
+              NIST, "CVE-2023-51774 Detail", National Vulnerability
+              Database, February 2024,
+              <https://nvd.nist.gov/vuln/detail/CVE-2023-51774>.
+
    [Kelsey]   Kelsey, J., "Compression and Information Leakage of
               Plaintext", Springer Berlin Heidelberg, Lecture Notes in
               Computer Science pp. 263-276,
@@ -718,13 +779,24 @@ Appendix A.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-A.1.  draft-sheffer-oauth-rfc8725bis-01
+A.1.  draft-sheffer-oauth-rfc8725bis-02
+
+   *  Obsoletes RFC 8725.
+
+A.2.  draft-sheffer-oauth-rfc8725bis-01
+
+   *  Mitigate encryption-signature confusion.
 
    *  Reject unreasonably large p2c (PBES2 Count) values.
 
-   *  Address incorrect reading of alg values as being case-insensitive.
+   *  Defensive checking to address incorrect reading of alg values as
+      being case-insensitive.
 
-A.2.  draft-sheffer-oauth-rfc8725bis-00
+   *  Mitigate DoS attacks resulting from abuse of compression.
+
+   *  Mitigate JWT serialization format confusion.
+
+A.3.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
