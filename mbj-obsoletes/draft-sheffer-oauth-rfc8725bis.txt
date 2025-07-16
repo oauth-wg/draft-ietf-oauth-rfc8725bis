@@ -2,12 +2,12 @@
 
 
 
-OAuth Working Group                                           Y. Sheffer
+OAuth                                                         Y. Sheffer
 Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
-Intended status: Best Current Practice                                  
-Expires: 17 January 2026                                        M. Jones
-                                                  Self-Issued Consulting
+Updates: 7519 (if approved)                                             
+Intended status: Best Current Practice                          M. Jones
+Expires: 17 January 2026                          Self-Issued Consulting
                                                             16 July 2025
 
 
@@ -21,9 +21,14 @@ Abstract
    encrypted.  JWTs are being widely used and deployed as a simple
    security token format in numerous protocols and applications, both in
    the area of digital identity and in other application areas.  This
-   Best Current Practices document updates RFC 7519 to provide
-   actionable guidance leading to secure implementation and deployment
-   of JWTs.
+   Best Current Practices (BCP) specification updates RFC 7519 to
+   provide actionable guidance leading to secure implementation and
+   deployment of JWTs.
+
+   This BCP specification furthermore replaces the existing JWT BCP
+   specification RFC 8725 to provide additional actionable guidance
+   covering threats and attacks that have been discovered since RFC 8725
+   was published.
 
 Status of This Memo
 
@@ -781,7 +786,7 @@ Appendix A.  Document History
 
 A.1.  draft-sheffer-oauth-rfc8725bis-02
 
-   *  Obsoletes RFC 8725.
+   *  Obsoletes RFC 8725 and updates RFC 7519.
 
 A.2.  draft-sheffer-oauth-rfc8725bis-01
 
