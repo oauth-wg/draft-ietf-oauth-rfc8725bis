@@ -17,6 +17,7 @@ author:
 category: bcp
 docname: draft-sheffer-oauth-rfc8725bis-latest
 ipr: trust200902
+obsoletes: 8725
 keyword:
 - JSON Web Token
 - JWT
@@ -781,6 +782,10 @@ for their reviews.
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-sheffer-oauth-rfc8725bis-02
+
+* Obsoletes RFC 8725.
 
 ## draft-sheffer-oauth-rfc8725bis-01
 
