@@ -2,13 +2,13 @@
 
 
 
-OAuth Working Group                                           Y. Sheffer
+OAuth                                                         Y. Sheffer
 Internet-Draft                                                    Intuit
-Intended status: Best Current Practice                          D. Hardt
-Expires: 24 November 2025                                               
-                                                                M. Jones
-                                                  Self-Issued Consulting
-                                                             23 May 2025
+Obsoletes: 8725 (if approved)                                   D. Hardt
+Updates: 7519 (if approved)                                             
+Intended status: Best Current Practice                          M. Jones
+Expires: 24 January 2026                          Self-Issued Consulting
+                                                            23 July 2025
 
 
                  JSON Web Token Best Current Practices
@@ -21,9 +21,14 @@ Abstract
    encrypted.  JWTs are being widely used and deployed as a simple
    security token format in numerous protocols and applications, both in
    the area of digital identity and in other application areas.  This
-   Best Current Practices document updates RFC 7519 to provide
-   actionable guidance leading to secure implementation and deployment
-   of JWTs.
+   Best Current Practices (BCP) specification updates RFC 7519 to
+   provide actionable guidance leading to secure implementation and
+   deployment of JWTs.
+
+   This BCP specification furthermore replaces the existing JWT BCP
+   specification RFC 8725 to provide additional actionable guidance
+   covering threats and attacks that have been discovered since RFC 8725
+   was published.
 
 Status of This Memo
 
@@ -40,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 November 2025.
+   This Internet-Draft will expire on 24 January 2026.
 
 Copyright Notice
 
@@ -99,8 +104,9 @@ Table of Contents
      7.1.  Normative References
      7.2.  Informative References
    Appendix A.  Document History
-     A.1.  draft-sheffer-oauth-rfc8725bis-01
-     A.2.  draft-sheffer-oauth-rfc8725bis-00
+     A.1.  draft-sheffer-oauth-rfc8725bis-02
+     A.2.  draft-sheffer-oauth-rfc8725bis-01
+     A.3.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -778,7 +784,11 @@ Appendix A.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-A.1.  draft-sheffer-oauth-rfc8725bis-01
+A.1.  draft-sheffer-oauth-rfc8725bis-02
+
+   *  Obsoletes RFC 8725 and updates RFC 7519.
+
+A.2.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -791,7 +801,7 @@ A.1.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-A.2.  draft-sheffer-oauth-rfc8725bis-00
+A.3.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 

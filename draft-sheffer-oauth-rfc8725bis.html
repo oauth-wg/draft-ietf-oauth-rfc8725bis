@@ -14,10 +14,14 @@
  JWTs are being widely used and deployed as a simple security token
  format in numerous protocols and applications, both in the area of
  digital identity and in other application areas.  This Best Current
- Practices document updates RFC 7519 to provide actionable guidance
+ Practices (BCP) specification updates RFC 7519 to provide actionable guidance
  leading to secure implementation and deployment of JWTs. 
+       This BCP specification furthermore replaces the existing JWT BCP
+ specification RFC 8725 to provide additional actionable guidance
+ covering threats and attacks that have been discovered
+ since RFC 8725 was published. 
     " name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="JSON Web Token" name="keyword">
 <meta content="JWT" name="keyword">
 <meta content="JSON Object Signing and Encryption" name="keyword">
@@ -32,18 +36,18 @@
 <meta content="Cryptography" name="keyword">
 <meta content="draft-sheffer-oauth-rfc8725bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
-    Python 3.12.10
+  xml2rfc 3.30.0
+    Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
-    lxml 5.3.0
+    lxml 5.3.1
     platformdirs 4.3.8
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.3
-    setuptools 70.3.0
+    requests 2.32.4
+    setuptools 80.9.0
     wcwidth 0.2.13
 -->
 <link href="draft-sheffer-oauth-rfc8725bis.xml" rel="alternate" type="application/rfc+xml">
@@ -1063,11 +1067,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JWT BCP</td>
-<td class="right">May 2025</td>
+<td class="right">July 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 24 November 2025</td>
+<td class="center">Expires 24 January 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1075,17 +1079,23 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">OAuth Working Group</dd>
+<dd class="workgroup">OAuth</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-sheffer-oauth-rfc8725bis-latest</dd>
+<dt class="label-obsoletes">Obsoletes:</dt>
+<dd class="obsoletes">
+<a href="https://www.rfc-editor.org/rfc/rfc8725" class="eref">8725</a> (if approved)</dd>
+<dt class="label-updates">Updates:</dt>
+<dd class="updates">
+<a href="https://www.rfc-editor.org/rfc/rfc7519" class="eref">7519</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-05-23" class="published">23 May 2025</time>
+<time datetime="2025-07-23" class="published">23 July 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-11-24">24 November 2025</time></dd>
+<dd class="expires"><time datetime="2026-01-24">24 January 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1110,8 +1120,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
  JWTs are being widely used and deployed as a simple security token
  format in numerous protocols and applications, both in the area of
  digital identity and in other application areas.  This Best Current
- Practices document updates RFC 7519 to provide actionable guidance
+ Practices (BCP) specification updates RFC 7519 to provide actionable guidance
  leading to secure implementation and deployment of JWTs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">This BCP specification furthermore replaces the existing JWT BCP
+ specification RFC 8725 to provide additional actionable guidance
+ covering threats and attacks that have been discovered
+ since RFC 8725 was published.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1132,7 +1146,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 November 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 24 January 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1290,10 +1304,13 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
+                <p id="section-toc.1-1.8.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-draft-sheffer-oauth-rfc8725bi" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
 </li>
             </ul>
 </li>
@@ -2076,38 +2093,50 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-A-1">[[Note to RFC Editor: please remove before publication.]]<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div id="autogen-draft-sheffer-oauth-rfc8725bis-01">
+<div id="autogen-draft-sheffer-oauth-rfc8725bis-02">
 <section id="appendix-A.1">
         <h3 id="name-draft-sheffer-oauth-rfc8725">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-02</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-A.1-1.1">
-            <p id="appendix-A.1-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-A.1-1.1.1">Obsoletes RFC 8725 and updates RFC 7519.<a href="#appendix-A.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.2">
-            <p id="appendix-A.1-1.2.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-A.1-1.2.1" class="pilcrow">¶</a></p>
+        </ul>
+</section>
+</div>
+<div id="autogen-draft-sheffer-oauth-rfc8725bis-01">
+<section id="appendix-A.2">
+        <h3 id="name-draft-sheffer-oauth-rfc8725b">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-A.2-1.1">
+            <p id="appendix-A.2-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-A.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.3">
-            <p id="appendix-A.1-1.3.1">Defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-A.1-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.2-1.2">
+            <p id="appendix-A.2-1.2.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-A.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.4">
-            <p id="appendix-A.1-1.4.1">Mitigate DoS attacks resulting from abuse of compression.<a href="#appendix-A.1-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.2-1.3">
+            <p id="appendix-A.2-1.3.1">Defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-A.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-A.1-1.5">
-            <p id="appendix-A.1-1.5.1">Mitigate JWT serialization format confusion.<a href="#appendix-A.1-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-A.2-1.4">
+            <p id="appendix-A.2-1.4.1">Mitigate DoS attacks resulting from abuse of compression.<a href="#appendix-A.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-A.2-1.5">
+            <p id="appendix-A.2-1.5.1">Mitigate JWT serialization format confusion.<a href="#appendix-A.2-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-00">
-<section id="appendix-A.2">
-        <h3 id="name-draft-sheffer-oauth-rfc8725b">
-<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
+<section id="appendix-A.3">
+        <h3 id="name-draft-sheffer-oauth-rfc8725bi">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-draft-sheffer-oauth-rfc8725bi" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-A.2-1.1">
-            <p id="appendix-A.2-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-A.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-A.3-1.1">
+            <p id="appendix-A.3-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-A.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
