@@ -17,6 +17,8 @@ author:
 category: bcp
 docname: draft-sheffer-oauth-rfc8725bis-latest
 ipr: trust200902
+obsoletes: 8725
+updates: 7519
 keyword:
 - JSON Web Token
 - JWT
@@ -46,7 +48,7 @@ pi:
 stand_alone: 'yes'
 submissiontype: IETF
 title: JSON Web Token Best Current Practices
-workgroup: OAuth Working Group
+workgroup: OAuth
 
 
 normative:
@@ -155,10 +157,13 @@ informative:
  JWTs are being widely used and deployed as a simple security token
  format in numerous protocols and applications, both in the area of
  digital identity and in other application areas.  This Best Current
- Practices document updates RFC 7519 to provide actionable guidance
+ Practices (BCP) specification updates RFC 7519 to provide actionable guidance
  leading to secure implementation and deployment of JWTs.
 
-
+ This BCP specification furthermore replaces the existing JWT BCP
+ specification RFC 8725 to provide additional actionable guidance
+ covering threats and attacks that have been discovered
+ since RFC 8725 was published.
 
 
 --- middle
@@ -781,6 +786,10 @@ for their reviews.
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-sheffer-oauth-rfc8725bis-02
+
+* Obsoletes RFC 8725 and updates RFC 7519.
 
 ## draft-sheffer-oauth-rfc8725bis-01
 
