@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-17T01:02:24.778521+00:00",
+  "timestamp": "2025-07-24T01:02:27.134693+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -1311,24 +1311,26 @@
       "id": "PR_kwDONgvdIs6fLXBt",
       "title": "Obsoletes RFC 8725",
       "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/pull/16",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-07-16T12:35:25Z",
-      "updatedAt": "2025-07-16T14:14:10Z",
+      "updatedAt": "2025-07-23T10:47:18Z",
       "baseRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "639b52266ab174c41e750077f4193d362592e485",
       "headRepository": "yaronf/draft-sheffer-oauth-rfc8725bis",
       "headRefName": "mbj-obsoletes",
       "headRefOid": "7e0e636e9c193fa166af19452689d76327883e1f",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-07-23T10:47:18Z",
+      "mergedAt": "2025-07-23T10:47:18Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "300fa621e57ea9ccc6526404bef1358ae6d65bc6"
+      },
       "comments": [
         {
           "author": "yaronf",
