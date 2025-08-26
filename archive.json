@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-24T01:01:56.622226+00:00",
+  "timestamp": "2025-08-26T00:56:45.342191+00:00",
   "repo": "yaronf/draft-sheffer-oauth-rfc8725bis",
   "labels": [
     {
@@ -447,6 +447,22 @@
       "body": "The doc history section is insufficient, and is not published with the RFC.",
       "createdAt": "2025-08-10T09:52:37Z",
       "updatedAt": "2025-08-10T09:52:37Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 19,
+      "id": "I_kwDONgvdIs7HqdTX",
+      "title": "Representation of time values to void the 2038 bug",
+      "url": "https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/issues/19",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Per ChatGPT, this is not a problem in mainstream systems, but remains a real problem in IOT. Quoting:\n\nShort answer: in mainstream server/client JOSE stacks, **no**\u2014current libraries do **not** use 32-bit integers for `NumericDate`. But in **embedded** ecosystems you can still encounter effective 32-bit limits because the platform\u2019s `time_t` (or equivalent) is 32-bit, and some Arduino/RTOS JWT implementations inherit that.\n\n### What I can confirm today\n\n* **Embedded/RTOS platforms still ship 32-bit `time_t`.** For example, Arduino environments and ESP8266 builds commonly use 32-bit (often signed) `time_t`, which overflows in 2038. ([[Arduino Forum](https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com)][1], [[GitHub](https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com)][2])\n* **JWT libraries exist for those platforms.** Several Arduino JWT libraries target AVR/ESP-class boards (which therefore inherit the 32-bit epoch limit unless they store timestamps in a wider type). ([[GitHub](https://github.com/Ant2000/CustomJWT?utm_source=chatgpt.com)][3], [[about.gitlab.com](https://gitlab.com/petrhu/ArduinoJWT/blob/master/examples/simple_JSON_jwt/simple_JSON_jwt.ino?utm_source=chatgpt.com)][4])\n* **Some projects still file bugs about 32-bit time usage.** The Zephyr RTOS had an open issue around use of 32-bit `time_t`. ([[GitHub](https://github.com/zephyrproject-rtos/zephyr/issues/58681?utm_source=chatgpt.com)][5])\n\n### Mainstream stacks (generally safe)\n\nModern general-purpose platforms use 64-bit time or IEEE-754 doubles for JSON numbers:\n\n* **Windows/MSVC** defaults `time_t` to 64-bit; 32-bit can be forced but is discouraged because it breaks after Jan 18, 2038. ([[Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/1f4c8f33%28v%3Dvs.140%29?utm_source=chatgpt.com)][6])\n* Historical bugs in popular JWT libs (e.g., using Java `Integer` for dates) were fixed years ago to use 64-bit `Long`. ([[GitHub](https://github.com/auth0/java-jwt/issues/132?utm_source=chatgpt.com)][7])\n\n### Practical guidance\n\n* If you\u2019re using **Arduino/ESP/RTOS** JWT code, **audit** how it parses/serializes `exp/nbf/iat`: confirm it uses a 64-bit type (or a double) end-to-end, not `time_t`/`long` that is 32-bit on that target.\n* In \\*\\*Java/C#/**Node/Python**, you\u2019re typically safe, but unit-test with a token whose `exp` is beyond **2038-01-19** to catch regressions.\n* If you control the schema, consider allowing **fractional seconds** (per RFC 7519\u2019s allowance) to encourage use of floating-point/64-bit representations.\n\n**Bottom line:** Current, maintained JOSE/JWT libraries for desktop/server use do not intentionally use 32-bit `NumericDate`, but **embedded implementations can still be constrained to 32-bit by their platform**, so review those carefully. ([[Arduino Forum](https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com)][1], [[GitHub](https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com)][2])\n\n[1]: https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com \"Combining int and time_t - Programming - Arduino Forum\"\n[2]: https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com \"time_t typedef should be unsigned 32-bit (to avoid year 2038 problem)\"\n[3]: https://github.com/Ant2000/CustomJWT?utm_source=chatgpt.com \"GitHub - Ant2000/CustomJWT\"\n[4]: https://gitlab.com/petrhu/ArduinoJWT/blob/master/examples/simple_JSON_jwt/simple_JSON_jwt.ino?utm_source=chatgpt.com \"examples/simple_JSON_jwt/simple_JSON_jwt.ino \u00b7 master \u00b7 Petr ...\"\n[5]: https://github.com/zephyrproject-rtos/zephyr/issues/58681?utm_source=chatgpt.com \"[Coverity CID: 316011] Use of 32-bit time_t in lib/os/timeutil.c ...\"\n[6]: https://learn.microsoft.com/en-us/previous-versions/1f4c8f33%28v%3Dvs.140%29?utm_source=chatgpt.com \"time, _time32, _time64 | Microsoft Learn\"\n[7]: https://github.com/auth0/java-jwt/issues/132?utm_source=chatgpt.com \"Timestamps are limited by Integer/int to 2038-01-19T04:14:07 ... - GitHub\"",
+      "createdAt": "2025-08-24T18:46:46Z",
+      "updatedAt": "2025-08-24T18:46:46Z",
       "closedAt": null,
       "comments": []
     }
