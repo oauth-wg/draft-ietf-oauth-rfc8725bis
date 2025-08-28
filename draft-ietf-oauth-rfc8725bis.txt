@@ -2,7 +2,7 @@
 
 
 
-OAuth                                                         Y. Sheffer
+Web Authorization Protocol                                    Y. Sheffer
 Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
