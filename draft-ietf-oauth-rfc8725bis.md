@@ -1,6 +1,6 @@
 ---
 abbrev: JWT BCP
-area: Security
+area: "Security"
 author:
 - email: yaronf.ietf@gmail.com
   ins: Y. Sheffer
@@ -48,7 +48,7 @@ pi:
 stand_alone: 'yes'
 submissiontype: IETF
 title: JSON Web Token Best Current Practices
-workgroup: OAuth
+workgroup: "Web Authorization Protocol"
 
 
 normative:
