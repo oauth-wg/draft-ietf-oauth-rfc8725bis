@@ -7,12 +7,12 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 24 January 2026                          Self-Issued Consulting
-                                                            23 July 2025
+Expires: 1 March 2026                             Self-Issued Consulting
+                                                          28 August 2025
 
 
                  JSON Web Token Best Current Practices
-                 draft-sheffer-oauth-rfc8725bis-latest
+                   draft-ietf-oauth-rfc8725bis-latest
 
 Abstract
 
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 January 2026.
+   This Internet-Draft will expire on 1 March 2026.
 
 Copyright Notice
 
