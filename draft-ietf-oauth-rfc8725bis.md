@@ -787,6 +787,10 @@ for their reviews.
 
 [[Note to RFC Editor: please remove before publication.]]
 
+## draft-ietf-oauth-rfc8725bis-00
+
+* Draft adopted, no textual changes
+
 ## draft-sheffer-oauth-rfc8725bis-02
 
 * Obsoletes RFC 8725 and updates RFC 7519.
