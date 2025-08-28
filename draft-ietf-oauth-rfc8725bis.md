@@ -15,7 +15,7 @@ author:
   organization: Self-Issued Consulting
   uri: https://self-issued.info/
 category: bcp
-docname: draft-sheffer-oauth-rfc8725bis-latest
+docname: draft-ietf-oauth-rfc8725bis-latest
 ipr: trust200902
 obsoletes: 8725
 updates: 7519
