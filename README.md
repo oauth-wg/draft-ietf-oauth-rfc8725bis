@@ -1,21 +1,22 @@
+<!-- regenerate: on (set to off if you edit this file) -->
+
 # JSON Web Token Best Current Practices
 
-This is the working area for the individual Internet-Draft, "JSON Web Token Best Current Practices" (RFC8725bis).
+This is the working area for the IETF [OAUTH Working Group](https://datatracker.ietf.org/group/oauth/documents/) Internet-Draft, "JSON Web Token Best Current Practices".
 
-* [Editor's Copy](https://yaronf.github.io/draft-sheffer-oauth-rfc8725bis/#go.draft-sheffer-oauth-rfc8725bis.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-sheffer-oauth-rfc8725bis)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-sheffer-oauth-rfc8725bis)
-* [Compare Editor's Copy to Individual Draft](https://yaronf.github.io/draft-sheffer-oauth-rfc8725bis/#go.draft-sheffer-oauth-rfc8725bis.diff)
+* [Editor's Copy](https://yaronf.github.io/draft-ietf-oauth-rfc8725bis/#go.draft-ietf-oauth-rfc8725bis.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc8725bis)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis)
+* [Compare Editor's Copy to Working Group Draft](https://yaronf.github.io/draft-ietf-oauth-rfc8725bis/#go.draft-ietf-oauth-rfc8725bis.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/yaronf/draft-sheffer-oauth-rfc8725bis/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/yaronf/draft-ietf-oauth-rfc8725bis/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
