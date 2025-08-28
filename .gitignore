@@ -9,6 +9,7 @@
 /*-[0-9][0-9].xml
 /.*.mk
 /.gems/
+/.idea/
 /.refcache
 /.venv/
 /.vscode/
@@ -17,7 +18,7 @@
 /versioned/
 Gemfile.lock
 archive.json
-draft-sheffer-oauth-rfc8725bis.xml
+draft-ietf-oauth-rfc8725bis.xml
 package-lock.json
 report.xml
 !requirements.txt
