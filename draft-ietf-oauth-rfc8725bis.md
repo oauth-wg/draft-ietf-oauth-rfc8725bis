@@ -787,8 +787,6 @@ for their reviews.
 
 This document obsoletes RFC 8725 and provides several significant improvements and additions:
 
-## Major Changes
-
 1. Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation.
 
 2. PBES2 Count Limits: Added requirements to reject unreasonably large `p2c` (PBES2 Count) values to prevent DoS attacks.
