@@ -49,6 +49,12 @@ stand_alone: 'yes'
 submissiontype: IETF
 title: JSON Web Token Best Current Practices
 workgroup: "Web Authorization Protocol"
+venue:
+  group: "Web Authorization Protocol"
+  type: "Working Group"
+  mail: "oauth@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/oauth/"
+  github: "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis"
 
 
 normative:
@@ -232,18 +238,7 @@ not be provided by libraries, or until they are), and
 
 ## Conventions Used in this Document {#conventions-used-in-this-document}
 
-
-
- The key words "MUST", "MUST NOT",
- "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
- "RECOMMENDED", "NOT RECOMMENDED",
- "MAY", and "OPTIONAL" in this document are
- to be interpreted as
- described in BCP 14  {{RFC2119}}  {{RFC8174}}
- when, and only when, they appear in all capitals, as shown here.
-
-
-
+{::boilerplate bcp14-tagged}
 
 
 
