@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-31T00:58:16.170713+00:00",
+  "timestamp": "2025-09-02T00:07:57.432789+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -1433,6 +1433,58 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDONgvdIs6mKLVJ",
+      "title": "Venue info and boilerplate directive",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/21",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Close #20 \r\n\r\n- Add venue section to YAML header with working group information\r\n- Replace manual BCP14 boilerplate text with {::boilerplate bcp14-tagged} directive\r\n- This implements the markdown magic requested in GitHub issue #20",
+      "createdAt": "2025-08-31T12:23:23Z",
+      "updatedAt": "2025-08-31T12:23:23Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "0f83811ec8a815d0998f7383825b8c5107dce279",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "ys-20",
+      "headRefOid": "094c81c9974c4bb6955e11c7b77e7b746736e807",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDONgvdIs6mKNrI",
+      "title": "New section: changes from RFC 8725",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/22",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #18 ",
+      "createdAt": "2025-08-31T12:39:38Z",
+      "updatedAt": "2025-08-31T12:39:38Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "0f83811ec8a815d0998f7383825b8c5107dce279",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "ys-18",
+      "headRefOid": "2989a62888883ab9ba58262ea949712343ac8ea0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
