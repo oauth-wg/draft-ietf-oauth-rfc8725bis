@@ -294,7 +294,7 @@ attacker gets hold of such a token  {{Langkemper}}.
 
 ## Incorrect Use and Composition of Encryption and Signature {#incorrect-composition-of-encryption-and-signature}
 
-Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure. This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.
+Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.
 
 In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.
@@ -306,7 +306,7 @@ For mitigations, see  {{validate-crypto}}.
 
  Many encryption algorithms leak information about the length of the
  plaintext, with a varying amount of
-leakage depending on the algorithm and mode of operation. This problem is exacerbated
+leakage depending on the algorithm and mode of operation. JWEs are vulnerable to this leakage. This problem is exacerbated
 when the plaintext is initially compressed, because the length of the
 compressed plaintext and, thus,
 the ciphertext
@@ -378,10 +378,9 @@ the attacker gaining access to resources that it is not entitled to access.
 ## Cross-JWT Confusion {#cross-jwt-confusion}
 
 
- As JWTs are being used by more different protocols in diverse
- application areas, it becomes increasingly
-important to prevent cases of JWT tokens that have been issued for one purpose
-being subverted and used for another.
+ As JWTs are used by more protocols in diverse ways, it becomes increasingly
+important to prevent JWT tokens that have been issued for one purpose
+being used for another.
 Note that this is a specific type of substitution attack.
 If the JWT could be used in an application context in which it could be
 confused with other kinds of JWTs,
@@ -456,7 +455,7 @@ and this  MUST be checked when the cryptographic operation is performed.
 
 Libraries SHOULD opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
-as the JSON parser. In particular, use allowlists for critical
+as the JSON parser. In particular, libraries SHOULD use allowlists for critical
 parameters such as "alg" instead of blocklists.
 
 
@@ -482,8 +481,8 @@ using cryptographically current algorithms, there may be no need to apply anothe
 cryptographic protections to the JWT.
 In such cases, the use of the "none" algorithm can be perfectly acceptable.
 The "none" algorithm should only be used when the JWT is cryptographically protected by other means.
-JWTs using "none" are often used in application contexts in which the content is optionally signed;
-then, the URL-safe claims representation and processing can be the same in both
+JWTs using "none" are often used in application contexts in which the content is optionally signed.
+The URL-safe claims representation and processing in this context can be the same in both
 the signed and unsigned cases.
 JWT libraries  SHOULD NOT generate JWTs using "none" unless
 explicitly requested to do so by the caller.
@@ -520,8 +519,8 @@ This is true not only of JWTs with a single set of Header Parameters
 but also for Nested JWTs in which both outer and inner operations  MUST be validated
 using the keys and algorithms supplied by the application.
 
-Libraries MUST allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs.
-This would allow verifiers to easily establish a policy of only accepting JWS-signed JWTs.
+Libraries MUST allow the verifier to distinguish between signed JWTs (JWSes) and encrypted JWTs (JWEs).
+This allows verifiers to easily establish a policy of only accepting signed JWTs.
 
 ## Validate Cryptographic Inputs {#validate-inputs}
 
@@ -567,7 +566,7 @@ Note that even when used for key encryption, password-based encryption is
 ## Avoid Compression of Encryption Inputs {#no-compression}
 
 
- Compression of data  SHOULD NOT be done before encryption, because
+ Compression of data  SHOULD NOT be used when creating a JWE, because
 such compressed data often reveals information about the plaintext.
 
 
@@ -580,7 +579,7 @@ such compressed data often reveals information about the plaintext.
  specify that UTF-8 be used for encoding and decoding JSON
 used in Header Parameters and JWT Claims Sets. This is also in line with the
 latest JSON specification  {{RFC8259}}.
-Implementations and applications  MUST do this and not use or admit the use of
+Implementations and applications  MUST do this and not use or allow the use of
 other Unicode encodings for these purposes.
 
 
@@ -616,10 +615,10 @@ If the issuer, subject, or the pair are invalid, the application
 
 
  If the same issuer can issue JWTs that are intended for use by more
- than one relying party or application,
+ than one relying party or application, or may in the future,
 the JWT  MUST contain an "aud" (audience) claim that can be used
 to determine whether the JWT
-is being used by an intended party or was substituted by an attacker at an unintended party.
+is being used by an intended party or was substituted by an attacker.
 
  In such cases, the relying party or application  MUST
  validate the audience value,
