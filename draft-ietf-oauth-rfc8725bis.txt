@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 1 March 2026                             Self-Issued Consulting
-                                                          28 August 2025
+Expires: 12 March 2026                            Self-Issued Consulting
+                                                        8 September 2025
 
 
                  JSON Web Token Best Current Practices
@@ -30,6 +30,22 @@ Abstract
    covering threats and attacks that have been discovered since RFC 8725
    was published.
 
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc8725bis/.
+
+   Discussion of this document takes place on the Web Authorization
+   Protocol Working Group mailing list (mailto:oauth@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/oauth/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/oauth/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/https://github.com/oauth-wg/draft-ietf-oauth-
+   rfc8725bis.
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -45,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 March 2026.
+   This Internet-Draft will expire on 12 March 2026.
 
 Copyright Notice
 

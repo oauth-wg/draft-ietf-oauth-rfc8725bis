@@ -21,7 +21,7 @@
  covering threats and attacks that have been discovered
  since RFC 8725 was published. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.30.1" name="generator">
 <meta content="JSON Web Token" name="keyword">
 <meta content="JWT" name="keyword">
 <meta content="JSON Object Signing and Encryption" name="keyword">
@@ -36,17 +36,17 @@
 <meta content="Cryptography" name="keyword">
 <meta content="draft-ietf-oauth-rfc8725bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
+  xml2rfc 3.30.1
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.3.8
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.4
+    requests 2.32.5
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1067,11 +1067,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JWT BCP</td>
-<td class="right">August 2025</td>
+<td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 1 March 2026</td>
+<td class="center">Expires 12 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1090,12 +1090,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc7519" class="eref">7519</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-08-28" class="published">28 August 2025</time>
+<time datetime="2025-09-08" class="published">8 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-01">1 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-12">12 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1127,6 +1127,21 @@ svg :is([fill="white"], [fill^="#fff"]) {
  covering threats and attacks that have been discovered
  since RFC 8725 was published.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc8725bis/">https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc8725bis/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Web Authorization Protocol Working Group mailing list (<span><a href="mailto:oauth@ietf.org">mailto:oauth@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/oauth/">https://mailarchive.ietf.org/arch/browse/oauth/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/oauth/">https://www.ietf.org/mailman/listinfo/oauth/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis">https://github.com/https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
         <h2 id="name-status-of-this-memo">
@@ -1146,7 +1161,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 12 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1388,13 +1403,10 @@ not be provided by libraries, or until they are), and<a href="#section-1.1-2.2.1
         <h3 id="name-conventions-used-in-this-do">
 <a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-conventions-used-in-this-do" class="section-name selfRef">Conventions Used in this Document</a>
         </h3>
-<p id="section-1.2-1">The key words "MUST", "MUST NOT",
- "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
- "RECOMMENDED", "NOT RECOMMENDED",
- "MAY", and "OPTIONAL" in this document are
- to be interpreted as
- described in BCP 14  <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>  <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span>
- when, and only when, they appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+<p id="section-1.2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1538,7 +1550,7 @@ being subverted and used for another.
 Note that this is a specific type of substitution attack.
 If the JWT could be used in an application context in which it could be
 confused with other kinds of JWTs,
-then mitigations  MUST be employed to prevent these substitution attacks.<a href="#section-2.8-1" class="pilcrow">¶</a></p>
+then mitigations  <span class="bcp14">MUST</span> be employed to prevent these substitution attacks.<a href="#section-2.8-1" class="pilcrow">¶</a></p>
 <p id="section-2.8-2">For mitigations, see Sections  <a href="#validate-iss-sub" class="auto internal xref">3.8</a>,  <a href="#use-aud" class="auto internal xref">3.9</a>,  <a href="#use-typ" class="auto internal xref">3.11</a>, and  <a href="#preventing-confusion" class="auto internal xref">3.12</a>.<a href="#section-2.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1594,7 +1606,7 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
         <h3 id="name-jwt-format-confusion">
 <a href="#section-2.13" class="section-number selfRef">2.13. </a><a href="#name-jwt-format-confusion" class="section-name selfRef">JWT Format Confusion</a>
         </h3>
-<p id="section-2.13-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs MUST use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.13-1" class="pilcrow">¶</a></p>
+<p id="section-2.13-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs <span class="bcp14">MUST</span> use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.13-1" class="pilcrow">¶</a></p>
 <p id="section-2.13-2">For mitigations, see <a href="#token-format" class="auto internal xref">Section 3.14</a>.<a href="#section-2.13-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1612,13 +1624,13 @@ to mitigate the threats listed in the preceding section.<a href="#section-3-1" c
         <h3 id="name-perform-algorithm-verificat">
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-perform-algorithm-verificat" class="section-name selfRef">Perform Algorithm Verification</a>
         </h3>
-<p id="section-3.1-1">Libraries  MUST enable the caller to specify a
- supported set of algorithms and  MUST NOT use any other algorithms when performing cryptographic operations.
-The library  MUST ensure that the "alg" or "enc" header specifies the same algorithm
+<p id="section-3.1-1">Libraries  <span class="bcp14">MUST</span> enable the caller to specify a
+ supported set of algorithms and  <span class="bcp14">MUST NOT</span> use any other algorithms when performing cryptographic operations.
+The library  <span class="bcp14">MUST</span> ensure that the "alg" or "enc" header specifies the same algorithm
 that is used for the cryptographic operation.
-Moreover, each key  MUST be used with exactly one algorithm,
-and this  MUST be checked when the cryptographic operation is performed.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Libraries SHOULD opt for defensive security policies to cope
+Moreover, each key  <span class="bcp14">MUST</span> be used with exactly one algorithm,
+and this  <span class="bcp14">MUST</span> be checked when the cryptographic operation is performed.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Libraries <span class="bcp14">SHOULD</span> opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
 as the JSON parser. In particular, use allowlists for critical
 parameters such as "alg" instead of blocklists.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
@@ -1633,13 +1645,13 @@ parameters such as "alg" instead of blocklists.<a href="#section-3.1-2" class="p
 "it is an application decision which algorithms may
 be used in a given context. Even if a JWS can be successfully
 validated, unless the algorithm(s) used in the JWS are acceptable to
-the application, it  SHOULD consider the JWS to be invalid."<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Therefore, applications  MUST only allow the use of
+the application, it  <span class="bcp14">SHOULD</span> consider the JWS to be invalid."<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Therefore, applications  <span class="bcp14">MUST</span> only allow the use of
  cryptographically current algorithms
 that meet the security requirements of the application.
 This set will vary over time as new algorithms are introduced
 and existing algorithms are deprecated due to discovered cryptographic weaknesses.
-Applications  MUST therefore be designed to enable cryptographic agility.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+Applications  <span class="bcp14">MUST</span> therefore be designed to enable cryptographic agility.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">That said, if a JWT is cryptographically protected end-to-end by a
  transport layer, such as TLS
 using cryptographically current algorithms, there may be no need to apply another layer of
@@ -1649,11 +1661,11 @@ The "none" algorithm should only be used when the JWT is cryptographically prote
 JWTs using "none" are often used in application contexts in which the content is optionally signed;
 then, the URL-safe claims representation and processing can be the same in both
 the signed and unsigned cases.
-JWT libraries  SHOULD NOT generate JWTs using "none" unless
+JWT libraries  <span class="bcp14">SHOULD NOT</span> generate JWTs using "none" unless
 explicitly requested to do so by the caller.
-Similarly, JWT libraries  SHOULD NOT consume JWTs using "none"
+Similarly, JWT libraries  <span class="bcp14">SHOULD NOT</span> consume JWTs using "none"
  unless explicitly requested by the caller.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">Applications  SHOULD follow these algorithm-specific recommendations:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">Applications  <span class="bcp14">SHOULD</span> follow these algorithm-specific recommendations:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-5.1">
             <p id="section-3.2-5.1.1">Avoid all RSA-PKCS1 v1.5 encryption algorithms (<span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>, Section 7.2), preferring
@@ -1667,7 +1679,7 @@ every message
 If even just a few bits of the random value are predictable across multiple messages, then
 the security of the signature scheme may be compromised. In the worst case,
 the private key may be recoverable by an attacker. To counter these attacks,
-JWT libraries  SHOULD implement ECDSA using the deterministic
+JWT libraries  <span class="bcp14">SHOULD</span> implement ECDSA using the deterministic
 approach defined in  <span>[<a href="#RFC6979" class="cite xref">RFC6979</a>]</span>.
 This approach is completely compatible with existing ECDSA verifiers and so can be implemented
 without new algorithm identifiers being required.<a href="#section-3.2-5.2.1" class="pilcrow">¶</a></p>
@@ -1680,12 +1692,12 @@ without new algorithm identifiers being required.<a href="#section-3.2-5.2.1" cl
         <h3 id="name-validate-all-cryptographic-">
 <a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-validate-all-cryptographic-" class="section-name selfRef">Validate All Cryptographic Operations</a>
         </h3>
-<p id="section-3.3-1">All cryptographic operations used in the JWT MUST be validated and the entire JWT MUST be rejected
+<p id="section-3.3-1">All cryptographic operations used in the JWT <span class="bcp14">MUST</span> be validated and the entire JWT <span class="bcp14">MUST</span> be rejected
 if any of them fail to validate.
 This is true not only of JWTs with a single set of Header Parameters
-but also for Nested JWTs in which both outer and inner operations  MUST be validated
+but also for Nested JWTs in which both outer and inner operations  <span class="bcp14">MUST</span> be validated
 using the keys and algorithms supplied by the application.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">Libraries MUST allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs.
+<p id="section-3.3-2">Libraries <span class="bcp14">MUST</span> allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs.
 This would allow verifiers to easily establish a policy of only accepting JWS-signed JWTs.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1704,7 +1716,7 @@ or it must use underlying cryptographic libraries that do so (or both!).<a href=
  public key (epk) inputs should be validated
  according to the recipient's
 chosen elliptic curve. For the NIST prime-order curves P-256, P-384, and P-521,
-validation  MUST
+validation  <span class="bcp14">MUST</span>
 be performed according to Section 5.6.2.3.4 (ECC Partial Public-Key Validation
 Routine) of "Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography"
 <span>[<a href="#nist-sp-800-56a-r3" class="cite xref">nist-sp-800-56a-r3</a>]</span>.
@@ -1719,8 +1731,8 @@ then the security considerations in  <span>[<a href="#RFC8037" class="cite xref"
         </h3>
 <p id="section-3.5-1">The Key Entropy and Random Values advice in  Section 10.1 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> and the
  Password Considerations in  Section 8.8 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>
-  MUST be followed.
-In particular, human-memorizable passwords  MUST NOT be directly used
+          <span class="bcp14">MUST</span> be followed.
+In particular, human-memorizable passwords  <span class="bcp14">MUST NOT</span> be directly used
 as the key to a keyed-MAC algorithm such as "HS256".
 Moreover, passwords should only be used to perform key encryption, rather
 than content encryption,
@@ -1734,7 +1746,7 @@ Note that even when used for key encryption, password-based encryption is
         <h3 id="name-avoid-compression-of-encryp">
 <a href="#section-3.6" class="section-number selfRef">3.6. </a><a href="#name-avoid-compression-of-encryp" class="section-name selfRef">Avoid Compression of Encryption Inputs</a>
         </h3>
-<p id="section-3.6-1">Compression of data  SHOULD NOT be done before encryption, because
+<p id="section-3.6-1">Compression of data  <span class="bcp14">SHOULD NOT</span> be done before encryption, because
 such compressed data often reveals information about the plaintext.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1747,7 +1759,7 @@ such compressed data often reveals information about the plaintext.<a href="#sec
  specify that UTF-8 be used for encoding and decoding JSON
 used in Header Parameters and JWT Claims Sets. This is also in line with the
 latest JSON specification  <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.
-Implementations and applications  MUST do this and not use or admit the use of
+Implementations and applications  <span class="bcp14">MUST</span> do this and not use or admit the use of
 other Unicode encodings for these purposes.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1757,9 +1769,9 @@ other Unicode encodings for these purposes.<a href="#section-3.7-1" class="pilcr
 <a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-validate-issuer-and-subject" class="section-name selfRef">Validate Issuer and Subject</a>
         </h3>
 <p id="section-3.8-1">When a JWT contains an "iss" (issuer) claim, the application
-  MUST validate that the cryptographic keys
+  <span class="bcp14">MUST</span> validate that the cryptographic keys
 used for the cryptographic operations in the JWT belong to the issuer.
-If they do not, the application  MUST reject the JWT.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
+If they do not, the application  <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 <p id="section-3.8-2">The means of determining the keys owned by an issuer is application-specific.
 As one example, OpenID Connect  <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>
 issuer values are "https" URLs
@@ -1768,11 +1780,11 @@ an "https" URL from which the issuer's keys are retrieved as a JWK Set  <span>[<
 This same mechanism is used by  <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>.
 Other applications may use different means of binding keys to issuers.<a href="#section-3.8-2" class="pilcrow">¶</a></p>
 <p id="section-3.8-3">Similarly, when the JWT contains a "sub" (subject) claim, the
- application  MUST validate that
+ application  <span class="bcp14">MUST</span> validate that
 the subject value corresponds to a valid subject and/or issuer-subject pair at the application.
 This may include confirming that the issuer is trusted by the application.
 If the issuer, subject, or the pair are invalid, the application
-  MUST reject the JWT.<a href="#section-3.8-3" class="pilcrow">¶</a></p>
+  <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.8-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="use-aud">
@@ -1782,13 +1794,13 @@ If the issuer, subject, or the pair are invalid, the application
         </h3>
 <p id="section-3.9-1">If the same issuer can issue JWTs that are intended for use by more
  than one relying party or application,
-the JWT  MUST contain an "aud" (audience) claim that can be used
+the JWT  <span class="bcp14">MUST</span> contain an "aud" (audience) claim that can be used
 to determine whether the JWT
 is being used by an intended party or was substituted by an attacker at an unintended party.<a href="#section-3.9-1" class="pilcrow">¶</a></p>
-<p id="section-3.9-2">In such cases, the relying party or application  MUST
+<p id="section-3.9-2">In such cases, the relying party or application  <span class="bcp14">MUST</span>
  validate the audience value,
 and if the audience value is not present or not associated with the recipient,
-it  MUST reject the JWT.<a href="#section-3.9-2" class="pilcrow">¶</a></p>
+it  <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="do-not-trust-claims">
@@ -1802,7 +1814,7 @@ should ensure that this does not create SQL or LDAP injection vulnerabilities by
 and/or sanitizing the received value.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
 <p id="section-3.10-2">Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
 which may contain an arbitrary URL,
-could result in server-side request forgery (SSRF) attacks. Applications SHOULD protect against such
+could result in server-side request forgery (SSRF) attacks. Applications <span class="bcp14">SHOULD</span> protect against such
 attacks, e.g., by matching the URL to a whitelist of allowed locations
 and ensuring no cookies are sent in the GET request.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
 </section>
@@ -1821,21 +1833,21 @@ For instance, the  <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</spa
 the "application/secevent+jwt" media type
 to perform explicit typing of Security Event Tokens (SETs).<a href="#section-3.11-1" class="pilcrow">¶</a></p>
 <p id="section-3.11-2">Per the definition of "typ" in  Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>,
-it is  RECOMMENDED that the "application/" prefix be omitted from the "typ" value.
-Therefore, for example, the "typ" value used to explicitly include a type for a SET SHOULD be "secevent+jwt".
-When explicit typing is employed for a JWT, it is  RECOMMENDED
+it is  <span class="bcp14">RECOMMENDED</span> that the "application/" prefix be omitted from the "typ" value.
+Therefore, for example, the "typ" value used to explicitly include a type for a SET <span class="bcp14">SHOULD</span> be "secevent+jwt".
+When explicit typing is employed for a JWT, it is  <span class="bcp14">RECOMMENDED</span>
 that a media type name of the format
 "application/example+jwt" be used, where "example" is replaced by the
  identifier for the specific kind of JWT.<a href="#section-3.11-2" class="pilcrow">¶</a></p>
 <p id="section-3.11-3">When applying explicit typing to a Nested JWT, the "typ" Header
- Parameter containing the explicit type value  MUST be present in the inner JWT of the Nested JWT (the JWT
+ Parameter containing the explicit type value  <span class="bcp14">MUST</span> be present in the inner JWT of the Nested JWT (the JWT
 whose payload is the JWT Claims Set).
 In some cases, the same "typ" Header Parameter value will be present in the outer JWT as well,
 to explicitly type the entire Nested JWT.<a href="#section-3.11-3" class="pilcrow">¶</a></p>
 <p id="section-3.11-4">Note that the use of explicit typing may not achieve disambiguation
  from existing kinds of JWTs,
 as the validation rules for existing kinds of JWTs often do not use the "typ" Header Parameter value.
-Explicit typing is  RECOMMENDED for new uses of JWTs.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
+Explicit typing is  <span class="bcp14">RECOMMENDED</span> for new uses of JWTs.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="preventing-confusion">
@@ -1847,7 +1859,7 @@ Explicit typing is  RECOMMENDED for new uses of JWTs.<a href="#section-3.11-4" c
  and optional JWT claims
 and the validation rules associated with them.
 If more than one kind of JWT can be issued by the same issuer,
-the validation rules for those JWTs  MUST be written such that
+the validation rules for those JWTs  <span class="bcp14">MUST</span> be written such that
 they are mutually exclusive,
 rejecting JWTs of the wrong kind.
 To prevent substitution of JWTs from one context into another,
@@ -1888,7 +1900,7 @@ to differentiate among different kinds of JWTs
 will, in general, be application-specific.
 As discussed in  <a href="#use-typ" class="auto internal xref">Section 3.11</a>, for new JWT
  applications, the use of explicit typing is
-  RECOMMENDED.<a href="#section-3.12-3" class="pilcrow">¶</a></p>
+  <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.12-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limit-iterations">
@@ -1896,13 +1908,13 @@ As discussed in  <a href="#use-typ" class="auto internal xref">Section 3.11</a>,
         <h3 id="name-limit-hash-iteration-count">
 <a href="#section-3.13" class="section-number selfRef">3.13. </a><a href="#name-limit-hash-iteration-count" class="section-name selfRef">Limit Hash Iteration Count</a>
         </h3>
-<p id="section-3.13-1">Implementations are RECOMMENDED to set a reasonable upper limit on
+<p id="section-3.13-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on
 the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
 <span>[<a href="#OWASP-Password-Storage" class="cite xref">OWASP-Password-Storage</a>]</span> states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
-Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
+Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,000 (double that) is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="token-format">
@@ -1910,7 +1922,7 @@ Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,00
         <h3 id="name-check-jwt-format-type">
 <a href="#section-3.14" class="section-number selfRef">3.14. </a><a href="#name-check-jwt-format-type" class="section-name selfRef">Check JWT Format Type</a>
         </h3>
-<p id="section-3.14-1">Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.<a href="#section-3.14-1" class="pilcrow">¶</a></p>
+<p id="section-3.14-1">Implementations <span class="bcp14">MUST</span> confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#section-3.14-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limit-decompression">
@@ -1918,7 +1930,7 @@ Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,00
         <h3 id="name-limit-jwe-decompression-siz">
 <a href="#section-3.15" class="section-number selfRef">3.15. </a><a href="#name-limit-jwe-decompression-siz" class="section-name selfRef">Limit JWE Decompression Size</a>
         </h3>
-<p id="section-3.15-1">Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
+<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
