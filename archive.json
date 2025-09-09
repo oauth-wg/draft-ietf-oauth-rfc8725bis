@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-02T00:07:57.432789+00:00",
+  "timestamp": "2025-09-09T00:07:38.934044+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -347,11 +347,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [],
       "body": "We need to acknowledge Jesse Yang @p3ngu1nw who effectively initiated the bis document.",
       "createdAt": "2025-05-23T10:34:08Z",
-      "updatedAt": "2025-08-10T11:12:20Z",
+      "updatedAt": "2025-09-08T14:14:28Z",
       "closedAt": null,
       "comments": [
         {
@@ -410,11 +412,13 @@
       "state": "OPEN",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
-      "assignees": [],
+      "assignees": [
+        "dickhardt"
+      ],
       "labels": [],
       "body": "The title of this document is JSON Web Token Best Current Practices. Its goal is \"to provide actionable guidance leading to secure implementation and deployment of JWTs\" and \"to facilitate *secure implementation* and deployment of JWTs\" (Introduction).\n\nSection 2 (Threats and Vulnerabilities) lists some known and possible problems with JWT implementations and deployments. \n\nSection 2.7 (Substitution Attacks) states:\n\n> There are attacks in which one recipient will be given a JWT that was intended for it and will attempt to use it at a different recipient for which that JWT was not intended.\n\nThis relates to the audience of the JWT.\n\nSection 2.8 (Cross-JWT Confusion) states:\n\n> As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another. \n\n\nThe concept of \"purpose\" is inexistent in JWT-SD and would need to be clarified.\n\nThis draft is concentrating on the structure of JWTs, but is ignoring the context in which JWTs are requested, obtained and then used. \n\nSD-JWTs defined SD-JWTs *formats* for two flows: \n\n     a) when an issuer issues a SD-JWT including all Disclosures,\n     b) when a verifier presents SD-JWT or SD-JWT+KB including selected Disclosures.\n\nHowever, SD-JWT does not define which *protocols* can be used to carry these *data formats*.\n\nHence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed. \nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs, \nboth inside and **outside the IETF**\" is incomplete.\n\nTwo important \"specifications that rely on JWTs outside the IETF\" are:\n\n> \"OID4VCI\": OpenID for Verifiable Credential Issuance - draft 16\n> https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html\n> \n> \"OID4VP\": \"OpenID for Verifiable Presentations 1.0\" which defines a protocol for requesting and presenting Credentials (published on 9 July 2025). It defines a mechanism on top of OAuth 2.0 to allow presentation of claims in the form of Verifiable Credentials as part of the protocol flow. https://openid.net/specs/openid-4-verifiable-presentations-1_0.html\n\nThese two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nWhen using selective disclosure of claims, it is important to prevent cases where JWTs issued for one individual would be usable by another individual with a complicity between these individuals. In some cases, this issue is identified as a \"relay attack\".\n\nThis issue has not been identified in the documents produced by the OAuth WG (nor the SPICE WG), nor in OID4VP.\n\nOID4VP defines protocols for requesting and presenting Credentials. It is not explicitly said that these protocols must be supported by a single application and that the end-user using the device supporting that application SHALL NOT be able to modify it or to use its \"key store\" by downloading a rogue application and then using these keys with it.\n\nOnce this issue is identified, it needs to be addressed in a section called \"implementation considerations\" which, unfortunately, is inexistent in the proposed draft.\n\nThis topic is highly dependent upon the type of the device, however, general considerations apply.\n\n\n",
       "createdAt": "2025-07-15T13:25:23Z",
-      "updatedAt": "2025-07-15T13:25:23Z",
+      "updatedAt": "2025-09-08T14:14:11Z",
       "closedAt": null,
       "comments": []
     },
@@ -426,11 +430,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "yaronf"
+      ],
       "labels": [],
       "body": "- [ ] One application area in which JWTs are commonly used is representing digital identity information, such as OpenID Connect ID Tokens  [OpenID.Core] and OAuth 2.0  [RFC6749] access tokens and refresh tokens\n\n    Change to \"representing authorization or identity information, such as\nOAuth 2.0 access tokens [RFC9068] and OpenID Connect ID Tokens\n[OpenID.Core]\"\n\n    It is not common practice to use JWTs for refresh tokens, since\nrefresh tokens are only consumed by the issuer, whereas access tokens\nare consumed by the resource server which is a separate role from the\nauthorization server that issues them. Also updated the reference to\nthe JWT access token spec.\n\n- [ ] if a JWT is cryptographically protected end-to-end by a transport layer, such as TLS using cryptographically current algorithms, there may be no need to apply another layer of cryptographic protections to the JWT. In such cases, the use of the \"none\" algorithm can be perfectly acceptable.\n\n    This makes it sound like it's acceptable to send alg none JWTs as\naccess tokens over TLS, which is obviously not true. I would suggest\nremoving all references to alg none being acceptable. If there is an\nactual concrete use case for alg none JWTs, list it out explicitly,\npreferably to a reference of a spec/profile that uses it.\n\n- [ ] Section 3.3 mentions the term \"Nested JWT\" capitalized, but this is\nthe first occurrence of the term in the document. Add a reference to\nwhere Nested JWT is defined, or change to lowercase if the intent is\nto mention the general concept of nested JWTs.\n\n- [ ] The means of determining the keys owned by an issuer is application-specific. As one example, OpenID Connect  [OpenID.Core] issuer values are \"https\" URLs that reference a JSON metadata document that contains a \"jwks_uri\" value that is an \"https\" URL from which the issuer's keys are retrieved as a JWK Set [RFC7517]. This same mechanism is used by  [RFC8414].\n\n- [ ] Swap the mentions of RFC8414 and OpenID Connect: \"As one example,\nAuthorization Server Metadata [RFC8414] issuer values are .... The\nsame mechanism is used by OpenID Connect [OpenID.Core].\"\n\n- [ ] Similarly, when the JWT contains a \"sub\" (subject) claim, the application MUST validate that the subject value corresponds to a valid subject and/or issuer-subject pair at the application\n\n    This would benefit from an explicit reference to Section 4.15 of\nRFC9700 https://datatracker.ietf.org/doc/html/rfc9700#section-4.15\nwhich talks about the possibility of client_id vs user identifier\nconfusion.\n\n- [ ] Section 3.10: change \"whitelist\" to \"allowlist\". There is already a\nprior use of \"allowlist\" in the doc, so I assume this was\nunintentional.\n\n- [ ] Also in section 3.10, mention that the AS should check what the\nhostname resolves to and avoid making a request if it resolves to a\nloopback or internal IP address. (e.g. someone uses the value\n\"attacker.example.com/etc/passwd\" as the jwks_uri, but adds a DNS\nentry for \"attacker.example.com\" to resolve to \"127.0.0.1\" or other\ninternal IP address ranges.\n\n- [ ] Section 3.11: \"Sometimes, one kind of JWT can be confused for another.\"\n\n    This is kind of vague and would benefit from more explicit examples.\n\nCC: @aaronpk",
       "createdAt": "2025-08-01T14:18:38Z",
-      "updatedAt": "2025-08-23T09:19:20Z",
+      "updatedAt": "2025-09-08T14:15:45Z",
       "closedAt": null,
       "comments": []
     },
@@ -442,11 +448,13 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "selfissued"
+      ],
       "labels": [],
       "body": "The doc history section is insufficient, and is not published with the RFC.",
       "createdAt": "2025-08-10T09:52:37Z",
-      "updatedAt": "2025-08-10T09:52:37Z",
+      "updatedAt": "2025-09-08T14:16:35Z",
       "closedAt": null,
       "comments": []
     },
@@ -458,28 +466,38 @@
       "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
-      "assignees": [],
+      "assignees": [
+        "yaronf"
+      ],
       "labels": [],
       "body": "Per ChatGPT, this is not a problem in mainstream systems, but remains a real problem in IOT. Quoting:\n\nShort answer: in mainstream server/client JOSE stacks, **no**\u2014current libraries do **not** use 32-bit integers for `NumericDate`. But in **embedded** ecosystems you can still encounter effective 32-bit limits because the platform\u2019s `time_t` (or equivalent) is 32-bit, and some Arduino/RTOS JWT implementations inherit that.\n\n### What I can confirm today\n\n* **Embedded/RTOS platforms still ship 32-bit `time_t`.** For example, Arduino environments and ESP8266 builds commonly use 32-bit (often signed) `time_t`, which overflows in 2038. ([[Arduino Forum](https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com)][1], [[GitHub](https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com)][2])\n* **JWT libraries exist for those platforms.** Several Arduino JWT libraries target AVR/ESP-class boards (which therefore inherit the 32-bit epoch limit unless they store timestamps in a wider type). ([[GitHub](https://github.com/Ant2000/CustomJWT?utm_source=chatgpt.com)][3], [[about.gitlab.com](https://gitlab.com/petrhu/ArduinoJWT/blob/master/examples/simple_JSON_jwt/simple_JSON_jwt.ino?utm_source=chatgpt.com)][4])\n* **Some projects still file bugs about 32-bit time usage.** The Zephyr RTOS had an open issue around use of 32-bit `time_t`. ([[GitHub](https://github.com/zephyrproject-rtos/zephyr/issues/58681?utm_source=chatgpt.com)][5])\n\n### Mainstream stacks (generally safe)\n\nModern general-purpose platforms use 64-bit time or IEEE-754 doubles for JSON numbers:\n\n* **Windows/MSVC** defaults `time_t` to 64-bit; 32-bit can be forced but is discouraged because it breaks after Jan 18, 2038. ([[Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/1f4c8f33%28v%3Dvs.140%29?utm_source=chatgpt.com)][6])\n* Historical bugs in popular JWT libs (e.g., using Java `Integer` for dates) were fixed years ago to use 64-bit `Long`. ([[GitHub](https://github.com/auth0/java-jwt/issues/132?utm_source=chatgpt.com)][7])\n\n### Practical guidance\n\n* If you\u2019re using **Arduino/ESP/RTOS** JWT code, **audit** how it parses/serializes `exp/nbf/iat`: confirm it uses a 64-bit type (or a double) end-to-end, not `time_t`/`long` that is 32-bit on that target.\n* In \\*\\*Java/C#/**Node/Python**, you\u2019re typically safe, but unit-test with a token whose `exp` is beyond **2038-01-19** to catch regressions.\n* If you control the schema, consider allowing **fractional seconds** (per RFC 7519\u2019s allowance) to encourage use of floating-point/64-bit representations.\n\n**Bottom line:** Current, maintained JOSE/JWT libraries for desktop/server use do not intentionally use 32-bit `NumericDate`, but **embedded implementations can still be constrained to 32-bit by their platform**, so review those carefully. ([[Arduino Forum](https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com)][1], [[GitHub](https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com)][2])\n\n[1]: https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com \"Combining int and time_t - Programming - Arduino Forum\"\n[2]: https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com \"time_t typedef should be unsigned 32-bit (to avoid year 2038 problem)\"\n[3]: https://github.com/Ant2000/CustomJWT?utm_source=chatgpt.com \"GitHub - Ant2000/CustomJWT\"\n[4]: https://gitlab.com/petrhu/ArduinoJWT/blob/master/examples/simple_JSON_jwt/simple_JSON_jwt.ino?utm_source=chatgpt.com \"examples/simple_JSON_jwt/simple_JSON_jwt.ino \u00b7 master \u00b7 Petr ...\"\n[5]: https://github.com/zephyrproject-rtos/zephyr/issues/58681?utm_source=chatgpt.com \"[Coverity CID: 316011] Use of 32-bit time_t in lib/os/timeutil.c ...\"\n[6]: https://learn.microsoft.com/en-us/previous-versions/1f4c8f33%28v%3Dvs.140%29?utm_source=chatgpt.com \"time, _time32, _time64 | Microsoft Learn\"\n[7]: https://github.com/auth0/java-jwt/issues/132?utm_source=chatgpt.com \"Timestamps are limited by Integer/int to 2038-01-19T04:14:07 ... - GitHub\"",
       "createdAt": "2025-08-24T18:46:46Z",
-      "updatedAt": "2025-08-24T18:46:46Z",
+      "updatedAt": "2025-09-08T14:30:43Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "https://www.rfc-editor.org/rfc/rfc8259#section-6 says:\n\n> Note that when such software is used, numbers that are integers and\n> are in the range [-(2**53)+1, (2**53)-1] are interoperable in the\n> sense that implementations will agree exactly on their numeric\n> values.\n\nSo this isn't a problem for JSON - which is what the spec uses.  We should say that.",
+          "createdAt": "2025-09-08T14:26:34Z",
+          "updatedAt": "2025-09-08T14:26:34Z"
+        }
+      ]
     },
     {
       "number": 20,
       "id": "I_kwDONgvdIs7Ik8Fd",
       "title": "Markdown magic",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add a `venue` section to the YAML at the top of the doc, as well as:\n\n```\n{::boilerplate bcp14-tagged}\n```\nin the Conventions section.",
       "createdAt": "2025-08-29T01:27:23Z",
-      "updatedAt": "2025-08-29T01:27:23Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-08T14:32:49Z",
+      "closedAt": "2025-09-08T14:32:49Z",
       "comments": []
     }
   ],
@@ -1439,26 +1457,55 @@
       "id": "PR_kwDONgvdIs6mKLVJ",
       "title": "Venue info and boilerplate directive",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/21",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Close #20 \r\n\r\n- Add venue section to YAML header with working group information\r\n- Replace manual BCP14 boilerplate text with {::boilerplate bcp14-tagged} directive\r\n- This implements the markdown magic requested in GitHub issue #20",
       "createdAt": "2025-08-31T12:23:23Z",
-      "updatedAt": "2025-08-31T12:23:23Z",
+      "updatedAt": "2025-09-08T14:32:48Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "0f83811ec8a815d0998f7383825b8c5107dce279",
       "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "headRefName": "ys-20",
       "headRefOid": "094c81c9974c4bb6955e11c7b77e7b746736e807",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-08T14:32:48Z",
+      "mergedAt": "2025-09-08T14:32:48Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "c214a94738d9b84bbb22616c96651d175fde3395"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6-i6ms",
+          "commit": {
+            "abbreviatedOid": "094c81c"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-08T14:31:54Z",
+          "updatedAt": "2025-09-08T14:31:54Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs6-i7Fy",
+          "commit": {
+            "abbreviatedOid": "094c81c"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-08T14:32:26Z",
+          "updatedAt": "2025-09-08T14:32:26Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 22,
@@ -1472,7 +1519,7 @@
       "labels": [],
       "body": "Closes #18 ",
       "createdAt": "2025-08-31T12:39:38Z",
-      "updatedAt": "2025-08-31T12:39:38Z",
+      "updatedAt": "2025-09-08T14:34:34Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "0f83811ec8a815d0998f7383825b8c5107dce279",
@@ -1484,7 +1531,34 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs6-i7qn",
+          "commit": {
+            "abbreviatedOid": "2989a62"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-08T14:33:05Z",
+          "updatedAt": "2025-09-08T14:33:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs6-i9KX",
+          "commit": {
+            "abbreviatedOid": "2989a62"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Let's add references to all the sections with the new content.",
+          "createdAt": "2025-09-08T14:34:34Z",
+          "updatedAt": "2025-09-08T14:34:34Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
