@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-09T00:07:38.934044+00:00",
+  "timestamp": "2025-09-16T00:07:18.977731+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -418,9 +418,17 @@
       "labels": [],
       "body": "The title of this document is JSON Web Token Best Current Practices. Its goal is \"to provide actionable guidance leading to secure implementation and deployment of JWTs\" and \"to facilitate *secure implementation* and deployment of JWTs\" (Introduction).\n\nSection 2 (Threats and Vulnerabilities) lists some known and possible problems with JWT implementations and deployments. \n\nSection 2.7 (Substitution Attacks) states:\n\n> There are attacks in which one recipient will be given a JWT that was intended for it and will attempt to use it at a different recipient for which that JWT was not intended.\n\nThis relates to the audience of the JWT.\n\nSection 2.8 (Cross-JWT Confusion) states:\n\n> As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another. \n\n\nThe concept of \"purpose\" is inexistent in JWT-SD and would need to be clarified.\n\nThis draft is concentrating on the structure of JWTs, but is ignoring the context in which JWTs are requested, obtained and then used. \n\nSD-JWTs defined SD-JWTs *formats* for two flows: \n\n     a) when an issuer issues a SD-JWT including all Disclosures,\n     b) when a verifier presents SD-JWT or SD-JWT+KB including selected Disclosures.\n\nHowever, SD-JWT does not define which *protocols* can be used to carry these *data formats*.\n\nHence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed. \nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs, \nboth inside and **outside the IETF**\" is incomplete.\n\nTwo important \"specifications that rely on JWTs outside the IETF\" are:\n\n> \"OID4VCI\": OpenID for Verifiable Credential Issuance - draft 16\n> https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html\n> \n> \"OID4VP\": \"OpenID for Verifiable Presentations 1.0\" which defines a protocol for requesting and presenting Credentials (published on 9 July 2025). It defines a mechanism on top of OAuth 2.0 to allow presentation of claims in the form of Verifiable Credentials as part of the protocol flow. https://openid.net/specs/openid-4-verifiable-presentations-1_0.html\n\nThese two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nWhen using selective disclosure of claims, it is important to prevent cases where JWTs issued for one individual would be usable by another individual with a complicity between these individuals. In some cases, this issue is identified as a \"relay attack\".\n\nThis issue has not been identified in the documents produced by the OAuth WG (nor the SPICE WG), nor in OID4VP.\n\nOID4VP defines protocols for requesting and presenting Credentials. It is not explicitly said that these protocols must be supported by a single application and that the end-user using the device supporting that application SHALL NOT be able to modify it or to use its \"key store\" by downloading a rogue application and then using these keys with it.\n\nOnce this issue is identified, it needs to be addressed in a section called \"implementation considerations\" which, unfortunately, is inexistent in the proposed draft.\n\nThis topic is highly dependent upon the type of the device, however, general considerations apply.\n\n\n",
       "createdAt": "2025-07-15T13:25:23Z",
-      "updatedAt": "2025-09-08T14:14:11Z",
+      "updatedAt": "2025-09-14T13:37:57Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@Denisthemalice \n\n> However, SD-JWT does not define which protocols can be used to carry these data formats.\n\n> Hence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed.\nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs,\nboth inside and outside the IETF\" is incomplete.\n\nWhat specifically are you suggesting should be added to the JWT BCP?  I participated in SD-JWT and provided guidance on JWT best practices to be included in SD-JWT. What did we miss?\n\n\n> These two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nAre you suggested we provide advice no not including optional features?  While I agree there may be challenges in \"many optional features\", that is decision that looks out of scope as a best practice as it is dependent on the use cases a specification is trying to solve and \"many optional features\" may be the right choice. Do you have suggested text to make the discussion more concrete?\n\n\n\n",
+          "createdAt": "2025-09-14T13:37:56Z",
+          "updatedAt": "2025-09-14T13:37:56Z"
+        }
+      ]
     },
     {
       "number": 17,
