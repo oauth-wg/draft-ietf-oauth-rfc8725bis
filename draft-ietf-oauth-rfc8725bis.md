@@ -566,7 +566,7 @@ Note that even when used for key encryption, password-based encryption is
 ## Avoid Compression of Encryption Inputs {#no-compression}
 
 
- Compression of data  SHOULD NOT be used when creating a JWE, because
+ Compression of data SHOULD NOT be used when creating a JWE, because
 such compressed data often reveals information about the plaintext.
 
 
@@ -579,7 +579,7 @@ such compressed data often reveals information about the plaintext.
  specify that UTF-8 be used for encoding and decoding JSON
 used in Header Parameters and JWT Claims Sets. This is also in line with the
 latest JSON specification  {{RFC8259}}.
-Implementations and applications  MUST do this and not use or allow the use of
+Implementations and applications MUST do this and not use or allow the use of
 other Unicode encodings for these purposes.
 
 
@@ -615,7 +615,7 @@ If the issuer, subject, or the pair are invalid, the application
 
 
  If the same issuer can issue JWTs that are intended for use by more
- than one relying party or application, or may in the future,
+ than one relying party or application,
 the JWT  MUST contain an "aud" (audience) claim that can be used
 to determine whether the JWT
 is being used by an intended party or was substituted by an attacker.
