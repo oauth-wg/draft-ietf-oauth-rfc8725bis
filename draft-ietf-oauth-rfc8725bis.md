@@ -787,15 +787,15 @@ for their reviews.
 
 This document obsoletes RFC 8725 and provides several significant improvements and additions:
 
-1. Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation.
+1. Algorithm Verification: Added defensive checking to address incorrect reading of `alg` values as being case-insensitive ({{algorithm-verification}}).
 
-2. PBES2 Count Limits: Added requirements to reject unreasonably large `p2c` (PBES2 Count) values to prevent DoS attacks.
+2. Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation ({{preventing-confusion}}).
 
-3. Algorithm Verification: Added defensive checking to address incorrect reading of `alg` values as being case-insensitive.
+3. PBES2 Count Limits: Added requirements to reject unreasonably large `p2c` (PBES2 Count) values to prevent DoS attacks ({{limit-iterations}}).
 
-4. Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE.
+4. JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks ({{token-format}}).
 
-5. JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks.
+5. Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE ({{limit-decompression}}).
 
 # Document History
 
