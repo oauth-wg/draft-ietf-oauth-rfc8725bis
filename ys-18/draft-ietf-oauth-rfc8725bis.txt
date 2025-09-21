@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 4 March 2026                             Self-Issued Consulting
-                                                          31 August 2025
+Expires: 25 March 2026                            Self-Issued Consulting
+                                                       21 September 2025
 
 
                  JSON Web Token Best Current Practices
@@ -45,7 +45,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 March 2026.
+   This Internet-Draft will expire on 25 March 2026.
 
 Copyright Notice
 
@@ -787,21 +787,23 @@ Appendix A.  Changes from RFC 8725
    This document obsoletes RFC 8725 and provides several significant
    improvements and additions:
 
-   1.  Encryption-Signature Confusion: Added mitigation for attacks
+   1.  Algorithm Verification: Added defensive checking to address
+       incorrect reading of alg values as being case-insensitive
+       (Section 3.1).
+
+   2.  Encryption-Signature Confusion: Added mitigation for attacks
        where verifiers don't distinguish between successful decryption
-       and successful signature validation.
+       and successful signature validation (Section 3.12).
 
-   2.  PBES2 Count Limits: Added requirements to reject unreasonably
-       large p2c (PBES2 Count) values to prevent DoS attacks.
+   3.  PBES2 Count Limits: Added requirements to reject unreasonably
+       large p2c (PBES2 Count) values to prevent DoS attacks
+       (Section 3.13).
 
-   3.  Algorithm Verification: Added defensive checking to address
-       incorrect reading of alg values as being case-insensitive.
+   4.  JWT Format Confusion: Added mitigation for JWT serialization
+       format confusion attacks (Section 3.14).
 
-   4.  Compression DoS: Added mitigation for DoS attacks resulting from
-       abuse of compression in JWE.
-
-   5.  JWT Format Confusion: Added mitigation for JWT serialization
-       format confusion attacks.
+   5.  Compression DoS: Added mitigation for DoS attacks resulting from
+       abuse of compression in JWE (Section 3.15).
 
 Appendix B.  Document History
 
