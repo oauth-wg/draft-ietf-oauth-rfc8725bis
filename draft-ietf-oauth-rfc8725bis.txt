@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 12 March 2026                            Self-Issued Consulting
-                                                        8 September 2025
+Expires: 26 March 2026                            Self-Issued Consulting
+                                                       22 September 2025
 
 
                  JSON Web Token Best Current Practices
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 March 2026.
+   This Internet-Draft will expire on 26 March 2026.
 
 Copyright Notice
 
@@ -119,11 +119,12 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Document History
-     A.1.  draft-ietf-oauth-rfc8725bis-00
-     A.2.  draft-sheffer-oauth-rfc8725bis-02
-     A.3.  draft-sheffer-oauth-rfc8725bis-01
-     A.4.  draft-sheffer-oauth-rfc8725bis-00
+   Appendix A.  Changes from RFC 8725
+   Appendix B.  Document History
+     B.1.  draft-ietf-oauth-rfc8725bis-00
+     B.2.  draft-sheffer-oauth-rfc8725bis-02
+     B.3.  draft-sheffer-oauth-rfc8725bis-01
+     B.4.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -797,19 +798,42 @@ Table of Contents
               implementations in the wild", March 2018,
               <https://ia.cr/2018/298>.
 
-Appendix A.  Document History
+Appendix A.  Changes from RFC 8725
+
+   This document obsoletes RFC 8725 and provides several significant
+   improvements and additions:
+
+   1.  Algorithm Verification: Added defensive checking to address
+       incorrect reading of alg values as being case-insensitive
+       (Section 3.1).
+
+   2.  Encryption-Signature Confusion: Added mitigation for attacks
+       where verifiers don't distinguish between successful decryption
+       and successful signature validation (Section 3.12).
+
+   3.  PBES2 Count Limits: Added requirements to reject unreasonably
+       large p2c (PBES2 Count) values to prevent DoS attacks
+       (Section 3.13).
+
+   4.  JWT Format Confusion: Added mitigation for JWT serialization
+       format confusion attacks (Section 3.14).
+
+   5.  Compression DoS: Added mitigation for DoS attacks resulting from
+       abuse of compression in JWE (Section 3.15).
+
+Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-A.1.  draft-ietf-oauth-rfc8725bis-00
+B.1.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-A.2.  draft-sheffer-oauth-rfc8725bis-02
+B.2.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-A.3.  draft-sheffer-oauth-rfc8725bis-01
+B.3.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -822,7 +846,7 @@ A.3.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-A.4.  draft-sheffer-oauth-rfc8725bis-00
+B.4.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
