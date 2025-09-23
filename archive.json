@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-16T00:07:18.977731+00:00",
+  "timestamp": "2025-09-23T00:07:19.949065+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -398,11 +398,54 @@
         "yaronf"
       ],
       "labels": [],
-      "body": "- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#name-weak-symmetric-keys perhaps you want to mention this open source project which cracks JWTs signed with a weak HMAC key: https://github.com/brendan-rius/c-jwt-cracker\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#name-incorrect-use-and-compositi I'd change\n\"However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure.\"\nto \"However verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure).\"\nA JWS is by definition signed, just as a JWE is by definition encrypted, so I thought this was clearer.\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.4 I'd change\n\"Many encryption algorithms leak information about the length of the plaintext, with a varying amount of leakage depending on the algorithm and mode of operation.\"\nto \"Many encryption algorithms leak information about the length of the plaintext, with a varying amount of leakage depending on the algorithm and mode of operation. JWEs are vulnerable to this leakage.\"\nAlternatively you could add other language to make it clear this attack is applicable to JWEs, not JWTs in general, just as is done in https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.12 . I suppose you could even change the section header to \"JWE Plaintext Leakage through Analysis of Ciphertext Length\". In general there are a few security issues that are related to encryption and therefore only affect JWEs.\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.5\nThe Sanso link is busted (expired cert, 404 for https://blogs.adobe.com/security/2017/03/critical-vulnerability-uncovered-in-json-encryption.html ) so you might want to review.\n\n- [ ] Is the attack outlined here https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.5 the same as\nhttps://neilmadden.blog/2022/04/19/psychic-signatures-in-java/ ? If so, maybe that is a better link?\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.8 I'd change\n\"As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another.\"\nTo \"As JWTs are used by more protocols in diverse ways, it becomes increasingly important to prevent JWT tokens that have been issued for one purpose being used for another.\"\nJust think it reads cleaner.\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.1-2 I'd change\n\"In particular, use allowlists for critical parameters such as \"alg\" instead of blocklists.\"\n\"In particular, libraries SHOULD use allowlists for critical parameters such as \"alg\" instead of blocklists.\"\nThis makes it a complete sentence.\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.2 you quote the RFC which mentions SHOULD but then you follow it up with MUST. I find that confusing. I'd remove the first paragraph or at least this sentence: \"Even if a JWS can be successfully validated, unless the algorithm(s) used in the JWS are acceptable to the application, it SHOULD consider the JWS to be invalid.\" because then you remove the SHOULD/MUST confusion I had.\n\n- [ ] In that same section, the semi-colon was awkward. I'd change\n\"JWTs using \"none\" are often used in application contexts in which the content is optionally signed; then, the URL-safe claims representation and processing can be the same in both the signed and unsigned cases.\"\nto\n\"JWTs using \"none\" are often used in application contexts in which the content is optionally signed. The URL-safe claims representation and processing in this context can be the same in both the signed and unsigned cases.\"\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.3 I'd change\n\"Libraries MUST allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs. This would allow verifiers to easily establish a policy of only accepting JWS-signed JWTs.\"\nto\n\"Libraries MUST allow the verifier to distinguish between signed JWTs (JWSes) and encrypted JWTs (JWEs). This allows verifiers to easily establish a policy of only accepting signed JWTs.\"\nI found the terms JWS-signed and JWT-encrypted confusing. They felt internally redundant (a JWS is always signed, for example).\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.6 I wondered if it made sense to mention JWEs here? Maybe change\n\"Compression of data SHOULD NOT be done before encryption, because such compressed data often reveals information about the plaintext.\"\nto \n\"Compression of data SHOULD NOT be used when creating a JWE, because such compressed data often reveals information about the plaintext.\"\nThis distinguishes between JWS and JWE, where the latter is the only one this recommendation applies to.\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.7 I'd change\n\"Implementations and applications MUST do this and not use or admit the use of other Unicode encodings for these purposes.\"\nto\n\"Implementations and applications MUST do this and not use or allow the use of other Unicode encodings for these purposes.\"\nUnless \"admit\" means something special in this context, \"allow\" is clearer. \"allow\" seems more common and \"admit\" is not used elsewhere in this doc.\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.9 I worry about changes to the implementation (where you start with one RP/app, then add more). I'd address this by adding a clause about the future:\n\"If the same issuer can issue JWTs that are intended for use by more than one relying party or application\"\nto\n\"If the same issuer can issue JWTs that are intended for use by more than one relying party or application, or may in the future,\"\n\n- [ ] I'd also change\n\"or was substituted by an attacker at an unintended party.\"\nto\n\"or was substituted by an attacker.\"\nI'm not sure what the \"unintended party\" phrase adds.\n\n- [ ] There's also this sentence:\n\"In such cases, the relying party or application MUST validate the audience value, and if the audience value is not present or not associated with the recipient, it MUST reject the JWT.\"\nThe aud claim can be an array https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3 . Should we mention that here? Maybe something like:\n\"In such cases, the relying party or application MUST validate the audience value, and if no audience value is present or none of the values are associated with the recipient, it MUST reject the JWT.\"\n\n- [ ] I found https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.11-2 confusing.  Here's the text:\n\"Per the definition of \"typ\" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the \"application/\" prefix be omitted from the \"typ\" value. Therefore, for example, the \"typ\" value used to explicitly include a type for a SET SHOULD be \"secevent+jwt\". When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the format \"application/example+jwt\" be used, where \"example\" is replaced by the identifier for the specific kind of JWT.\"\nAs a JWT creator, should I be including \"application/\" in the typ value? I see recommendations for and against that, unless the media type name refers to something other than the value of the typ header. What am I missing?\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.12 I missed the MUST here, as I jumped right to the list. I'd suggest a small formatting change to highlight the MUST. Can we do a newline to make it clearer? That would change:\n\"If more than one kind of JWT can be issued by the same issuer, the validation rules for those JWTs MUST be written such that they are mutually exclusive, rejecting JWTs of the wrong kind. To prevent substitution of JWTs from one context into another, application developers may employ a number of strategies:\"\nto\n\"If more than one kind of JWT can be issued by the same issuer, the validation rules for those JWTs MUST be written such that they are mutually exclusive, rejecting JWTs of the wrong kind. To prevent substitution of JWTs from one context into another, application developers may employ a number of strategies:\"\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.13\nthat 600k OWASP iteration recommendation value changes over time. Do you want this text to be more broadly applicable in the future? (Not sure how this kind of thing is handled in general.) If so, could change this from:\n\"\"[OWASP-Password-Storage] states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Thus, rejecting inputs with a p2c (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.\"\nto\n\"[OWASP-Password-Storage] states a specific iteration count (600,000 at time of publishing) is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a p2c (PBES2 Count) value larger than double the recommended OWASP value is RECOMMENDED.\"\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.14 it is unclear to me if this if this is for the JWT as encoded or the decoded value? I think encoded, but am not sure. Do you want to reference base64 url encoding here? as mentioned in 7515 and by https://datatracker.ietf.org/doc/html/rfc4648#section-5\n\ncc: @mooreds",
+      "body": "\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#name-incorrect-use-and-compositi I'd change\n\"However verifiers don't always check that the received JWT is a signed JWS as opposed to an encrypted JWE structure.\"\nto \"However verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure).\"\nA JWS is by definition signed, just as a JWE is by definition encrypted, so I thought this was clearer.\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.4 I'd change\n\"Many encryption algorithms leak information about the length of the plaintext, with a varying amount of leakage depending on the algorithm and mode of operation.\"\nto \"Many encryption algorithms leak information about the length of the plaintext, with a varying amount of leakage depending on the algorithm and mode of operation. JWEs are vulnerable to this leakage.\"\nAlternatively you could add other language to make it clear this attack is applicable to JWEs, not JWTs in general, just as is done in https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.12 . I suppose you could even change the section header to \"JWE Plaintext Leakage through Analysis of Ciphertext Length\". In general there are a few security issues that are related to encryption and therefore only affect JWEs.\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.5\nThe Sanso link is busted (expired cert, 404 for https://blogs.adobe.com/security/2017/03/critical-vulnerability-uncovered-in-json-encryption.html ) so you might want to review.\n\n- [x] Is the attack outlined here https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.5 the same as\nhttps://neilmadden.blog/2022/04/19/psychic-signatures-in-java/ ? If so, maybe that is a better link?\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.8 I'd change\n\"As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another.\"\nTo \"As JWTs are used by more protocols in diverse ways, it becomes increasingly important to prevent JWT tokens that have been issued for one purpose being used for another.\"\nJust think it reads cleaner.\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.1-2 I'd change\n\"In particular, use allowlists for critical parameters such as \"alg\" instead of blocklists.\"\n\"In particular, libraries SHOULD use allowlists for critical parameters such as \"alg\" instead of blocklists.\"\nThis makes it a complete sentence.\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.2 you quote the RFC which mentions SHOULD but then you follow it up with MUST. I find that confusing. I'd remove the first paragraph or at least this sentence: \"Even if a JWS can be successfully validated, unless the algorithm(s) used in the JWS are acceptable to the application, it SHOULD consider the JWS to be invalid.\" because then you remove the SHOULD/MUST confusion I had.\n\n- [x] In that same section, the semi-colon was awkward. I'd change\n\"JWTs using \"none\" are often used in application contexts in which the content is optionally signed; then, the URL-safe claims representation and processing can be the same in both the signed and unsigned cases.\"\nto\n\"JWTs using \"none\" are often used in application contexts in which the content is optionally signed. The URL-safe claims representation and processing in this context can be the same in both the signed and unsigned cases.\"\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.3 I'd change\n\"Libraries MUST allow the verifier to distinguish between JWS-signed and JWE-encrypted JWTs. This would allow verifiers to easily establish a policy of only accepting JWS-signed JWTs.\"\nto\n\"Libraries MUST allow the verifier to distinguish between signed JWTs (JWSes) and encrypted JWTs (JWEs). This allows verifiers to easily establish a policy of only accepting signed JWTs.\"\nI found the terms JWS-signed and JWT-encrypted confusing. They felt internally redundant (a JWS is always signed, for example).\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.6 I wondered if it made sense to mention JWEs here? Maybe change\n\"Compression of data SHOULD NOT be done before encryption, because such compressed data often reveals information about the plaintext.\"\nto \n\"Compression of data SHOULD NOT be used when creating a JWE, because such compressed data often reveals information about the plaintext.\"\nThis distinguishes between JWS and JWE, where the latter is the only one this recommendation applies to.\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.7 I'd change\n\"Implementations and applications MUST do this and not use or admit the use of other Unicode encodings for these purposes.\"\nto\n\"Implementations and applications MUST do this and not use or allow the use of other Unicode encodings for these purposes.\"\nUnless \"admit\" means something special in this context, \"allow\" is clearer. \"allow\" seems more common and \"admit\" is not used elsewhere in this doc.\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.9 I worry about changes to the implementation (where you start with one RP/app, then add more). I'd address this by adding a clause about the future:\n\"If the same issuer can issue JWTs that are intended for use by more than one relying party or application\"\nto\n\"If the same issuer can issue JWTs that are intended for use by more than one relying party or application, or may in the future,\"\n\n- [x] I'd also change\n\"or was substituted by an attacker at an unintended party.\"\nto\n\"or was substituted by an attacker.\"\nI'm not sure what the \"unintended party\" phrase adds.\n\n- [x] There's also this sentence:\n\"In such cases, the relying party or application MUST validate the audience value, and if the audience value is not present or not associated with the recipient, it MUST reject the JWT.\"\nThe aud claim can be an array https://datatracker.ietf.org/doc/html/rfc7519#section-4.1.3 . Should we mention that here? Maybe something like:\n\"In such cases, the relying party or application MUST validate the audience value, and if no audience value is present or none of the values are associated with the recipient, it MUST reject the JWT.\"\n\n- [ ] I found https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.11-2 confusing.  Here's the text:\n\"Per the definition of \"typ\" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the \"application/\" prefix be omitted from the \"typ\" value. Therefore, for example, the \"typ\" value used to explicitly include a type for a SET SHOULD be \"secevent+jwt\". When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the format \"application/example+jwt\" be used, where \"example\" is replaced by the identifier for the specific kind of JWT.\"\nAs a JWT creator, should I be including \"application/\" in the typ value? I see recommendations for and against that, unless the media type name refers to something other than the value of the typ header. What am I missing?\n\n- [x] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.12 I missed the MUST here, as I jumped right to the list. I'd suggest a small formatting change to highlight the MUST. Can we do a newline to make it clearer? That would change:\n\"If more than one kind of JWT can be issued by the same issuer, the validation rules for those JWTs MUST be written such that they are mutually exclusive, rejecting JWTs of the wrong kind. To prevent substitution of JWTs from one context into another, application developers may employ a number of strategies:\"\nto\n\"If more than one kind of JWT can be issued by the same issuer, the validation rules for those JWTs MUST be written such that they are mutually exclusive, rejecting JWTs of the wrong kind. To prevent substitution of JWTs from one context into another, application developers may employ a number of strategies:\"\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.13\nthat 600k OWASP iteration recommendation value changes over time. Do you want this text to be more broadly applicable in the future? (Not sure how this kind of thing is handled in general.) If so, could change this from:\n\"\"[OWASP-Password-Storage] states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Thus, rejecting inputs with a p2c (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.\"\nto\n\"[OWASP-Password-Storage] states a specific iteration count (600,000 at time of publishing) is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a p2c (PBES2 Count) value larger than double the recommended OWASP value is RECOMMENDED.\"\n\n- [ ] In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.14 it is unclear to me if this if this is for the JWT as encoded or the decoded value? I think encoded, but am not sure. Do you want to reference base64 url encoding here? as mentioned in 7515 and by https://datatracker.ietf.org/doc/html/rfc4648#section-5\n\ncc: @mooreds",
       "createdAt": "2025-07-14T20:30:33Z",
-      "updatedAt": "2025-07-16T17:31:29Z",
+      "updatedAt": "2025-09-22T21:35:24Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Partially addressed by #23.",
+          "createdAt": "2025-09-21T17:13:02Z",
+          "updatedAt": "2025-09-21T17:13:02Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Is the attack outlined here https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-2.5 the same as\nhttps://neilmadden.blog/2022/04/19/psychic-signatures-in-java/ ? If so, maybe that is a better link?\n\nOne is JWS and one is JWE, and there's 5 years between them.",
+          "createdAt": "2025-09-22T11:55:26Z",
+          "updatedAt": "2025-09-22T11:55:26Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.2 you quote the RFC which mentions SHOULD but then you follow it up with MUST. I find that confusing. I'd remove the first paragraph or at least this sentence: \"Even if a JWS can be successfully validated, unless the algorithm(s) used in the JWS are acceptable to the application, it SHOULD consider the JWS to be invalid.\" because then you remove the SHOULD/MUST confusion I had.\n\nI think the RFC 7515 does support the following paragraph, despite the SHOULD/MUST confusion. BTW the first paragraph is about receivers and the second about senders. Anyway, keeping the text as-is.",
+          "createdAt": "2025-09-22T12:00:15Z",
+          "updatedAt": "2025-09-22T12:00:15Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I found https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#section-3.11-2 confusing. Here's the text:\n\"Per the definition of \"typ\" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the \"application/\" prefix be omitted from the \"typ\" value. Therefore, for example, the \"typ\" value used to explicitly include a type for a SET SHOULD be \"secevent+jwt\". When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the format \"application/example+jwt\" be used, where \"example\" is replaced by the identifier for the specific kind of JWT.\"\nAs a JWT creator, should I be including \"application/\" in the typ value? I see recommendations for and against that, unless the media type name refers to something other than the value of the typ header. What am I missing?\n\nI'm also confused. @selfissued WDYT?",
+          "createdAt": "2025-09-22T12:10:27Z",
+          "updatedAt": "2025-09-22T12:10:27Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"Per the definition of \"typ\" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the \"application/\" prefix be omitted from the \"typ\" value. Therefore, for example, the \"typ\" value used to explicitly include a type for a SET SHOULD be \"secevent+jwt\". When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the format \"application/example+jwt\" be used, where \"example\" is replaced by the identifier for the specific kind of JWT.\"\n\nRephrase: the first sentence is \"typ\", the second is about media type. We could add \"while omitting application/\" but need better clarification.",
+          "createdAt": "2025-09-22T14:09:26Z",
+          "updatedAt": "2025-09-22T14:09:26Z"
+        },
+        {
+          "author": "mooreds",
+          "authorAssociation": "NONE",
+          "body": "> Rephrase: the first sentence is \"typ\", the second is about media type. We could add \"while omitting application/\" but need better clarification.\n\nAh, so the first section, where you don't need the `application/` prefix is for the `typ` key in the header, whereas the second is the media type name?\n\nThat makes sense. \n\nMaybe rewrite it to:\n\n> Per the definition of \"typ\" in Section 4.1.9 of [[RFC7515](https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#RFC7515)], it is RECOMMENDED that the \"application/\" prefix be omitted from the \"typ\" Header Parameter value. Therefore, for example, the \"typ\" value used to explicitly include a type for a SET SHOULD be \"secevent+jwt\". \n> \n> When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the format \"application/example+jwt\" be used, where \"example\" is replaced by the identifier for the specific kind of JWT. Therefore, for example, the media type name for a SET SHOULD be \"application/secevent+jwt\".",
+          "createdAt": "2025-09-22T21:35:24Z",
+          "updatedAt": "2025-09-22T21:35:24Z"
+        }
+      ]
     },
     {
       "number": 15,
@@ -418,7 +461,7 @@
       "labels": [],
       "body": "The title of this document is JSON Web Token Best Current Practices. Its goal is \"to provide actionable guidance leading to secure implementation and deployment of JWTs\" and \"to facilitate *secure implementation* and deployment of JWTs\" (Introduction).\n\nSection 2 (Threats and Vulnerabilities) lists some known and possible problems with JWT implementations and deployments. \n\nSection 2.7 (Substitution Attacks) states:\n\n> There are attacks in which one recipient will be given a JWT that was intended for it and will attempt to use it at a different recipient for which that JWT was not intended.\n\nThis relates to the audience of the JWT.\n\nSection 2.8 (Cross-JWT Confusion) states:\n\n> As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another. \n\n\nThe concept of \"purpose\" is inexistent in JWT-SD and would need to be clarified.\n\nThis draft is concentrating on the structure of JWTs, but is ignoring the context in which JWTs are requested, obtained and then used. \n\nSD-JWTs defined SD-JWTs *formats* for two flows: \n\n     a) when an issuer issues a SD-JWT including all Disclosures,\n     b) when a verifier presents SD-JWT or SD-JWT+KB including selected Disclosures.\n\nHowever, SD-JWT does not define which *protocols* can be used to carry these *data formats*.\n\nHence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed. \nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs, \nboth inside and **outside the IETF**\" is incomplete.\n\nTwo important \"specifications that rely on JWTs outside the IETF\" are:\n\n> \"OID4VCI\": OpenID for Verifiable Credential Issuance - draft 16\n> https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html\n> \n> \"OID4VP\": \"OpenID for Verifiable Presentations 1.0\" which defines a protocol for requesting and presenting Credentials (published on 9 July 2025). It defines a mechanism on top of OAuth 2.0 to allow presentation of claims in the form of Verifiable Credentials as part of the protocol flow. https://openid.net/specs/openid-4-verifiable-presentations-1_0.html\n\nThese two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nWhen using selective disclosure of claims, it is important to prevent cases where JWTs issued for one individual would be usable by another individual with a complicity between these individuals. In some cases, this issue is identified as a \"relay attack\".\n\nThis issue has not been identified in the documents produced by the OAuth WG (nor the SPICE WG), nor in OID4VP.\n\nOID4VP defines protocols for requesting and presenting Credentials. It is not explicitly said that these protocols must be supported by a single application and that the end-user using the device supporting that application SHALL NOT be able to modify it or to use its \"key store\" by downloading a rogue application and then using these keys with it.\n\nOnce this issue is identified, it needs to be addressed in a section called \"implementation considerations\" which, unfortunately, is inexistent in the proposed draft.\n\nThis topic is highly dependent upon the type of the device, however, general considerations apply.\n\n\n",
       "createdAt": "2025-07-15T13:25:23Z",
-      "updatedAt": "2025-09-14T13:37:57Z",
+      "updatedAt": "2025-09-21T18:04:13Z",
       "closedAt": null,
       "comments": [
         {
@@ -427,6 +470,13 @@
           "body": "@Denisthemalice \n\n> However, SD-JWT does not define which protocols can be used to carry these data formats.\n\n> Hence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed.\nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs,\nboth inside and outside the IETF\" is incomplete.\n\nWhat specifically are you suggesting should be added to the JWT BCP?  I participated in SD-JWT and provided guidance on JWT best practices to be included in SD-JWT. What did we miss?\n\n\n> These two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nAre you suggested we provide advice no not including optional features?  While I agree there may be challenges in \"many optional features\", that is decision that looks out of scope as a best practice as it is dependent on the use cases a specification is trying to solve and \"many optional features\" may be the right choice. Do you have suggested text to make the discussion more concrete?\n\n\n\n",
           "createdAt": "2025-09-14T13:37:56Z",
           "updatedAt": "2025-09-14T13:37:56Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@Denisthemalice checking in you saw this -- we will close if we don't receive additional context",
+          "createdAt": "2025-09-21T18:04:13Z",
+          "updatedAt": "2025-09-21T18:04:13Z"
         }
       ]
     },
@@ -439,12 +489,12 @@
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
-        "yaronf"
+        "selfissued"
       ],
       "labels": [],
       "body": "- [ ] One application area in which JWTs are commonly used is representing digital identity information, such as OpenID Connect ID Tokens  [OpenID.Core] and OAuth 2.0  [RFC6749] access tokens and refresh tokens\n\n    Change to \"representing authorization or identity information, such as\nOAuth 2.0 access tokens [RFC9068] and OpenID Connect ID Tokens\n[OpenID.Core]\"\n\n    It is not common practice to use JWTs for refresh tokens, since\nrefresh tokens are only consumed by the issuer, whereas access tokens\nare consumed by the resource server which is a separate role from the\nauthorization server that issues them. Also updated the reference to\nthe JWT access token spec.\n\n- [ ] if a JWT is cryptographically protected end-to-end by a transport layer, such as TLS using cryptographically current algorithms, there may be no need to apply another layer of cryptographic protections to the JWT. In such cases, the use of the \"none\" algorithm can be perfectly acceptable.\n\n    This makes it sound like it's acceptable to send alg none JWTs as\naccess tokens over TLS, which is obviously not true. I would suggest\nremoving all references to alg none being acceptable. If there is an\nactual concrete use case for alg none JWTs, list it out explicitly,\npreferably to a reference of a spec/profile that uses it.\n\n- [ ] Section 3.3 mentions the term \"Nested JWT\" capitalized, but this is\nthe first occurrence of the term in the document. Add a reference to\nwhere Nested JWT is defined, or change to lowercase if the intent is\nto mention the general concept of nested JWTs.\n\n- [ ] The means of determining the keys owned by an issuer is application-specific. As one example, OpenID Connect  [OpenID.Core] issuer values are \"https\" URLs that reference a JSON metadata document that contains a \"jwks_uri\" value that is an \"https\" URL from which the issuer's keys are retrieved as a JWK Set [RFC7517]. This same mechanism is used by  [RFC8414].\n\n- [ ] Swap the mentions of RFC8414 and OpenID Connect: \"As one example,\nAuthorization Server Metadata [RFC8414] issuer values are .... The\nsame mechanism is used by OpenID Connect [OpenID.Core].\"\n\n- [ ] Similarly, when the JWT contains a \"sub\" (subject) claim, the application MUST validate that the subject value corresponds to a valid subject and/or issuer-subject pair at the application\n\n    This would benefit from an explicit reference to Section 4.15 of\nRFC9700 https://datatracker.ietf.org/doc/html/rfc9700#section-4.15\nwhich talks about the possibility of client_id vs user identifier\nconfusion.\n\n- [ ] Section 3.10: change \"whitelist\" to \"allowlist\". There is already a\nprior use of \"allowlist\" in the doc, so I assume this was\nunintentional.\n\n- [ ] Also in section 3.10, mention that the AS should check what the\nhostname resolves to and avoid making a request if it resolves to a\nloopback or internal IP address. (e.g. someone uses the value\n\"attacker.example.com/etc/passwd\" as the jwks_uri, but adds a DNS\nentry for \"attacker.example.com\" to resolve to \"127.0.0.1\" or other\ninternal IP address ranges.\n\n- [ ] Section 3.11: \"Sometimes, one kind of JWT can be confused for another.\"\n\n    This is kind of vague and would benefit from more explicit examples.\n\nCC: @aaronpk",
       "createdAt": "2025-08-01T14:18:38Z",
-      "updatedAt": "2025-09-08T14:15:45Z",
+      "updatedAt": "2025-09-22T14:14:00Z",
       "closedAt": null,
       "comments": []
     },
@@ -453,7 +503,7 @@
       "id": "I_kwDONgvdIs7FIwoP",
       "title": "Need a \"Changes from RFC8725\" section",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -462,8 +512,8 @@
       "labels": [],
       "body": "The doc history section is insufficient, and is not published with the RFC.",
       "createdAt": "2025-08-10T09:52:37Z",
-      "updatedAt": "2025-09-08T14:16:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-22T14:03:46Z",
+      "closedAt": "2025-09-22T14:03:45Z",
       "comments": []
     },
     {
@@ -471,7 +521,7 @@
       "id": "I_kwDONgvdIs7HqdTX",
       "title": "Representation of time values to void the 2038 bug",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -480,8 +530,8 @@
       "labels": [],
       "body": "Per ChatGPT, this is not a problem in mainstream systems, but remains a real problem in IOT. Quoting:\n\nShort answer: in mainstream server/client JOSE stacks, **no**\u2014current libraries do **not** use 32-bit integers for `NumericDate`. But in **embedded** ecosystems you can still encounter effective 32-bit limits because the platform\u2019s `time_t` (or equivalent) is 32-bit, and some Arduino/RTOS JWT implementations inherit that.\n\n### What I can confirm today\n\n* **Embedded/RTOS platforms still ship 32-bit `time_t`.** For example, Arduino environments and ESP8266 builds commonly use 32-bit (often signed) `time_t`, which overflows in 2038. ([[Arduino Forum](https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com)][1], [[GitHub](https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com)][2])\n* **JWT libraries exist for those platforms.** Several Arduino JWT libraries target AVR/ESP-class boards (which therefore inherit the 32-bit epoch limit unless they store timestamps in a wider type). ([[GitHub](https://github.com/Ant2000/CustomJWT?utm_source=chatgpt.com)][3], [[about.gitlab.com](https://gitlab.com/petrhu/ArduinoJWT/blob/master/examples/simple_JSON_jwt/simple_JSON_jwt.ino?utm_source=chatgpt.com)][4])\n* **Some projects still file bugs about 32-bit time usage.** The Zephyr RTOS had an open issue around use of 32-bit `time_t`. ([[GitHub](https://github.com/zephyrproject-rtos/zephyr/issues/58681?utm_source=chatgpt.com)][5])\n\n### Mainstream stacks (generally safe)\n\nModern general-purpose platforms use 64-bit time or IEEE-754 doubles for JSON numbers:\n\n* **Windows/MSVC** defaults `time_t` to 64-bit; 32-bit can be forced but is discouraged because it breaks after Jan 18, 2038. ([[Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/1f4c8f33%28v%3Dvs.140%29?utm_source=chatgpt.com)][6])\n* Historical bugs in popular JWT libs (e.g., using Java `Integer` for dates) were fixed years ago to use 64-bit `Long`. ([[GitHub](https://github.com/auth0/java-jwt/issues/132?utm_source=chatgpt.com)][7])\n\n### Practical guidance\n\n* If you\u2019re using **Arduino/ESP/RTOS** JWT code, **audit** how it parses/serializes `exp/nbf/iat`: confirm it uses a 64-bit type (or a double) end-to-end, not `time_t`/`long` that is 32-bit on that target.\n* In \\*\\*Java/C#/**Node/Python**, you\u2019re typically safe, but unit-test with a token whose `exp` is beyond **2038-01-19** to catch regressions.\n* If you control the schema, consider allowing **fractional seconds** (per RFC 7519\u2019s allowance) to encourage use of floating-point/64-bit representations.\n\n**Bottom line:** Current, maintained JOSE/JWT libraries for desktop/server use do not intentionally use 32-bit `NumericDate`, but **embedded implementations can still be constrained to 32-bit by their platform**, so review those carefully. ([[Arduino Forum](https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com)][1], [[GitHub](https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com)][2])\n\n[1]: https://forum.arduino.cc/t/combining-int-and-time-t/907182?utm_source=chatgpt.com \"Combining int and time_t - Programming - Arduino Forum\"\n[2]: https://github.com/esp8266/Arduino/issues/4948?utm_source=chatgpt.com \"time_t typedef should be unsigned 32-bit (to avoid year 2038 problem)\"\n[3]: https://github.com/Ant2000/CustomJWT?utm_source=chatgpt.com \"GitHub - Ant2000/CustomJWT\"\n[4]: https://gitlab.com/petrhu/ArduinoJWT/blob/master/examples/simple_JSON_jwt/simple_JSON_jwt.ino?utm_source=chatgpt.com \"examples/simple_JSON_jwt/simple_JSON_jwt.ino \u00b7 master \u00b7 Petr ...\"\n[5]: https://github.com/zephyrproject-rtos/zephyr/issues/58681?utm_source=chatgpt.com \"[Coverity CID: 316011] Use of 32-bit time_t in lib/os/timeutil.c ...\"\n[6]: https://learn.microsoft.com/en-us/previous-versions/1f4c8f33%28v%3Dvs.140%29?utm_source=chatgpt.com \"time, _time32, _time64 | Microsoft Learn\"\n[7]: https://github.com/auth0/java-jwt/issues/132?utm_source=chatgpt.com \"Timestamps are limited by Integer/int to 2038-01-19T04:14:07 ... - GitHub\"",
       "createdAt": "2025-08-24T18:46:46Z",
-      "updatedAt": "2025-09-08T14:30:43Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-21T16:51:39Z",
+      "closedAt": "2025-09-21T16:51:39Z",
       "comments": [
         {
           "author": "selfissued",
@@ -489,6 +539,13 @@
           "body": "https://www.rfc-editor.org/rfc/rfc8259#section-6 says:\n\n> Note that when such software is used, numbers that are integers and\n> are in the range [-(2**53)+1, (2**53)-1] are interoperable in the\n> sense that implementations will agree exactly on their numeric\n> values.\n\nSo this isn't a problem for JSON - which is what the spec uses.  We should say that.",
           "createdAt": "2025-09-08T14:26:34Z",
           "updatedAt": "2025-09-08T14:26:34Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Even for smaller systems the links seem to be old or obsolete. Arduino is not all 64-bit time yet, but parts of the ecosystem are already there and those that are still 32-bit will feel the pain even without our help. Closing.",
+          "createdAt": "2025-09-21T16:51:39Z",
+          "updatedAt": "2025-09-21T16:51:39Z"
         }
       ]
     },
@@ -506,6 +563,22 @@
       "createdAt": "2025-08-29T01:27:23Z",
       "updatedAt": "2025-09-08T14:32:49Z",
       "closedAt": "2025-09-08T14:32:49Z",
+      "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDONgvdIs7NEasV",
+      "title": "In https://www.ietf.org/archive/id/draft-sheffer-oauth-rfc8725bis-01.html#name-weak-symmetric-keys perhaps you want to mention this open source project which cracks JWTs signed with a weak HMAC key: https://github.com/brendan-rius/c-jwt-cracker",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/24",
+      "state": "CLOSED",
+      "author": "yaronf",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-22T11:28:42Z",
+      "updatedAt": "2025-09-22T11:46:23Z",
+      "closedAt": "2025-09-22T11:46:23Z",
       "comments": []
     }
   ],
@@ -1520,24 +1593,26 @@
       "id": "PR_kwDONgvdIs6mKNrI",
       "title": "New section: changes from RFC 8725",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Closes #18 ",
       "createdAt": "2025-08-31T12:39:38Z",
-      "updatedAt": "2025-09-08T14:34:34Z",
+      "updatedAt": "2025-09-22T14:03:45Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "0f83811ec8a815d0998f7383825b8c5107dce279",
       "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "headRefName": "ys-18",
-      "headRefOid": "2989a62888883ab9ba58262ea949712343ac8ea0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "dbd617fe7da30fbe86b2b123c2b01dfc7cf37299",
+      "closedAt": "2025-09-22T14:03:44Z",
+      "mergedAt": "2025-09-22T14:03:44Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "3b0b4460cdab628f057c23a8d9f9ee8f36f1c4e8"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1565,8 +1640,73 @@
           "createdAt": "2025-09-08T14:34:34Z",
           "updatedAt": "2025-09-08T14:34:34Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs7B5O_S",
+          "commit": {
+            "abbreviatedOid": "dbd617f"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-22T14:03:26Z",
+          "updatedAt": "2025-09-22T14:03:26Z",
+          "comments": []
         }
       ]
+    },
+    {
+      "number": 23,
+      "id": "PR_kwDONgvdIs6ptiYd",
+      "title": "Dan Moore's comments - the editorial part",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/23",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-21T17:06:25Z",
+      "updatedAt": "2025-09-21T17:06:25Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "c214a94738d9b84bbb22616c96651d175fde3395",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "ys-14",
+      "headRefOid": "1f05dd9df7e6b5ebc2c8662aed55ebf261f71d5d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDONgvdIs6p07p7",
+      "title": "More substantial edits by Dan Moore",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/25",
+      "state": "OPEN",
+      "author": "yaronf",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-22T12:12:43Z",
+      "updatedAt": "2025-09-22T12:12:43Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "c214a94738d9b84bbb22616c96651d175fde3395",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "ys-14b",
+      "headRefOid": "b0c1fa608a9f7e4fc0f56224fab900dc67d9ad6b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
