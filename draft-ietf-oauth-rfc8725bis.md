@@ -734,7 +734,10 @@ is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting in
 
 ## Check JWT Format Type {#token-format}
 
-Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.
+Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs,
+being dot-concatenated base64url strings, contain only the ASCII characters for letters, numbers, dash,
+underscore, and period.  Content with any other characters - especially braces and quotation
+marks - is not a JWT and MUST be rejected.
 
 
 ## Limit JWE Decompression Size {#limit-decompression}
