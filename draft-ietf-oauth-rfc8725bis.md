@@ -652,13 +652,13 @@ For instance, the  {{RFC8417}} specification uses
 the "application/secevent+jwt" media type
 to perform explicit typing of Security Event Tokens (SETs).
 
- Per the definition of "typ" in  Section 4.1.9 of {{RFC7515}},
-it is  RECOMMENDED that the "application/" prefix be omitted from the "typ" value.
+Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the "application/" prefix
+be omitted from the "typ" Header Parameter value, compared to the associated media type.
 Therefore, for example, the "typ" value used to explicitly include a type for a SET SHOULD be "secevent+jwt".
-When explicit typing is employed for a JWT, it is  RECOMMENDED
-that a media type name of the format
-"application/example+jwt" be used, where "example" is replaced by the
- identifier for the specific kind of JWT.
+
+When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the
+format "application/example+jwt" be used, where "example" is replaced by the identifier for the
+specific kind of JWT. Therefore, for example, the media type name for a SET SHOULD be "application/secevent+jwt".
 
  When applying explicit typing to a Nested JWT, the "typ" Header
  Parameter containing the explicit type value  MUST be present in the inner JWT of the Nested JWT (the JWT
@@ -728,8 +728,9 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-{{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
-Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
+{{OWASP-Password-Storage}} states a specific iteration count (600,000 at time of publishing)
+is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a p2c
+(PBES2 Count) value larger than double the recommended OWASP value is RECOMMENDED.
 
 ## Check JWT Format Type {#token-format}
 
