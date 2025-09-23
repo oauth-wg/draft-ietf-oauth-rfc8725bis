@@ -630,10 +630,11 @@ Table of Contents
 3.14.  Check JWT Format Type
 
    Implementations MUST confirm the JWT is in a legal format while
-   parsing it.  Legal JWTs contain only the ASCII characters for
-   letters, numbers, dash, underscore, and period.  Content with any
-   other characters - especially braces and quotation marks - is not a
-   JWT and MUST be rejected.
+   parsing it.  Legal JWTs, being dot-concatenated base64url strings,
+   contain only the ASCII characters for letters, numbers, dash,
+   underscore, and period.  Content with any other characters -
+   especially braces and quotation marks - is not a JWT and MUST be
+   rejected.
 
 3.15.  Limit JWE Decompression Size
 

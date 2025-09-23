@@ -1920,7 +1920,10 @@ is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting in
         <h3 id="name-check-jwt-format-type">
 <a href="#section-3.14" class="section-number selfRef">3.14. </a><a href="#name-check-jwt-format-type" class="section-name selfRef">Check JWT Format Type</a>
         </h3>
-<p id="section-3.14-1">Implementations <span class="bcp14">MUST</span> confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#section-3.14-1" class="pilcrow">¶</a></p>
+<p id="section-3.14-1">Implementations <span class="bcp14">MUST</span> confirm the JWT is in a legal format while parsing it. Legal JWTs,
+being dot-concatenated base64url strings, contain only the ASCII characters for letters, numbers, dash,
+underscore, and period.  Content with any other characters - especially braces and quotation
+marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#section-3.14-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limit-decompression">
