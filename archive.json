@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-25T00:07:25.857135+00:00",
+  "timestamp": "2025-09-28T00:08:37.949336+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -468,7 +468,7 @@
       "labels": [],
       "body": "The title of this document is JSON Web Token Best Current Practices. Its goal is \"to provide actionable guidance leading to secure implementation and deployment of JWTs\" and \"to facilitate *secure implementation* and deployment of JWTs\" (Introduction).\n\nSection 2 (Threats and Vulnerabilities) lists some known and possible problems with JWT implementations and deployments. \n\nSection 2.7 (Substitution Attacks) states:\n\n> There are attacks in which one recipient will be given a JWT that was intended for it and will attempt to use it at a different recipient for which that JWT was not intended.\n\nThis relates to the audience of the JWT.\n\nSection 2.8 (Cross-JWT Confusion) states:\n\n> As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another. \n\n\nThe concept of \"purpose\" is inexistent in JWT-SD and would need to be clarified.\n\nThis draft is concentrating on the structure of JWTs, but is ignoring the context in which JWTs are requested, obtained and then used. \n\nSD-JWTs defined SD-JWTs *formats* for two flows: \n\n     a) when an issuer issues a SD-JWT including all Disclosures,\n     b) when a verifier presents SD-JWT or SD-JWT+KB including selected Disclosures.\n\nHowever, SD-JWT does not define which *protocols* can be used to carry these *data formats*.\n\nHence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed. \nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs, \nboth inside and **outside the IETF**\" is incomplete.\n\nTwo important \"specifications that rely on JWTs outside the IETF\" are:\n\n> \"OID4VCI\": OpenID for Verifiable Credential Issuance - draft 16\n> https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html\n> \n> \"OID4VP\": \"OpenID for Verifiable Presentations 1.0\" which defines a protocol for requesting and presenting Credentials (published on 9 July 2025). It defines a mechanism on top of OAuth 2.0 to allow presentation of claims in the form of Verifiable Credentials as part of the protocol flow. https://openid.net/specs/openid-4-verifiable-presentations-1_0.html\n\nThese two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nWhen using selective disclosure of claims, it is important to prevent cases where JWTs issued for one individual would be usable by another individual with a complicity between these individuals. In some cases, this issue is identified as a \"relay attack\".\n\nThis issue has not been identified in the documents produced by the OAuth WG (nor the SPICE WG), nor in OID4VP.\n\nOID4VP defines protocols for requesting and presenting Credentials. It is not explicitly said that these protocols must be supported by a single application and that the end-user using the device supporting that application SHALL NOT be able to modify it or to use its \"key store\" by downloading a rogue application and then using these keys with it.\n\nOnce this issue is identified, it needs to be addressed in a section called \"implementation considerations\" which, unfortunately, is inexistent in the proposed draft.\n\nThis topic is highly dependent upon the type of the device, however, general considerations apply.\n\n\n",
       "createdAt": "2025-07-15T13:25:23Z",
-      "updatedAt": "2025-09-24T14:00:40Z",
+      "updatedAt": "2025-09-26T14:56:43Z",
       "closedAt": null,
       "comments": [
         {
@@ -512,6 +512,20 @@
           "body": "> Which trust relationships should there be between a web browser application and an Holder application ? Which parts of the Holder application should run in the RichOS and in the TEE ? What about the security characteristics of the RichOS and of the TEE ?\n\n\nA best current practice does not create new practices -- it pull together practices that have been proven to be the best practices. \n\nWhat best practice are you suggesting would address the concerns you are raising?\n",
           "createdAt": "2025-09-24T14:00:40Z",
           "updatedAt": "2025-09-24T14:00:40Z"
+        },
+        {
+          "author": "Denisthemalice",
+          "authorAssociation": "NONE",
+          "body": "The key point is that no \"best practice\" has currently been recommended to address this concern.\n\nIf this concern is not addressed, this will leave unsolved a major security concern which needs to be addressed when selective disclosure of claims is supported and the user cannot be uniquely identified.\n\nA sketch of the beginning of best practices is detailed in the previous comments.\n ",
+          "createdAt": "2025-09-26T14:28:00Z",
+          "updatedAt": "2025-09-26T14:28:00Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I appreciate your desire to help secure deployments, but the BCP is a collection of existing, accepted practices that have been developed from experience and proven threats. Prescribing a speculative practice is not in our scope. ",
+          "createdAt": "2025-09-26T14:56:43Z",
+          "updatedAt": "2025-09-26T14:56:43Z"
         }
       ]
     },
