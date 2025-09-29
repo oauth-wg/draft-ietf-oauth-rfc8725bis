@@ -58,7 +58,6 @@ venue:
 
 
 normative:
-  RFC2119:
   RFC6979:
   RFC7515:
   RFC7516:
@@ -66,7 +65,6 @@ normative:
   RFC7519:
   RFC8017:
   RFC8037:
-  RFC8174:
   RFC8259:
   nist-sp-800-56a-r3: DOI.10.6028/NIST.SP.800-56Ar3
 informative:
@@ -91,6 +89,12 @@ informative:
     refcontent: National Vulnerability Database
     target: https://nvd.nist.gov/vuln/detail/CVE-2023-51774
     title: CVE-2023-51774 Detail
+  JWT-Cracker:
+    author:
+    - ins: B. Rius
+      name: Brendan Rius
+    title: JWT Cracker
+    target: https://github.com/brendan-rius/c-jwt-cracker
   Kelsey: DOI.10.1007/3-540-45661-9_21
   Langkemper:
     author:
@@ -131,8 +135,8 @@ informative:
     - ins: A. Sanso
       name: Antonio Sanso
     date: March 2017
-    target: https://blogs.adobe.com/security/2017/03/critical-vulnerability-uncovered-in-json-encryption.html
-    title: Critical Vulnerability Uncovered in JSON Encryption
+    target: https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/
+    title: Critical Vulnerability in JSON Web Encryption
   Valenta:
     author:
     - ins: L. Valenta
@@ -280,7 +284,7 @@ For mitigations, see {{algorithm-verification}} and {{appropriate-algorithms}}.
 "HS256", to sign tokens but supply a weak symmetric key with
 insufficient entropy (such as a human-memorable password). Such keys
 are vulnerable to offline brute-force or dictionary attacks once an
-attacker gets hold of such a token  {{Langkemper}}.
+attacker gets hold of such a token  {{Langkemper}}{{JWT-Cracker}}.
 
  For mitigations, see  {{key-entropy}}.
 
@@ -610,18 +614,13 @@ If the issuer, subject, or the pair are invalid, the application
 
 
  If the same issuer can issue JWTs that are intended for use by more
- than one relying party or application,
+ than one relying party or application, or may do so in the future,
 the JWT  MUST contain an "aud" (audience) claim that can be used
 to determine whether the JWT
 is being used by an intended party or was substituted by an attacker.
 
- In such cases, the relying party or application  MUST
- validate the audience value,
-and if the audience value is not present or not associated with the recipient,
-it  MUST reject the JWT.
-
-
-
+In such cases, the relying party or application MUST validate the audience value, and if no audience
+value is present or none of the values are associated with the recipient, it MUST reject the JWT.
 
 ## Do Not Trust Received Claims {#do-not-trust-claims}
 
@@ -652,13 +651,13 @@ For instance, the  {{RFC8417}} specification uses
 the "application/secevent+jwt" media type
 to perform explicit typing of Security Event Tokens (SETs).
 
- Per the definition of "typ" in  Section 4.1.9 of {{RFC7515}},
-it is  RECOMMENDED that the "application/" prefix be omitted from the "typ" value.
+Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the "application/" prefix
+be omitted from the "typ" Header Parameter value, compared to the associated media type.
 Therefore, for example, the "typ" value used to explicitly include a type for a SET SHOULD be "secevent+jwt".
-When explicit typing is employed for a JWT, it is  RECOMMENDED
-that a media type name of the format
-"application/example+jwt" be used, where "example" is replaced by the
- identifier for the specific kind of JWT.
+
+When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the
+format "application/example+jwt" be used, where "example" is replaced by the identifier for the
+specific kind of JWT. Therefore, for example, the media type name for a SET SHOULD be "application/secevent+jwt".
 
  When applying explicit typing to a Nested JWT, the "typ" Header
  Parameter containing the explicit type value  MUST be present in the inner JWT of the Nested JWT (the JWT
@@ -684,6 +683,7 @@ If more than one kind of JWT can be issued by the same issuer,
 the validation rules for those JWTs  MUST be written such that
 they are mutually exclusive,
 rejecting JWTs of the wrong kind.
+
 To prevent substitution of JWTs from one context into another,
 application developers may employ a number of strategies:
 
@@ -727,12 +727,16 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-{{OWASP-Password-Storage}} states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
-Thus, rejecting inputs with a `p2c` (PBES2 Count) value over 1,200,000 (double that) is RECOMMENDED.
+{{OWASP-Password-Storage}} states a specific iteration count (600,000 at time of publishing)
+is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a `p2c`
+(PBES2 Count) value larger than double the recommended OWASP value is RECOMMENDED.
 
 ## Check JWT Format Type {#token-format}
 
-Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and MUST be rejected.
+Implementations MUST confirm the JWT is in a legal format while parsing it. Legal JWTs,
+being dot-concatenated base64url strings, contain only the ASCII characters for letters, numbers, dash,
+underscore, and period.  Content with any other characters - especially braces and quotation
+marks - is not a JWT and MUST be rejected.
 
 
 ## Limit JWE Decompression Size {#limit-decompression}
