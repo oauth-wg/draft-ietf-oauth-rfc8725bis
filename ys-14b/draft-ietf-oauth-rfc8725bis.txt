@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 27 March 2026                            Self-Issued Consulting
-                                                       23 September 2025
+Expires: 2 April 2026                             Self-Issued Consulting
+                                                       29 September 2025
 
 
                  JSON Web Token Best Current Practices
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 March 2026.
+   This Internet-Draft will expire on 2 April 2026.
 
 Copyright Notice
 
