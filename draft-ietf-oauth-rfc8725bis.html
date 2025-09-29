@@ -1457,7 +1457,7 @@ HMAC shared secret (see  <span>[<a href="#McLean" class="cite xref">McLean</a>]<
 "HS256", to sign tokens but supply a weak symmetric key with
 insufficient entropy (such as a human-memorable password). Such keys
 are vulnerable to offline brute-force or dictionary attacks once an
-attacker gets hold of such a token  <span>[<a href="#Langkemper" class="cite xref">Langkemper</a>]</span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+attacker gets hold of such a token  <span>[<a href="#Langkemper" class="cite xref">Langkemper</a>]</span><span>[<a href="#JWT-Cracker" class="cite xref">JWT-Cracker</a>]</span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
 <p id="section-2.2-2">For mitigations, see  <a href="#key-entropy" class="auto internal xref">Section 3.5</a>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1795,14 +1795,12 @@ If the issuer, subject, or the pair are invalid, the application
 <a href="#section-3.9" class="section-number selfRef">3.9. </a><a href="#name-use-and-validate-audience" class="section-name selfRef">Use and Validate Audience</a>
         </h3>
 <p id="section-3.9-1">If the same issuer can issue JWTs that are intended for use by more
- than one relying party or application,
+ than one relying party or application, or may do so in the future,
 the JWT  <span class="bcp14">MUST</span> contain an "aud" (audience) claim that can be used
 to determine whether the JWT
 is being used by an intended party or was substituted by an attacker.<a href="#section-3.9-1" class="pilcrow">¶</a></p>
-<p id="section-3.9-2">In such cases, the relying party or application  <span class="bcp14">MUST</span>
- validate the audience value,
-and if the audience value is not present or not associated with the recipient,
-it  <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.9-2" class="pilcrow">¶</a></p>
+<p id="section-3.9-2">In such cases, the relying party or application <span class="bcp14">MUST</span> validate the audience value, and if no audience
+value is present or none of the values are associated with the recipient, it <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="do-not-trust-claims">
@@ -1834,22 +1832,21 @@ Explicit JWT typing is accomplished by using the "typ" Header Parameter.
 For instance, the  <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> specification uses
 the "application/secevent+jwt" media type
 to perform explicit typing of Security Event Tokens (SETs).<a href="#section-3.11-1" class="pilcrow">¶</a></p>
-<p id="section-3.11-2">Per the definition of "typ" in  Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>,
-it is  <span class="bcp14">RECOMMENDED</span> that the "application/" prefix be omitted from the "typ" value.
-Therefore, for example, the "typ" value used to explicitly include a type for a SET <span class="bcp14">SHOULD</span> be "secevent+jwt".
-When explicit typing is employed for a JWT, it is  <span class="bcp14">RECOMMENDED</span>
-that a media type name of the format
-"application/example+jwt" be used, where "example" is replaced by the
- identifier for the specific kind of JWT.<a href="#section-3.11-2" class="pilcrow">¶</a></p>
-<p id="section-3.11-3">When applying explicit typing to a Nested JWT, the "typ" Header
+<p id="section-3.11-2">Per the definition of "typ" in Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> that the "application/" prefix
+be omitted from the "typ" Header Parameter value, compared to the associated media type.
+Therefore, for example, the "typ" value used to explicitly include a type for a SET <span class="bcp14">SHOULD</span> be "secevent+jwt".<a href="#section-3.11-2" class="pilcrow">¶</a></p>
+<p id="section-3.11-3">When explicit typing is employed for a JWT, it is <span class="bcp14">RECOMMENDED</span> that a media type name of the
+format "application/example+jwt" be used, where "example" is replaced by the identifier for the
+specific kind of JWT. Therefore, for example, the media type name for a SET <span class="bcp14">SHOULD</span> be "application/secevent+jwt".<a href="#section-3.11-3" class="pilcrow">¶</a></p>
+<p id="section-3.11-4">When applying explicit typing to a Nested JWT, the "typ" Header
  Parameter containing the explicit type value  <span class="bcp14">MUST</span> be present in the inner JWT of the Nested JWT (the JWT
 whose payload is the JWT Claims Set).
 In some cases, the same "typ" Header Parameter value will be present in the outer JWT as well,
-to explicitly type the entire Nested JWT.<a href="#section-3.11-3" class="pilcrow">¶</a></p>
-<p id="section-3.11-4">Note that the use of explicit typing may not achieve disambiguation
+to explicitly type the entire Nested JWT.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
+<p id="section-3.11-5">Note that the use of explicit typing may not achieve disambiguation
  from existing kinds of JWTs,
 as the validation rules for existing kinds of JWTs often do not use the "typ" Header Parameter value.
-Explicit typing is  <span class="bcp14">RECOMMENDED</span> for new uses of JWTs.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
+Explicit typing is  <span class="bcp14">RECOMMENDED</span> for new uses of JWTs.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="preventing-confusion">
@@ -1863,46 +1860,46 @@ and the validation rules associated with them.
 If more than one kind of JWT can be issued by the same issuer,
 the validation rules for those JWTs  <span class="bcp14">MUST</span> be written such that
 they are mutually exclusive,
-rejecting JWTs of the wrong kind.
-To prevent substitution of JWTs from one context into another,
-application developers may employ a number of strategies:<a href="#section-3.12-1" class="pilcrow">¶</a></p>
+rejecting JWTs of the wrong kind.<a href="#section-3.12-1" class="pilcrow">¶</a></p>
+<p id="section-3.12-2">To prevent substitution of JWTs from one context into another,
+application developers may employ a number of strategies:<a href="#section-3.12-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.12-2.1">
-            <p id="section-3.12-2.1.1">Use explicit typing for different kinds of JWTs.
+<li class="normal" id="section-3.12-3.1">
+            <p id="section-3.12-3.1.1">Use explicit typing for different kinds of JWTs.
 Then the distinct "typ" values can be used to differentiate between the
- different kinds of JWTs.<a href="#section-3.12-2.1.1" class="pilcrow">¶</a></p>
+ different kinds of JWTs.<a href="#section-3.12-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.12-2.2">
-            <p id="section-3.12-2.2.1">Use different sets of required claims or different required claim values.
+          <li class="normal" id="section-3.12-3.2">
+            <p id="section-3.12-3.2.1">Use different sets of required claims or different required claim values.
 Then the validation rules for one kind of JWT will reject those with different
- claims or values.<a href="#section-3.12-2.2.1" class="pilcrow">¶</a></p>
+ claims or values.<a href="#section-3.12-3.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.12-2.3">
-            <p id="section-3.12-2.3.1">Use different sets of required Header Parameters or different
+          <li class="normal" id="section-3.12-3.3">
+            <p id="section-3.12-3.3.1">Use different sets of required Header Parameters or different
  required Header Parameter values.
 Then the validation rules for one kind of JWT will reject those with different
- Header Parameters or values.<a href="#section-3.12-2.3.1" class="pilcrow">¶</a></p>
+ Header Parameters or values.<a href="#section-3.12-3.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.12-2.4">
-            <p id="section-3.12-2.4.1">Use different keys for different kinds of JWTs.
-Then the keys used to validate one kind of JWT will fail to validate other kinds of JWTs.<a href="#section-3.12-2.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.12-3.4">
+            <p id="section-3.12-3.4.1">Use different keys for different kinds of JWTs.
+Then the keys used to validate one kind of JWT will fail to validate other kinds of JWTs.<a href="#section-3.12-3.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.12-2.5">
-            <p id="section-3.12-2.5.1">Use different "aud" values for different uses of JWTs from the same issuer.
-Then audience validation will reject JWTs substituted into inappropriate contexts.<a href="#section-3.12-2.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.12-3.5">
+            <p id="section-3.12-3.5.1">Use different "aud" values for different uses of JWTs from the same issuer.
+Then audience validation will reject JWTs substituted into inappropriate contexts.<a href="#section-3.12-3.5.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.12-2.6">
-            <p id="section-3.12-2.6.1">Use different issuers for different kinds of JWTs.
-Then the distinct "iss" values can be used to segregate the different kinds of JWTs.<a href="#section-3.12-2.6.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-3.12-3.6">
+            <p id="section-3.12-3.6.1">Use different issuers for different kinds of JWTs.
+Then the distinct "iss" values can be used to segregate the different kinds of JWTs.<a href="#section-3.12-3.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.12-3">Given the broad diversity of JWT usage and applications,
+<p id="section-3.12-4">Given the broad diversity of JWT usage and applications,
 the best combination of types, required claims, values, Header Parameters, key usages, and issuers
 to differentiate among different kinds of JWTs
 will, in general, be application-specific.
 As discussed in  <a href="#use-typ" class="auto internal xref">Section 3.11</a>, for new JWT
  applications, the use of explicit typing is
-  <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.12-3" class="pilcrow">¶</a></p>
+  <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.12-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limit-iterations">
@@ -1915,8 +1912,9 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-<span>[<a href="#OWASP-Password-Storage" class="cite xref">OWASP-Password-Storage</a>]</span> states that an iteration count of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140 compliance.
-Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,000 (double that) is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
+<span>[<a href="#OWASP-Password-Storage" class="cite xref">OWASP-Password-Storage</a>]</span> states a specific iteration count (600,000 at time of publishing)
+is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a <code>p2c</code>
+(PBES2 Count) value larger than double the recommended OWASP value is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="token-format">
@@ -1924,7 +1922,10 @@ Thus, rejecting inputs with a <code>p2c</code> (PBES2 Count) value over 1,200,00
         <h3 id="name-check-jwt-format-type">
 <a href="#section-3.14" class="section-number selfRef">3.14. </a><a href="#name-check-jwt-format-type" class="section-name selfRef">Check JWT Format Type</a>
         </h3>
-<p id="section-3.14-1">Implementations <span class="bcp14">MUST</span> confirm the JWT is in a legal format while parsing it. Legal JWTs contain only the ASCII characters for letters, numbers, dash, underscore, and period.  Content with any other characters - especially braces and quotation marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#section-3.14-1" class="pilcrow">¶</a></p>
+<p id="section-3.14-1">Implementations <span class="bcp14">MUST</span> confirm the JWT is in a legal format while parsing it. Legal JWTs,
+being dot-concatenated base64url strings, contain only the ASCII characters for letters, numbers, dash,
+underscore, and period.  Content with any other characters - especially braces and quotation
+marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#section-3.14-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limit-decompression">
@@ -2051,6 +2052,10 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"CVE-2023-51774 Detail"</span>, <span class="refContent">National Vulnerability Database</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://nvd.nist.gov/vuln/detail/CVE-2023-51774">https://nvd.nist.gov/vuln/detail/CVE-2023-51774</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="JWT-Cracker">[JWT-Cracker]</dt>
+        <dd>
+<span class="refAuthor">Rius, B.</span>, <span class="refTitle">"JWT Cracker"</span>, <span>n.d.</span>, <span>&lt;<a href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Kelsey">[Kelsey]</dt>
         <dd>
 <span class="refAuthor">Kelsey, J.</span>, <span class="refTitle">"Compression and Information Leakage of Plaintext"</span>, <span class="refContent">Springer Berlin Heidelberg</span>, <span class="seriesInfo">Lecture Notes in Computer Science pp. 263-276</span>, <span class="seriesInfo">DOI 10.1007/3-540-45661-9_21</span>, <span class="seriesInfo">ISBN ["9783540440093", "9783540456612"]</span>, <time datetime="2002" class="refDate">2002</time>, <span>&lt;<a href="https://doi.org/10.1007/3-540-45661-9_21">https://doi.org/10.1007/3-540-45661-9_21</a>&gt;</span>. </dd>
@@ -2093,7 +2098,7 @@ for their reviews.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="Sanso">[Sanso]</dt>
         <dd>
-<span class="refAuthor">Sanso, A.</span>, <span class="refTitle">"Critical Vulnerability Uncovered in JSON Encryption"</span>, <time datetime="2017-03" class="refDate">March 2017</time>, <span>&lt;<a href="https://blogs.adobe.com/security/2017/03/critical-vulnerability-uncovered-in-json-encryption.html">https://blogs.adobe.com/security/2017/03/critical-vulnerability-uncovered-in-json-encryption.html</a>&gt;</span>. </dd>
+<span class="refAuthor">Sanso, A.</span>, <span class="refTitle">"Critical Vulnerability in JSON Web Encryption"</span>, <time datetime="2017-03" class="refDate">March 2017</time>, <span>&lt;<a href="https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/">https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Valenta">[Valenta]</dt>
       <dd>

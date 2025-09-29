@@ -222,7 +222,7 @@ Table of Contents
    weak symmetric key with insufficient entropy (such as a human-
    memorable password).  Such keys are vulnerable to offline brute-force
    or dictionary attacks once an attacker gets hold of such a token
-   [Langkemper].
+   [Langkemper][JWT-Cracker].
 
    For mitigations, see Section 3.5.
 
@@ -515,13 +515,14 @@ Table of Contents
 3.9.  Use and Validate Audience
 
    If the same issuer can issue JWTs that are intended for use by more
-   than one relying party or application, the JWT MUST contain an "aud"
-   (audience) claim that can be used to determine whether the JWT is
-   being used by an intended party or was substituted by an attacker.
+   than one relying party or application, or may do so in the future,
+   the JWT MUST contain an "aud" (audience) claim that can be used to
+   determine whether the JWT is being used by an intended party or was
+   substituted by an attacker.
 
    In such cases, the relying party or application MUST validate the
-   audience value, and if the audience value is not present or not
-   associated with the recipient, it MUST reject the JWT.
+   audience value, and if no audience value is present or none of the
+   values are associated with the recipient, it MUST reject the JWT.
 
 3.10.  Do Not Trust Received Claims
 
@@ -550,11 +551,15 @@ Table of Contents
 
    Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is
    RECOMMENDED that the "application/" prefix be omitted from the "typ"
-   value.  Therefore, for example, the "typ" value used to explicitly
-   include a type for a SET SHOULD be "secevent+jwt".  When explicit
-   typing is employed for a JWT, it is RECOMMENDED that a media type
-   name of the format "application/example+jwt" be used, where "example"
-   is replaced by the identifier for the specific kind of JWT.
+   Header Parameter value, compared to the associated media type.
+   Therefore, for example, the "typ" value used to explicitly include a
+   type for a SET SHOULD be "secevent+jwt".
+
+   When explicit typing is employed for a JWT, it is RECOMMENDED that a
+   media type name of the format "application/example+jwt" be used,
+   where "example" is replaced by the identifier for the specific kind
+   of JWT.  Therefore, for example, the media type name for a SET SHOULD
+   be "application/secevent+jwt".
 
    When applying explicit typing to a Nested JWT, the "typ" Header
    Parameter containing the explicit type value MUST be present in the
@@ -575,9 +580,10 @@ Table of Contents
    and optional JWT claims and the validation rules associated with
    them.  If more than one kind of JWT can be issued by the same issuer,
    the validation rules for those JWTs MUST be written such that they
-   are mutually exclusive, rejecting JWTs of the wrong kind.  To prevent
-   substitution of JWTs from one context into another, application
-   developers may employ a number of strategies:
+   are mutually exclusive, rejecting JWTs of the wrong kind.
+
+   To prevent substitution of JWTs from one context into another,
+   application developers may employ a number of strategies:
 
    *  Use explicit typing for different kinds of JWTs.  Then the
       distinct "typ" values can be used to differentiate between the
@@ -617,18 +623,20 @@ Table of Contents
    the number of hash iterations that can be performed when validating
    encrypted content using PBES2 encryption algorithms, so as to prevent
    attackers from imposing an unreasonable computational burden on
-   recipients.  [OWASP-Password-Storage] states that an iteration count
-   of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140
-   compliance.  Thus, rejecting inputs with a p2c (PBES2 Count) value
-   over 1,200,000 (double that) is RECOMMENDED.
+   recipients.  [OWASP-Password-Storage] states a specific iteration
+   count (600,000 at time of publishing) is required when using HMAC-
+   SHA-256 to achieve FIPS-140 compliance.  Rejecting inputs with a p2c
+   (PBES2 Count) value larger than double the recommended OWASP value is
+   RECOMMENDED.
 
 3.14.  Check JWT Format Type
 
    Implementations MUST confirm the JWT is in a legal format while
-   parsing it.  Legal JWTs contain only the ASCII characters for
-   letters, numbers, dash, underscore, and period.  Content with any
-   other characters - especially braces and quotation marks - is not a
-   JWT and MUST be rejected.
+   parsing it.  Legal JWTs, being dot-concatenated base64url strings,
+   contain only the ASCII characters for letters, numbers, dash,
+   underscore, and period.  Content with any other characters -
+   especially braces and quotation marks - is not a JWT and MUST be
+   rejected.
 
 3.15.  Limit JWE Decompression Size
 
@@ -738,6 +746,10 @@ Table of Contents
               Database, February 2024,
               <https://nvd.nist.gov/vuln/detail/CVE-2023-51774>.
 
+   [JWT-Cracker]
+              Rius, B., "JWT Cracker", n.d.,
+              <https://github.com/brendan-rius/c-jwt-cracker>.
+
    [Kelsey]   Kelsey, J., "Compression and Information Leakage of
               Plaintext", Springer Berlin Heidelberg, Lecture Notes in
               Computer Science pp. 263-276,
@@ -788,10 +800,9 @@ Table of Contents
               DOI 10.17487/RFC8417, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8417>.
 
-   [Sanso]    Sanso, A., "Critical Vulnerability Uncovered in JSON
-              Encryption", March 2017,
-              <https://blogs.adobe.com/security/2017/03/critical-
-              vulnerability-uncovered-in-json-encryption.html>.
+   [Sanso]    Sanso, A., "Critical Vulnerability in JSON Web
+              Encryption", March 2017, <https://auth0.com/blog/critical-
+              vulnerability-in-json-web-encryption/>.
 
    [Valenta]  Valenta, L., Sullivan, N., Sanso, A., and N. Heninger, "In
               search of CurveSwap: Measuring elliptic curve
