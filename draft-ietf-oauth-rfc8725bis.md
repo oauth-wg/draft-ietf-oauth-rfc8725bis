@@ -54,7 +54,7 @@ venue:
   type: "Working Group"
   mail: "oauth@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/oauth/"
-  github: "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis"
+  github: "oauth-wg/draft-ietf-oauth-rfc8725bis"
 
 
 normative:
