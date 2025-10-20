@@ -799,6 +799,11 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 [[Note to RFC Editor: please remove before publication.]]
 
+## draft-ietf-oauth-rfc8725bis-01
+
+* Applied editorial suggestions by Dan Moore.
+* Described changes relative to RFC 8725
+
 ## draft-ietf-oauth-rfc8725bis-00
 
 * Draft adopted, no textual changes
