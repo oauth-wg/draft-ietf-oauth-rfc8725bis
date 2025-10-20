@@ -774,8 +774,10 @@ RSA/HMAC confusion attack  {{McLean}}.
 Thanks to  Nat Sakimura for advocating the use of
 explicit typing. Thanks to  Neil Madden for his
 numerous comments, and to Carsten Bormann, Brian Campbell, Brian Carpenter, Alissa Cooper, Roman Danyliw, Ben Kaduk,
-Mirja Kühlewind, Barry Leiba, Eric Rescorla, Adam Roach, Martin Vigoureux,
-and  Éric Vyncke
+Mirja Kühlewind, Barry Leiba,
+Dan Moore,
+Eric Rescorla, Adam Roach, Martin Vigoureux,
+and Éric Vyncke
 for their reviews.
 
 
