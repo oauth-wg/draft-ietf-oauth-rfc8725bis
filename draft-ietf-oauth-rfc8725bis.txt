@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 23 April 2026                            Self-Issued Consulting
-                                                         20 October 2025
+Expires: 24 April 2026                            Self-Issued Consulting
+                                                         21 October 2025
 
 
                  JSON Web Token Best Current Practices
@@ -43,8 +43,7 @@ About This Document
    Subscribe at https://www.ietf.org/mailman/listinfo/oauth/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/https://github.com/oauth-wg/draft-ietf-oauth-
-   rfc8725bis.
+   https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis.
 
 Status of This Memo
 
@@ -61,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2026.
+   This Internet-Draft will expire on 24 April 2026.
 
 Copyright Notice
 
