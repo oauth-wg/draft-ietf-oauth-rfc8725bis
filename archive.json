@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-21T00:07:48.111110+00:00",
+  "timestamp": "2025-10-23T00:07:42.816985+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -1847,24 +1847,26 @@
       "id": "PR_kwDONgvdIs6uuIvW",
       "title": "Fix GitHub link format in draft document",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/26",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-10-20T22:07:38Z",
-      "updatedAt": "2025-10-20T22:31:19Z",
+      "updatedAt": "2025-10-21T07:17:19Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "9619fc348fdb468b7c628069a3347fffecd01930",
       "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "headRefName": "yaronf-patch-1",
       "headRefOid": "ac286003d3f0fc6f5ac87a36b8a9c01115f25901",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-10-21T07:17:18Z",
+      "mergedAt": "2025-10-21T07:17:18Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "64ebc8251f951c87a168ddd6c14da09196d903eb"
+      },
       "comments": [],
       "reviews": [
         {
