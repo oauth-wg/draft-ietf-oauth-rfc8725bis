@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-23T00:07:42.816985+00:00",
+  "timestamp": "2025-11-06T00:08:13.710840+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -266,7 +266,7 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-05-21T22:52:15Z",
+      "updatedAt": "2025-11-05T16:18:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -310,6 +310,20 @@
           "body": "To address this issue, we need to identify the attacks we will describe in the text and how we're mitigating them.  @hannestschofenig?\n\nUnless we identify attacks and mitigations, we should close this issue with no action.",
           "createdAt": "2025-05-21T22:52:14Z",
           "updatedAt": "2025-05-21T22:52:14Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "NONE",
+          "body": "Since you do not believe me, maybe you believe Sophie: https://mailarchive.ietf.org/arch/msg/cose/Vj2Wy9hM_Sc0osegJjEvp6N-kvg/",
+          "createdAt": "2025-11-05T15:04:07Z",
+          "updatedAt": "2025-11-05T15:04:07Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "NONE",
+          "body": "There are two types of attacks:\n\n1. Downgrading attacks like the LAMPS attack where an attacker modifies a AEAD cipher and downgrades it to some other cipher like a non-AEAD cipher.\n\n2. Attacker causes the victim to incorrectly apply the key to an algorithm that was not intended by the victim.\n\nAs a general guideline: See Section 5.2 of  NIST SP 800-57 Part 1 Rev. 5: \"In general, a single key shall be used for only one purpose...\"",
+          "createdAt": "2025-11-05T16:18:33Z",
+          "updatedAt": "2025-11-05T16:18:33Z"
         }
       ]
     },
