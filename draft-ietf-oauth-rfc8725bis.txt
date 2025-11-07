@@ -115,6 +115,8 @@ Table of Contents
    4.  Security Considerations
    5.  IANA Considerations
    6.  Acknowledgements
+     6.1.  Acknowledgements for RFC 8725
+     6.2.  Acknowledgements for [[ this specification ]]
    7.  References
      7.1.  Normative References
      7.2.  Informative References
@@ -670,6 +672,11 @@ Table of Contents
 
 6.  Acknowledgements
 
+6.1.  Acknowledgements for RFC 8725
+
+   The following acknowledgements from [RFC8725], the text of which is
+   incorporated into this specification, are retained.
+
    Thanks to Antonio Sanso for bringing the "ECDH-ES" invalid point
    attack to the attention of JWE and JWT implementers.  Tim McLean
    published the RSA/HMAC confusion attack [McLean].  Thanks to Nat
@@ -678,6 +685,12 @@ Table of Contents
    Campbell, Brian Carpenter, Alissa Cooper, Roman Danyliw, Ben Kaduk,
    Mirja Kühlewind, Barry Leiba, Dan Moore, Eric Rescorla, Adam Roach,
    Martin Vigoureux, and Éric Vyncke for their reviews.
+
+6.2.  Acknowledgements for [[ this specification ]]
+
+   We would like to thank Brian Campbell, Jianjun Chen, Dan Moore, Aaron
+   Parecki, Filip Skokan, Tom Tervoort, Enze Wang, and Jesse Yang for
+   their contributions to the new content in this specification.
 
 7.  References
 
@@ -822,6 +835,11 @@ Table of Contents
               DOI 10.17487/RFC8417, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8417>.
 
+   [RFC8725]  Sheffer, Y., Hardt, D., and M. Jones, "JSON Web Token Best
+              Current Practices", BCP 225, RFC 8725,
+              DOI 10.17487/RFC8725, February 2020,
+              <https://www.rfc-editor.org/rfc/rfc8725>.
+
    [RFC9068]  Bertocci, V., "JSON Web Token (JWT) Profile for OAuth 2.0
               Access Tokens", RFC 9068, DOI 10.17487/RFC9068, October
               2021, <https://www.rfc-editor.org/rfc/rfc9068>.
@@ -870,6 +888,9 @@ Appendix B.  Document History
 B.1.  draft-ietf-oauth-rfc8725bis-02
 
    *  Incorporated Aaron Parecki's review suggestions.
+
+   *  Acknowledged contributors to the new content in this
+      specification.
 
 B.2.  draft-ietf-oauth-rfc8725bis-01
 
