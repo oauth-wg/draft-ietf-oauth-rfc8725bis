@@ -654,8 +654,9 @@ that resolves to "127.0.0.1" or other local IP address values.
 
 ## Use Explicit Typing {#use-typ}
 
-
- Sometimes, one kind of JWT can be confused for another. If a particular
+When two different uses of JWTs share a common set of claims,
+one kind of JWT can be confused for another.
+If a particular
 kind of JWT is subject to such confusion, that JWT can include an explicit
 JWT type value, and the validation rules can specify checking the type.
 This mechanism can prevent such confusion.
