@@ -650,7 +650,7 @@ could result in server-side request forgery (SSRF) attacks. Applications SHOULD 
 attacks, e.g., by matching the URL to an allowlist of permitted locations
 and ensuring no cookies are sent in the GET request.
 
-Likewise, the authorization server SHOULD check what a hostname resolves to
+When such an allowlist is not available, the authorization server SHOULD check what a hostname resolves to
 and avoid making a request if it resolves to a loopback or local IP address.
 An example of this is when "attacker.example.com/etc/passwd" is used
 as the "jwks_uri" value and there is a DNS entry for "attacker.example.com"
