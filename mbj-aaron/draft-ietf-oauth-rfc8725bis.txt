@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 25 March 2026                            Self-Issued Consulting
-                                                       21 September 2025
+Expires: 11 May 2026                              Self-Issued Consulting
+                                                         7 November 2025
 
 
                  JSON Web Token Best Current Practices
@@ -30,6 +30,21 @@ Abstract
    covering threats and attacks that have been discovered since RFC 8725
    was published.
 
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-oauth-rfc8725bis/.
+
+   Discussion of this document takes place on the Web Authorization
+   Protocol Working Group mailing list (mailto:oauth@ietf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/oauth/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/oauth/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis.
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
@@ -45,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 March 2026.
+   This Internet-Draft will expire on 11 May 2026.
 
 Copyright Notice
 
@@ -103,11 +118,14 @@ Table of Contents
    7.  References
      7.1.  Normative References
      7.2.  Informative References
-   Appendix A.  Document History
-     A.1.  draft-ietf-oauth-rfc8725bis-00
-     A.2.  draft-sheffer-oauth-rfc8725bis-02
-     A.3.  draft-sheffer-oauth-rfc8725bis-01
-     A.4.  draft-sheffer-oauth-rfc8725bis-00
+   Appendix A.  Changes from RFC 8725
+   Appendix B.  Document History
+     B.1.  draft-ietf-oauth-rfc8725bis-02
+     B.2.  draft-ietf-oauth-rfc8725bis-01
+     B.3.  draft-ietf-oauth-rfc8725bis-00
+     B.4.  draft-sheffer-oauth-rfc8725bis-02
+     B.5.  draft-sheffer-oauth-rfc8725bis-01
+     B.6.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -118,9 +136,10 @@ Table of Contents
    because it encapsulates security-relevant information in one easy-to-
    protect location, and because it is easy to implement using widely
    available tools.  One application area in which JWTs are commonly
-   used is representing digital identity information, such as OpenID
-   Connect ID Tokens [OpenID.Core] and OAuth 2.0 [RFC6749] access tokens
-   and refresh tokens, the details of which are deployment-specific.
+   used is representing authorization information, such as OAuth 2.0
+   access tokens [RFC9068], and identity information, such as OpenID
+   Connect ID Tokens [OpenID.Core].  The details of these uses are
+   application- and deployment-specific.
 
    Since the JWT specification was published, there have been several
    widely published attacks on implementations and deployments.  Such
@@ -205,7 +224,7 @@ Table of Contents
    weak symmetric key with insufficient entropy (such as a human-
    memorable password).  Such keys are vulnerable to offline brute-force
    or dictionary attacks once an attacker gets hold of such a token
-   [Langkemper].
+   [Langkemper][JWT-Cracker].
 
    For mitigations, see Section 3.5.
 
@@ -422,9 +441,9 @@ Table of Contents
    All cryptographic operations used in the JWT MUST be validated and
    the entire JWT MUST be rejected if any of them fail to validate.
    This is true not only of JWTs with a single set of Header Parameters
-   but also for Nested JWTs in which both outer and inner operations
-   MUST be validated using the keys and algorithms supplied by the
-   application.
+   but also for Nested JWTs, as defined in Section 2 of [RFC7519], in
+   which both outer and inner operations MUST be validated using the
+   keys and algorithms supplied by the application.
 
    Libraries MUST allow the verifier to distinguish between signed JWTs
    (JWSes) and encrypted JWTs (JWEs).  This allows verifiers to easily
@@ -481,30 +500,33 @@ Table of Contents
    application MUST reject the JWT.
 
    The means of determining the keys owned by an issuer is application-
-   specific.  As one example, OpenID Connect [OpenID.Core] issuer values
-   are "https" URLs that reference a JSON metadata document that
-   contains a "jwks_uri" value that is an "https" URL from which the
-   issuer's keys are retrieved as a JWK Set [RFC7517].  This same
-   mechanism is used by [RFC8414].  Other applications may use different
-   means of binding keys to issuers.
+   specific.  As one example, OAuth 2.0 authorization server issuer
+   values [RFC8414] are "https" URLs that reference a JSON metadata
+   document that contains a "jwks_uri" value that is an "https" URL from
+   which the issuer's keys are retrieved as a JWK Set [RFC7517].  This
+   same mechanism is used by OpenID Connect [OpenID.Core].  Other
+   applications may use different means of binding keys to issuers.
 
    Similarly, when the JWT contains a "sub" (subject) claim, the
    application MUST validate that the subject value corresponds to a
    valid subject and/or issuer-subject pair at the application.  This
    may include confirming that the issuer is trusted by the application.
-   If the issuer, subject, or the pair are invalid, the application MUST
-   reject the JWT.
+   Note that Section 4.15 of [RFC9700] discusses the possibility of
+   confusing user identifier and client ID values.  If the issuer,
+   subject, or the pair are invalid, the application MUST reject the
+   JWT.
 
 3.9.  Use and Validate Audience
 
    If the same issuer can issue JWTs that are intended for use by more
-   than one relying party or application, the JWT MUST contain an "aud"
-   (audience) claim that can be used to determine whether the JWT is
-   being used by an intended party or was substituted by an attacker.
+   than one relying party or application, or may do so in the future,
+   the JWT MUST contain an "aud" (audience) claim that can be used to
+   determine whether the JWT is being used by an intended party or was
+   substituted by an attacker.
 
    In such cases, the relying party or application MUST validate the
-   audience value, and if the audience value is not present or not
-   associated with the recipient, it MUST reject the JWT.
+   audience value, and if no audience value is present or none of the
+   values are associated with the recipient, it MUST reject the JWT.
 
 3.10.  Do Not Trust Received Claims
 
@@ -516,9 +538,16 @@ Table of Contents
    Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509
    URL) header, which may contain an arbitrary URL, could result in
    server-side request forgery (SSRF) attacks.  Applications SHOULD
-   protect against such attacks, e.g., by matching the URL to a
-   whitelist of allowed locations and ensuring no cookies are sent in
+   protect against such attacks, e.g., by matching the URL to an
+   allowlist of permitted locations and ensuring no cookies are sent in
    the GET request.
+
+   Likewise, the authorization server SHOULD check what a hostname
+   resolves to and avoid making a request if it resolves to a loopback
+   or local IP address.  An example of this is when
+   "attacker.example.com/etc/passwd" is used as the "jwks_uri" value and
+   there is a DNS entry for "attacker.example.com" that resolves to
+   "127.0.0.1" or other local IP address values.
 
 3.11.  Use Explicit Typing
 
@@ -531,13 +560,26 @@ Table of Contents
    "application/secevent+jwt" media type to perform explicit typing of
    Security Event Tokens (SETs).
 
+   An example of an ad-hoc means of preventing confusion between
+   different kinds of JWTs is the requirement in Logout Tokens
+   [OpenID.Backchannel] prohibiting the inclusion of a "nonce" claim so
+   that Logout Tokens will fail the validation rules for ID Tokens
+   [OpenID.Core].  The use of explicit typing avoids the need for
+   employing such ad-hoc mechanisms when the validation rules for both
+   kind of JWTs include validating the "typ" values and the acceptable
+   "typ" values for the two kinds of JWTs are distinct.
+
    Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is
    RECOMMENDED that the "application/" prefix be omitted from the "typ"
-   value.  Therefore, for example, the "typ" value used to explicitly
-   include a type for a SET SHOULD be "secevent+jwt".  When explicit
-   typing is employed for a JWT, it is RECOMMENDED that a media type
-   name of the format "application/example+jwt" be used, where "example"
-   is replaced by the identifier for the specific kind of JWT.
+   Header Parameter value, compared to the associated media type.
+   Therefore, for example, the "typ" value used to explicitly include a
+   type for a SET SHOULD be "secevent+jwt".
+
+   When explicit typing is employed for a JWT, it is RECOMMENDED that a
+   media type name of the format "application/example+jwt" be used,
+   where "example" is replaced by the identifier for the specific kind
+   of JWT.  Therefore, for example, the media type name for a SET SHOULD
+   be "application/secevent+jwt".
 
    When applying explicit typing to a Nested JWT, the "typ" Header
    Parameter containing the explicit type value MUST be present in the
@@ -558,9 +600,10 @@ Table of Contents
    and optional JWT claims and the validation rules associated with
    them.  If more than one kind of JWT can be issued by the same issuer,
    the validation rules for those JWTs MUST be written such that they
-   are mutually exclusive, rejecting JWTs of the wrong kind.  To prevent
-   substitution of JWTs from one context into another, application
-   developers may employ a number of strategies:
+   are mutually exclusive, rejecting JWTs of the wrong kind.
+
+   To prevent substitution of JWTs from one context into another,
+   application developers may employ a number of strategies:
 
    *  Use explicit typing for different kinds of JWTs.  Then the
       distinct "typ" values can be used to differentiate between the
@@ -600,18 +643,20 @@ Table of Contents
    the number of hash iterations that can be performed when validating
    encrypted content using PBES2 encryption algorithms, so as to prevent
    attackers from imposing an unreasonable computational burden on
-   recipients.  [OWASP-Password-Storage] states that an iteration count
-   of 600,000 is required when using HMAC-SHA-256 to achieve FIPS-140
-   compliance.  Thus, rejecting inputs with a p2c (PBES2 Count) value
-   over 1,200,000 (double that) is RECOMMENDED.
+   recipients.  [OWASP-Password-Storage] states a specific iteration
+   count (600,000 at time of publishing) is required when using HMAC-
+   SHA-256 to achieve FIPS-140 compliance.  Rejecting inputs with a p2c
+   (PBES2 Count) value larger than double the recommended OWASP value is
+   RECOMMENDED.
 
 3.14.  Check JWT Format Type
 
    Implementations MUST confirm the JWT is in a legal format while
-   parsing it.  Legal JWTs contain only the ASCII characters for
-   letters, numbers, dash, underscore, and period.  Content with any
-   other characters - especially braces and quotation marks - is not a
-   JWT and MUST be rejected.
+   parsing it.  Legal JWTs, being dot-concatenated base64url strings,
+   contain only the ASCII characters for letters, numbers, dash,
+   underscore, and period.  Content with any other characters -
+   especially braces and quotation marks - is not a JWT and MUST be
+   rejected.
 
 3.15.  Limit JWE Decompression Size
 
@@ -635,8 +680,8 @@ Table of Contents
    Sakimura for advocating the use of explicit typing.  Thanks to Neil
    Madden for his numerous comments, and to Carsten Bormann, Brian
    Campbell, Brian Carpenter, Alissa Cooper, Roman Danyliw, Ben Kaduk,
-   Mirja Kühlewind, Barry Leiba, Eric Rescorla, Adam Roach, Martin
-   Vigoureux, and Éric Vyncke for their reviews.
+   Mirja Kühlewind, Barry Leiba, Dan Moore, Eric Rescorla, Adam Roach,
+   Martin Vigoureux, and Éric Vyncke for their reviews.
 
 7.  References
 
@@ -721,6 +766,10 @@ Table of Contents
               Database, February 2024,
               <https://nvd.nist.gov/vuln/detail/CVE-2023-51774>.
 
+   [JWT-Cracker]
+              Rius, B., "JWT Cracker", n.d.,
+              <https://github.com/brendan-rius/c-jwt-cracker>.
+
    [Kelsey]   Kelsey, J., "Compression and Information Leakage of
               Plaintext", Springer Berlin Heidelberg, Lecture Notes in
               Computer Science pp. 263-276,
@@ -736,6 +785,12 @@ Table of Contents
    [McLean]   McLean, T., "Critical vulnerabilities in JSON Web Token
               libraries", March 2015, <https://auth0.com/blog/critical-
               vulnerabilities-in-json-web-token-libraries/>.
+
+   [OpenID.Backchannel]
+              Jones, M. and J. Bradley, "OpenID Connect Back-Channel
+              Logout 1.0 incorporating errata set 1", December 2023,
+              <https://openid.net/specs/openid-connect-backchannel-
+              1_0.html>.
 
    [OpenID.Core]
               Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
@@ -771,29 +826,70 @@ Table of Contents
               DOI 10.17487/RFC8417, July 2018,
               <https://www.rfc-editor.org/rfc/rfc8417>.
 
-   [Sanso]    Sanso, A., "Critical Vulnerability Uncovered in JSON
-              Encryption", March 2017,
-              <https://blogs.adobe.com/security/2017/03/critical-
-              vulnerability-uncovered-in-json-encryption.html>.
+   [RFC9068]  Bertocci, V., "JSON Web Token (JWT) Profile for OAuth 2.0
+              Access Tokens", RFC 9068, DOI 10.17487/RFC9068, October
+              2021, <https://www.rfc-editor.org/rfc/rfc9068>.
+
+   [RFC9700]  Lodderstedt, T., Bradley, J., Labunets, A., and D. Fett,
+              "Best Current Practice for OAuth 2.0 Security", BCP 240,
+              RFC 9700, DOI 10.17487/RFC9700, January 2025,
+              <https://www.rfc-editor.org/rfc/rfc9700>.
+
+   [Sanso]    Sanso, A., "Critical Vulnerability in JSON Web
+              Encryption", March 2017, <https://auth0.com/blog/critical-
+              vulnerability-in-json-web-encryption/>.
 
    [Valenta]  Valenta, L., Sullivan, N., Sanso, A., and N. Heninger, "In
               search of CurveSwap: Measuring elliptic curve
               implementations in the wild", March 2018,
               <https://ia.cr/2018/298>.
 
-Appendix A.  Document History
+Appendix A.  Changes from RFC 8725
+
+   This document obsoletes RFC 8725 and provides several significant
+   improvements and additions:
+
+   1.  Algorithm Verification: Added defensive checking to address
+       incorrect reading of alg values as being case-insensitive
+       (Section 3.1).
+
+   2.  Encryption-Signature Confusion: Added mitigation for attacks
+       where verifiers don't distinguish between successful decryption
+       and successful signature validation (Section 3.12).
+
+   3.  PBES2 Count Limits: Added requirements to reject unreasonably
+       large p2c (PBES2 Count) values to prevent DoS attacks
+       (Section 3.13).
+
+   4.  JWT Format Confusion: Added mitigation for JWT serialization
+       format confusion attacks (Section 3.14).
+
+   5.  Compression DoS: Added mitigation for DoS attacks resulting from
+       abuse of compression in JWE (Section 3.15).
+
+Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-A.1.  draft-ietf-oauth-rfc8725bis-00
+B.1.  draft-ietf-oauth-rfc8725bis-02
+
+   *  Incorporated Aaron Parecki's review suggestions.
+
+B.2.  draft-ietf-oauth-rfc8725bis-01
+
+   *  Applied editorial suggestions by Dan Moore.
+
+   *  Described changes relative to RFC 8725.
+
+B.3.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-A.2.  draft-sheffer-oauth-rfc8725bis-02
+B.4.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-A.3.  draft-sheffer-oauth-rfc8725bis-01
+B.5.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -806,7 +902,7 @@ A.3.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-A.4.  draft-sheffer-oauth-rfc8725bis-00
+B.6.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
