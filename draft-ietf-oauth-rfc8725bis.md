@@ -139,6 +139,7 @@ informative:
   RFC7517:
   RFC8414:
   RFC8417:
+  RFC8725:
   RFC9068:
   RFC9700:
   Sanso:
@@ -789,6 +790,11 @@ Implementations are RECOMMENDED to set a reasonable upper limit on the decompres
 
 # Acknowledgements {#acknowledgements}
 
+## Acknowledgements for RFC 8725
+
+The following acknowledgements from {{RFC8725}},
+the text of which is incorporated into this specification, are retained.
+
  Thanks to  Antonio Sanso for bringing the
  "ECDH-ES" invalid point attack to the attention
 of JWE and JWT implementers.  Tim McLean published the
@@ -802,6 +808,19 @@ Eric Rescorla, Adam Roach, Martin Vigoureux,
 and Éric Vyncke
 for their reviews.
 
+## Acknowledgements for [[ this specification ]]
+
+We would like to thank
+Brian Campbell,
+Jianjun Chen,
+Dan Moore,
+Aaron Parecki,
+Filip Skokan,
+Tom Tervoort,
+Enze Wang,
+and
+Jesse Yang
+for their contributions to the new content in this specification.
 
 --- back
 
@@ -826,6 +845,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 ## draft-ietf-oauth-rfc8725bis-02
 
 * Incorporated Aaron Parecki's review suggestions.
+* Acknowledged contributors to the new content in this specification.
 
 ## draft-ietf-oauth-rfc8725bis-01
 
