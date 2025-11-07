@@ -674,7 +674,7 @@ between different kinds of JWTs is the requirement in
 Logout Tokens {{OpenID.Backchannel}} prohibiting the inclusion of a "nonce" claim
 so that Logout Tokens will fail the validation rules for ID Tokens {{OpenID.Core}}.
 The use of explicit typing avoids the need for employing such ad-hoc mechanisms
-when the validation rules for both kind of JWTs include validating the "typ" values
+when the validation rules for both kinds of JWTs include validating the "typ" values
 and the acceptable "typ" values for the two kinds of JWTs are distinct.
 
 Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the "application/" prefix
