@@ -547,14 +547,14 @@ Table of Contents
 
 3.11.  Use Explicit Typing
 
-   Sometimes, one kind of JWT can be confused for another.  If a
-   particular kind of JWT is subject to such confusion, that JWT can
-   include an explicit JWT type value, and the validation rules can
-   specify checking the type.  This mechanism can prevent such
-   confusion.  Explicit JWT typing is accomplished by using the "typ"
-   Header Parameter.  For instance, the [RFC8417] specification uses the
-   "application/secevent+jwt" media type to perform explicit typing of
-   Security Event Tokens (SETs).
+   When two different uses of JWTs share a common set of claims, one
+   kind of JWT can be confused for another.  If a particular kind of JWT
+   is subject to such confusion, that JWT can include an explicit JWT
+   type value, and the validation rules can specify checking the type.
+   This mechanism can prevent such confusion.  Explicit JWT typing is
+   accomplished by using the "typ" Header Parameter.  For instance, the
+   [RFC8417] specification uses the "application/secevent+jwt" media
+   type to perform explicit typing of Security Event Tokens (SETs).
 
    An example of an ad-hoc means of preventing confusion between
    different kinds of JWTs is the requirement in Logout Tokens

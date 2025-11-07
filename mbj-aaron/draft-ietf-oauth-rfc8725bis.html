@@ -1832,7 +1832,9 @@ that resolves to "127.0.0.1" or other local IP address values.<a href="#section-
         <h3 id="name-use-explicit-typing">
 <a href="#section-3.11" class="section-number selfRef">3.11. </a><a href="#name-use-explicit-typing" class="section-name selfRef">Use Explicit Typing</a>
         </h3>
-<p id="section-3.11-1">Sometimes, one kind of JWT can be confused for another. If a particular
+<p id="section-3.11-1">When two different uses of JWTs share a common set of claims,
+one kind of JWT can be confused for another.
+If a particular
 kind of JWT is subject to such confusion, that JWT can include an explicit
 JWT type value, and the validation rules can specify checking the type.
 This mechanism can prevent such confusion.
