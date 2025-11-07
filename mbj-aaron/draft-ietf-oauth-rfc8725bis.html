@@ -1781,7 +1781,7 @@ other Unicode encodings for these purposes.<a href="#section-3.7-1" class="pilcr
 used for the cryptographic operations in the JWT belong to the issuer.
 If they do not, the application  <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 <p id="section-3.8-2">The means of determining the keys owned by an issuer is application-specific.
-As one example, OAuth 2.0 authorization server issuer values <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
+As one example, OAuth 2.0 authorization server "issuer" values <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
 are "https" URLs
 that reference a JSON metadata document that contains a "jwks_uri" value that is
 an "https" URL from which the issuer's keys are retrieved as a JWK Set  <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>.
