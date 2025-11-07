@@ -616,7 +616,7 @@ Other applications may use different means of binding keys to issuers.
  application  MUST validate that
 the subject value corresponds to a valid subject and/or issuer-subject pair at the application.
 This may include confirming that the issuer is trusted by the application.
-Note that {{Section 4.15 of RFC9700}} discusses the possibility of
+In the OAuth context, {{Section 4.15 of RFC9700}} discusses the possibility of
 confusing user identifier and client ID values.
 If the issuer, subject, or the pair are invalid, the application
   MUST reject the JWT.
