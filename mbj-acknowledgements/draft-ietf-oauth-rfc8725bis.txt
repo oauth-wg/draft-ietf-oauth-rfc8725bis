@@ -138,9 +138,10 @@ Table of Contents
    because it encapsulates security-relevant information in one easy-to-
    protect location, and because it is easy to implement using widely
    available tools.  One application area in which JWTs are commonly
-   used is representing digital identity information, such as OpenID
-   Connect ID Tokens [OpenID.Core] and OAuth 2.0 [RFC6749] access tokens
-   and refresh tokens, the details of which are deployment-specific.
+   used is representing authorization information, such as OAuth 2.0
+   access tokens [RFC9068], and identity information, such as OpenID
+   Connect ID Tokens [OpenID.Core].  The details of these uses are
+   application- and deployment-specific.
 
    Since the JWT specification was published, there have been several
    widely published attacks on implementations and deployments.  Such
@@ -407,19 +408,15 @@ Table of Contents
    cryptographic weaknesses.  Applications MUST therefore be designed to
    enable cryptographic agility.
 
-   That said, if a JWT is cryptographically protected end-to-end by a
-   transport layer, such as TLS using cryptographically current
-   algorithms, there may be no need to apply another layer of
-   cryptographic protections to the JWT.  In such cases, the use of the
-   "none" algorithm can be perfectly acceptable.  The "none" algorithm
-   should only be used when the JWT is cryptographically protected by
-   other means.  JWTs using "none" are often used in application
-   contexts in which the content is optionally signed.  The URL-safe
-   claims representation and processing in this context can be the same
-   in both the signed and unsigned cases.  JWT libraries SHOULD NOT
-   generate JWTs using "none" unless explicitly requested to do so by
-   the caller.  Similarly, JWT libraries SHOULD NOT consume JWTs using
-   "none" unless explicitly requested by the caller.
+   The "none" algorithm should only be used when the JWT is
+   cryptographically protected by other means.  JWTs using "none" are
+   often used in application contexts in which the content is optionally
+   signed.  The URL-safe claims representation and processing in this
+   context can be the same in both the signed and unsigned cases.  JWT
+   libraries SHOULD NOT generate JWTs using "none" unless explicitly
+   requested to do so by the caller.  Similarly, JWT libraries SHOULD
+   NOT consume JWTs using "none" unless explicitly requested by the
+   caller.
 
    Applications SHOULD follow these algorithm-specific recommendations:
 
@@ -442,9 +439,9 @@ Table of Contents
    All cryptographic operations used in the JWT MUST be validated and
    the entire JWT MUST be rejected if any of them fail to validate.
    This is true not only of JWTs with a single set of Header Parameters
-   but also for Nested JWTs in which both outer and inner operations
-   MUST be validated using the keys and algorithms supplied by the
-   application.
+   but also for Nested JWTs, as defined in Section 2 of [RFC7519], in
+   which both outer and inner operations MUST be validated using the
+   keys and algorithms supplied by the application.
 
    Libraries MUST allow the verifier to distinguish between signed JWTs
    (JWSes) and encrypted JWTs (JWEs).  This allows verifiers to easily
@@ -501,18 +498,20 @@ Table of Contents
    application MUST reject the JWT.
 
    The means of determining the keys owned by an issuer is application-
-   specific.  As one example, OpenID Connect [OpenID.Core] issuer values
-   are "https" URLs that reference a JSON metadata document that
-   contains a "jwks_uri" value that is an "https" URL from which the
-   issuer's keys are retrieved as a JWK Set [RFC7517].  This same
-   mechanism is used by [RFC8414].  Other applications may use different
-   means of binding keys to issuers.
+   specific.  As one example, OAuth 2.0 authorization server "issuer"
+   values [RFC8414] are "https" URLs that reference a JSON metadata
+   document that contains a "jwks_uri" value that is an "https" URL from
+   which the issuer's keys are retrieved as a JWK Set [RFC7517].  This
+   same mechanism is used by OpenID Connect [OpenID.Core].  Other
+   applications may use different means of binding keys to issuers.
 
    Similarly, when the JWT contains a "sub" (subject) claim, the
    application MUST validate that the subject value corresponds to a
    valid subject and/or issuer-subject pair at the application.  This
    may include confirming that the issuer is trusted by the application.
-   If the issuer, subject, or the pair are invalid, the application MUST
+   In the OAuth context, Section 4.15 of [RFC9700] discusses the
+   possibility of confusing user identifier and client ID values.  If
+   the issuer, subject, or the pair are invalid, the application MUST
    reject the JWT.
 
 3.9.  Use and Validate Audience
@@ -537,20 +536,36 @@ Table of Contents
    Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509
    URL) header, which may contain an arbitrary URL, could result in
    server-side request forgery (SSRF) attacks.  Applications SHOULD
-   protect against such attacks, e.g., by matching the URL to a
-   whitelist of allowed locations and ensuring no cookies are sent in
+   protect against such attacks, e.g., by matching the URL to an
+   allowlist of permitted locations and ensuring no cookies are sent in
    the GET request.
+
+   When such an allowlist is not available, the authorization server
+   SHOULD check what a hostname resolves to and avoid making a request
+   if it resolves to a loopback or local IP address.  An example of this
+   is when "attacker.example.com/etc/passwd" is used as the "jwks_uri"
+   value and there is a DNS entry for "attacker.example.com" that
+   resolves to "127.0.0.1" or other local IP address values.
 
 3.11.  Use Explicit Typing
 
-   Sometimes, one kind of JWT can be confused for another.  If a
-   particular kind of JWT is subject to such confusion, that JWT can
-   include an explicit JWT type value, and the validation rules can
-   specify checking the type.  This mechanism can prevent such
-   confusion.  Explicit JWT typing is accomplished by using the "typ"
-   Header Parameter.  For instance, the [RFC8417] specification uses the
-   "application/secevent+jwt" media type to perform explicit typing of
-   Security Event Tokens (SETs).
+   When two different uses of JWTs share a common set of claims, one
+   kind of JWT can be confused for another.  If a particular kind of JWT
+   is subject to such confusion, that JWT can include an explicit JWT
+   type value, and the validation rules can specify checking the type.
+   This mechanism can prevent such confusion.  Explicit JWT typing is
+   accomplished by using the "typ" Header Parameter.  For instance, the
+   [RFC8417] specification uses the "application/secevent+jwt" media
+   type to perform explicit typing of Security Event Tokens (SETs).
+
+   An example of an ad-hoc means of preventing confusion between
+   different kinds of JWTs is the requirement in Logout Tokens
+   [OpenID.Backchannel] prohibiting the inclusion of a "nonce" claim so
+   that Logout Tokens will fail the validation rules for ID Tokens
+   [OpenID.Core].  The use of explicit typing avoids the need for
+   employing such ad-hoc mechanisms when the validation rules for both
+   kinds of JWTs include validating the "typ" values and the acceptable
+   "typ" values for the two kinds of JWTs are distinct.
 
    Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is
    RECOMMENDED that the "application/" prefix be omitted from the "typ"
@@ -780,6 +795,12 @@ Table of Contents
               libraries", March 2015, <https://auth0.com/blog/critical-
               vulnerabilities-in-json-web-token-libraries/>.
 
+   [OpenID.Backchannel]
+              Jones, M. and J. Bradley, "OpenID Connect Back-Channel
+              Logout 1.0 incorporating errata set 1", December 2023,
+              <https://openid.net/specs/openid-connect-backchannel-
+              1_0.html>.
+
    [OpenID.Core]
               Sakimura, N., Bradley, J., Jones, M., de Medeiros, B., and
               C. Mortimore, "OpenID Connect Core 1.0 incorporating
@@ -819,6 +840,15 @@ Table of Contents
               DOI 10.17487/RFC8725, February 2020,
               <https://www.rfc-editor.org/rfc/rfc8725>.
 
+   [RFC9068]  Bertocci, V., "JSON Web Token (JWT) Profile for OAuth 2.0
+              Access Tokens", RFC 9068, DOI 10.17487/RFC9068, October
+              2021, <https://www.rfc-editor.org/rfc/rfc9068>.
+
+   [RFC9700]  Lodderstedt, T., Bradley, J., Labunets, A., and D. Fett,
+              "Best Current Practice for OAuth 2.0 Security", BCP 240,
+              RFC 9700, DOI 10.17487/RFC9700, January 2025,
+              <https://www.rfc-editor.org/rfc/rfc9700>.
+
    [Sanso]    Sanso, A., "Critical Vulnerability in JSON Web
               Encryption", March 2017, <https://auth0.com/blog/critical-
               vulnerability-in-json-web-encryption/>.
@@ -856,6 +886,8 @@ Appendix B.  Document History
    [[Note to RFC Editor: please remove before publication.]]
 
 B.1.  draft-ietf-oauth-rfc8725bis-02
+
+   *  Incorporated Aaron Parecki's review suggestions.
 
    *  Acknowledged contributors to the new content in this
       specification.
