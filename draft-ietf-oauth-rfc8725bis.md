@@ -605,7 +605,7 @@ used for the cryptographic operations in the JWT belong to the issuer.
 If they do not, the application  MUST reject the JWT.
 
  The means of determining the keys owned by an issuer is application-specific.
-As one example, OAuth 2.0 authorization server issuer values {{RFC8414}}
+As one example, OAuth 2.0 authorization server "issuer" values {{RFC8414}}
 are "https" URLs
 that reference a JSON metadata document that contains a "jwks_uri" value that is
 an "https" URL from which the issuer's keys are retrieved as a JWK Set  {{RFC7517}}.
