@@ -125,11 +125,22 @@ informative:
     date: December 2023
     target: https://openid.net/specs/openid-connect-core-1_0.html
     title: OpenID Connect Core 1.0 incorporating errata set 2
+  OpenID.Backchannel:
+    author:
+    - ins: M. Jones
+      name: Michael B. Jones
+    - ins: J. Bradley
+      name: John Bradley
+    date: December 2023
+    target: https://openid.net/specs/openid-connect-backchannel-1_0.html
+    title: OpenID Connect Back-Channel Logout 1.0 incorporating errata set 1
   RFC6749:
   RFC7159:
   RFC7517:
   RFC8414:
   RFC8417:
+  RFC9068:
+  RFC9700:
   Sanso:
     author:
     - ins: A. Sanso
@@ -188,10 +199,10 @@ that contain a set of claims that can be signed and/or encrypted.
 The JWT specification has seen rapid adoption because it encapsulates
 security-relevant information in one easy-to-protect location, and because
 it is easy to implement using widely available tools.
-One application area in which JWTs are commonly used is representing digital identity information,
-such as OpenID Connect ID Tokens  {{OpenID.Core}}
-and OAuth 2.0  {{RFC6749}} access tokens and
- refresh tokens, the details of which are deployment-specific.
+One application area in which JWTs are commonly used is
+representing authorization information, such as OAuth 2.0 access tokens {{RFC9068}},
+and identity information, such as OpenID Connect ID Tokens {{OpenID.Core}}.
+The details of these uses are application- and deployment-specific.
 
  Since the JWT specification was published, there have been several widely published
 attacks on implementations and deployments.
@@ -515,7 +526,8 @@ without new algorithm identifiers being required.
 All cryptographic operations used in the JWT MUST be validated and the entire JWT MUST be rejected
 if any of them fail to validate.
 This is true not only of JWTs with a single set of Header Parameters
-but also for Nested JWTs in which both outer and inner operations  MUST be validated
+but also for Nested JWTs, as defined in {{Section 2 of RFC7519}},
+in which both outer and inner operations MUST be validated
 using the keys and algorithms supplied by the application.
 
 Libraries MUST allow the verifier to distinguish between signed JWTs (JWSes) and encrypted JWTs (JWEs).
@@ -593,17 +605,19 @@ used for the cryptographic operations in the JWT belong to the issuer.
 If they do not, the application  MUST reject the JWT.
 
  The means of determining the keys owned by an issuer is application-specific.
-As one example, OpenID Connect  {{OpenID.Core}}
-issuer values are "https" URLs
+As one example, OAuth 2.0 authorization server issuer values {{RFC8414}}
+are "https" URLs
 that reference a JSON metadata document that contains a "jwks_uri" value that is
 an "https" URL from which the issuer's keys are retrieved as a JWK Set  {{RFC7517}}.
-This same mechanism is used by  {{RFC8414}}.
+This same mechanism is used by OpenID Connect {{OpenID.Core}}.
 Other applications may use different means of binding keys to issuers.
 
  Similarly, when the JWT contains a "sub" (subject) claim, the
  application  MUST validate that
 the subject value corresponds to a valid subject and/or issuer-subject pair at the application.
 This may include confirming that the issuer is trusted by the application.
+Note that {{Section 4.15 of RFC9700}} discusses the possibility of
+confusing user identifier and client ID values.
 If the issuer, subject, or the pair are invalid, the application
   MUST reject the JWT.
 
@@ -633,10 +647,14 @@ and/or sanitizing the received value.
  Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
 which may contain an arbitrary URL,
 could result in server-side request forgery (SSRF) attacks. Applications SHOULD protect against such
-attacks, e.g., by matching the URL to a whitelist of allowed locations
+attacks, e.g., by matching the URL to an allowlist of permitted locations
 and ensuring no cookies are sent in the GET request.
 
-
+Likewise, the authorization server SHOULD check what a hostname resolves to
+and avoid making a request if it resolves to a loopback or local IP address.
+An example of this is when "attacker.example.com/etc/passwd" is used
+as the "jwks_uri" value and there is a DNS entry for "attacker.example.com"
+that resolves to "127.0.0.1" or other local IP address values.
 
 
 ## Use Explicit Typing {#use-typ}
@@ -650,6 +668,14 @@ Explicit JWT typing is accomplished by using the "typ" Header Parameter.
 For instance, the  {{RFC8417}} specification uses
 the "application/secevent+jwt" media type
 to perform explicit typing of Security Event Tokens (SETs).
+
+An example of an ad-hoc means of preventing confusion
+between different kinds of JWTs is the requirement in
+Logout Tokens {{OpenID.Backchannel}} prohibiting the inclusion of a "nonce" claim
+so that Logout Tokens will fail the validation rules for ID Tokens {{OpenID.Core}}.
+The use of explicit typing avoids the need for employing such ad-hoc mechanisms
+when the validation rules for both kind of JWTs include validating the "typ" values
+and the acceptable "typ" values for the two kinds of JWTs are distinct.
 
 Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the "application/" prefix
 be omitted from the "typ" Header Parameter value, compared to the associated media type.
@@ -800,6 +826,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-02
+
+* Incorporated Aaron Parecki's review suggestions.
 
 ## draft-ietf-oauth-rfc8725bis-01
 
