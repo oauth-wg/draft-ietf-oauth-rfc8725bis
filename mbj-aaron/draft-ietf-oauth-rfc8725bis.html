@@ -1659,12 +1659,7 @@ that meet the security requirements of the application.
 This set will vary over time as new algorithms are introduced
 and existing algorithms are deprecated due to discovered cryptographic weaknesses.
 Applications  <span class="bcp14">MUST</span> therefore be designed to enable cryptographic agility.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
-<p id="section-3.2-3">That said, if a JWT is cryptographically protected end-to-end by a
- transport layer, such as TLS
-using cryptographically current algorithms, there may be no need to apply another layer of
-cryptographic protections to the JWT.
-In such cases, the use of the "none" algorithm can be perfectly acceptable.
-The "none" algorithm should only be used when the JWT is cryptographically protected by other means.
+<p id="section-3.2-3">The "none" algorithm should only be used when the JWT is cryptographically protected by other means.
 JWTs using "none" are often used in application contexts in which the content is optionally signed.
 The URL-safe claims representation and processing in this context can be the same in both
 the signed and unsigned cases.
