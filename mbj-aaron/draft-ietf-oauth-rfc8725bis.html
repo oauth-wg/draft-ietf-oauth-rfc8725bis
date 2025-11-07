@@ -1850,7 +1850,7 @@ between different kinds of JWTs is the requirement in
 Logout Tokens <span>[<a href="#OpenID.Backchannel" class="cite xref">OpenID.Backchannel</a>]</span> prohibiting the inclusion of a "nonce" claim
 so that Logout Tokens will fail the validation rules for ID Tokens <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>.
 The use of explicit typing avoids the need for employing such ad-hoc mechanisms
-when the validation rules for both kind of JWTs include validating the "typ" values
+when the validation rules for both kinds of JWTs include validating the "typ" values
 and the acceptable "typ" values for the two kinds of JWTs are distinct.<a href="#section-3.11-2" class="pilcrow">¶</a></p>
 <p id="section-3.11-3">Per the definition of "typ" in Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> that the "application/" prefix
 be omitted from the "typ" Header Parameter value, compared to the associated media type.
