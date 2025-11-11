@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-09T00:08:42.134400+00:00",
+  "timestamp": "2025-11-11T00:08:32.855813+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -266,7 +266,7 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-11-08T21:05:42Z",
+      "updatedAt": "2025-11-10T15:23:29Z",
       "closedAt": null,
       "comments": [
         {
@@ -331,6 +331,27 @@
           "body": "I think we are talking past one another. Sophie's text is about both `kid` and `alg`. Both the attacks @hannestschofenig mentions are related to `alg`. @selfissued discussion above is mostly about `kid`.\n\nI would support something like:\n\n* Applications SHOULD not include an `alg` header in the JWT. It is RECOMMENDED that verifiers ignore an `alg` header if it exists, and only use the cryptographic key to determine the signature algorithm.\n\nRe: `kid` I actually read Sophie's text differently. I agree there are practical risks in having the key ID in the signed token vs. the header, but I think her point is that from a pure security point of view, both are the same. `kid` is inherently risky. So I don't think we should add text related to `kid`.",
           "createdAt": "2025-11-08T21:05:42Z",
           "updatedAt": "2025-11-08T21:05:42Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\"alg\" is a required header parameter with defined processing rules. It would be a totally unnecessary breaking change to deviate from that.",
+          "createdAt": "2025-11-10T00:35:32Z",
+          "updatedAt": "2025-11-10T00:35:32Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \"alg\" is a required header parameter with defined processing rules. It would be a totally unnecessary breaking change to deviate from that.\n\nTo your point on \"defined processing rules\", Sec. 3.1 of the RFC adds a bunch of rules that weren't there before the BCP. Here's hoping that people actually implemented them.\n\nI wish the OAuth WG/community was open to deprecating elements, such as `alg`, that actively hurt security. But a BCP is not the right place to do it anyway. Maybe we should write a \"deprecating 'alg'\" draft.",
+          "createdAt": "2025-11-10T13:02:44Z",
+          "updatedAt": "2025-11-10T13:02:44Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I wish the OAuth WG/community was open to deprecating elements, such as alg, that actively hurt security. But a BCP is not the right place to do it anyway. Maybe we should write a \"deprecating 'alg'\" draft.\n\nQuite to the contrary, \"alg\" helps security because it cryptographically binds the algorithm used into the signature computation.  Without that, any algorithm chosen by an attacker would be used.",
+          "createdAt": "2025-11-10T15:23:29Z",
+          "updatedAt": "2025-11-10T15:23:29Z"
         }
       ]
     },
