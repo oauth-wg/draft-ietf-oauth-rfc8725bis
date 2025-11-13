@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-11T00:08:32.855813+00:00",
+  "timestamp": "2025-11-13T00:08:28.216506+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -266,7 +266,7 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-11-10T15:23:29Z",
+      "updatedAt": "2025-11-11T20:58:36Z",
       "closedAt": null,
       "comments": [
         {
@@ -352,6 +352,20 @@
           "body": "> I wish the OAuth WG/community was open to deprecating elements, such as alg, that actively hurt security. But a BCP is not the right place to do it anyway. Maybe we should write a \"deprecating 'alg'\" draft.\n\nQuite to the contrary, \"alg\" helps security because it cryptographically binds the algorithm used into the signature computation.  Without that, any algorithm chosen by an attacker would be used.",
           "createdAt": "2025-11-10T15:23:29Z",
           "updatedAt": "2025-11-10T15:23:29Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@selfissued Well, Sophie disagrees. See her text, specifically the paragraph that starts:\n\n> For the algorithm header field, I am not aware of any reason to have that in the token (other than the fact that it historically has been there).",
+          "createdAt": "2025-11-11T11:22:38Z",
+          "updatedAt": "2025-11-11T11:22:38Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I replied to Sophie's point in the thread you cited @yaronf in the message https://mailarchive.ietf.org/arch/msg/cose/DRWVSo4R4BFD7JMvUiIJclmmSDw/.  My reply included the rationale for the decisions made 15 years ago with input from cryptographers and implementers that resulted in the JOSE and JWT specs that we have today.",
+          "createdAt": "2025-11-11T20:58:36Z",
+          "updatedAt": "2025-11-11T20:58:36Z"
         }
       ]
     },
