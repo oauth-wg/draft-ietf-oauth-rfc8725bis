@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-11-13T00:08:28.216506+00:00",
+  "timestamp": "2025-11-18T00:08:37.859976+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -257,7 +257,7 @@
       "id": "I_kwDONgvdIs6lD-l3",
       "title": "Key Identification guidance",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -266,8 +266,8 @@
       "labels": [],
       "body": "Now that we're reopening the JWT BCP, should we include the guidance on key identification from Hannes' draft, https://datatracker.ietf.org/doc/draft-tschofenig-jose-cose-guidance/ ?\r\n\r\nThe target audience for the drafts may be different though, with the JWT BCP targeting library authors and the \"guidance\" draft aimed at application writers.",
       "createdAt": "2025-01-05T13:48:38Z",
-      "updatedAt": "2025-11-11T20:58:36Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-17T17:50:22Z",
+      "closedAt": "2025-11-17T17:50:22Z",
       "comments": [
         {
           "author": "selfissued",
@@ -366,6 +366,13 @@
           "body": "I replied to Sophie's point in the thread you cited @yaronf in the message https://mailarchive.ietf.org/arch/msg/cose/DRWVSo4R4BFD7JMvUiIJclmmSDw/.  My reply included the rationale for the decisions made 15 years ago with input from cryptographers and implementers that resulted in the JOSE and JWT specs that we have today.",
           "createdAt": "2025-11-11T20:58:36Z",
           "updatedAt": "2025-11-11T20:58:36Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "As discussed on today's editor's call, it is beyond the scope of the BCP to remove the requirement for the \"alg\" header parameter.",
+          "createdAt": "2025-11-17T17:50:22Z",
+          "updatedAt": "2025-11-17T17:50:22Z"
         }
       ]
     },
@@ -515,7 +522,7 @@
       "id": "I_kwDONgvdIs7AqFcH",
       "title": "JWTs issued for one individual must not be usable by another individual with a complicity between these individuals",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Denisthemalice",
       "authorAssociation": "NONE",
       "assignees": [
@@ -524,8 +531,8 @@
       "labels": [],
       "body": "The title of this document is JSON Web Token Best Current Practices. Its goal is \"to provide actionable guidance leading to secure implementation and deployment of JWTs\" and \"to facilitate *secure implementation* and deployment of JWTs\" (Introduction).\n\nSection 2 (Threats and Vulnerabilities) lists some known and possible problems with JWT implementations and deployments. \n\nSection 2.7 (Substitution Attacks) states:\n\n> There are attacks in which one recipient will be given a JWT that was intended for it and will attempt to use it at a different recipient for which that JWT was not intended.\n\nThis relates to the audience of the JWT.\n\nSection 2.8 (Cross-JWT Confusion) states:\n\n> As JWTs are being used by more different protocols in diverse application areas, it becomes increasingly important to prevent cases of JWT tokens that have been issued for one purpose being subverted and used for another. \n\n\nThe concept of \"purpose\" is inexistent in JWT-SD and would need to be clarified.\n\nThis draft is concentrating on the structure of JWTs, but is ignoring the context in which JWTs are requested, obtained and then used. \n\nSD-JWTs defined SD-JWTs *formats* for two flows: \n\n     a) when an issuer issues a SD-JWT including all Disclosures,\n     b) when a verifier presents SD-JWT or SD-JWT+KB including selected Disclosures.\n\nHowever, SD-JWT does not define which *protocols* can be used to carry these *data formats*.\n\nHence, threats and vulnerabilities that can arise in these protocols are not considered, nor addressed. \nThis means that the current content of this draft while explicit targeted to \"Developers of specifications that rely on JWTs, \nboth inside and **outside the IETF**\" is incomplete.\n\nTwo important \"specifications that rely on JWTs outside the IETF\" are:\n\n> \"OID4VCI\": OpenID for Verifiable Credential Issuance - draft 16\n> https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html\n> \n> \"OID4VP\": \"OpenID for Verifiable Presentations 1.0\" which defines a protocol for requesting and presenting Credentials (published on 9 July 2025). It defines a mechanism on top of OAuth 2.0 to allow presentation of claims in the form of Verifiable Credentials as part of the protocol flow. https://openid.net/specs/openid-4-verifiable-presentations-1_0.html\n\nThese two OpenID specifications contain many optional features. This makes difficult for implementers to select a right combination that allows to develop a secure implementation.\n\nWhen using selective disclosure of claims, it is important to prevent cases where JWTs issued for one individual would be usable by another individual with a complicity between these individuals. In some cases, this issue is identified as a \"relay attack\".\n\nThis issue has not been identified in the documents produced by the OAuth WG (nor the SPICE WG), nor in OID4VP.\n\nOID4VP defines protocols for requesting and presenting Credentials. It is not explicitly said that these protocols must be supported by a single application and that the end-user using the device supporting that application SHALL NOT be able to modify it or to use its \"key store\" by downloading a rogue application and then using these keys with it.\n\nOnce this issue is identified, it needs to be addressed in a section called \"implementation considerations\" which, unfortunately, is inexistent in the proposed draft.\n\nThis topic is highly dependent upon the type of the device, however, general considerations apply.\n\n\n",
       "createdAt": "2025-07-15T13:25:23Z",
-      "updatedAt": "2025-10-02T07:05:29Z",
-      "closedAt": null,
+      "updatedAt": "2025-11-17T15:24:03Z",
+      "closedAt": "2025-11-17T15:24:03Z",
       "comments": [
         {
           "author": "dickhardt",
@@ -589,6 +596,13 @@
           "body": "draft-ietf-oauth-rfc8725bis-00 states:\n\n(...)\n\n2.  Threats and Vulnerabilities\n\n   This section lists some known and possible problems with JWT\n   implementations and deployments.\n\n     2.1.  Weak Signatures and Insufficient Signature Validation \n     2.2.  Weak Symmetric Keys \n     2.3.  Incorrect Use and Composition of Encryption and Signature\n     2.4.  Plaintext Leakage through Analysis of Ciphertext Length\n     2.5.  Insecure Use of Elliptic Curve Encryption\n     2.6.  Multiplicity of JSON Encodings\n     2.7.  Substitution Attacks\n     2.8.  Cross-JWT Confusion\n     2.9.  Indirect Attacks on the Server\n     2.10. Computation Cost of Unreasonable Number of Hash Iterations\n     2.11. Algorithm Verification Code Not Defensively Written\n     2.12. JWE Decompression Bomb Attack\n     2.13. JWT Format Confusion\n\nThe threat I mentioned is not listed in any of these sections.\n\nThe threat has been identified more than two years ago under the following title: Security of Trusty OS (TEE) Non-Secure World API.\nhttps://security.stackexchange.com/questions/269155/security-of-trusty-os-tee-non-secure-world-api\n\nThe question raised were the following: \n\n> How can the trusted application make sure that only selected applications from the Non-Secure World can access the port?\n> \n> Is there even a way how a trusted application can securely determine which application from the Non-Secure World connected to it?\n> \n\nIf a rogue application can be installed by the owner of a device and use the keys that should normally only be used by a specific trusted application, then another individual can take benefit of the cryptographic results produced by the TEE.\n\nThere are several ways to name that threat. For the time being, I have identified it under the following wording :\n\" JWTs issued for one individual must not be usable by another individual with a complicity between these individuals\".\n\nThis threat is particularly relevant when selective disclosure of claims is supported and the user cannot be uniquely identified.\n\ndraft-ietf-oauth-rfc8725bis-00 states:\n\n>    This BCP specification furthermore replaces the existing JWT BCP\n>    specification RFC 8725 to provide additional actionable guidance\n>    covering threats and attacks that have been discovered since RFC 8725\n>    was published.\n> \n> (...)\n> \n>    The goal of this document is to facilitate secure implementation and\n>    deployment of JWTs.\n\nIf we really want to \"facilitate secure implementation and deployment of JWTs\" covering threats and attacks that were not mentioned when RFC 8725 was published, we should not ignore that threat and we should indicate ways to counter it.",
           "createdAt": "2025-10-02T07:05:29Z",
           "updatedAt": "2025-10-02T07:05:29Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@Denisthemalice \n\nThanks for raising this. The scenario you describe is absolutely a real-world threat, but it results from key-management and TEE isolation failures, not from any behavior specific to JWTs or JOSE.\n\nThe JWT BCP focuses narrowly on how to create, validate, and use JWTs safely (algorithm verification, claim validation, confusion/substitution prevention, cryptographic parameter limits, etc.).\n\nThe TEE scenario is an operational/platform issue: multiple applications are allowed to use the same signing key. JWTs (or any other token type) cannot defend against a compromised or overly-permissive key environment.\n\nTherefore this threat is out of scope for this document, and I am closing this issue. It is better covered by platform security guidance, key-attestation requirements, or the SD-JWT deployment BCP rather than the JWT BCP.\n\n",
+          "createdAt": "2025-11-17T15:24:03Z",
+          "updatedAt": "2025-11-17T15:24:03Z"
         }
       ]
     },
