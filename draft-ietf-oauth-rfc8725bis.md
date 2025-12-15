@@ -701,7 +701,7 @@ if a legacy implementation creates a JWT without the explicit type and
 an updated implementation receiving it requires the explicit type,
 the JWT will be rejected.  The implementations will not interoperate.
 However, retrofitting a rule that if the JWT contains a "typ" value,
-then it MUST be expected explicit type, is not a breaking change.
+then it MUST be the expected explicit type, is not a breaking change.
 
 Another consideration for existing kinds of JWTs is that the use of
 a "typ" value of "JWT", as originally recommended in {{Section 5.1 of RFC7519}},
