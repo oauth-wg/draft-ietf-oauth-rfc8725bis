@@ -1883,7 +1883,7 @@ if a legacy implementation creates a JWT without the explicit type and
 an updated implementation receiving it requires the explicit type,
 the JWT will be rejected.  The implementations will not interoperate.
 However, retrofitting a rule that if the JWT contains a "typ" value,
-then it <span class="bcp14">MUST</span> be expected explicit type, is not a breaking change.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
+then it <span class="bcp14">MUST</span> be the expected explicit type, is not a breaking change.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
 <p id="section-3.11-8">Another consideration for existing kinds of JWTs is that the use of
 a "typ" value of "JWT", as originally recommended in <span><a href="https://rfc-editor.org/rfc/rfc7519#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
 does not constitute effective explicit typing.<a href="#section-3.11-8" class="pilcrow">¶</a></p>

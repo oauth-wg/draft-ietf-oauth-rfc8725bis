@@ -598,7 +598,7 @@ Table of Contents
    without the explicit type and an updated implementation receiving it
    requires the explicit type, the JWT will be rejected.  The
    implementations will not interoperate.  However, retrofitting a rule
-   that if the JWT contains a "typ" value, then it MUST be expected
+   that if the JWT contains a "typ" value, then it MUST be the expected
    explicit type, is not a breaking change.
 
    Another consideration for existing kinds of JWTs is that the use of a
