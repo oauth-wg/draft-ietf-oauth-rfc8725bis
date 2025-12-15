@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 11 May 2026                              Self-Issued Consulting
-                                                         7 November 2025
+Expires: 18 June 2026                             Self-Issued Consulting
+                                                        15 December 2025
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 May 2026.
+   This Internet-Draft will expire on 18 June 2026.
 
 Copyright Notice
 
@@ -122,12 +122,13 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Changes from RFC 8725
    Appendix B.  Document History
-     B.1.  draft-ietf-oauth-rfc8725bis-02
-     B.2.  draft-ietf-oauth-rfc8725bis-01
-     B.3.  draft-ietf-oauth-rfc8725bis-00
-     B.4.  draft-sheffer-oauth-rfc8725bis-02
-     B.5.  draft-sheffer-oauth-rfc8725bis-01
-     B.6.  draft-sheffer-oauth-rfc8725bis-00
+     B.1.  draft-ietf-oauth-rfc8725bis-03
+     B.2.  draft-ietf-oauth-rfc8725bis-02
+     B.3.  draft-ietf-oauth-rfc8725bis-01
+     B.4.  draft-ietf-oauth-rfc8725bis-00
+     B.5.  draft-sheffer-oauth-rfc8725bis-02
+     B.6.  draft-sheffer-oauth-rfc8725bis-01
+     B.7.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -587,8 +588,23 @@ Table of Contents
    Nested JWT.
 
    Note that the use of explicit typing may not achieve disambiguation
-   from existing kinds of JWTs, as the validation rules for existing
-   kinds of JWTs often do not use the "typ" Header Parameter value.
+   from existing kinds of JWTs, as the validation rules for kinds of
+   JWTs defined before the guidance on explicit typing in [RFC8725] was
+   available often do not use the "typ" Header Parameter value.
+
+   Also, note that attempting to retrofit mandatory explicit typing into
+   the validation rules for existing kinds of JWTs not already using it
+   would be a breaking change; if a legacy implementation creates a JWT
+   without the explicit type and an updated implementation receiving it
+   requires the explicit type, the JWT will be rejected.  The
+   implementations will not interoperate.  However, retrofitting a rule
+   that if the JWT contains a "typ" value, then it MUST be the expected
+   explicit type, is not a breaking change.
+
+   Another consideration for existing kinds of JWTs is that the use of a
+   "typ" value of "JWT", as originally recommended in Section 5.1 of
+   [RFC7519], does not constitute effective explicit typing.
+
    Explicit typing is RECOMMENDED for new uses of JWTs.
 
 3.12.  Use Mutually Exclusive Validation Rules for Different Kinds of
@@ -881,32 +897,40 @@ Appendix A.  Changes from RFC 8725
    5.  Compression DoS: Added mitigation for DoS attacks resulting from
        abuse of compression in JWE (Section 3.15).
 
+   6.  Described relationship between explicit typing and kinds of JWTs
+       not already employing it.
+
 Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-B.1.  draft-ietf-oauth-rfc8725bis-02
+B.1.  draft-ietf-oauth-rfc8725bis-03
+
+   *  Described relationship between explicit typing and kinds of JWTs
+      not already employing it.
+
+B.2.  draft-ietf-oauth-rfc8725bis-02
 
    *  Incorporated Aaron Parecki's review suggestions.
 
    *  Acknowledged contributors to the new content in this
       specification.
 
-B.2.  draft-ietf-oauth-rfc8725bis-01
+B.3.  draft-ietf-oauth-rfc8725bis-01
 
    *  Applied editorial suggestions by Dan Moore.
 
    *  Described changes relative to RFC 8725.
 
-B.3.  draft-ietf-oauth-rfc8725bis-00
+B.4.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-B.4.  draft-sheffer-oauth-rfc8725bis-02
+B.5.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-B.5.  draft-sheffer-oauth-rfc8725bis-01
+B.6.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -919,7 +943,7 @@ B.5.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-B.6.  draft-sheffer-oauth-rfc8725bis-00
+B.7.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
