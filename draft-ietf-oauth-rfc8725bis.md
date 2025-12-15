@@ -690,10 +690,24 @@ to explicitly type the entire Nested JWT.
 
  Note that the use of explicit typing may not achieve disambiguation
  from existing kinds of JWTs,
-as the validation rules for existing kinds of JWTs often do not use the "typ" Header Parameter value.
-Explicit typing is  RECOMMENDED for new uses of JWTs.
+as the validation rules for kinds of JWTs defined before
+the guidance on explicit typing in {{RFC8725}} was available
+often do not use the "typ" Header Parameter value.
 
+Also, note that attempting to retrofit mandatory explicit typing
+into the validation rules for existing kinds of JWTs not already using it
+would be a breaking change;
+if a legacy implementation creates a JWT without the explicit type and
+an updated implementation receiving it requres the explicit type,
+the JWT will be rejected.  The implementations will not interoperate.
+However, retrofitting a rule that if the JWT contains a "typ" value,
+then it MUST be expected explicit type, is not a breaking change.
 
+Another consideration for existing kinds of JWTs is that the use of
+a "typ" value of "JWT", as originally recommended in {{Section 5.1 of RFC7519}},
+does not constitute effective explicit typing.
+
+Explicit typing is RECOMMENDED for new uses of JWTs.
 
 
 ## Use Mutually Exclusive Validation Rules for Different Kinds of JWTs {#preventing-confusion}
@@ -838,9 +852,15 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 5. Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE ({{limit-decompression}}).
 
+6. Described relationship between explicit typing and kinds of JWTs not already employing it.
+
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-03
+
+* Described relationship between explicit typing and kinds of JWTs not already employing it.
 
 ## draft-ietf-oauth-rfc8725bis-02
 
