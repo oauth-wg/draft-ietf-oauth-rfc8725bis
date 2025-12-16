@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-14T00:09:13.408012+00:00",
+  "timestamp": "2025-12-16T00:09:28.618786+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -734,24 +734,39 @@
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2025-12-13T12:31:02Z",
+      "updatedAt": "2025-12-15T15:46:03Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Per the [mailing list discussion](https://mailarchive.ietf.org/arch/msg/oauth/fPW14HPAi3CwIqczP6sOKJIU-Do/) on this topic:\n> There\u2019s precedent in OAuth for not holding up publishing a BCP because other developments may update the BCP later.  In particular, we decided not to hold the OAuth Security BCP [RFC 9700] until we\u2019d addressed already known vulnerabilities, including the one being addressed in rfc7523bis.  Our logic was that it is better to publish the BCP in a timely fashion to get a set of useful information out to people and that the BCP will be updated when the mitigations for additional vulnerabilities are settled.\n\nI'll note that RFC 9700 does not include an informative reference to rfc8725bis, even though rfc8725bis documents an actionable security vulnerability and a proposed best practice for preventing it.  Both were known before draft-ietf-oauth-security-topics became RFC 9700.  It was thought to be better to publish the set of recommendations already in the draft and then update the BCP as new recommendations became final.  I believe that's the right course to follow here too.  BCPs are meant to be updated, if and when new best current practices are developed.\n\nAs for \"proper and accountable guidance regarding the treatment of \"alg\":\"none\"\", I'll note that RFC 8725 already provided strong and actionable guidance specifically about \"alg\":\"none\":\n> JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.\n\nSo when the existing BCP guidance is followed, unless the recipient explicitly says that it wants to consume tokens using \"alg\":\"none\", misuse is already impossible.\n",
+          "createdAt": "2025-12-15T02:35:19Z",
+          "updatedAt": "2025-12-15T02:35:19Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@bc-pi Is there a change you're proposing to our existing normative guidance,\n\n> JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.",
+          "createdAt": "2025-12-15T15:46:03Z",
+          "updatedAt": "2025-12-15T15:46:03Z"
+        }
+      ]
     },
     {
       "number": 30,
       "id": "I_kwDONgvdIs7eFOfa",
       "title": "Brian's WGLC comment - explicit typing",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Regarding explicit typing, splitting topics as per [this message](https://mailarchive.ietf.org/arch/msg/oauth/9iDsDNx8kkpBR4Gib5UbRNNiSZ4/), I did say in the [message to the list back in August](https://mailarchive.ietf.org/arch/msg/oauth/wXCAE-FcUHDcv7bsvpsiI62NpGY/) that I wasn't sure how it could be improved at this point. But that's different from doing nothing. At a minimum, there should be some additional treatment around the limitations of applying it to existing protocols/profiles (in most cases doing so would either be a breaking change or forgo much of the value of it). Two open issues on OIDC ([2162](https://bitbucket.org/openid/connect/issues/2162/recommendation-to-the-use-of-explicit) / [2185](https://bitbucket.org/openid/connect/issues/2185/id-tokens-should-have-an-associated-media)), recent [work in rfc7523bis](https://github.com/oauth-wg/draft-ietf-oauth-rfc7523bis/issues/8), [this in openid-key-binding](https://github.com/dickhardt/openid-key-binding/issues/5), parts of [whatever happened here](https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/15), a WIMSE discussion Yaron and I were in just last week, and more that I don't have reference to offhand certainly suggest there's need for more guidance and clarity in an update to the BCP. \n\nAs mentioned [here](https://github.com/oauth-wg/oauth-selective-disclosure-jwt/issues/327) and probably elsewhere, I'm not convinced that the use of the 'typ' header and media types has proven to be the best or even a good vehicle for explicit typing. So I am not a fan of continued advocacy of it as a best practice. But it is largely ingrained current practice that would likely be untenable to change now. I won't be so presumptuous as to suggest a major change there but having this in the mailing list archive will hopefully prove useful down the road somehow though.\n\nSome treatment of \"typ\":\"JWT\" would also be worthwhile in an update to the BCP. If the construct provides any meaningly useful value, it'd be nice for the BCP update to explain it, otherwise the document should discourage its use.\n\ncc: @bc-pi ",
       "createdAt": "2025-12-13T12:33:49Z",
-      "updatedAt": "2025-12-13T12:33:49Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-15T15:52:32Z",
+      "closedAt": "2025-12-15T15:52:32Z",
       "comments": []
     },
     {
@@ -766,7 +781,7 @@
       "labels": [],
       "body": "Regarding compression, as stated previously, I believe the current text around compression in JWE is a bit overreaching and lacking in useful guidance about when it is or is not reasonable to use. [Section 3.6](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-3.6) has a SHOULD NOT on compressing the JWE payload because it \"often reveals information about the plaintext\" but nothing about when the recommendation isn't actually applicable. [Section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-2.4), which points to that 3.6, does have some more text about \"Plaintext Leakage through Analysis of Ciphertext Length\" but mostly in the context of HTTPS, which is, of course, a completely different protocol with different considerations. I don't claim expertise but the conditions and problems described don't seem applicable to archetypal JW/JWT usage. \n\nI anecdotally understand there's been implementation(s) that dropped support for the zip header, at least in part due to this text in RFC8725, which doesn't seem great for interop. Some recent SDO work like OpenID4VCI do have some [\"negotiation\" capabilities](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-8.2-2.4.1) around it but that one is the exception rather than the rule, which again doesn't seem good for interop.\n\ncc: @bc-pi ",
       "createdAt": "2025-12-13T12:36:46Z",
-      "updatedAt": "2025-12-13T12:48:14Z",
+      "updatedAt": "2025-12-15T02:34:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -775,6 +790,13 @@
           "body": "Reacting to the above, we've had over 20 years [1] of attacks on encryption combined with compression, so I don't think a SHOULD NOT is out of place. And it's not just TLS, there have been attacks on IPsec as well. Both are different from JWE/JWT but I think for the majority of cases a SHOULD NOT is a reasonable approach. In particular library developers often don't have enough context to say whether the risk exists in applications that are built on top of them.\n\nNote that the original research is about both chosen-plaintext AND passive attacks, and the passive part might well apply to JWE.\n\nHaving said all that, I'm sure we could improve the text.\n\n[1] John Kelsey, \u201cCompression and Information Leakage of Plaintext,\u201d FSE 2002 (LNCS 2365, pp. 263\u2013276)",
           "createdAt": "2025-12-13T12:48:14Z",
           "updatedAt": "2025-12-13T12:48:14Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Per the [mailing list discussion](https://mailarchive.ietf.org/arch/msg/oauth/fPW14HPAi3CwIqczP6sOKJIU-Do/) on this topic:\n> As asked on the OAuth office hours call on Monday, November 17, 2025, are there new JWT best practices that have emerged on this topic since RFC 8725 was published that you can cite that you believe should be included in the draft, Brian?  If so, please provide proposed text.\n\nI was also going to add the Kelsey reference to the draft in response to this discussion, but I see that it's already there.",
+          "createdAt": "2025-12-15T02:34:24Z",
+          "updatedAt": "2025-12-15T02:34:24Z"
         }
       ]
     }
@@ -2218,6 +2240,101 @@
           "body": "",
           "createdAt": "2025-11-07T17:02:31Z",
           "updatedAt": "2025-11-07T17:02:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 32,
+      "id": "PR_kwDONgvdIs640HfJ",
+      "title": "Describe relationship between explicit typing and JWTs not already employing it",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/32",
+      "state": "MERGED",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #30",
+      "createdAt": "2025-12-15T01:34:01Z",
+      "updatedAt": "2025-12-15T15:52:31Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "944e1639ce316d3ea95c89117222ee6acc9ac7b6",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "mbj-explicit-typing",
+      "headRefOid": "aeec60582e960c611eb33e27ed28fb19d70e5c43",
+      "closedAt": "2025-12-15T15:52:31Z",
+      "mergedAt": "2025-12-15T15:52:31Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs7VT2rL",
+          "commit": {
+            "abbreviatedOid": "3785502"
+          },
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-15T15:16:28Z",
+          "updatedAt": "2025-12-15T15:16:28Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\nan updated implementation receiving it requires the explicit type,\n```",
+              "createdAt": "2025-12-15T15:16:28Z",
+              "updatedAt": "2025-12-15T15:16:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7VT4U-",
+          "commit": {
+            "abbreviatedOid": "9145238"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-12-15T15:17:58Z",
+          "updatedAt": "2025-12-15T15:17:58Z",
+          "comments": [
+            {
+              "originalPosition": 17,
+              "body": "```suggestion\nthen it MUST be the expected explicit type, is not a breaking change.\n```",
+              "createdAt": "2025-12-15T15:17:58Z",
+              "updatedAt": "2025-12-15T15:17:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7VT5eR",
+          "commit": {
+            "abbreviatedOid": "aeec605"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-15T15:18:58Z",
+          "updatedAt": "2025-12-15T15:18:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs7VT6ye",
+          "commit": {
+            "abbreviatedOid": "aeec605"
+          },
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-15T15:20:16Z",
+          "updatedAt": "2025-12-15T15:20:16Z",
           "comments": []
         }
       ]
