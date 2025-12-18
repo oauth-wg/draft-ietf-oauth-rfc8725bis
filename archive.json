@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-16T00:09:28.618786+00:00",
+  "timestamp": "2025-12-18T00:07:27.055681+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -734,7 +734,7 @@
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2025-12-15T15:46:03Z",
+      "updatedAt": "2025-12-17T18:19:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -750,6 +750,13 @@
           "body": "@bc-pi Is there a change you're proposing to our existing normative guidance,\n\n> JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.",
           "createdAt": "2025-12-15T15:46:03Z",
           "updatedAt": "2025-12-15T15:46:03Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "> [@bc-pi](https://github.com/bc-pi) Is there a change you're proposing to our existing normative guidance,\n> \n> > JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.\n\nYes. Make it stronger. Reference https://datatracker.ietf.org/doc/draft-ietf-jose-deprecate-none-rsa15/. And change the tone of the text to acknowledge that \"alg\":\"none\" as the specification design mistake that it was and stop putting the blame on implementations. \n",
+          "createdAt": "2025-12-17T18:19:45Z",
+          "updatedAt": "2025-12-17T18:19:45Z"
         }
       ]
     },
@@ -781,7 +788,7 @@
       "labels": [],
       "body": "Regarding compression, as stated previously, I believe the current text around compression in JWE is a bit overreaching and lacking in useful guidance about when it is or is not reasonable to use. [Section 3.6](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-3.6) has a SHOULD NOT on compressing the JWE payload because it \"often reveals information about the plaintext\" but nothing about when the recommendation isn't actually applicable. [Section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-2.4), which points to that 3.6, does have some more text about \"Plaintext Leakage through Analysis of Ciphertext Length\" but mostly in the context of HTTPS, which is, of course, a completely different protocol with different considerations. I don't claim expertise but the conditions and problems described don't seem applicable to archetypal JW/JWT usage. \n\nI anecdotally understand there's been implementation(s) that dropped support for the zip header, at least in part due to this text in RFC8725, which doesn't seem great for interop. Some recent SDO work like OpenID4VCI do have some [\"negotiation\" capabilities](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-8.2-2.4.1) around it but that one is the exception rather than the rule, which again doesn't seem good for interop.\n\ncc: @bc-pi ",
       "createdAt": "2025-12-13T12:36:46Z",
-      "updatedAt": "2025-12-15T02:34:24Z",
+      "updatedAt": "2025-12-17T20:42:22Z",
       "closedAt": null,
       "comments": [
         {
@@ -797,6 +804,55 @@
           "body": "Per the [mailing list discussion](https://mailarchive.ietf.org/arch/msg/oauth/fPW14HPAi3CwIqczP6sOKJIU-Do/) on this topic:\n> As asked on the OAuth office hours call on Monday, November 17, 2025, are there new JWT best practices that have emerged on this topic since RFC 8725 was published that you can cite that you believe should be included in the draft, Brian?  If so, please provide proposed text.\n\nI was also going to add the Kelsey reference to the draft in response to this discussion, but I see that it's already there.",
           "createdAt": "2025-12-15T02:34:24Z",
           "updatedAt": "2025-12-15T02:34:24Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "Yes, I am aware of that reference that's in the RFC and draft and the mailing list discussion. I'm asking to \"improve the text\" to provide meaningfully useful guidance and rationale.  \n\n\n",
+          "createdAt": "2025-12-17T17:41:20Z",
+          "updatedAt": "2025-12-17T17:41:20Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I for one think that the current text is just fine and that adding exceptional cases would confuse readers more than it would help. Brian, could you please share text that you think would be better?",
+          "createdAt": "2025-12-17T18:51:07Z",
+          "updatedAt": "2025-12-17T18:51:07Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I've thought about this some in the background.  It may have been on the OAuth office hours call, but a problem that Brian described is implementations removing their support for compression, which causes an interop problem if the sender uses it and the recipient can't process it.  (Yes, it was probably a bad idea for the sender to use it, which is primarily what the existing guidance is about.)\n\nI'm willing to write a note in this section describing the interop problem.  Let me take a crack at that.",
+          "createdAt": "2025-12-17T19:43:18Z",
+          "updatedAt": "2025-12-17T19:43:18Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "The potential interop issue is more a second order effect. But still relevant. ",
+          "createdAt": "2025-12-17T20:06:44Z",
+          "updatedAt": "2025-12-17T20:06:44Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree this is a breaking change in that sense. But so is deprecating `alg:none`.",
+          "createdAt": "2025-12-17T20:07:12Z",
+          "updatedAt": "2025-12-17T20:07:12Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "> I for one think that the current text is just fine and that adding exceptional cases would confuse readers more than it would help. Brian, could you please share text that you think would be better?\n\nMaybe after the holidays. I leave in about 15mins. But I don't honestly know how. I am just asking for actual contextually meaningful guidance and or rationale because what's there genuinely doesn't make sense to me.   ",
+          "createdAt": "2025-12-17T20:33:47Z",
+          "updatedAt": "2025-12-17T20:33:47Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Brian\r\n\r\nOur job is not to create guidance \u2014 it is to collect best current practice\r\n\u2014 if you can articulate a best current practice we can explore including it\r\n\u2014 but it is unreasonable to ask us to create guidance \u2014 we are just\r\ncollecting it.\r\n\r\nOn Wed, Dec 17, 2025 at 9:34\u202fPM Brian Campbell ***@***.***>\r\nwrote:\r\n\r\n> *bc-pi* left a comment (oauth-wg/draft-ietf-oauth-rfc8725bis#31)\r\n> <https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/31#issuecomment-3667053085>\r\n>\r\n> I for one think that the current text is just fine and that adding\r\n> exceptional cases would confuse readers more than it would help. Brian,\r\n> could you please share text that you think would be better?\r\n>\r\n> Maybe after the holidays. I leave in about 15mins. But I don't honestly\r\n> know how. I am just asking for actual contextually meaningful guidance and\r\n> or rationale because what's there genuinely doesn't make sense to me.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/31#issuecomment-3667053085>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAFIGVSOCAQQW33SLWBNZ4D4CG44DAVCNFSM6AAAAACO55OQMCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTMNRXGA2TGMBYGU>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n",
+          "createdAt": "2025-12-17T20:42:22Z",
+          "updatedAt": "2025-12-17T20:42:22Z"
         }
       ]
     }
