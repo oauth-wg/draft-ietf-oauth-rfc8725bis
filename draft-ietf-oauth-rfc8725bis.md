@@ -573,10 +573,19 @@ Note that even when used for key encryption, password-based encryption is
 ## Avoid Compression of Encryption Inputs {#no-compression}
 
 
- Compression of data SHOULD NOT be used when creating a JWE, because
-such compressed data often reveals information about the plaintext.
+Compression of data SHOULD NOT be used when creating a JWE, because
+such compressed data often reveals information about the plaintext,
+as described in {{Kelsey}}.
 
-
+Note that, in response to the guidance in {{RFC8725}},
+some JWE implementations removed support for the "zip" header parameter.
+This created an interoperability issue when using these implementations,
+as they are incapable of processing a JWE using it.
+Such implementations do not conform to {{RFC7516},
+since the specification says about "zip":
+"This Header Parameter MUST be understood and processed by implementations."
+The guidance in {{RFC8725}} was that "zip" SHOULD NOT be used when creating a JWE;
+it did not advocate removing support from implementations.
 
 
 ## Use UTF-8 {#use-utf8}
@@ -854,6 +863,8 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 6. Described relationship between explicit typing and kinds of JWTs not already employing it.
 
+7. Added a note about compatibility problems with implementations that removed support for "zip".
+
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
@@ -861,6 +872,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 ## draft-ietf-oauth-rfc8725bis-03
 
 * Described relationship between explicit typing and kinds of JWTs not already employing it.
+* Added a note about compatibility problems with implementations that removed support for "zip".
 
 ## draft-ietf-oauth-rfc8725bis-02
 
