@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-18T00:07:27.055681+00:00",
+  "timestamp": "2025-12-21T00:09:09.585522+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -734,7 +734,7 @@
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2025-12-17T18:19:46Z",
+      "updatedAt": "2025-12-20T21:16:46Z",
       "closedAt": null,
       "comments": [
         {
@@ -757,6 +757,20 @@
           "body": "> [@bc-pi](https://github.com/bc-pi) Is there a change you're proposing to our existing normative guidance,\n> \n> > JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.\n\nYes. Make it stronger. Reference https://datatracker.ietf.org/doc/draft-ietf-jose-deprecate-none-rsa15/. And change the tone of the text to acknowledge that \"alg\":\"none\" as the specification design mistake that it was and stop putting the blame on implementations. \n",
           "createdAt": "2025-12-17T18:19:45Z",
           "updatedAt": "2025-12-17T18:19:45Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@bc-pi I agree this was both a design issue in the RFC and a problem with implementations. However I don't think it is our job in the current document to atone for sins of the past.\n\nDraft-deprecate is stuck in the working group. Regardless of what we think about this situation, it is not useful to speculate on the exact guidance that it will contain if/when it is finally published.\n\nGiven what little we have to work with, let me suggest a change.\n\nOld text:\n\n> The \"none\" algorithm should only be used when the JWT is cryptographically protected by other means. JWTs using \"none\" are often used in application contexts in which the content is optionally signed. The URL-safe claims representation and processing in this context can be the same in both the signed and unsigned cases. JWT libraries SHOULD NOT generate JWTs using \"none\" unless explicitly requested to do so by the caller. Similarly, JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.\n\nNew text:\n\n> Inclusion of the \"none\" algorithm in standards and JOSE implementations resulted in numerous vulnerabilities. RFC 7519 included \"none\" in its list of must-implement algorithms, and the current document updates this guidance to remove \"none\" from that list. Dependent standards and implementations that resorted to \"none\" because of the existence of other security controls (e.g. when sending tokens over an encrypted transport) SHOULD switch to a cryptographically signed JWT; otherwise they SHOULD replace the JWS/JWT by a base64url-encoded JSON object with no padding. New implementations SHOULD NOT support \"none\" unless required for backward compatibility.\n\n>  JWT libraries SHOULD NOT generate JWTs using \"none\" unless explicitly requested to do so by the caller. Similarly, JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.\n",
+          "createdAt": "2025-12-20T14:29:55Z",
+          "updatedAt": "2025-12-20T14:29:55Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@yaronf, I can't agree with your proposed text, because breaking existing deployments of JWTs is not a best current practice.  We should only be putting established best practices into the draft, as we have been discussing in this issue in others, and on the mailing list.",
+          "createdAt": "2025-12-20T21:16:46Z",
+          "updatedAt": "2025-12-20T21:16:46Z"
         }
       ]
     },
@@ -2391,6 +2405,86 @@
           "body": "",
           "createdAt": "2025-12-15T15:20:16Z",
           "updatedAt": "2025-12-15T15:20:16Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 33,
+      "id": "PR_kwDONgvdIs65-ITI",
+      "title": "Add note about implementations that removed support for \"zip\"",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/33",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #31 ",
+      "createdAt": "2025-12-20T20:40:52Z",
+      "updatedAt": "2025-12-20T22:14:57Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "mbj-compression",
+      "headRefOid": "599fae8dd4fe5bd9ab6c72f247b6ef3b96f705da",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs7WqDWi",
+          "commit": {
+            "abbreviatedOid": "599fae8"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-20T22:14:57Z",
+          "updatedAt": "2025-12-20T22:14:57Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "id": "PR_kwDONgvdIs65-PeB",
+      "title": "Add informative reference to draft-ietf-jose-deprecate-none-rsa15",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/34",
+      "state": "OPEN",
+      "author": "selfissued",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Adds an informative reference to draft-ietf-jose-deprecate-none-rsa15 since this was requested by multiple WGLC reviewers.\r\n\r\nFixes #29",
+      "createdAt": "2025-12-20T21:17:11Z",
+      "updatedAt": "2025-12-20T23:37:24Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
+      "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "mbj-alg-none",
+      "headRefOid": "be5e2516f73bef600015784e7c524f0a68878c29",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs7WqJMc",
+          "commit": {
+            "abbreviatedOid": "be5e251"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-20T23:37:24Z",
+          "updatedAt": "2025-12-20T23:37:24Z",
           "comments": []
         }
       ]
