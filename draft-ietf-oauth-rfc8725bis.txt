@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 18 June 2026                             Self-Issued Consulting
-                                                        15 December 2025
+Expires: 26 June 2026                             Self-Issued Consulting
+                                                        23 December 2025
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 June 2026.
+   This Internet-Draft will expire on 26 June 2026.
 
 Copyright Notice
 
@@ -435,6 +435,11 @@ Table of Contents
       completely compatible with existing ECDSA verifiers and so can be
       implemented without new algorithm identifiers being required.
 
+   Readers may want to be aware that
+   [I-D.ietf-jose-deprecate-none-rsa15] intends to propose additional
+   guidance on the "none" and "RSA1_5" algorithms at such point as it
+   becomes an RFC.
+
 3.3.  Validate All Cryptographic Operations
 
    All cryptographic operations used in the JWT MUST be validated and
@@ -790,6 +795,13 @@ Table of Contents
               NIST, "CVE-2023-51774 Detail", National Vulnerability
               Database, February 2024,
               <https://nvd.nist.gov/vuln/detail/CVE-2023-51774>.
+
+   [I-D.ietf-jose-deprecate-none-rsa15]
+              Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
+              Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
+              rsa15-03, 19 September 2025,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
+              deprecate-none-rsa15-03>.
 
    [JWT-Cracker]
               Rius, B., "JWT Cracker", n.d.,
