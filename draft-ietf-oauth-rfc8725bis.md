@@ -170,6 +170,7 @@ informative:
     seriesinfo: OWASP Cheat Sheet Series
     target: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
     date: 2025
+  I-D.ietf-jose-deprecate-none-rsa15:
 
 --- abstract
 
@@ -513,8 +514,9 @@ approach defined in  {{RFC6979}}.
 This approach is completely compatible with existing ECDSA verifiers and so can be implemented
 without new algorithm identifiers being required.
 
-
-
+Readers may want to be aware that {{I-D.ietf-jose-deprecate-none-rsa15}}
+intends to propose additional guidance on the "none" and "RSA1_5" algorithms
+at such point as it becomes an RFC.
 
 
 ## Validate All Cryptographic Operations {#validate-crypto}
