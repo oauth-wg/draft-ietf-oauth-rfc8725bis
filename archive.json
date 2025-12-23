@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-21T00:09:09.585522+00:00",
+  "timestamp": "2025-12-23T00:08:45.981078+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -734,7 +734,7 @@
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2025-12-20T21:16:46Z",
+      "updatedAt": "2025-12-21T15:17:33Z",
       "closedAt": null,
       "comments": [
         {
@@ -771,6 +771,13 @@
           "body": "@yaronf, I can't agree with your proposed text, because breaking existing deployments of JWTs is not a best current practice.  We should only be putting established best practices into the draft, as we have been discussing in this issue in others, and on the mailing list.",
           "createdAt": "2025-12-20T21:16:46Z",
           "updatedAt": "2025-12-20T21:16:46Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@selfissued RFC 8725 is marked \"Updates 7519\" so quite formally, we have a license to change the protocol (a.k.a., \"breaking changes\") if that's required to ensure the community's current understanding of security best practices.\n\nI don't love breaking changes, and I have great respect for the community that formed around JOSE and no wish to disrupt it, but sometimes breaking changes cannot be avoided.\n\nAlso, thank you for adding a reference to the draft.",
+          "createdAt": "2025-12-21T15:17:33Z",
+          "updatedAt": "2025-12-21T15:17:33Z"
         }
       ]
     },
@@ -2421,7 +2428,7 @@
       "labels": [],
       "body": "Fixes #31 ",
       "createdAt": "2025-12-20T20:40:52Z",
-      "updatedAt": "2025-12-20T22:14:57Z",
+      "updatedAt": "2025-12-21T17:34:35Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
@@ -2432,7 +2439,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Actually, the BCP doesn't update JWE [RFC 7516]. It's not within our remit to make breaking changes to a spec in another working group. That would need to be done by new spec work in the JOSE working group, with consensus of that working group. It is within our scope to recommend that problematic features not be used.",
+          "createdAt": "2025-12-21T17:32:17Z",
+          "updatedAt": "2025-12-21T17:34:35Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDONgvdIs7WqDWi",
@@ -2445,6 +2460,19 @@
           "body": "",
           "createdAt": "2025-12-20T22:14:57Z",
           "updatedAt": "2025-12-20T22:14:57Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs7WrlCu",
+          "commit": {
+            "abbreviatedOid": "599fae8"
+          },
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "I disagree with the premise here: the BCP formally Updates 7519 (and would Update 7516 if we asked for it), and so I don't think we are committed to retain every last feature if we believe it raises security issues.\n\nWe are pointing out a security problem with systems and libraries, and I don't think the position \"SHOULD NOT compress but still MUST support zip\" is consistent.",
+          "createdAt": "2025-12-21T15:02:10Z",
+          "updatedAt": "2025-12-21T15:02:10Z",
           "comments": []
         }
       ]
@@ -2461,7 +2489,7 @@
       "labels": [],
       "body": "Adds an informative reference to draft-ietf-jose-deprecate-none-rsa15 since this was requested by multiple WGLC reviewers.\r\n\r\nFixes #29",
       "createdAt": "2025-12-20T21:17:11Z",
-      "updatedAt": "2025-12-20T23:37:24Z",
+      "updatedAt": "2025-12-21T14:59:58Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
@@ -2485,6 +2513,32 @@
           "body": "",
           "createdAt": "2025-12-20T23:37:24Z",
           "updatedAt": "2025-12-20T23:37:24Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs7WrkTs",
+          "commit": {
+            "abbreviatedOid": "be5e251"
+          },
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-21T14:54:03Z",
+          "updatedAt": "2025-12-21T14:54:03Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs7Wrk05",
+          "commit": {
+            "abbreviatedOid": "be5e251"
+          },
+          "author": "aaronpk",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-21T14:59:58Z",
+          "updatedAt": "2025-12-21T14:59:58Z",
           "comments": []
         }
       ]
