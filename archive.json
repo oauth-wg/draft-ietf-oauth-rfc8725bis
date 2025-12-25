@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-23T00:08:45.981078+00:00",
+  "timestamp": "2025-12-25T00:08:45.372974+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -727,15 +727,15 @@
       "id": "I_kwDONgvdIs7eFNwf",
       "title": "Brian's comment - WGLC - alg:none",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2025-12-21T15:17:33Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-23T17:27:48Z",
+      "closedAt": "2025-12-23T17:27:48Z",
       "comments": [
         {
           "author": "selfissued",
@@ -2482,24 +2482,26 @@
       "id": "PR_kwDONgvdIs65-PeB",
       "title": "Add informative reference to draft-ietf-jose-deprecate-none-rsa15",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/34",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Adds an informative reference to draft-ietf-jose-deprecate-none-rsa15 since this was requested by multiple WGLC reviewers.\r\n\r\nFixes #29",
       "createdAt": "2025-12-20T21:17:11Z",
-      "updatedAt": "2025-12-21T14:59:58Z",
+      "updatedAt": "2025-12-23T17:27:48Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
       "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "headRefName": "mbj-alg-none",
       "headRefOid": "be5e2516f73bef600015784e7c524f0a68878c29",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-12-23T17:27:48Z",
+      "mergedAt": "2025-12-23T17:27:47Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "92d45a691e791ee8d71cad9d63f0ea0e40f40dee"
+      },
       "comments": [],
       "reviews": [
         {
