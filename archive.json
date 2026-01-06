@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-25T00:08:45.372974+00:00",
+  "timestamp": "2026-01-06T00:09:13.677544+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -727,15 +727,15 @@
       "id": "I_kwDONgvdIs7eFNwf",
       "title": "Brian's comment - WGLC - alg:none",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/29",
-      "state": "CLOSED",
+      "state": "OPEN",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2025-12-23T17:27:48Z",
-      "closedAt": "2025-12-23T17:27:48Z",
+      "updatedAt": "2026-01-04T17:33:44Z",
+      "closedAt": null,
       "comments": [
         {
           "author": "selfissued",
@@ -778,6 +778,13 @@
           "body": "@selfissued RFC 8725 is marked \"Updates 7519\" so quite formally, we have a license to change the protocol (a.k.a., \"breaking changes\") if that's required to ensure the community's current understanding of security best practices.\n\nI don't love breaking changes, and I have great respect for the community that formed around JOSE and no wish to disrupt it, but sometimes breaking changes cannot be avoided.\n\nAlso, thank you for adding a reference to the draft.",
           "createdAt": "2025-12-21T15:17:33Z",
           "updatedAt": "2025-12-21T15:17:33Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Reopening the issue: I did approve the PR that added the reference but we need to discuss whether this fully addresses the core issue.",
+          "createdAt": "2026-01-04T17:33:44Z",
+          "updatedAt": "2026-01-04T17:33:44Z"
         }
       ]
     },
