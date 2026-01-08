@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-06T00:09:13.677544+00:00",
+  "timestamp": "2026-01-08T00:09:07.943489+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -734,7 +734,7 @@
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2026-01-04T17:33:44Z",
+      "updatedAt": "2026-01-07T14:42:09Z",
       "closedAt": null,
       "comments": [
         {
@@ -785,6 +785,20 @@
           "body": "Reopening the issue: I did approve the PR that added the reference but we need to discuss whether this fully addresses the core issue.",
           "createdAt": "2026-01-04T17:33:44Z",
           "updatedAt": "2026-01-04T17:33:44Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Dependent standards and implementations that resorted to \"none\" because of the existence of other security controls (e.g. when sending tokens over an encrypted transport) SHOULD switch to a cryptographically signed JWT; otherwise they SHOULD replace the JWS/JWT by a base64url-encoded JSON object with no padding. New implementations SHOULD NOT support \"none\" unless required for backward compatibility.\n\nIs this net new language, or is this taken from somewhere else? \n\nI'm not keen on net new language -- telling existing implementations they SHOULD make breaking changes does not seem like good advice. \n\nWhile I have the view that \"alg\":\"none\" was a mistake -- we can't break existing, working deployments -- we can of course tell new things they SHOULD NOT use \"alg\":\"none\"",
+          "createdAt": "2026-01-07T12:18:53Z",
+          "updatedAt": "2026-01-07T12:18:53Z"
+        },
+        {
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@yaronf wrote:\n> @selfissued RFC 8725 is marked \"Updates 7519\" so quite formally, we have a license to change the protocol (a.k.a., \"breaking changes\") if that's required to ensure the community's current understanding of security best practices.\n> I don't love breaking changes, and I have great respect for the community that formed around JOSE and no wish to disrupt it, but sometimes breaking changes cannot be avoided.\n\nMy comment at https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/33#issuecomment-3679132933 also applies here:\n> Actually, the BCP doesn't update JWE [RFC 7516]. It's not within our remit to make breaking changes to a spec in another working group. That would need to be done by new spec work in the JOSE working group, with consensus of that working group. It is within our scope to recommend that problematic features not be used.\n\nIt's not within our remit to make breaking changes in a specification in a different working group.  The good news is that the JOSE working group has already taken up this particular issue.  We've referenced that work-in-progress informationally.\n\nI believe that #34 therefore completed our job on this issue, and it should be re-closed on that basis.",
+          "createdAt": "2026-01-07T14:42:09Z",
+          "updatedAt": "2026-01-07T14:42:09Z"
         }
       ]
     },
@@ -2435,7 +2449,7 @@
       "labels": [],
       "body": "Fixes #31 ",
       "createdAt": "2025-12-20T20:40:52Z",
-      "updatedAt": "2025-12-21T17:34:35Z",
+      "updatedAt": "2026-01-07T12:12:51Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
@@ -2453,6 +2467,13 @@
           "body": "Actually, the BCP doesn't update JWE [RFC 7516]. It's not within our remit to make breaking changes to a spec in another working group. That would need to be done by new spec work in the JOSE working group, with consensus of that working group. It is within our scope to recommend that problematic features not be used.",
           "createdAt": "2025-12-21T17:32:17Z",
           "updatedAt": "2025-12-21T17:34:35Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Checking in on where we are at on this. The updates look good to me. @bc-pi now is the time to make any additional suggestions!",
+          "createdAt": "2026-01-07T12:12:51Z",
+          "updatedAt": "2026-01-07T12:12:51Z"
         }
       ],
       "reviews": [
@@ -2480,6 +2501,19 @@
           "body": "I disagree with the premise here: the BCP formally Updates 7519 (and would Update 7516 if we asked for it), and so I don't think we are committed to retain every last feature if we believe it raises security issues.\n\nWe are pointing out a security problem with systems and libraries, and I don't think the position \"SHOULD NOT compress but still MUST support zip\" is consistent.",
           "createdAt": "2025-12-21T15:02:10Z",
           "updatedAt": "2025-12-21T15:02:10Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDONgvdIs7Yo1Tm",
+          "commit": {
+            "abbreviatedOid": "599fae8"
+          },
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-01-07T12:10:35Z",
+          "updatedAt": "2026-01-07T12:10:35Z",
           "comments": []
         }
       ]
