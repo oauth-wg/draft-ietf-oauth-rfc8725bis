@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-08T00:09:07.943489+00:00",
+  "timestamp": "2026-01-11T00:10:03.539850+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -734,7 +734,7 @@
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2026-01-07T14:42:09Z",
+      "updatedAt": "2026-01-09T06:13:58Z",
       "closedAt": null,
       "comments": [
         {
@@ -799,6 +799,20 @@
           "body": "@yaronf wrote:\n> @selfissued RFC 8725 is marked \"Updates 7519\" so quite formally, we have a license to change the protocol (a.k.a., \"breaking changes\") if that's required to ensure the community's current understanding of security best practices.\n> I don't love breaking changes, and I have great respect for the community that formed around JOSE and no wish to disrupt it, but sometimes breaking changes cannot be avoided.\n\nMy comment at https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/33#issuecomment-3679132933 also applies here:\n> Actually, the BCP doesn't update JWE [RFC 7516]. It's not within our remit to make breaking changes to a spec in another working group. That would need to be done by new spec work in the JOSE working group, with consensus of that working group. It is within our scope to recommend that problematic features not be used.\n\nIt's not within our remit to make breaking changes in a specification in a different working group.  The good news is that the JOSE working group has already taken up this particular issue.  We've referenced that work-in-progress informationally.\n\nI believe that #34 therefore completed our job on this issue, and it should be re-closed on that basis.",
           "createdAt": "2026-01-07T14:42:09Z",
           "updatedAt": "2026-01-07T14:42:09Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "IMO we already made a breaking change in 8725 when we said that:\n\n> JWT libraries SHOULD NOT generate JWTs using \"none\" unless explicitly requested to do so by the caller. Similarly, JWT libraries SHOULD NOT consume JWTs using \"none\" unless explicitly requested by the caller.\n\nThis is a breaking change because code that's using libraries that were modified to follow our advice would have to change.\n\nLet me remind ourselves that:\n\n- 7519 includes None as a MUST.\n- None became a major security fiasco.\n\nRFC 8725 is totally unclear about \"this is no longer a MUST\" and I think it's on us to clarify this point.",
+          "createdAt": "2026-01-08T17:50:03Z",
+          "updatedAt": "2026-01-08T17:50:03Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@yaronf -- your proposed language is telling existing implementations they SHOULD change how they work -- that they should no longer use \"alg\":\"none\" and use base64url-encoded JSON. That is not the same as libraries only supporting \"none\" when explicitly requested per your last message. ",
+          "createdAt": "2026-01-09T06:13:57Z",
+          "updatedAt": "2026-01-09T06:13:57Z"
         }
       ]
     },
@@ -830,7 +844,7 @@
       "labels": [],
       "body": "Regarding compression, as stated previously, I believe the current text around compression in JWE is a bit overreaching and lacking in useful guidance about when it is or is not reasonable to use. [Section 3.6](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-3.6) has a SHOULD NOT on compressing the JWE payload because it \"often reveals information about the plaintext\" but nothing about when the recommendation isn't actually applicable. [Section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-2.4), which points to that 3.6, does have some more text about \"Plaintext Leakage through Analysis of Ciphertext Length\" but mostly in the context of HTTPS, which is, of course, a completely different protocol with different considerations. I don't claim expertise but the conditions and problems described don't seem applicable to archetypal JW/JWT usage. \n\nI anecdotally understand there's been implementation(s) that dropped support for the zip header, at least in part due to this text in RFC8725, which doesn't seem great for interop. Some recent SDO work like OpenID4VCI do have some [\"negotiation\" capabilities](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-8.2-2.4.1) around it but that one is the exception rather than the rule, which again doesn't seem good for interop.\n\ncc: @bc-pi ",
       "createdAt": "2025-12-13T12:36:46Z",
-      "updatedAt": "2025-12-17T20:42:22Z",
+      "updatedAt": "2026-01-09T06:09:24Z",
       "closedAt": null,
       "comments": [
         {
@@ -895,6 +909,20 @@
           "body": "Brian\r\n\r\nOur job is not to create guidance \u2014 it is to collect best current practice\r\n\u2014 if you can articulate a best current practice we can explore including it\r\n\u2014 but it is unreasonable to ask us to create guidance \u2014 we are just\r\ncollecting it.\r\n\r\nOn Wed, Dec 17, 2025 at 9:34\u202fPM Brian Campbell ***@***.***>\r\nwrote:\r\n\r\n> *bc-pi* left a comment (oauth-wg/draft-ietf-oauth-rfc8725bis#31)\r\n> <https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/31#issuecomment-3667053085>\r\n>\r\n> I for one think that the current text is just fine and that adding\r\n> exceptional cases would confuse readers more than it would help. Brian,\r\n> could you please share text that you think would be better?\r\n>\r\n> Maybe after the holidays. I leave in about 15mins. But I don't honestly\r\n> know how. I am just asking for actual contextually meaningful guidance and\r\n> or rationale because what's there genuinely doesn't make sense to me.\r\n>\r\n> \u2014\r\n> Reply to this email directly, view it on GitHub\r\n> <https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/31#issuecomment-3667053085>,\r\n> or unsubscribe\r\n> <https://github.com/notifications/unsubscribe-auth/AAFIGVSOCAQQW33SLWBNZ4D4CG44DAVCNFSM6AAAAACO55OQMCVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZTMNRXGA2TGMBYGU>\r\n> .\r\n> You are receiving this because you are subscribed to this thread.Message\r\n> ID: ***@***.***>\r\n>\r\n",
           "createdAt": "2025-12-17T20:42:22Z",
           "updatedAt": "2025-12-17T20:42:22Z"
+        },
+        {
+          "author": "bc-pi",
+          "authorAssociation": "NONE",
+          "body": "> Brian\n> \n> Our job is not to create guidance \u2014 it is to collect best current practice\n> \u2014 if you can articulate a best current practice we can explore including it\n> \u2014 but it is unreasonable to ask us to create guidance \u2014 we are just\n> collecting it.\n> \n\nDick,\n\nThe framing that a BCP update should not \u201ccreate guidance\u201d is hard to reconcile with the document itself, as well as with other well-established BCPs (e.g., [TLS](https://www.rfc-editor.org/info/bcp195) and [OAuth](https://www.rfc-editor.org/info/bcp240) security BCPs).\n\nThe [abstract of RFC 8725](https://datatracker.ietf.org/doc/html/rfc8725#abstract) explicitly states that it exists to provide \u201cactionable guidance,\u201d and [draft-ietf-oauth-rfc8725bis-02's abstract](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#abstract) goes further by stating that it replaces RFC 8725 to provide \"additional actionable guidance\". Moreover, the substantive content of both documents consists almost entirely of such guidance.\n\nGiven that context, characterizing requests for improved guidance as \u201cunreasonable\u201d seems misplaced. Providing guidance is central to what a BCP, and this BCP in particular, claims to do.\n\n",
+          "createdAt": "2026-01-08T23:46:19Z",
+          "updatedAt": "2026-01-08T23:46:19Z"
+        },
+        {
+          "author": "dickhardt",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Providing guidance is clearly the purpose of a BCP. \n\n**Creating** guidance is not the same as **providing** guidance.\n\nIf you have guidance that is accepted as a best current practice -- please provide. \n\nIf you think there is an issue that needs guidance, please start a conversation in the community to get consensus on guidance. ",
+          "createdAt": "2026-01-09T06:09:24Z",
+          "updatedAt": "2026-01-09T06:09:24Z"
         }
       ]
     }
@@ -2449,7 +2477,7 @@
       "labels": [],
       "body": "Fixes #31 ",
       "createdAt": "2025-12-20T20:40:52Z",
-      "updatedAt": "2026-01-07T12:12:51Z",
+      "updatedAt": "2026-01-09T13:09:49Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
@@ -2474,6 +2502,13 @@
           "body": "Checking in on where we are at on this. The updates look good to me. @bc-pi now is the time to make any additional suggestions!",
           "createdAt": "2026-01-07T12:12:51Z",
           "updatedAt": "2026-01-07T12:12:51Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "While I understand the motivation for the paragraph that describes the interop issues with libraries that removed support for compression, I'm afraid that this paragraph significantly dilutes our message. As a BCP we are explaining why compression is problematic, let's keep it at that and have developers draw their own conclusions on pros and cons of supporting this functionality.\r\n\r\nSo, I suggest to retain the added reference but remove the compatibility paragraph. ",
+          "createdAt": "2026-01-09T13:09:49Z",
+          "updatedAt": "2026-01-09T13:09:49Z"
         }
       ],
       "reviews": [
