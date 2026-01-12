@@ -575,10 +575,9 @@ Note that even when used for key encryption, password-based encryption is
 ## Avoid Compression of Encryption Inputs {#no-compression}
 
 
- Compression of data SHOULD NOT be used when creating a JWE, because
-such compressed data often reveals information about the plaintext.
-
-
+Compression of data SHOULD NOT be used when creating a JWE, because
+such compressed data often reveals information about the plaintext,
+as described in {{Kelsey}}.
 
 
 ## Use UTF-8 {#use-utf8}
