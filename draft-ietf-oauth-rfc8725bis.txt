@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 26 June 2026                             Self-Issued Consulting
-                                                        23 December 2025
+Expires: 16 July 2026                             Self-Issued Consulting
+                                                         12 January 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,11 +60,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 June 2026.
+   This Internet-Draft will expire on 16 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -486,7 +486,8 @@ Table of Contents
 3.6.  Avoid Compression of Encryption Inputs
 
    Compression of data SHOULD NOT be used when creating a JWE, because
-   such compressed data often reveals information about the plaintext.
+   such compressed data often reveals information about the plaintext,
+   as described in [Kelsey].
 
 3.7.  Use UTF-8
 
