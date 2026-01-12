@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 23 June 2026                             Self-Issued Consulting
-                                                        20 December 2025
+Expires: 16 July 2026                             Self-Issued Consulting
+                                                         12 January 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,11 +60,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 June 2026.
+   This Internet-Draft will expire on 16 July 2026.
 
 Copyright Notice
 
-   Copyright (c) 2025 IETF Trust and the persons identified as the
+   Copyright (c) 2026 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -484,16 +484,6 @@ Table of Contents
    such compressed data often reveals information about the plaintext,
    as described in [Kelsey].
 
-   Note that, in response to the guidance in [RFC8725], some JWE
-   implementations removed support for the "zip" header parameter.  This
-   created an interoperability issue when using these implementations,
-   as they are incapable of processing a JWE using it.  Such
-   implementations do not conform to [RFC7516], since the specification
-   says about "zip": "This Header Parameter MUST be understood and
-   processed by implementations."  The guidance in [RFC8725] was that
-   "zip" SHOULD NOT be used when creating a JWE; it did not advocate
-   removing support from implementations.
-
 3.7.  Use UTF-8
 
    [RFC7515], [RFC7516], and [RFC7519] all specify that UTF-8 be used
@@ -911,9 +901,6 @@ Appendix A.  Changes from RFC 8725
    6.  Described relationship between explicit typing and kinds of JWTs
        not already employing it.
 
-   7.  Added a note about compatibility problems with implementations
-       that removed support for "zip".
-
 Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
@@ -922,9 +909,6 @@ B.1.  draft-ietf-oauth-rfc8725bis-03
 
    *  Described relationship between explicit typing and kinds of JWTs
       not already employing it.
-
-   *  Added a note about compatibility problems with implementations
-      that removed support for "zip".
 
 B.2.  draft-ietf-oauth-rfc8725bis-02
 
