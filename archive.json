@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-11T00:10:03.539850+00:00",
+  "timestamp": "2026-01-13T00:07:21.242687+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -727,15 +727,15 @@
       "id": "I_kwDONgvdIs7eFNwf",
       "title": "Brian's comment - WGLC - alg:none",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Yaron: Adding to Mike\u2019s response: the BCP, already in the published RFC8725, includes a SHOULD NOT for RSA-PKCS1 v1.5. And it was published 4 years before the \u201cdeprecate\u201d draft.\n\nBrian: Yes and even back in 2020ish the original RFC8725 probably should have been stronger about discouraging RSAES-PKCS1-v1_5. \n\nMy rationale for suggesting a reference to the \"deprecate\" draft, however, was primarily about wanting to see proper and accountable guidance regarding the treatment of \"alg\":\"none\", which I believe is long overdue. The \"deprecate\" draft was well ahead of the RFC8725bis draft in the document lifecycle when that suggestion was made. I don't believe the cited \"precedent\" around RFC9700 is really applicable to this case anyway. And even if the \"deprecate\" draft continues to be [held up unecessarly](https://datatracker.ietf.org/doc/minutes-124-jose-202511051430/), an informative downref would be totally reasonable. \n\nI did say [here](https://mailarchive.ietf.org/arch/msg/jose/wBQR1eCcZ4rpqsPV2qJ8NCnT9Fk/) that I believe \"alg\":\"none\" has \"caused immeasurable and irreparable harm\" but that's maybe too defeatist. I do think there's still some value to be found in work that endeavors to fix past mistakes. The RFC8725bis draft should take the opportunity to try.\n\nCC: @bc-pi ",
       "createdAt": "2025-12-13T12:30:25Z",
-      "updatedAt": "2026-01-09T06:13:58Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-12T15:20:30Z",
+      "closedAt": "2026-01-12T15:20:30Z",
       "comments": [
         {
           "author": "selfissued",
@@ -813,6 +813,13 @@
           "body": "@yaronf -- your proposed language is telling existing implementations they SHOULD change how they work -- that they should no longer use \"alg\":\"none\" and use base64url-encoded JSON. That is not the same as libraries only supporting \"none\" when explicitly requested per your last message. ",
           "createdAt": "2026-01-09T06:13:57Z",
           "updatedAt": "2026-01-09T06:13:57Z"
+        },
+        {
+          "author": "yaronf",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Discussed between the editors. The current text should work well for the expected audience of this RFC, also, we added a reference to the deprecate-none draft. Closing.",
+          "createdAt": "2026-01-12T15:20:30Z",
+          "updatedAt": "2026-01-12T15:20:30Z"
         }
       ]
     },
@@ -837,15 +844,15 @@
       "id": "I_kwDONgvdIs7eFPCL",
       "title": "Brian's WGLC comment - compression",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/issues/31",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yaronf",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Regarding compression, as stated previously, I believe the current text around compression in JWE is a bit overreaching and lacking in useful guidance about when it is or is not reasonable to use. [Section 3.6](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-3.6) has a SHOULD NOT on compressing the JWE payload because it \"often reveals information about the plaintext\" but nothing about when the recommendation isn't actually applicable. [Section 2.4](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-rfc8725bis-02#section-2.4), which points to that 3.6, does have some more text about \"Plaintext Leakage through Analysis of Ciphertext Length\" but mostly in the context of HTTPS, which is, of course, a completely different protocol with different considerations. I don't claim expertise but the conditions and problems described don't seem applicable to archetypal JW/JWT usage. \n\nI anecdotally understand there's been implementation(s) that dropped support for the zip header, at least in part due to this text in RFC8725, which doesn't seem great for interop. Some recent SDO work like OpenID4VCI do have some [\"negotiation\" capabilities](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#section-8.2-2.4.1) around it but that one is the exception rather than the rule, which again doesn't seem good for interop.\n\ncc: @bc-pi ",
       "createdAt": "2025-12-13T12:36:46Z",
-      "updatedAt": "2026-01-09T06:09:24Z",
-      "closedAt": null,
+      "updatedAt": "2026-01-12T15:18:05Z",
+      "closedAt": "2026-01-12T15:18:05Z",
       "comments": [
         {
           "author": "yaronf",
@@ -2470,24 +2477,26 @@
       "id": "PR_kwDONgvdIs65-ITI",
       "title": "Add note about implementations that removed support for \"zip\"",
       "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/33",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "selfissued",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fixes #31 ",
       "createdAt": "2025-12-20T20:40:52Z",
-      "updatedAt": "2026-01-09T13:09:49Z",
+      "updatedAt": "2026-01-12T15:18:04Z",
       "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "baseRefName": "main",
       "baseRefOid": "d0f9cc7d6b701c25c85be787789e6e7b3200245e",
       "headRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
       "headRefName": "mbj-compression",
-      "headRefOid": "599fae8dd4fe5bd9ab6c72f247b6ef3b96f705da",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "1a22aa097c1cdab3aab7c599f5906ebd4d1189a4",
+      "closedAt": "2026-01-12T15:18:04Z",
+      "mergedAt": "2026-01-12T15:18:03Z",
+      "mergedBy": "yaronf",
+      "mergeCommit": {
+        "oid": "fce1a611d0b90ea993b2159c635b49b1cc60f56e"
+      },
       "comments": [
         {
           "author": "selfissued",
