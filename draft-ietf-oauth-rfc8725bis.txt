@@ -122,13 +122,14 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Changes from RFC 8725
    Appendix B.  Document History
-     B.1.  draft-ietf-oauth-rfc8725bis-03
-     B.2.  draft-ietf-oauth-rfc8725bis-02
-     B.3.  draft-ietf-oauth-rfc8725bis-01
-     B.4.  draft-ietf-oauth-rfc8725bis-00
-     B.5.  draft-sheffer-oauth-rfc8725bis-02
-     B.6.  draft-sheffer-oauth-rfc8725bis-01
-     B.7.  draft-sheffer-oauth-rfc8725bis-00
+     B.1.  draft-ietf-oauth-rfc8725bis-04
+     B.2.  draft-ietf-oauth-rfc8725bis-03
+     B.3.  draft-ietf-oauth-rfc8725bis-02
+     B.4.  draft-ietf-oauth-rfc8725bis-01
+     B.5.  draft-ietf-oauth-rfc8725bis-00
+     B.6.  draft-sheffer-oauth-rfc8725bis-02
+     B.7.  draft-sheffer-oauth-rfc8725bis-01
+     B.8.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -932,33 +933,37 @@ Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-B.1.  draft-ietf-oauth-rfc8725bis-03
+B.1.  draft-ietf-oauth-rfc8725bis-04
+
+   *  Applied suggestions by document shepherd Hannes Tschofenig.
+
+B.2.  draft-ietf-oauth-rfc8725bis-03
 
    *  Described relationship between explicit typing and kinds of JWTs
       not already employing it.
 
-B.2.  draft-ietf-oauth-rfc8725bis-02
+B.3.  draft-ietf-oauth-rfc8725bis-02
 
    *  Incorporated Aaron Parecki's review suggestions.
 
    *  Acknowledged contributors to the new content in this
       specification.
 
-B.3.  draft-ietf-oauth-rfc8725bis-01
+B.4.  draft-ietf-oauth-rfc8725bis-01
 
    *  Applied editorial suggestions by Dan Moore.
 
    *  Described changes relative to RFC 8725.
 
-B.4.  draft-ietf-oauth-rfc8725bis-00
+B.5.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-B.5.  draft-sheffer-oauth-rfc8725bis-02
+B.6.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-B.6.  draft-sheffer-oauth-rfc8725bis-01
+B.7.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -971,7 +976,7 @@ B.6.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-B.7.  draft-sheffer-oauth-rfc8725bis-00
+B.8.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
