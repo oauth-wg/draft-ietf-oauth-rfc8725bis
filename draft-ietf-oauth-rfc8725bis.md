@@ -633,7 +633,7 @@ is being used by an intended party or was substituted by an attacker.
 In such cases, the relying party or application MUST validate the audience value, and if no audience
 value is present or none of the values are associated with the recipient, it MUST reject the JWT.
 
-## Do Not Trust Received Claims {#do-not-trust-claims}
+## Carefully Parse Claims {#do-not-trust-claims}
 
 
  The "kid" (key ID) header is used by the relying application to
