@@ -467,8 +467,8 @@ is consistent with the algorithm associated with the key identified by the
 corresponding identifier (e.g., "kid") during key lookup.
 
 When a recipient receives a JWT signed by a particular issuer, it MUST
-determine which algorithms are permitted for that
-issuer and ensure that the received JWT complies with those requirements.
+determine which algorithms are permitted for itself and that issuer
+and ensure that the received JWT complies with those requirements.
 It must likewise validate that the algorithms used by encrypted JWTs
 are among those supported by the intended recipient.
 
