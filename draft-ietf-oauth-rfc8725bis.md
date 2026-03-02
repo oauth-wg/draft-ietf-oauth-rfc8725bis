@@ -462,7 +462,7 @@ Libraries MUST provide a mechanism that enables developers to explicitly restric
 the set of algorithms permitted for use and MUST NOT employ any algorithms outside
 this configured set when performing cryptographic operations.
 
-The library MUST verify that the algorithm specified in the "alg" or "enc" header
+The library MUST verify that the algorithm specified in the "alg" or "enc" header parameter
 is consistent with the algorithm associated with the key identified by the
 corresponding identifier (e.g., "kid") during key lookup.
 
