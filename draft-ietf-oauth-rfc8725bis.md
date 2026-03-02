@@ -394,6 +394,9 @@ the attacker gaining access to resources that it is not entitled to access.
 important to prevent JWT tokens that have been issued for one purpose
 being used for another.
 Note that this is a specific type of substitution attack.
+If the JWT could be used in an application context in which it could be
+confused with other kinds of JWTs,
+then mitigations can be employed to prevent these substitution attacks.
 
 For mitigations, see Sections  {{<validate-iss-sub}},  {{<use-aud}},  {{<use-typ}}, and  {{<preventing-confusion}}.
 
