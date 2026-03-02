@@ -871,6 +871,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 [[Note to RFC Editor: please remove before publication.]]
 
+## draft-ietf-oauth-rfc8725bis-04
+
+* Applied suggestions by document shepherd Hannes Tschofenig.
+
 ## draft-ietf-oauth-rfc8725bis-03
 
 * Described relationship between explicit typing and kinds of JWTs not already employing it.
