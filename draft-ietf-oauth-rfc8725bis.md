@@ -466,9 +466,11 @@ The library MUST verify that the algorithm specified in the "alg" or "enc" heade
 is consistent with the algorithm associated with the key identified by the
 corresponding identifier (e.g., "kid") during key lookup.
 
-In other words, when a recipient receives a JWT from bob.example.com, it MUST consult
-its locally configured policy to determine which algorithms are permitted for that
-sender and ensure that the received JWT complies with those expectations.
+When a recipient receives a JWT signed by a particular issuer, it MUST
+determine which algorithms are permitted for that
+issuer and ensure that the received JWT complies with those requirements.
+It must likewise validate that the algorithms used by encrypted JWTs
+are among those supported by the intended recipient.
 
 In accordance with established cryptographic best practices, each key MUST be bound
 to exactly one algorithm. Compliance with this requirement MUST be enforced and
