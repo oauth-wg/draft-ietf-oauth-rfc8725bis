@@ -394,11 +394,8 @@ the attacker gaining access to resources that it is not entitled to access.
 important to prevent JWT tokens that have been issued for one purpose
 being used for another.
 Note that this is a specific type of substitution attack.
-If the JWT could be used in an application context in which it could be
-confused with other kinds of JWTs,
-then mitigations  MUST be employed to prevent these substitution attacks.
 
- For mitigations, see Sections  {{<validate-iss-sub}},  {{<use-aud}},  {{<use-typ}}, and  {{<preventing-confusion}}.
+For mitigations, see Sections  {{<validate-iss-sub}},  {{<use-aud}},  {{<use-typ}}, and  {{<preventing-confusion}}.
 
 
 
@@ -444,7 +441,7 @@ For mitigation, see {{limit-decompression}}.
 
 ## JWT Format Confusion
 
-Some JWS implementations support both the Compact and JSON Serializations. While JWTs MUST use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
+Some JWS implementations support both the Compact and JSON Serializations. While JWTs must use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
 
 For mitigations, see {{token-format}}.
 
