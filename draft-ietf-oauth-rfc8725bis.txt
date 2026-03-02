@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 16 July 2026                             Self-Issued Consulting
-                                                         12 January 2026
+Expires: 3 September 2026                         Self-Issued Consulting
+                                                            2 March 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 July 2026.
+   This Internet-Draft will expire on 3 September 2026.
 
 Copyright Notice
 
@@ -310,10 +310,7 @@ Table of Contents
    As JWTs are used by more protocols in diverse ways, it becomes
    increasingly important to prevent JWT tokens that have been issued
    for one purpose being used for another.  Note that this is a specific
-   type of substitution attack.  If the JWT could be used in an
-   application context in which it could be confused with other kinds of
-   JWTs, then mitigations MUST be employed to prevent these substitution
-   attacks.
+   type of substitution attack.
 
    For mitigations, see Sections 3.8, 3.9, 3.11, and 3.12.
 
@@ -365,7 +362,7 @@ Table of Contents
 2.13.  JWT Format Confusion
 
    Some JWS implementations support both the Compact and JSON
-   Serializations.  While JWTs MUST use the Compact Serialization, if an
+   Serializations.  While JWTs must use the Compact Serialization, if an
    application by mistake verifies a JWT using the JSON Serialization
    but extracts claims by parsing it as a JWT using the Compact
    Serialization (e.g., via string splitting), an attacker can craft a
@@ -800,9 +797,9 @@ Table of Contents
    [I-D.ietf-jose-deprecate-none-rsa15]
               Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
               Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
-              rsa15-03, 19 September 2025,
+              rsa15-04, 2 March 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              deprecate-none-rsa15-03>.
+              deprecate-none-rsa15-04>.
 
    [JWT-Cracker]
               Rius, B., "JWT Cracker", n.d.,

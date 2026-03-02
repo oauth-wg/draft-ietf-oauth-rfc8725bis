@@ -47,7 +47,7 @@
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.2.14
+    wcwidth 0.3.0
 -->
 <link href="draft-ietf-oauth-rfc8725bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -188,7 +188,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 @font-face {
   font-family: 'Oxygen Mono';
@@ -196,7 +196,8 @@
   font-weight: 400;
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 }
 
 @font-face {
@@ -588,6 +589,7 @@ aside, blockquote {
 }
 blockquote {
   margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
 }
 cite {
   display: block;
@@ -658,7 +660,7 @@ a.pilcrow {
   }
 }
 @media not print {
-  :hover > a.pilcrow {
+  :hover > a.pilcrow, a.pilcrow:focus {
     opacity: 1;
   }
   a.pilcrow[href]:hover {
@@ -1066,11 +1068,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JWT BCP</td>
-<td class="right">January 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 16 July 2026</td>
+<td class="center">Expires 3 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1089,12 +1091,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc7519" class="eref">7519</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-01-12" class="published">12 January 2026</time>
+<time datetime="2026-03-02" class="published">2 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-07-16">16 July 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1160,7 +1162,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 July 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1565,10 +1567,7 @@ the attacker gaining access to resources that it is not entitled to access.<a hr
 <p id="section-2.8-1">As JWTs are used by more protocols in diverse ways, it becomes increasingly
 important to prevent JWT tokens that have been issued for one purpose
 being used for another.
-Note that this is a specific type of substitution attack.
-If the JWT could be used in an application context in which it could be
-confused with other kinds of JWTs,
-then mitigations  <span class="bcp14">MUST</span> be employed to prevent these substitution attacks.<a href="#section-2.8-1" class="pilcrow">¶</a></p>
+Note that this is a specific type of substitution attack.<a href="#section-2.8-1" class="pilcrow">¶</a></p>
 <p id="section-2.8-2">For mitigations, see Sections  <a href="#validate-iss-sub" class="auto internal xref">3.8</a>,  <a href="#use-aud" class="auto internal xref">3.9</a>,  <a href="#use-typ" class="auto internal xref">3.11</a>, and  <a href="#preventing-confusion" class="auto internal xref">3.12</a>.<a href="#section-2.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1624,7 +1623,7 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
         <h3 id="name-jwt-format-confusion">
 <a href="#section-2.13" class="section-number selfRef">2.13. </a><a href="#name-jwt-format-confusion" class="section-name selfRef">JWT Format Confusion</a>
         </h3>
-<p id="section-2.13-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs <span class="bcp14">MUST</span> use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.13-1" class="pilcrow">¶</a></p>
+<p id="section-2.13-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs must use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.13-1" class="pilcrow">¶</a></p>
 <p id="section-2.13-2">For mitigations, see <a href="#token-format" class="auto internal xref">Section 3.14</a>.<a href="#section-2.13-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2128,7 +2127,7 @@ for their contributions to the new content in this specification.<a href="#secti
 <dd class="break"></dd>
 <dt id="I-D.ietf-jose-deprecate-none-rsa15">[I-D.ietf-jose-deprecate-none-rsa15]</dt>
         <dd>
-<span class="refAuthor">Madden, N.</span>, <span class="refTitle">"JOSE: Deprecate 'none' and 'RSA1_5'"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-deprecate-none-rsa15-03</span>, <time datetime="2025-09-19" class="refDate">19 September 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-03">https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-03</a>&gt;</span>. </dd>
+<span class="refAuthor">Madden, N.</span>, <span class="refTitle">"JOSE: Deprecate 'none' and 'RSA1_5'"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-deprecate-none-rsa15-04</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-04">https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-04</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="JWT-Cracker">[JWT-Cracker]</dt>
         <dd>
