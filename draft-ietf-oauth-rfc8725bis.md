@@ -472,8 +472,8 @@ issuer and ensure that the received JWT complies with those requirements.
 It must likewise validate that the algorithms used by encrypted JWTs
 are among those supported by the intended recipient.
 
-In accordance with established cryptographic best practices, each key MUST be bound
-to exactly one algorithm. Compliance with this requirement MUST be enforced and
+In accordance with established cryptographic best practices, each key MUST be used with
+exactly one algorithm. Compliance with this requirement MUST be enforced and
 validated at the time the cryptographic operation is executed.
 
 Libraries SHOULD opt for defensive security policies to cope
