@@ -635,7 +635,7 @@ value is present or none of the values are associated with the recipient, it MUS
 
 ## Carefully Evaluate Received Claims {#do-not-trust-claims}
 
-Treat claim values as potentially attacker provided input.
+Treat claim values as being potentially attacker-provided input.
 
  The "kid" (key ID) header is used by the relying application to
  perform key lookup. Applications
