@@ -458,12 +458,21 @@ to mitigate the threats listed in the preceding section.
 
 ## Perform Algorithm Verification {#algorithm-verification}
 
- Libraries  MUST enable the caller to specify a
- supported set of algorithms and  MUST NOT use any other algorithms when performing cryptographic operations.
-The library  MUST ensure that the "alg" or "enc" header specifies the same algorithm
-that is used for the cryptographic operation.
-Moreover, each key  MUST be used with exactly one algorithm,
-and this  MUST be checked when the cryptographic operation is performed.
+Libraries MUST provide a mechanism that enables developers to explicitly restrict
+the set of algorithms permitted for use and MUST NOT employ any algorithms outside
+this configured set when performing cryptographic operations.
+
+The library MUST verify that the algorithm specified in the "alg" or "enc" header
+is consistent with the algorithm associated with the key identified by the
+corresponding identifier (e.g., "kid") during key lookup.
+
+In other words, when a recipient receives a JWT from bob.example.com, it MUST consult
+its locally configured policy to determine which algorithms are permitted for that
+sender and ensure that the received JWT complies with those expectations.
+
+In accordance with established cryptographic best practices, each key MUST be bound
+to exactly one algorithm. Compliance with this requirement MUST be enforced and
+validated at the time the cryptographic operation is executed.
 
 Libraries SHOULD opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
