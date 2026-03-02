@@ -105,7 +105,7 @@ Table of Contents
      3.7.  Use UTF-8
      3.8.  Validate Issuer and Subject
      3.9.  Use and Validate Audience
-     3.10. Do Not Trust Received Claims
+     3.10. Carefully Evaluate Received Claims
      3.11. Use Explicit Typing
      3.12. Use Mutually Exclusive Validation Rules for Different Kinds
             of JWTs
@@ -533,7 +533,9 @@ Table of Contents
    audience value, and if no audience value is present or none of the
    values are associated with the recipient, it MUST reject the JWT.
 
-3.10.  Do Not Trust Received Claims
+3.10.  Carefully Evaluate Received Claims
+
+   Treat claim values as being potentially attacker-provided input.
 
    The "kid" (key ID) header is used by the relying application to
    perform key lookup.  Applications should ensure that this does not

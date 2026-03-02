@@ -1277,7 +1277,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.3.2.9.1"><a href="#section-3.9" class="auto internal xref">3.9</a>.  <a href="#name-use-and-validate-audience" class="internal xref">Use and Validate Audience</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.10">
-                <p id="section-toc.1-1.3.2.10.1"><a href="#section-3.10" class="auto internal xref">3.10</a>. <a href="#name-do-not-trust-received-claim" class="internal xref">Do Not Trust Received Claims</a></p>
+                <p id="section-toc.1-1.3.2.10.1"><a href="#section-3.10" class="auto internal xref">3.10</a>. <a href="#name-carefully-evaluate-received" class="internal xref">Carefully Evaluate Received Claims</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.11">
                 <p id="section-toc.1-1.3.2.11.1"><a href="#section-3.11" class="auto internal xref">3.11</a>. <a href="#name-use-explicit-typing" class="internal xref">Use Explicit Typing</a></p>
@@ -1825,23 +1825,24 @@ value is present or none of the values are associated with the recipient, it <sp
 </div>
 <div id="do-not-trust-claims">
 <section id="section-3.10">
-        <h3 id="name-do-not-trust-received-claim">
-<a href="#section-3.10" class="section-number selfRef">3.10. </a><a href="#name-do-not-trust-received-claim" class="section-name selfRef">Do Not Trust Received Claims</a>
+        <h3 id="name-carefully-evaluate-received">
+<a href="#section-3.10" class="section-number selfRef">3.10. </a><a href="#name-carefully-evaluate-received" class="section-name selfRef">Carefully Evaluate Received Claims</a>
         </h3>
-<p id="section-3.10-1">The "kid" (key ID) header is used by the relying application to
+<p id="section-3.10-1">Treat claim values as being potentially attacker-provided input.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
+<p id="section-3.10-2">The "kid" (key ID) header is used by the relying application to
  perform key lookup. Applications
 should ensure that this does not create SQL or LDAP injection vulnerabilities by validating
-and/or sanitizing the received value.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
-<p id="section-3.10-2">Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
+and/or sanitizing the received value.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
+<p id="section-3.10-3">Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
 which may contain an arbitrary URL,
 could result in server-side request forgery (SSRF) attacks. Applications <span class="bcp14">SHOULD</span> protect against such
 attacks, e.g., by matching the URL to an allowlist of permitted locations
-and ensuring no cookies are sent in the GET request.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
-<p id="section-3.10-3">When such an allowlist is not available, the authorization server <span class="bcp14">SHOULD</span> check what a hostname resolves to
+and ensuring no cookies are sent in the GET request.<a href="#section-3.10-3" class="pilcrow">¶</a></p>
+<p id="section-3.10-4">When such an allowlist is not available, the authorization server <span class="bcp14">SHOULD</span> check what a hostname resolves to
 and avoid making a request if it resolves to a loopback or local IP address.
 An example of this is when "attacker.example.com/etc/passwd" is used
 as the "jwks_uri" value and there is a DNS entry for "attacker.example.com"
-that resolves to "127.0.0.1" or other local IP address values.<a href="#section-3.10-3" class="pilcrow">¶</a></p>
+that resolves to "127.0.0.1" or other local IP address values.<a href="#section-3.10-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="use-typ">
