@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-13T00:07:21.242687+00:00",
+  "timestamp": "2026-03-03T00:12:24.405121+00:00",
   "repo": "oauth-wg/draft-ietf-oauth-rfc8725bis",
   "labels": [
     {
@@ -2626,6 +2626,232 @@
           "body": "",
           "createdAt": "2025-12-21T14:59:58Z",
           "updatedAt": "2025-12-21T14:59:58Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 35,
+      "id": "PR_kwDONgvdIs7HZuHC",
+      "title": "No RFC 2119 Language in \"Threats and Vulnerabilities\" Section",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/35",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "It makes no sense to use RFC 2119 language (MUST) in the threats section. The mitigation section is the right place to do so.",
+      "createdAt": "2026-03-02T18:13:57Z",
+      "updatedAt": "2026-03-02T21:03:15Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "fce1a611d0b90ea993b2159c635b49b1cc60f56e",
+      "headRepository": "hannestschofenig/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "patch-1",
+      "headRefOid": "6c451b6e2eb8e2e504dd429530b061c5ebdfc60c",
+      "closedAt": "2026-03-02T21:03:14Z",
+      "mergedAt": "2026-03-02T21:03:14Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "4029a3079f13055497d82c92ea29cd56056ea40c"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs7nL8fe",
+          "commit": {
+            "abbreviatedOid": "6c451b6"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I'm going to replace the deleted text with:\n\n> If the JWT could be used in an application context in which it could be\n> confused with other kinds of JWTs,\n> then mitigations can be employed to prevent these substitution attacks.",
+          "createdAt": "2026-03-02T21:02:51Z",
+          "updatedAt": "2026-03-02T21:02:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDONgvdIs7HZ3an",
+      "title": "Rename section from 'Do Not Trust Received Claims' to 'Carefully Pars\u2026",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/36",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "\u2026e Claims'",
+      "createdAt": "2026-03-02T18:25:24Z",
+      "updatedAt": "2026-03-02T21:11:05Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "fce1a611d0b90ea993b2159c635b49b1cc60f56e",
+      "headRepository": "hannestschofenig/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "patch-2",
+      "headRefOid": "609e8761e9c8a830b542e12c9ab9eb9a89928f21",
+      "closedAt": "2026-03-02T21:11:05Z",
+      "mergedAt": "2026-03-02T21:11:05Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "6a14f158a3d5914a7b27f1d8ce70d5897c635612"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs7nMB2-",
+          "commit": {
+            "abbreviatedOid": "522f600"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T21:08:04Z",
+          "updatedAt": "2026-03-02T21:08:05Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "```suggestion\n## Carefully Evaluate Received Claims {#do-not-trust-claims}\n```",
+              "createdAt": "2026-03-02T21:08:04Z",
+              "updatedAt": "2026-03-02T21:08:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7nMDer",
+          "commit": {
+            "abbreviatedOid": "522f600"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T21:09:45Z",
+          "updatedAt": "2026-03-02T21:09:45Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\nTreat claim values as being potentially attacker-provided input.\n```",
+              "createdAt": "2026-03-02T21:09:45Z",
+              "updatedAt": "2026-03-02T21:09:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7nMDwW",
+          "commit": {
+            "abbreviatedOid": "522f600"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved with wording changes",
+          "createdAt": "2026-03-02T21:10:03Z",
+          "updatedAt": "2026-03-02T21:10:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDONgvdIs7HaY2x",
+      "title": "Revise algorithm verification requirements",
+      "url": "https://github.com/oauth-wg/draft-ietf-oauth-rfc8725bis/pull/37",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I believe you want to address the essence of what draft-tschofenig-jose-key-identifier-security says in this section and I have tried to make it more clear. Just a different wording.\r\n\r\nFWIW if you read through the rest of the mitigations you will see that this section alone would prevent many of the problems.",
+      "createdAt": "2026-03-02T19:07:23Z",
+      "updatedAt": "2026-03-02T21:23:48Z",
+      "baseRepository": "oauth-wg/draft-ietf-oauth-rfc8725bis",
+      "baseRefName": "main",
+      "baseRefOid": "fce1a611d0b90ea993b2159c635b49b1cc60f56e",
+      "headRepository": "hannestschofenig/draft-ietf-oauth-rfc8725bis",
+      "headRefName": "patch-3",
+      "headRefOid": "092132208cc923b3d63ced02b263a111c0a0b994",
+      "closedAt": "2026-03-02T21:23:47Z",
+      "mergedAt": "2026-03-02T21:23:47Z",
+      "mergedBy": "selfissued",
+      "mergeCommit": {
+        "oid": "c4a3bf4dbc7b15348ee7012b945dc6cd27099e89"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDONgvdIs7nMIJe",
+          "commit": {
+            "abbreviatedOid": "4405b2b"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T21:14:38Z",
+          "updatedAt": "2026-03-02T21:14:38Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nThe library MUST verify that the algorithm specified in the \"alg\" or \"enc\" header parameter\nis consistent with the algorithm associated with the key identified by the\n```",
+              "createdAt": "2026-03-02T21:14:38Z",
+              "updatedAt": "2026-03-02T21:14:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7nMMVF",
+          "commit": {
+            "abbreviatedOid": "4405b2b"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T21:19:08Z",
+          "updatedAt": "2026-03-02T21:19:08Z",
+          "comments": [
+            {
+              "originalPosition": 20,
+              "body": "```suggestion\nWhen a recipient receives a JWT signed by a particular issuer, it MUST\ndetermine which algorithms are permitted for that\nissuer and ensure that the received JWT complies with those requirements.\nIt must likewise validate that the algorithms used by encrypted JWTs\nare among those supported by the intended recipient.\n```",
+              "createdAt": "2026-03-02T21:19:08Z",
+              "updatedAt": "2026-03-02T21:19:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7nMNqb",
+          "commit": {
+            "abbreviatedOid": "4405b2b"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-02T21:20:38Z",
+          "updatedAt": "2026-03-02T21:20:38Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "```suggestion\nIn accordance with established cryptographic best practices, each key MUST be used with\nexactly one algorithm. Compliance with this requirement MUST be enforced and\nvalidated at the time the cryptographic operation is executed.\n```",
+              "createdAt": "2026-03-02T21:20:38Z",
+              "updatedAt": "2026-03-02T21:20:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDONgvdIs7nMQY-",
+          "commit": {
+            "abbreviatedOid": "0921322"
+          },
+          "author": "selfissued",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Approved with minor wording changes",
+          "createdAt": "2026-03-02T21:23:32Z",
+          "updatedAt": "2026-03-02T21:23:32Z",
           "comments": []
         }
       ]
