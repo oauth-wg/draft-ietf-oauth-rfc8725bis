@@ -64,6 +64,7 @@ normative:
   RFC7518:
   RFC7519:
   RFC8017:
+  RFC8018:
   RFC8037:
   RFC8259:
   nist-sp-800-56a-r3: DOI.10.6028/NIST.SP.800-56Ar3
@@ -568,8 +569,8 @@ then the security considerations in  {{RFC8037}} apply.
 ## Ensure Cryptographic Keys Have Sufficient Entropy {#key-entropy}
 
 
- The Key Entropy and Random Values advice in  Section 10.1 of {{RFC7515}} and the
- Password Considerations in  Section 8.8 of {{RFC7518}}
+ The Key Entropy and Random Values advice in  Section 10.1 of {{RFC7515}}, the
+ Password Considerations in  Section 8.8 of {{RFC7518}}, and PBKDF2 as specified in {{RFC8018}}
   MUST be followed.
 In particular, human-memorizable passwords  MUST NOT be directly used
 as the key to a keyed-MAC algorithm such as "HS256".
