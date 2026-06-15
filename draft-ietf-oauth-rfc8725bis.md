@@ -525,9 +525,8 @@ approach defined in  {{RFC6979}}.
 This approach is completely compatible with existing ECDSA verifiers and so can be implemented
 without new algorithm identifiers being required.
 
-Readers may want to be aware that {{I-D.ietf-jose-deprecate-none-rsa15}}
-intends to propose additional guidance on the "none" and "RSA1_5" algorithms
-at such point as it becomes an RFC.
+Readers are advised that {{I-D.ietf-jose-deprecate-none-rsa15}}
+proposes deprecating the "none" and "RSA1_5" algorithms.
 
 
 ## Validate All Cryptographic Operations {#validate-crypto}
