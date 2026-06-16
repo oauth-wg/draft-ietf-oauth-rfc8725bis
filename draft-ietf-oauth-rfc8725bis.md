@@ -796,9 +796,11 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-{{OWASP-Password-Storage}} states a specific iteration count (600,000 at time of publishing)
-is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a `p2c`
-(PBES2 Count) value larger than double the recommended OWASP value is RECOMMENDED.
+As an example, {{OWASP-Password-Storage}} recommends 600,000 iterations (at time of publishing) when using
+HMAC-SHA-256 in a FIPS-140 context.
+Rejecting inputs with a `p2c` (PBES2 Count) value larger than twice that figure is RECOMMENDED,
+unless threat analysis on the recipient side results in accepting a larger
+number of iterations.
 
 ## Check JWT Format Type {#token-format}
 
