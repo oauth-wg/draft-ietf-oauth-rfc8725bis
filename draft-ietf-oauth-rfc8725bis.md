@@ -739,7 +739,7 @@ does not constitute effective explicit typing.
 
 Explicit typing is RECOMMENDED for new uses of JWTs, because without it,
 mutually exclusive validation rules are harder to enforce and cross-JWT
-substitution becomes more likely.
+confusion becomes more likely.
 
 
 ## Use Mutually Exclusive Validation Rules for Different Kinds of JWTs {#preventing-confusion}
