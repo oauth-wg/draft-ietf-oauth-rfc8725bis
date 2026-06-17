@@ -894,6 +894,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 [[Note to RFC Editor: please remove before publication.]]
 
+## draft-ietf-oauth-rfc8725bis-05
+
+* Applied suggestions by responsible AD Deb Cooley.
+
 ## draft-ietf-oauth-rfc8725bis-04
 
 * Applied suggestions by document shepherd Hannes Tschofenig.
