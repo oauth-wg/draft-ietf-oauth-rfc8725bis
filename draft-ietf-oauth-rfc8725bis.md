@@ -64,6 +64,7 @@ normative:
   RFC7518:
   RFC7519:
   RFC8017:
+  RFC8018:
   RFC8037:
   RFC8259:
   nist-sp-800-56a-r3: DOI.10.6028/NIST.SP.800-56Ar3
@@ -183,7 +184,7 @@ informative:
  Practices (BCP) specification updates RFC 7519 to provide actionable guidance
  leading to secure implementation and deployment of JWTs.
 
- This BCP specification furthermore replaces the existing JWT BCP
+ This BCP specification furthermore obsoletes the existing JWT BCP
  specification RFC 8725 to provide additional actionable guidance
  covering threats and attacks that have been discovered
  since RFC 8725 was published.
@@ -478,8 +479,10 @@ validated at the time the cryptographic operation is executed.
 
 Libraries SHOULD opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
-as the JSON parser. In particular, libraries SHOULD use allowlists for critical
-parameters such as "alg" instead of blocklists.
+as the JSON parser.
+In particular, libraries SHOULD use allowlists for critical
+parameters such as "alg" instead of blocklists, because blocklists
+cannot anticipate every unsafe or misspelled value an attacker might use.
 
 
 ## Use Appropriate Algorithms {#appropriate-algorithms}
@@ -507,7 +510,9 @@ explicitly requested to do so by the caller.
 Similarly, JWT libraries  SHOULD NOT consume JWTs using "none"
  unless explicitly requested by the caller.
 
- Applications  SHOULD follow these algorithm-specific recommendations:
+ Applications  SHOULD follow these algorithm-specific recommendations,
+because deviating from them may re-enable known attacks on the listed algorithms
+unless an application-specific threat analysis shows the risk is acceptable:
 
 
  * Avoid all RSA-PKCS1 v1.5 encryption algorithms ({{RFC8017}}, Section 7.2), preferring
@@ -525,9 +530,8 @@ approach defined in  {{RFC6979}}.
 This approach is completely compatible with existing ECDSA verifiers and so can be implemented
 without new algorithm identifiers being required.
 
-Readers may want to be aware that {{I-D.ietf-jose-deprecate-none-rsa15}}
-intends to propose additional guidance on the "none" and "RSA1_5" algorithms
-at such point as it becomes an RFC.
+Readers are advised that {{I-D.ietf-jose-deprecate-none-rsa15}}
+proposes deprecating the "none" and "RSA1_5" algorithms.
 
 
 ## Validate All Cryptographic Operations {#validate-crypto}
@@ -569,8 +573,8 @@ then the security considerations in  {{RFC8037}} apply.
 ## Ensure Cryptographic Keys Have Sufficient Entropy {#key-entropy}
 
 
- The Key Entropy and Random Values advice in  Section 10.1 of {{RFC7515}} and the
- Password Considerations in  Section 8.8 of {{RFC7518}}
+ The Key Entropy and Random Values advice in  Section 10.1 of {{RFC7515}}, the
+ Password Considerations in  Section 8.8 of {{RFC7518}}, and PBKDF2 as specified in {{RFC8018}}
   MUST be followed.
 In particular, human-memorizable passwords  MUST NOT be directly used
 as the key to a keyed-MAC algorithm such as "HS256".
@@ -660,7 +664,8 @@ attacks, e.g., by matching the URL to an allowlist of permitted locations
 and ensuring no cookies are sent in the GET request.
 
 When such an allowlist is not available, the authorization server SHOULD check what a hostname resolves to
-and avoid making a request if it resolves to a loopback or local IP address.
+and avoid making a request if it resolves to a loopback or local IP address,
+because otherwise an attacker-chosen URL can cause the server to fetch arbitrary content from within the security domain.
 An example of this is when "attacker.example.com/etc/passwd" is used
 as the "jwks_uri" value and there is a DNS entry for "attacker.example.com"
 that resolves to "127.0.0.1" or other local IP address values.
@@ -687,13 +692,25 @@ The use of explicit typing avoids the need for employing such ad-hoc mechanisms
 when the validation rules for both kinds of JWTs include validating the "typ" values
 and the acceptable "typ" values for the two kinds of JWTs are distinct.
 
-Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is RECOMMENDED that the "application/" prefix
-be omitted from the "typ" Header Parameter value, compared to the associated media type.
-Therefore, for example, the "typ" value used to explicitly include a type for a SET SHOULD be "secevent+jwt".
-
-When explicit typing is employed for a JWT, it is RECOMMENDED that a media type name of the
-format "application/example+jwt" be used, where "example" is replaced by the identifier for the
-specific kind of JWT. Therefore, for example, the media type name for a SET SHOULD be "application/secevent+jwt".
+Per Section 4.1.9 of {{RFC7515}}, the "typ" Header Parameter declares the
+media type of the complete JWS.
+To keep header values compact, producers are RECOMMENDED to omit the
+"application/" prefix from "typ" when no other "/" appears in the media type,
+as specified in that section;
+recipients using the media type value MUST treat a "typ" value with no "/"
+as if "application/" were prepended.
+When explicit typing is employed, implementations SHOULD register and use the
+full media type name "application/example+jwt", where "example" identifies the
+specific kind of JWT, and SHOULD set the corresponding "typ" value to
+"example+jwt", because distinct types make cross-JWT substitution harder when
+validators check "typ", and because misapplying the Section 4.1.9 prefix rule
+can cause validators to reject otherwise valid tokens or accept the wrong type.
+This pairing SHOULD be omitted only when the JWT cannot be confused with other
+kinds of JWTs in its application context.
+For example, for Security Event Tokens (SETs) {{RFC8417}}, the media type is
+"application/secevent+jwt" and the "typ" value SHOULD be "secevent+jwt", because
+SETs are often issued in contexts where they could otherwise be mistaken for
+other kinds of JWTs.
 
  When applying explicit typing to a Nested JWT, the "typ" Header
  Parameter containing the explicit type value  MUST be present in the inner JWT of the Nested JWT (the JWT
@@ -720,7 +737,9 @@ Another consideration for existing kinds of JWTs is that the use of
 a "typ" value of "JWT", as originally recommended in {{Section 5.1 of RFC7519}},
 does not constitute effective explicit typing.
 
-Explicit typing is RECOMMENDED for new uses of JWTs.
+Explicit typing is RECOMMENDED for new uses of JWTs, because without it,
+mutually exclusive validation rules are harder to enforce and cross-JWT
+confusion becomes more likely.
 
 
 ## Use Mutually Exclusive Validation Rules for Different Kinds of JWTs {#preventing-confusion}
@@ -777,9 +796,11 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-{{OWASP-Password-Storage}} states a specific iteration count (600,000 at time of publishing)
-is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a `p2c`
-(PBES2 Count) value larger than double the recommended OWASP value is RECOMMENDED.
+As an example, {{OWASP-Password-Storage}} recommends 600,000 iterations (at time of publishing) when using
+HMAC-SHA-256 in a FIPS-140 context.
+Rejecting inputs with a `p2c` (PBES2 Count) value larger than twice that figure is RECOMMENDED,
+unless threat analysis on the recipient side results in accepting a larger
+number of iterations.
 
 ## Check JWT Format Type {#token-format}
 
@@ -791,7 +812,8 @@ marks - is not a JWT and MUST be rejected.
 
 ## Limit JWE Decompression Size {#limit-decompression}
 
-Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.
+Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB,
+because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.
 
 
 # Security Considerations {#security-considerations}
@@ -839,6 +861,7 @@ for their reviews.
 
 We would like to thank
 Brian Campbell,
+Deb Cooley,
 Jianjun Chen,
 Dan Moore,
 Aaron Parecki,
