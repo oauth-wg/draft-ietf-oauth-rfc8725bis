@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 18 December 2026                         Self-Issued Consulting
-                                                            16 June 2026
+Expires: 19 December 2026                         Self-Issued Consulting
+                                                            17 June 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 December 2026.
+   This Internet-Draft will expire on 19 December 2026.
 
 Copyright Notice
 
@@ -643,7 +643,7 @@ Table of Contents
 
    Explicit typing is RECOMMENDED for new uses of JWTs, because without
    it, mutually exclusive validation rules are harder to enforce and
-   cross-JWT substitution becomes more likely.
+   cross-JWT confusion becomes more likely.
 
 3.12.  Use Mutually Exclusive Validation Rules for Different Kinds of
        JWTs
