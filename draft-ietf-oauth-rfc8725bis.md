@@ -470,7 +470,7 @@ corresponding identifier (e.g., "kid") during key lookup.
 When a recipient receives a JWT signed by a particular issuer, it MUST
 determine which algorithms are permitted for itself and that issuer
 and ensure that the received JWT complies with those requirements.
-It must likewise validate that the algorithms used by encrypted JWTs
+It MUST likewise validate that the algorithms used by encrypted JWTs
 are among those supported by the intended recipient.
 
 In accordance with established cryptographic best practices, each key MUST be used with
@@ -553,8 +553,8 @@ This allows verifiers to easily establish a policy of only accepting signed JWTs
 ("ECDH-ES"), take inputs that may contain invalid values. This includes points not on
 the specified elliptic curve
 or other invalid points (e.g.,  {{Valenta}}, Section 7.1).
-The JWS/JWE library itself must validate these inputs before using them,
-or it must use underlying cryptographic libraries that do so (or both!).
+The JWS/JWE library MUST validate these inputs before using them or use
+underlying cryptographic libraries that do so (or both).
 
  Elliptic Curve Diffie-Hellman Ephemeral Static (ECDH-ES) ephemeral
  public key (epk) inputs should be validated
@@ -653,8 +653,7 @@ value is present or none of the values are associated with the recipient, it MUS
 Treat claim values as being potentially attacker-provided input.
 
  The "kid" (key ID) header is used by the relying application to
- perform key lookup. Applications
-should ensure that this does not create SQL or LDAP injection vulnerabilities by validating
+ perform key lookup. Applications MUST ensure that this does not create SQL or LDAP injection vulnerabilities by validating
 and/or sanitizing the received value.
 
  Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
