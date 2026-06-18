@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 3 September 2026                         Self-Issued Consulting
-                                                            2 March 2026
+Expires: 20 December 2026                         Self-Issued Consulting
+                                                            18 June 2026
 
 
                  JSON Web Token Best Current Practices
@@ -25,7 +25,7 @@ Abstract
    provide actionable guidance leading to secure implementation and
    deployment of JWTs.
 
-   This BCP specification furthermore replaces the existing JWT BCP
+   This BCP specification furthermore obsoletes the existing JWT BCP
    specification RFC 8725 to provide additional actionable guidance
    covering threats and attacks that have been discovered since RFC 8725
    was published.
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 September 2026.
+   This Internet-Draft will expire on 20 December 2026.
 
 Copyright Notice
 
@@ -122,14 +122,15 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Changes from RFC 8725
    Appendix B.  Document History
-     B.1.  draft-ietf-oauth-rfc8725bis-04
-     B.2.  draft-ietf-oauth-rfc8725bis-03
-     B.3.  draft-ietf-oauth-rfc8725bis-02
-     B.4.  draft-ietf-oauth-rfc8725bis-01
-     B.5.  draft-ietf-oauth-rfc8725bis-00
-     B.6.  draft-sheffer-oauth-rfc8725bis-02
-     B.7.  draft-sheffer-oauth-rfc8725bis-01
-     B.8.  draft-sheffer-oauth-rfc8725bis-00
+     B.1.  draft-ietf-oauth-rfc8725bis-05
+     B.2.  draft-ietf-oauth-rfc8725bis-04
+     B.3.  draft-ietf-oauth-rfc8725bis-03
+     B.4.  draft-ietf-oauth-rfc8725bis-02
+     B.5.  draft-ietf-oauth-rfc8725bis-01
+     B.6.  draft-ietf-oauth-rfc8725bis-00
+     B.7.  draft-sheffer-oauth-rfc8725bis-02
+     B.8.  draft-sheffer-oauth-rfc8725bis-01
+     B.9.  draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -406,7 +407,9 @@ Table of Contents
    Libraries SHOULD opt for defensive security policies to cope with
    potential issues in the underlying infrastructure, such as the JSON
    parser.  In particular, libraries SHOULD use allowlists for critical
-   parameters such as "alg" instead of blocklists.
+   parameters such as "alg" instead of blocklists, because blocklists
+   cannot anticipate every unsafe or misspelled value an attacker might
+   use.
 
 3.2.  Use Appropriate Algorithms
 
@@ -433,7 +436,10 @@ Table of Contents
    NOT consume JWTs using "none" unless explicitly requested by the
    caller.
 
-   Applications SHOULD follow these algorithm-specific recommendations:
+   Applications SHOULD follow these algorithm-specific recommendations,
+   because deviating from them may re-enable known attacks on the listed
+   algorithms unless an application-specific threat analysis shows the
+   risk is acceptable:
 
    *  Avoid all RSA-PKCS1 v1.5 encryption algorithms ([RFC8017],
       Section 7.2), preferring RSAES-OAEP ([RFC8017], Section 7.1).
@@ -449,10 +455,8 @@ Table of Contents
       completely compatible with existing ECDSA verifiers and so can be
       implemented without new algorithm identifiers being required.
 
-   Readers may want to be aware that
-   [I-D.ietf-jose-deprecate-none-rsa15] intends to propose additional
-   guidance on the "none" and "RSA1_5" algorithms at such point as it
-   becomes an RFC.
+   Readers are advised that [I-D.ietf-jose-deprecate-none-rsa15]
+   proposes deprecating the "none" and "RSA1_5" algorithms.
 
 3.3.  Validate All Cryptographic Operations
 
@@ -488,14 +492,15 @@ Table of Contents
 
 3.5.  Ensure Cryptographic Keys Have Sufficient Entropy
 
-   The Key Entropy and Random Values advice in Section 10.1 of [RFC7515]
-   and the Password Considerations in Section 8.8 of [RFC7518] MUST be
-   followed.  In particular, human-memorizable passwords MUST NOT be
-   directly used as the key to a keyed-MAC algorithm such as "HS256".
-   Moreover, passwords should only be used to perform key encryption,
-   rather than content encryption, as described in Section 4.8 of
-   [RFC7518].  Note that even when used for key encryption, password-
-   based encryption is still subject to brute-force attacks.
+   The Key Entropy and Random Values advice in Section 10.1 of
+   [RFC7515], the Password Considerations in Section 8.8 of [RFC7518],
+   and PBKDF2 as specified in [RFC8018] MUST be followed.  In
+   particular, human-memorizable passwords MUST NOT be directly used as
+   the key to a keyed-MAC algorithm such as "HS256".  Moreover,
+   passwords should only be used to perform key encryption, rather than
+   content encryption, as described in Section 4.8 of [RFC7518].  Note
+   that even when used for key encryption, password-based encryption is
+   still subject to brute-force attacks.
 
 3.6.  Avoid Compression of Encryption Inputs
 
@@ -565,10 +570,12 @@ Table of Contents
 
    When such an allowlist is not available, the authorization server
    SHOULD check what a hostname resolves to and avoid making a request
-   if it resolves to a loopback or local IP address.  An example of this
-   is when "attacker.example.com/etc/passwd" is used as the "jwks_uri"
-   value and there is a DNS entry for "attacker.example.com" that
-   resolves to "127.0.0.1" or other local IP address values.
+   if it resolves to a loopback or local IP address, because otherwise
+   an attacker-chosen URL can cause the server to fetch arbitrary
+   content from within the security domain.  An example of this is when
+   "attacker.example.com/etc/passwd" is used as the "jwks_uri" value and
+   there is a DNS entry for "attacker.example.com" that resolves to
+   "127.0.0.1" or other local IP address values.
 
 3.11.  Use Explicit Typing
 
@@ -590,17 +597,25 @@ Table of Contents
    kinds of JWTs include validating the "typ" values and the acceptable
    "typ" values for the two kinds of JWTs are distinct.
 
-   Per the definition of "typ" in Section 4.1.9 of [RFC7515], it is
-   RECOMMENDED that the "application/" prefix be omitted from the "typ"
-   Header Parameter value, compared to the associated media type.
-   Therefore, for example, the "typ" value used to explicitly include a
-   type for a SET SHOULD be "secevent+jwt".
-
-   When explicit typing is employed for a JWT, it is RECOMMENDED that a
-   media type name of the format "application/example+jwt" be used,
-   where "example" is replaced by the identifier for the specific kind
-   of JWT.  Therefore, for example, the media type name for a SET SHOULD
-   be "application/secevent+jwt".
+   Per Section 4.1.9 of [RFC7515], the "typ" Header Parameter declares
+   the media type of the complete JWS.  To keep header values compact,
+   producers are RECOMMENDED to omit the "application/" prefix from
+   "typ" when no other "/" appears in the media type, as specified in
+   that section; recipients using the media type value MUST treat a
+   "typ" value with no "/" as if "application/" were prepended.  When
+   explicit typing is employed, implementations SHOULD register and use
+   the full media type name "application/example+jwt", where "example"
+   identifies the specific kind of JWT, and SHOULD set the corresponding
+   "typ" value to "example+jwt", because distinct types make cross-JWT
+   substitution harder when validators check "typ", and because
+   misapplying the Section 4.1.9 prefix rule can cause validators to
+   reject otherwise valid tokens or accept the wrong type.  This pairing
+   SHOULD be omitted only when the JWT cannot be confused with other
+   kinds of JWTs in its application context.  For example, for Security
+   Event Tokens (SETs) [RFC8417], the media type is "application/
+   secevent+jwt" and the "typ" value SHOULD be "secevent+jwt", because
+   SETs are often issued in contexts where they could otherwise be
+   mistaken for other kinds of JWTs.
 
    When applying explicit typing to a Nested JWT, the "typ" Header
    Parameter containing the explicit type value MUST be present in the
@@ -627,7 +642,9 @@ Table of Contents
    "typ" value of "JWT", as originally recommended in Section 5.1 of
    [RFC7519], does not constitute effective explicit typing.
 
-   Explicit typing is RECOMMENDED for new uses of JWTs.
+   Explicit typing is RECOMMENDED for new uses of JWTs, because without
+   it, mutually exclusive validation rules are harder to enforce and
+   cross-JWT confusion becomes more likely.
 
 3.12.  Use Mutually Exclusive Validation Rules for Different Kinds of
        JWTs
@@ -679,11 +696,12 @@ Table of Contents
    the number of hash iterations that can be performed when validating
    encrypted content using PBES2 encryption algorithms, so as to prevent
    attackers from imposing an unreasonable computational burden on
-   recipients.  [OWASP-Password-Storage] states a specific iteration
-   count (600,000 at time of publishing) is required when using HMAC-
-   SHA-256 to achieve FIPS-140 compliance.  Rejecting inputs with a p2c
-   (PBES2 Count) value larger than double the recommended OWASP value is
-   RECOMMENDED.
+   recipients.  As an example, [OWASP-Password-Storage] recommends
+   600,000 iterations (at time of publishing) when using HMAC-SHA-256 in
+   a FIPS-140 context.  Rejecting inputs with a p2c (PBES2 Count) value
+   larger than twice that figure is RECOMMENDED, unless threat analysis
+   on the recipient side results in accepting a larger number of
+   iterations.
 
 3.14.  Check JWT Format Type
 
@@ -697,7 +715,9 @@ Table of Contents
 3.15.  Limit JWE Decompression Size
 
    Implementations are RECOMMENDED to set a reasonable upper limit on
-   the decompressed size of a JWE such as 250 KB.
+   the decompressed size of a JWE such as 250 KB, because without such a
+   limit, decompression can impose an unreasonable memory or CPU burden
+   on recipients.
 
 4.  Security Considerations
 
@@ -726,9 +746,10 @@ Table of Contents
 
 6.2.  Acknowledgements for [[ this specification ]]
 
-   We would like to thank Brian Campbell, Jianjun Chen, Dan Moore, Aaron
-   Parecki, Filip Skokan, Tom Tervoort, Enze Wang, and Jesse Yang for
-   their contributions to the new content in this specification.
+   We would like to thank Brian Campbell, Deb Cooley, Jianjun Chen, Dan
+   Moore, Aaron Parecki, Filip Skokan, Tom Tervoort, Enze Wang, and
+   Jesse Yang for their contributions to the new content in this
+   specification.
 
 7.  References
 
@@ -772,6 +793,11 @@ Table of Contents
               "PKCS #1: RSA Cryptography Specifications Version 2.2",
               RFC 8017, DOI 10.17487/RFC8017, November 2016,
               <https://www.rfc-editor.org/rfc/rfc8017>.
+
+   [RFC8018]  Moriarty, K., Ed., Kaliski, B., and A. Rusch, "PKCS #5:
+              Password-Based Cryptography Specification Version 2.1",
+              RFC 8018, DOI 10.17487/RFC8018, January 2017,
+              <https://www.rfc-editor.org/rfc/rfc8018>.
 
    [RFC8037]  Liusvaara, I., "CFRG Elliptic Curve Diffie-Hellman (ECDH)
               and Signatures in JSON Object Signing and Encryption
@@ -933,37 +959,41 @@ Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-B.1.  draft-ietf-oauth-rfc8725bis-04
+B.1.  draft-ietf-oauth-rfc8725bis-05
+
+   *  Applied suggestions by responsible AD Deb Cooley.
+
+B.2.  draft-ietf-oauth-rfc8725bis-04
 
    *  Applied suggestions by document shepherd Hannes Tschofenig.
 
-B.2.  draft-ietf-oauth-rfc8725bis-03
+B.3.  draft-ietf-oauth-rfc8725bis-03
 
    *  Described relationship between explicit typing and kinds of JWTs
       not already employing it.
 
-B.3.  draft-ietf-oauth-rfc8725bis-02
+B.4.  draft-ietf-oauth-rfc8725bis-02
 
    *  Incorporated Aaron Parecki's review suggestions.
 
    *  Acknowledged contributors to the new content in this
       specification.
 
-B.4.  draft-ietf-oauth-rfc8725bis-01
+B.5.  draft-ietf-oauth-rfc8725bis-01
 
    *  Applied editorial suggestions by Dan Moore.
 
    *  Described changes relative to RFC 8725.
 
-B.5.  draft-ietf-oauth-rfc8725bis-00
+B.6.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-B.6.  draft-sheffer-oauth-rfc8725bis-02
+B.7.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-B.7.  draft-sheffer-oauth-rfc8725bis-01
+B.8.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -976,7 +1006,7 @@ B.7.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-B.8.  draft-sheffer-oauth-rfc8725bis-00
+B.9.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 

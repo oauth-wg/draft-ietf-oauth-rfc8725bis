@@ -16,12 +16,12 @@
  digital identity and in other application areas.  This Best Current
  Practices (BCP) specification updates RFC 7519 to provide actionable guidance
  leading to secure implementation and deployment of JWTs. 
-       This BCP specification furthermore replaces the existing JWT BCP
+       This BCP specification furthermore obsoletes the existing JWT BCP
  specification RFC 8725 to provide additional actionable guidance
  covering threats and attacks that have been discovered
  since RFC 8725 was published. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.33.0" name="generator">
 <meta content="JSON Web Token" name="keyword">
 <meta content="JWT" name="keyword">
 <meta content="JSON Object Signing and Encryption" name="keyword">
@@ -36,18 +36,18 @@
 <meta content="Cryptography" name="keyword">
 <meta content="draft-ietf-oauth-rfc8725bis-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
-    Python 3.12.12
+  xml2rfc 3.33.0
+    Python 3.12.13
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.6
     pycountry 24.6.1
     PyYAML 6.0.3
-    requests 2.32.5
-    wcwidth 0.3.0
+    requests 2.33.1
+    wcwidth 0.7.0
 -->
 <link href="draft-ietf-oauth-rfc8725bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -314,16 +314,19 @@ h1, h2, h3, h4, h5, h6 {
   font-size-adjust: 0.5;
   color: var(--title-color);
 }
-h1#title {
-  font-size: 32px;
-  line-height: 40px;
-  clear: both;
-}
-h1#title, h1#rfcnum {
-  margin: 1.5em 0 0.2em;
-}
-h1#rfcnum + h1#title {
-  margin: 0.2em 0;
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
 }
 
 h1, h2, h3 {
@@ -343,10 +346,10 @@ h4, h5, h6 {
 #abstract+p {
   font-size: 18px;
   line-height: 24px;
-}
-#abstract+p code, #abstract+p samp, #abstract+p tt {
-  font-size: 16px;
-  line-height: 0;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
 }
 
 p {
@@ -357,59 +360,59 @@ p {
 div {
   margin: 0;
 }
-.alignRight.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignRight.art-text pre {
-  padding: 0;
-  width: auto;
-}
 .alignRight {
   margin: 1em 0;
-}
-.alignRight > *:first-child {
-  border: none;
-  margin: 0;
-  float: right;
-  clear: both;
-}
-.alignRight > *:nth-child(2) {
-  clear: both;
-  display: block;
-  border: none;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
 }
 svg {
   display: block;
-}
-/* font-family isn't space-separated, but =~ will have to do */
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
-}
-.alignCenter.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignCenter.art-text pre {
-  padding: 0;
-  width: auto;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
 }
 .alignCenter {
   margin: 1em 0;
-}
-.alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
-  margin: 0 auto;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 /* lists */
@@ -447,26 +450,25 @@ dl {
     --indent: 5ch;
     & > dt {
       min-width: calc(var(--indent) - 2ch);
+      float: none;
     }
-  }
-  &.olPercent > dt {
-    float: none;
   }
 
   dl > dd > & {
     margin-top: 0.5em;
     margin-bottom: 0;
   }
-}
-dl:not(.dlNewline) > dt {
-  float: left;
-  margin-right: 2ch;
-  min-width: 8ch;
-}
-dl > dd {
-  margin-bottom: .8em;
-  margin-left: var(--indent) !important; /* stupid element overrides */
-  min-height: 2ex;
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -482,20 +484,22 @@ dl > dd {
 }
 
 /* links */
-a, a[href].selfRef:hover {
+a {
   text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
 }
-a[href] {
-  color: var(--link-color);
-}
-a[href].selfRef, .iref + a[href].internal {
+.iref + a[href].internal {
   color: var(--text-color);
-}
-a[href]:hover {
-  text-decoration: underline;
-}
-a[href].selfRef:hover {
-  background-color: var(--highlight-color);
 }
 a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
@@ -531,9 +535,9 @@ img {
 figure {
   margin: 0.5em 0;
   padding: 0;
-}
-figure blockquote {
-  margin: 0.8em 0.4em 0.4em;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
 }
 figcaption, caption {
   font-style: italic;
@@ -543,17 +547,19 @@ figcaption, caption {
 }
 @media screen {
   /* Auto-collapse boilerplate. */
-  :is(#status-of-memo, #copyright) p {
-    margin: -2px 0;
-    max-height: 0;
-    transition: max-height 2s ease, margin 0.5s ease 0.5s;
-    overflow: hidden;
-  }
-  :is(#status-of-memo, #copyright):hover p,
-  :is(#status-of-memo, #copyright) h2:target ~ p {
-    margin: 0.5em 0;
-    max-height: 500px;
-    overflow: auto;
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
   }
   pre, svg {
     display: inline-block;
@@ -603,25 +609,17 @@ table {
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
-}
-table.right {
-  margin-left: auto;
-}
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-table.left {
-  margin-right: auto;
-}
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
 }
 
 thead, tbody {
@@ -641,13 +639,6 @@ th {
 :is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
 }
-table caption {
-  margin: 0;
-  padding: 3px 0 3px 1em;
-}
-table p {
-  margin: 0;
-}
 
 /* pilcrow */
 a.pilcrow {
@@ -658,18 +649,16 @@ a.pilcrow {
     color: var(--pilcrow-weak);
     &:hover { text-decoration: none; }
   }
-}
-@media not print {
-  :hover > a.pilcrow, a.pilcrow:focus {
-    opacity: 1;
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
   }
-  a.pilcrow[href]:hover {
-    color: var(--pilcrow-strong);
-    background-color: transparent;
-  }
-}
-@media print {
-  a.pilcrow {
+  @media print {
     display: none;
   }
 }
@@ -728,9 +717,9 @@ sub, sup {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 2em;
-}
-.docInfo .prepared {
-  float: right;
+  & .prepared {
+    float: right;
+  }
 }
 
 /* table of contents */
@@ -820,23 +809,27 @@ hr.addr {
   max-width: calc(100% - 16px);
 }
 @media (min-width: 500px) {
-  #authors-addresses > section {
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #authors-addresses > section > h2 {
-    column-span: all;
-  }
-  /* hack for break-inside: avoid-column */
-  #authors-addresses address {
-    display: inline-block;
-    break-inside: avoid-column;
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
   }
 }
 
 /* Comments */
-.rfcEditorRemove p:first-of-type {
-  font-style: italic;
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -847,19 +840,21 @@ hr.addr {
 }
 
 @media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
-    & > ul { margin-bottom: 2em; }
-    & ul {
-      margin: 0 0 0 4px;
-      & :is(p, li) {
-        margin: 2px 0;
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
       }
     }
-  }
-  #toc a.toplink {
-    float: right;
+    & a.toplink {
+      float: right;
+    }
   }
 }
 @media not screen {
@@ -880,54 +875,54 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 2px 0 2px 6px;
-    padding-right: 1em;
-    font-size: 18px;
-    line-height: 24px;
-    min-width: 190px;
-    text-align: right;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
-    &::before { /* css hamburger */
-      float: right;
-      position: relative;
-      width: 1em;
-      height: 1px;
-      left: -164px;
-      margin: 8px 0 0 0;
-      background: white none repeat scroll 0 0;
-      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-      content: "";
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
     }
-  }
-  #toc nav {
-    display: none;
-    background-color: var(--background-color);
-    padding: 0.5em 1em 1em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    height: calc(100vh - 48px);
-    border-left: 1px solid #ddd;
-  }
-  #toc.active {
-    opacity: 1;
-    & nav { display: block; }
-  }
-  /* Make the collapsed ToC header render white on gray also when it's a link */
-  #toc h2 a,
-  #toc h2 a:is(:link, :focus, :hover),
-  #toc a.toplink,
-  #toc a.toplink:hover {
-    color: white;
-    background-color: #444;
-    text-decoration: none;
-  }
-  #toc a.toplink {
-    margin: 2px 0.5em 0;
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
   }
 }
 
@@ -946,26 +941,26 @@ hr.addr {
     margin: 0;
     padding: 0;
     z-index: 1;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 0.25em 1em 1em 0;
-  }
-  #toc nav {
-    display: block;
-    height: calc(90vh - 84px);
-    bottom: 0;
-    padding: 0.5em 0 2em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
   }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
-  }
-  #toc a.toplink {
-    margin: 8px 0.5em 0;
   }
 }
 
@@ -981,12 +976,13 @@ hr.addr {
   #n-copyright-notice {
     border-bottom: none;
   }
-  #toc, #n-introduction {
-    page-break-before: always;
-  }
   #toc {
+    page-break-before: always;
     border-top: none;
     padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
   }
   figure, pre, .vcard {
     page-break-inside: avoid;
@@ -1048,17 +1044,19 @@ hr.addr {
 }
 
 /* SVG Trick: a prefix match works because only black and white are allowed */
-svg :is([stroke="black"], [stroke^="#000"]) {
-  stroke: var(--text-color);
-}
-svg :is([stroke="white"], [stroke^="#fff"]) {
-  stroke: var(--background-color);
-}
-svg :is([fill="black"], [fill^="#000"], :not([fill])) {
-  fill: var(--text-color);
-}
-svg :is([fill="white"], [fill^="#fff"]) {
-  fill: var(--background-color);
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
 }
 </style>
 
@@ -1068,11 +1066,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JWT BCP</td>
-<td class="right">March 2026</td>
+<td class="right">June 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 3 September 2026</td>
+<td class="center">Expires 20 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1091,12 +1089,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc7519" class="eref">7519</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-02" class="published">2 March 2026</time>
+<time datetime="2026-06-18" class="published">18 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-03">3 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-20">20 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1123,7 +1121,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
  digital identity and in other application areas.  This Best Current
  Practices (BCP) specification updates RFC 7519 to provide actionable guidance
  leading to secure implementation and deployment of JWTs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
-<p id="section-abstract-2">This BCP specification furthermore replaces the existing JWT BCP
+<p id="section-abstract-2">This BCP specification furthermore obsoletes the existing JWT BCP
  specification RFC 8725 to provide additional actionable guidance
  covering threats and attacks that have been discovered
  since RFC 8725 was published.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
@@ -1162,7 +1160,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 3 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1331,28 +1329,31 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis" class="internal xref">draft-ietf-oauth-rfc8725bis-04</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis" class="internal xref">draft-ietf-oauth-rfc8725bis-05</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-" class="internal xref">draft-ietf-oauth-rfc8725bis-03</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-" class="internal xref">draft-ietf-oauth-rfc8725bis-04</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-0" class="internal xref">draft-ietf-oauth-rfc8725bis-02</a></p>
+                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-0" class="internal xref">draft-ietf-oauth-rfc8725bis-03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
-                <p id="section-toc.1-1.9.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-01" class="internal xref">draft-ietf-oauth-rfc8725bis-01</a></p>
+                <p id="section-toc.1-1.9.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-02" class="internal xref">draft-ietf-oauth-rfc8725bis-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
-                <p id="section-toc.1-1.9.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-00" class="internal xref">draft-ietf-oauth-rfc8725bis-00</a></p>
+                <p id="section-toc.1-1.9.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-01" class="internal xref">draft-ietf-oauth-rfc8725bis-01</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.6">
-                <p id="section-toc.1-1.9.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-02</a></p>
+                <p id="section-toc.1-1.9.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-00" class="internal xref">draft-ietf-oauth-rfc8725bis-00</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.7">
-                <p id="section-toc.1-1.9.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+                <p id="section-toc.1-1.9.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.8">
-                <p id="section-toc.1-1.9.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-draft-sheffer-oauth-rfc8725bi" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
+                <p id="section-toc.1-1.9.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.9">
+                <p id="section-toc.1-1.9.2.9.1"><a href="#appendix-B.9" class="auto internal xref">B.9</a>.  <a href="#name-draft-sheffer-oauth-rfc8725bi" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
 </li>
             </ul>
 </li>
@@ -1663,8 +1664,10 @@ exactly one algorithm. Compliance with this requirement <span class="bcp14">MUST
 validated at the time the cryptographic operation is executed.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <p id="section-3.1-5">Libraries <span class="bcp14">SHOULD</span> opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
-as the JSON parser. In particular, libraries <span class="bcp14">SHOULD</span> use allowlists for critical
-parameters such as "alg" instead of blocklists.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+as the JSON parser.
+In particular, libraries <span class="bcp14">SHOULD</span> use allowlists for critical
+parameters such as "alg" instead of blocklists, because blocklists
+cannot anticipate every unsafe or misspelled value an attacker might use.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="appropriate-algorithms">
@@ -1691,7 +1694,9 @@ JWT libraries  <span class="bcp14">SHOULD NOT</span> generate JWTs using "none" 
 explicitly requested to do so by the caller.
 Similarly, JWT libraries  <span class="bcp14">SHOULD NOT</span> consume JWTs using "none"
  unless explicitly requested by the caller.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">Applications  <span class="bcp14">SHOULD</span> follow these algorithm-specific recommendations:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">Applications  <span class="bcp14">SHOULD</span> follow these algorithm-specific recommendations,
+because deviating from them may re-enable known attacks on the listed algorithms
+unless an application-specific threat analysis shows the risk is acceptable:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-3.2-5.1">
             <p id="section-3.2-5.1.1">Avoid all RSA-PKCS1 v1.5 encryption algorithms (<span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>, Section 7.2), preferring
@@ -1711,9 +1716,8 @@ This approach is completely compatible with existing ECDSA verifiers and so can 
 without new algorithm identifiers being required.<a href="#section-3.2-5.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.2-6">Readers may want to be aware that <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>
-intends to propose additional guidance on the "none" and "RSA1_5" algorithms
-at such point as it becomes an RFC.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.2-6">Readers are advised that <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>
+proposes deprecating the "none" and "RSA1_5" algorithms.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validate-crypto">
@@ -1759,8 +1763,8 @@ then the security considerations in  <span>[<a href="#RFC8037" class="cite xref"
         <h3 id="name-ensure-cryptographic-keys-h">
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-ensure-cryptographic-keys-h" class="section-name selfRef">Ensure Cryptographic Keys Have Sufficient Entropy</a>
         </h3>
-<p id="section-3.5-1">The Key Entropy and Random Values advice in  Section 10.1 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> and the
- Password Considerations in  Section 8.8 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>
+<p id="section-3.5-1">The Key Entropy and Random Values advice in  Section 10.1 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, the
+ Password Considerations in  Section 8.8 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>, and PBKDF2 as specified in <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>
           <span class="bcp14">MUST</span> be followed.
 In particular, human-memorizable passwords  <span class="bcp14">MUST NOT</span> be directly used
 as the key to a keyed-MAC algorithm such as "HS256".
@@ -1850,7 +1854,8 @@ could result in server-side request forgery (SSRF) attacks. Applications <span c
 attacks, e.g., by matching the URL to an allowlist of permitted locations
 and ensuring no cookies are sent in the GET request.<a href="#section-3.10-3" class="pilcrow">¶</a></p>
 <p id="section-3.10-4">When such an allowlist is not available, the authorization server <span class="bcp14">SHOULD</span> check what a hostname resolves to
-and avoid making a request if it resolves to a loopback or local IP address.
+and avoid making a request if it resolves to a loopback or local IP address,
+because otherwise an attacker-chosen URL can cause the server to fetch arbitrary content from within the security domain.
 An example of this is when "attacker.example.com/etc/passwd" is used
 as the "jwks_uri" value and there is a DNS entry for "attacker.example.com"
 that resolves to "127.0.0.1" or other local IP address values.<a href="#section-3.10-4" class="pilcrow">¶</a></p>
@@ -1878,34 +1883,49 @@ so that Logout Tokens will fail the validation rules for ID Tokens <span>[<a hre
 The use of explicit typing avoids the need for employing such ad-hoc mechanisms
 when the validation rules for both kinds of JWTs include validating the "typ" values
 and the acceptable "typ" values for the two kinds of JWTs are distinct.<a href="#section-3.11-2" class="pilcrow">¶</a></p>
-<p id="section-3.11-3">Per the definition of "typ" in Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, it is <span class="bcp14">RECOMMENDED</span> that the "application/" prefix
-be omitted from the "typ" Header Parameter value, compared to the associated media type.
-Therefore, for example, the "typ" value used to explicitly include a type for a SET <span class="bcp14">SHOULD</span> be "secevent+jwt".<a href="#section-3.11-3" class="pilcrow">¶</a></p>
-<p id="section-3.11-4">When explicit typing is employed for a JWT, it is <span class="bcp14">RECOMMENDED</span> that a media type name of the
-format "application/example+jwt" be used, where "example" is replaced by the identifier for the
-specific kind of JWT. Therefore, for example, the media type name for a SET <span class="bcp14">SHOULD</span> be "application/secevent+jwt".<a href="#section-3.11-4" class="pilcrow">¶</a></p>
-<p id="section-3.11-5">When applying explicit typing to a Nested JWT, the "typ" Header
+<p id="section-3.11-3">Per Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, the "typ" Header Parameter declares the
+media type of the complete JWS.
+To keep header values compact, producers are <span class="bcp14">RECOMMENDED</span> to omit the
+"application/" prefix from "typ" when no other "/" appears in the media type,
+as specified in that section;
+recipients using the media type value <span class="bcp14">MUST</span> treat a "typ" value with no "/"
+as if "application/" were prepended.
+When explicit typing is employed, implementations <span class="bcp14">SHOULD</span> register and use the
+full media type name "application/example+jwt", where "example" identifies the
+specific kind of JWT, and <span class="bcp14">SHOULD</span> set the corresponding "typ" value to
+"example+jwt", because distinct types make cross-JWT substitution harder when
+validators check "typ", and because misapplying the Section 4.1.9 prefix rule
+can cause validators to reject otherwise valid tokens or accept the wrong type.
+This pairing <span class="bcp14">SHOULD</span> be omitted only when the JWT cannot be confused with other
+kinds of JWTs in its application context.
+For example, for Security Event Tokens (SETs) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>, the media type is
+"application/secevent+jwt" and the "typ" value <span class="bcp14">SHOULD</span> be "secevent+jwt", because
+SETs are often issued in contexts where they could otherwise be mistaken for
+other kinds of JWTs.<a href="#section-3.11-3" class="pilcrow">¶</a></p>
+<p id="section-3.11-4">When applying explicit typing to a Nested JWT, the "typ" Header
  Parameter containing the explicit type value  <span class="bcp14">MUST</span> be present in the inner JWT of the Nested JWT (the JWT
 whose payload is the JWT Claims Set).
 In some cases, the same "typ" Header Parameter value will be present in the outer JWT as well,
-to explicitly type the entire Nested JWT.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
-<p id="section-3.11-6">Note that the use of explicit typing may not achieve disambiguation
+to explicitly type the entire Nested JWT.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
+<p id="section-3.11-5">Note that the use of explicit typing may not achieve disambiguation
  from existing kinds of JWTs,
 as the validation rules for kinds of JWTs defined before
 the guidance on explicit typing in <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span> was available
-often do not use the "typ" Header Parameter value.<a href="#section-3.11-6" class="pilcrow">¶</a></p>
-<p id="section-3.11-7">Also, note that attempting to retrofit mandatory explicit typing
+often do not use the "typ" Header Parameter value.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
+<p id="section-3.11-6">Also, note that attempting to retrofit mandatory explicit typing
 into the validation rules for existing kinds of JWTs not already using it
 would be a breaking change;
 if a legacy implementation creates a JWT without the explicit type and
 an updated implementation receiving it requires the explicit type,
 the JWT will be rejected.  The implementations will not interoperate.
 However, retrofitting a rule that if the JWT contains a "typ" value,
-then it <span class="bcp14">MUST</span> be the expected explicit type, is not a breaking change.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
-<p id="section-3.11-8">Another consideration for existing kinds of JWTs is that the use of
+then it <span class="bcp14">MUST</span> be the expected explicit type, is not a breaking change.<a href="#section-3.11-6" class="pilcrow">¶</a></p>
+<p id="section-3.11-7">Another consideration for existing kinds of JWTs is that the use of
 a "typ" value of "JWT", as originally recommended in <span><a href="https://rfc-editor.org/rfc/rfc7519#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
-does not constitute effective explicit typing.<a href="#section-3.11-8" class="pilcrow">¶</a></p>
-<p id="section-3.11-9">Explicit typing is <span class="bcp14">RECOMMENDED</span> for new uses of JWTs.<a href="#section-3.11-9" class="pilcrow">¶</a></p>
+does not constitute effective explicit typing.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
+<p id="section-3.11-8">Explicit typing is <span class="bcp14">RECOMMENDED</span> for new uses of JWTs, because without it,
+mutually exclusive validation rules are harder to enforce and cross-JWT
+confusion becomes more likely.<a href="#section-3.11-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="preventing-confusion">
@@ -1971,9 +1991,11 @@ the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
 an unreasonable computational burden on recipients.
-<span>[<a href="#OWASP-Password-Storage" class="cite xref">OWASP-Password-Storage</a>]</span> states a specific iteration count (600,000 at time of publishing)
-is required when using HMAC-SHA-256 to achieve FIPS-140 compliance. Rejecting inputs with a <code>p2c</code>
-(PBES2 Count) value larger than double the recommended OWASP value is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
+As an example, <span>[<a href="#OWASP-Password-Storage" class="cite xref">OWASP-Password-Storage</a>]</span> recommends 600,000 iterations (at time of publishing) when using
+HMAC-SHA-256 in a FIPS-140 context.
+Rejecting inputs with a <code>p2c</code> (PBES2 Count) value larger than twice that figure is <span class="bcp14">RECOMMENDED</span>,
+unless threat analysis on the recipient side results in accepting a larger
+number of iterations.<a href="#section-3.13-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="token-format">
@@ -1992,7 +2014,8 @@ marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#s
         <h3 id="name-limit-jwe-decompression-siz">
 <a href="#section-3.15" class="section-number selfRef">3.15. </a><a href="#name-limit-jwe-decompression-siz" class="section-name selfRef">Limit JWE Decompression Size</a>
         </h3>
-<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
+<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB,
+because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2047,6 +2070,7 @@ for their reviews.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
         </h3>
 <p id="section-6.2-1">We would like to thank
 Brian Campbell,
+Deb Cooley,
 Jianjun Chen,
 Dan Moore,
 Aaron Parecki,
@@ -2102,6 +2126,10 @@ for their contributions to the new content in this specification.<a href="#secti
 <dt id="RFC8017">[RFC8017]</dt>
         <dd>
 <span class="refAuthor">Moriarty, K., Ed.</span>, <span class="refAuthor">Kaliski, B.</span>, <span class="refAuthor">Jonsson, J.</span>, and <span class="refAuthor">A. Rusch</span>, <span class="refTitle">"PKCS #1: RSA Cryptography Specifications Version 2.2"</span>, <span class="seriesInfo">RFC 8017</span>, <span class="seriesInfo">DOI 10.17487/RFC8017</span>, <time datetime="2016-11" class="refDate">November 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8017">https://www.rfc-editor.org/rfc/rfc8017</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8018">[RFC8018]</dt>
+        <dd>
+<span class="refAuthor">Moriarty, K., Ed.</span>, <span class="refAuthor">Kaliski, B.</span>, and <span class="refAuthor">A. Rusch</span>, <span class="refTitle">"PKCS #5: Password-Based Cryptography Specification Version 2.1"</span>, <span class="seriesInfo">RFC 8018</span>, <span class="seriesInfo">DOI 10.17487/RFC8018</span>, <time datetime="2017-01" class="refDate">January 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8018">https://www.rfc-editor.org/rfc/rfc8018</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8037">[RFC8037]</dt>
         <dd>
@@ -2251,116 +2279,128 @@ for their contributions to the new content in this specification.<a href="#secti
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-B-1">[[Note to RFC Editor: please remove before publication.]]<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="autogen-draft-ietf-oauth-rfc8725bis-04">
+<div id="autogen-draft-ietf-oauth-rfc8725bis-05">
 <section id="appendix-B.1">
         <h3 id="name-draft-ietf-oauth-rfc8725bis">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-draft-ietf-oauth-rfc8725bis" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-04</a>
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-draft-ietf-oauth-rfc8725bis" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-05</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Applied suggestions by document shepherd Hannes Tschofenig.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Applied suggestions by responsible AD Deb Cooley.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="autogen-draft-ietf-oauth-rfc8725bis-04">
+<section id="appendix-B.2">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-draft-ietf-oauth-rfc8725bis-" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-04</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.2-1.1">
+            <p id="appendix-B.2-1.1.1">Applied suggestions by document shepherd Hannes Tschofenig.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-03">
-<section id="appendix-B.2">
-        <h3 id="name-draft-ietf-oauth-rfc8725bis-">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-draft-ietf-oauth-rfc8725bis-" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-03</a>
+<section id="appendix-B.3">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-0">
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-draft-ietf-oauth-rfc8725bis-0" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.2-1.1">
-            <p id="appendix-B.2-1.1.1">Described relationship between explicit typing and kinds of JWTs not already employing it.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.3-1.1">
+            <p id="appendix-B.3-1.1.1">Described relationship between explicit typing and kinds of JWTs not already employing it.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-02">
-<section id="appendix-B.3">
-        <h3 id="name-draft-ietf-oauth-rfc8725bis-0">
-<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-draft-ietf-oauth-rfc8725bis-0" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-02</a>
+<section id="appendix-B.4">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-02">
+<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-draft-ietf-oauth-rfc8725bis-02" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.3-1.1">
-            <p id="appendix-B.3-1.1.1">Incorporated Aaron Parecki's review suggestions.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.4-1.1">
+            <p id="appendix-B.4-1.1.1">Incorporated Aaron Parecki's review suggestions.<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.3-1.2">
-            <p id="appendix-B.3-1.2.1">Acknowledged contributors to the new content in this specification.<a href="#appendix-B.3-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.4-1.2">
+            <p id="appendix-B.4-1.2.1">Acknowledged contributors to the new content in this specification.<a href="#appendix-B.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-01">
-<section id="appendix-B.4">
+<section id="appendix-B.5">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-01">
-<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-draft-ietf-oauth-rfc8725bis-01" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-01</a>
+<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-draft-ietf-oauth-rfc8725bis-01" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.4-1.1">
-            <p id="appendix-B.4-1.1.1">Applied editorial suggestions by Dan Moore.<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.5-1.1">
+            <p id="appendix-B.5-1.1.1">Applied editorial suggestions by Dan Moore.<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.4-1.2">
-            <p id="appendix-B.4-1.2.1">Described changes relative to RFC 8725.<a href="#appendix-B.4-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.5-1.2">
+            <p id="appendix-B.5-1.2.1">Described changes relative to RFC 8725.<a href="#appendix-B.5-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-00">
-<section id="appendix-B.5">
+<section id="appendix-B.6">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-00">
-<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-draft-ietf-oauth-rfc8725bis-00" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-00</a>
+<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-draft-ietf-oauth-rfc8725bis-00" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.5-1.1">
-            <p id="appendix-B.5-1.1.1">Draft adopted, no textual changes<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.6-1.1">
+            <p id="appendix-B.6-1.1.1">Draft adopted, no textual changes<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-02">
-<section id="appendix-B.6">
+<section id="appendix-B.7">
         <h3 id="name-draft-sheffer-oauth-rfc8725">
-<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-02</a>
+<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.6-1.1">
-            <p id="appendix-B.6-1.1.1">Obsoletes RFC 8725 and updates RFC 7519.<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.7-1.1">
+            <p id="appendix-B.7-1.1.1">Obsoletes RFC 8725 and updates RFC 7519.<a href="#appendix-B.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-01">
-<section id="appendix-B.7">
+<section id="appendix-B.8">
         <h3 id="name-draft-sheffer-oauth-rfc8725b">
-<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
+<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.7-1.1">
-            <p id="appendix-B.7-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-B.7-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.8-1.1">
+            <p id="appendix-B.8-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-B.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.7-1.2">
-            <p id="appendix-B.7-1.2.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-B.7-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.2">
+            <p id="appendix-B.8-1.2.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-B.8-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.7-1.3">
-            <p id="appendix-B.7-1.3.1">Defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-B.7-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.3">
+            <p id="appendix-B.8-1.3.1">Defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-B.8-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.7-1.4">
-            <p id="appendix-B.7-1.4.1">Mitigate DoS attacks resulting from abuse of compression.<a href="#appendix-B.7-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.4">
+            <p id="appendix-B.8-1.4.1">Mitigate DoS attacks resulting from abuse of compression.<a href="#appendix-B.8-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.7-1.5">
-            <p id="appendix-B.7-1.5.1">Mitigate JWT serialization format confusion.<a href="#appendix-B.7-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.8-1.5">
+            <p id="appendix-B.8-1.5.1">Mitigate JWT serialization format confusion.<a href="#appendix-B.8-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-00">
-<section id="appendix-B.8">
+<section id="appendix-B.9">
         <h3 id="name-draft-sheffer-oauth-rfc8725bi">
-<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-draft-sheffer-oauth-rfc8725bi" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
+<a href="#appendix-B.9" class="section-number selfRef">B.9. </a><a href="#name-draft-sheffer-oauth-rfc8725bi" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.8-1.1">
-            <p id="appendix-B.8-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-B.8-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.9-1.1">
+            <p id="appendix-B.9-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-B.9-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
