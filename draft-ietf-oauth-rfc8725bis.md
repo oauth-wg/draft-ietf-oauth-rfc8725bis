@@ -893,6 +893,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 [[Note to RFC Editor: please remove before publication.]]
 
+## draft-ietf-oauth-rfc8725bis-06
+
+* AD review followup: promoted selected lowercase must/should guidance to normative MUST language.
+
 ## draft-ietf-oauth-rfc8725bis-05
 
 * Applied suggestions by responsible AD Deb Cooley.
