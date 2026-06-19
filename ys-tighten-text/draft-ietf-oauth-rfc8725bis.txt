@@ -7,8 +7,8 @@ Internet-Draft                                                    Intuit
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 20 December 2026                         Self-Issued Consulting
-                                                            18 June 2026
+Expires: 21 December 2026                         Self-Issued Consulting
+                                                            19 June 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 December 2026.
+   This Internet-Draft will expire on 21 December 2026.
 
 Copyright Notice
 
@@ -122,15 +122,16 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Changes from RFC 8725
    Appendix B.  Document History
-     B.1.  draft-ietf-oauth-rfc8725bis-05
-     B.2.  draft-ietf-oauth-rfc8725bis-04
-     B.3.  draft-ietf-oauth-rfc8725bis-03
-     B.4.  draft-ietf-oauth-rfc8725bis-02
-     B.5.  draft-ietf-oauth-rfc8725bis-01
-     B.6.  draft-ietf-oauth-rfc8725bis-00
-     B.7.  draft-sheffer-oauth-rfc8725bis-02
-     B.8.  draft-sheffer-oauth-rfc8725bis-01
-     B.9.  draft-sheffer-oauth-rfc8725bis-00
+     B.1.  draft-ietf-oauth-rfc8725bis-06
+     B.2.  draft-ietf-oauth-rfc8725bis-05
+     B.3.  draft-ietf-oauth-rfc8725bis-04
+     B.4.  draft-ietf-oauth-rfc8725bis-03
+     B.5.  draft-ietf-oauth-rfc8725bis-02
+     B.6.  draft-ietf-oauth-rfc8725bis-01
+     B.7.  draft-ietf-oauth-rfc8725bis-00
+     B.8.  draft-sheffer-oauth-rfc8725bis-02
+     B.9.  draft-sheffer-oauth-rfc8725bis-01
+     B.10. draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -959,41 +960,46 @@ Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-B.1.  draft-ietf-oauth-rfc8725bis-05
+B.1.  draft-ietf-oauth-rfc8725bis-06
+
+   *  AD review followup: promoted selected lowercase must/should
+      guidance to normative MUST language.
+
+B.2.  draft-ietf-oauth-rfc8725bis-05
 
    *  Applied suggestions by responsible AD Deb Cooley.
 
-B.2.  draft-ietf-oauth-rfc8725bis-04
+B.3.  draft-ietf-oauth-rfc8725bis-04
 
    *  Applied suggestions by document shepherd Hannes Tschofenig.
 
-B.3.  draft-ietf-oauth-rfc8725bis-03
+B.4.  draft-ietf-oauth-rfc8725bis-03
 
    *  Described relationship between explicit typing and kinds of JWTs
       not already employing it.
 
-B.4.  draft-ietf-oauth-rfc8725bis-02
+B.5.  draft-ietf-oauth-rfc8725bis-02
 
    *  Incorporated Aaron Parecki's review suggestions.
 
    *  Acknowledged contributors to the new content in this
       specification.
 
-B.5.  draft-ietf-oauth-rfc8725bis-01
+B.6.  draft-ietf-oauth-rfc8725bis-01
 
    *  Applied editorial suggestions by Dan Moore.
 
    *  Described changes relative to RFC 8725.
 
-B.6.  draft-ietf-oauth-rfc8725bis-00
+B.7.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-B.7.  draft-sheffer-oauth-rfc8725bis-02
+B.8.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-B.8.  draft-sheffer-oauth-rfc8725bis-01
+B.9.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -1006,7 +1012,7 @@ B.8.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-B.9.  draft-sheffer-oauth-rfc8725bis-00
+B.10.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
