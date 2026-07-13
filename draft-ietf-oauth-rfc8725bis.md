@@ -477,10 +477,10 @@ In accordance with established cryptographic best practices, each key MUST be us
 exactly one algorithm. Compliance with this requirement MUST be enforced and
 validated at the time the cryptographic operation is executed.
 
-Libraries SHOULD opt for defensive security policies to cope
+As a best practice, libraries should opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
 as the JSON parser.
-In particular, libraries SHOULD use allowlists for critical
+In particular, libraries should use allowlists for critical
 parameters such as "alg" instead of blocklists, because blocklists
 cannot anticipate every unsafe or misspelled value an attacker might use.
 
@@ -526,7 +526,7 @@ If even just a few bits of the random value are predictable across multiple mess
 the security of the signature scheme may be compromised. In the worst case,
 the private key may be recoverable by an attacker. To counter these attacks,
 JWT libraries  SHOULD implement ECDSA using the deterministic
-approach defined in  {{RFC6979}}.
+approach defined in  {{RFC6979}}, unless this is not reasonably implementable.
 This approach is completely compatible with existing ECDSA verifiers and so can be implemented
 without new algorithm identifiers being required.
 
@@ -592,7 +592,8 @@ Note that even when used for key encryption, password-based encryption is
 
 Compression of data SHOULD NOT be used when creating a JWE, because
 such compressed data often reveals information about the plaintext,
-as described in {{Kelsey}}.
+as described in {{Kelsey}}, unless this risk is outside the applicable
+threat model.
 
 
 ## Use UTF-8 {#use-utf8}
@@ -660,9 +661,10 @@ and/or sanitizing the received value.
 which may contain an arbitrary URL,
 could result in server-side request forgery (SSRF) attacks. Applications SHOULD protect against such
 attacks, e.g., by matching the URL to an allowlist of permitted locations
-and ensuring no cookies are sent in the GET request.
+and ensuring no cookies are sent in the GET request, unless there are no
+local resources to protect (e.g., a hosted sandbox).
 
-When such an allowlist is not available, the authorization server SHOULD check what a hostname resolves to
+When such an allowlist is not available, the authorization server MUST check what a hostname resolves to
 and avoid making a request if it resolves to a loopback or local IP address,
 because otherwise an attacker-chosen URL can cause the server to fetch arbitrary content from within the security domain.
 An example of this is when "attacker.example.com/etc/passwd" is used
@@ -892,6 +894,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-07
+
+* Applied ARTART review suggestions for SHOULD language in Sections 3.1, 3.2, 3.6, and 3.10.
 
 ## draft-ietf-oauth-rfc8725bis-06
 
