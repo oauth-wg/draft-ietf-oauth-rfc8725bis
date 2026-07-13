@@ -794,12 +794,13 @@ Implementations are RECOMMENDED to set a reasonable upper limit on
 the number of hash iterations that can be performed
 when validating encrypted content using PBES2 encryption algorithms,
 so as to prevent attackers from imposing
-an unreasonable computational burden on recipients.
-As an example, {{OWASP-Password-Storage}} recommends 600,000 iterations (at time of publishing) when using
-HMAC-SHA-256 in a FIPS-140 context.
-Rejecting inputs with a `p2c` (PBES2 Count) value larger than twice that figure is RECOMMENDED,
-unless threat analysis on the recipient side results in accepting a larger
-number of iterations.
+an unreasonable computational burden on recipients, and to reject inputs
+whose `p2c` (PBES2 Count) value exceeds that limit.
+As an example, {{OWASP-Password-Storage}} recommends 600,000 iterations
+(at time of publishing) when using HMAC-SHA-256 in a FIPS-140 context.
+Using an upper limit of no more than twice that figure (1,200,000 in this
+example) is RECOMMENDED, unless threat analysis on the recipient side
+results in accepting a larger number of iterations.
 
 ## Check JWT Format Type {#token-format}
 
@@ -892,6 +893,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-07
+
+* Clarified PBES2 `p2c` rejection threshold in Section 3.13 (ARTART review).
 
 ## draft-ietf-oauth-rfc8725bis-06
 
