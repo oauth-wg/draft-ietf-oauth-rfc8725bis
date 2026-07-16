@@ -1071,7 +1071,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 14 January 2027</td>
+<td class="center">Expires 17 January 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1090,12 +1090,12 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc7519" class="eref">7519</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-13" class="published">13 July 2026</time>
+<time datetime="2026-07-16" class="published">16 July 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-14">14 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-01-17">17 January 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1895,45 +1895,55 @@ and the acceptable "typ" values for the two kinds of JWTs are distinct.<a href="
 media type of the complete JWS.
 To keep header values compact, producers are <span class="bcp14">RECOMMENDED</span> to omit the
 "application/" prefix from "typ" when no other "/" appears in the media type,
-as specified in that section;
+as specified in that section, unless application requirements or interoperability
+needs call for including the prefix;
 recipients using the media type value <span class="bcp14">MUST</span> treat a "typ" value with no "/"
 as if "application/" were prepended.
-When explicit typing is employed, implementations <span class="bcp14">SHOULD</span> register and use the
-full media type name "application/example+jwt", where "example" identifies the
-specific kind of JWT, and <span class="bcp14">SHOULD</span> set the corresponding "typ" value to
-"example+jwt", because distinct types make cross-JWT substitution harder when
-validators check "typ", and because misapplying the Section 4.1.9 prefix rule
-can cause validators to reject otherwise valid tokens or accept the wrong type.
-This pairing <span class="bcp14">SHOULD</span> be omitted only when the JWT cannot be confused with other
-kinds of JWTs in its application context.
-For example, for Security Event Tokens (SETs) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>, the media type is
-"application/secevent+jwt" and the "typ" value <span class="bcp14">SHOULD</span> be "secevent+jwt", because
+When explicit typing is employed:<a href="#section-3.11-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-3.11-4.1">
+            <p id="section-3.11-4.1.1">Implementations <span class="bcp14">SHOULD</span> register the full media type name
+"application/example+jwt", where "example" identifies the specific kind
+of JWT.<a href="#section-3.11-4.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-3.11-4.2">
+            <p id="section-3.11-4.2.1">Implementations <span class="bcp14">SHOULD</span> set the corresponding "typ" value to "example+jwt".<a href="#section-3.11-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-3.11-5">These recommendations apply unless the JWT cannot be confused with other
+kinds of JWTs in its application context, in which case the media type and
+"typ" pairing <span class="bcp14">MAY</span> be omitted.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
+<p id="section-3.11-6">Distinct types make cross-JWT substitution harder when validators check "typ".
+Misapplying the Section 4.1.9 prefix rule can cause validators to reject
+otherwise valid tokens or accept the wrong type.<a href="#section-3.11-6" class="pilcrow">¶</a></p>
+<p id="section-3.11-7">For example, for Security Event Tokens (SETs) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>, the media type is
+"application/secevent+jwt" and the "typ" value should be "secevent+jwt", because
 SETs are often issued in contexts where they could otherwise be mistaken for
-other kinds of JWTs.<a href="#section-3.11-3" class="pilcrow">¶</a></p>
-<p id="section-3.11-4">When applying explicit typing to a Nested JWT, the "typ" Header
+other kinds of JWTs.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
+<p id="section-3.11-8">When applying explicit typing to a Nested JWT, the "typ" Header
  Parameter containing the explicit type value  <span class="bcp14">MUST</span> be present in the inner JWT of the Nested JWT (the JWT
 whose payload is the JWT Claims Set).
 In some cases, the same "typ" Header Parameter value will be present in the outer JWT as well,
-to explicitly type the entire Nested JWT.<a href="#section-3.11-4" class="pilcrow">¶</a></p>
-<p id="section-3.11-5">Note that the use of explicit typing may not achieve disambiguation
+to explicitly type the entire Nested JWT.<a href="#section-3.11-8" class="pilcrow">¶</a></p>
+<p id="section-3.11-9">Note that the use of explicit typing may not achieve disambiguation
  from existing kinds of JWTs,
 as the validation rules for kinds of JWTs defined before
 the guidance on explicit typing in <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span> was available
-often do not use the "typ" Header Parameter value.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
-<p id="section-3.11-6">Also, note that attempting to retrofit mandatory explicit typing
+often do not use the "typ" Header Parameter value.<a href="#section-3.11-9" class="pilcrow">¶</a></p>
+<p id="section-3.11-10">Also, note that attempting to retrofit mandatory explicit typing
 into the validation rules for existing kinds of JWTs not already using it
 would be a breaking change;
 if a legacy implementation creates a JWT without the explicit type and
 an updated implementation receiving it requires the explicit type,
 the JWT will be rejected.  The implementations will not interoperate.
 However, retrofitting a rule that if the JWT contains a "typ" value,
-then it <span class="bcp14">MUST</span> be the expected explicit type, is not a breaking change.<a href="#section-3.11-6" class="pilcrow">¶</a></p>
-<p id="section-3.11-7">Another consideration for existing kinds of JWTs is that the use of
+then it <span class="bcp14">MUST</span> be the expected explicit type, is not a breaking change.<a href="#section-3.11-10" class="pilcrow">¶</a></p>
+<p id="section-3.11-11">Another consideration for existing kinds of JWTs is that the use of
 a "typ" value of "JWT", as originally recommended in <span><a href="https://rfc-editor.org/rfc/rfc7519#section-5.1" class="relref">Section 5.1</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
-does not constitute effective explicit typing.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
-<p id="section-3.11-8">Explicit typing is <span class="bcp14">RECOMMENDED</span> for new uses of JWTs, because without it,
+does not constitute effective explicit typing.<a href="#section-3.11-11" class="pilcrow">¶</a></p>
+<p id="section-3.11-12">Explicit typing is <span class="bcp14">RECOMMENDED</span> for new uses of JWTs, because without it,
 mutually exclusive validation rules are harder to enforce and cross-JWT
-confusion becomes more likely.<a href="#section-3.11-8" class="pilcrow">¶</a></p>
+confusion becomes more likely.<a href="#section-3.11-12" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="preventing-confusion">
@@ -2295,6 +2305,9 @@ for their contributions to the new content in this specification.<a href="#secti
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
             <p id="appendix-B.1-1.1.1">Applied ARTART review suggestions for <span class="bcp14">SHOULD</span> language in Sections 3.1, 3.2, 3.6, and 3.10.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.2">
+            <p id="appendix-B.1-1.2.1">Applied ARTART review suggestions regarding explicit typing (Section 3.11).<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
