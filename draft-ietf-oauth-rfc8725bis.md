@@ -697,19 +697,28 @@ Per Section 4.1.9 of {{RFC7515}}, the "typ" Header Parameter declares the
 media type of the complete JWS.
 To keep header values compact, producers are RECOMMENDED to omit the
 "application/" prefix from "typ" when no other "/" appears in the media type,
-as specified in that section;
+as specified in that section, unless application requirements or interoperability
+needs call for including the prefix;
 recipients using the media type value MUST treat a "typ" value with no "/"
 as if "application/" were prepended.
-When explicit typing is employed, implementations SHOULD register and use the
-full media type name "application/example+jwt", where "example" identifies the
-specific kind of JWT, and SHOULD set the corresponding "typ" value to
-"example+jwt", because distinct types make cross-JWT substitution harder when
-validators check "typ", and because misapplying the Section 4.1.9 prefix rule
-can cause validators to reject otherwise valid tokens or accept the wrong type.
-This pairing SHOULD be omitted only when the JWT cannot be confused with other
-kinds of JWTs in its application context.
+When explicit typing is employed:
+
+* Implementations SHOULD register the full media type name
+  "application/example+jwt", where "example" identifies the specific kind
+  of JWT.
+
+* Implementations SHOULD set the corresponding "typ" value to "example+jwt".
+
+These recommendations apply unless the JWT cannot be confused with other
+kinds of JWTs in its application context, in which case the media type and
+"typ" pairing MAY be omitted.
+
+Distinct types make cross-JWT substitution harder when validators check "typ".
+Misapplying the Section 4.1.9 prefix rule can cause validators to reject
+otherwise valid tokens or accept the wrong type.
+
 For example, for Security Event Tokens (SETs) {{RFC8417}}, the media type is
-"application/secevent+jwt" and the "typ" value SHOULD be "secevent+jwt", because
+"application/secevent+jwt" and the "typ" value should be "secevent+jwt", because
 SETs are often issued in contexts where they could otherwise be mistaken for
 other kinds of JWTs.
 
@@ -898,6 +907,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 ## draft-ietf-oauth-rfc8725bis-07
 
 * Applied ARTART review suggestions for SHOULD language in Sections 3.1, 3.2, 3.6, and 3.10.
+* Applied ARTART review suggestions regarding explicit typing (Section 3.11).
 
 ## draft-ietf-oauth-rfc8725bis-06
 
