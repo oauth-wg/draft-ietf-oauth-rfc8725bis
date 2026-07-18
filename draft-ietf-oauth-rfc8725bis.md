@@ -96,6 +96,7 @@ informative:
       name: Brendan Rius
     title: JWT Cracker
     target: https://github.com/brendan-rius/c-jwt-cracker
+    date: false
   Kelsey: DOI.10.1007/3-540-45661-9_21
   Langkemper:
     author:
