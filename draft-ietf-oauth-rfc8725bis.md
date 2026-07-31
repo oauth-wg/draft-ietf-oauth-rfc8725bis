@@ -539,9 +539,9 @@ proposes deprecating the "none" and "RSA1_5" algorithms.
 
 All cryptographic operations used in the JWT MUST be validated and the entire JWT MUST be rejected
 if any of them fail to validate.
-This is true not only of JWTs with a single set of Header Parameters
-but also for Nested JWTs, as defined in {{Section 2 of RFC7519}},
-in which both outer and inner operations MUST be validated
+This is true of JWTs with a single set of Header Parameters.
+If an implementation supports Nested JWTs, as defined in {{Section 2 of RFC7519}},
+then both the outer and inner operations MUST be validated
 using the keys and algorithms supplied by the application.
 
 Libraries MUST allow the verifier to distinguish between signed JWTs (JWSes) and encrypted JWTs (JWEs).
@@ -904,6 +904,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-08
+
+* Clarified that Nested JWT validation applies when Nested JWTs are supported (SECDIR review).
 
 ## draft-ietf-oauth-rfc8725bis-07
 
