@@ -916,7 +916,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 ## draft-ietf-oauth-rfc8725bis-08
 
 * Clarified that Nested JWT validation applies when Nested JWTs are supported (SECDIR review).
-* Applied IESG ballot comments by Ketan Talaulikar (Introduction relationships, Compact Serialization and typ prefix citations).
+* Applied IESG ballot comments by Ketan Talaulikar (Introduction relationships, Compact Serialization and `typ` prefix citations).
 
 ## draft-ietf-oauth-rfc8725bis-07
 
