@@ -961,24 +961,32 @@ Appendix A.  Changes from RFC 8725
 
    1.  Algorithm Verification: Added defensive checking to address
        incorrect reading of alg values as being case-insensitive
-       (Section 3.1).
+       (Section 2.11 and Section 3.1).
 
    2.  Encryption-Signature Confusion: Added mitigation for attacks
        where verifiers don't distinguish between successful decryption
-       and successful signature validation (Section 3.12).
+       and successful signature validation (Section 2.3 and
+       Section 3.3).
 
    3.  PBES2 Count Limits: Added requirements to reject unreasonably
        large p2c (PBES2 Count) values to prevent DoS attacks
-       (Section 3.13).
+       (Section 2.10 and Section 3.13).
 
    4.  JWT Format Confusion: Added mitigation for JWT serialization
-       format confusion attacks (Section 3.14).
+       format confusion attacks (Section 2.13 and Section 3.14).
 
    5.  Compression DoS: Added mitigation for DoS attacks resulting from
-       abuse of compression in JWE (Section 3.15).
+       abuse of compression in JWE (Section 2.12 and Section 3.15).
 
-   6.  Described relationship between explicit typing and kinds of JWTs
-       not already employing it.
+   6.  Explicit Typing: Expanded the guidance on explicit typing by
+       defining recommended typ and media type conventions, recipient
+       processing rules, and deployment guidance for new and existing
+       JWT types (Section 3.11 and Section 3.12).
+
+   7.  Untrusted Header Parameters and SSRF: Added guidance on treating
+       kid, jku, and x5u as potentially attacker-controlled input,
+       including SSRF mitigations and DNS resolution checks when
+       processing untrusted URLs (Section 3.10).
 
 Appendix B.  Document History
 
@@ -991,6 +999,9 @@ B.1.  draft-ietf-oauth-rfc8725bis-08
 
    *  Applied IESG ballot comments by Ketan Talaulikar (Introduction
       relationships, Compact Serialization and typ prefix citations).
+
+   *  Updated Appendix A (Changes from RFC 8725) with complete bullets
+      and section references.
 
 B.2.  draft-ietf-oauth-rfc8725bis-07
 

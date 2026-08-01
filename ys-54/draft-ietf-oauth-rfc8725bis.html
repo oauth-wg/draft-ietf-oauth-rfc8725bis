@@ -1615,7 +1615,7 @@ thereby imposing an unreasonable computational burden on recipients.<a href="#se
 <p id="section-2.10-2">For mitigations, see <a href="#limit-iterations" class="auto internal xref">Section 3.13</a>.<a href="#section-2.10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-algorithm-verification-code-not-defensively-written">
+<div id="alg-verification-threat">
 <section id="section-2.11">
         <h3 id="name-algorithm-verification-code">
 <a href="#section-2.11" class="section-number selfRef">2.11. </a><a href="#name-algorithm-verification-code" class="section-name selfRef">Algorithm Verification Code Not Defensively Written</a>
@@ -1629,7 +1629,7 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
 <p id="section-2.11-2">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>.<a href="#section-2.11-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-jwe-decompression-bomb-attack">
+<div id="jwe-decompression-bomb">
 <section id="section-2.12">
         <h3 id="name-jwe-decompression-bomb-atta">
 <a href="#section-2.12" class="section-number selfRef">2.12. </a><a href="#name-jwe-decompression-bomb-atta" class="section-name selfRef">JWE Decompression Bomb Attack</a>
@@ -1638,7 +1638,7 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
 <p id="section-2.12-2">For mitigation, see <a href="#limit-decompression" class="auto internal xref">Section 3.15</a>.<a href="#section-2.12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-jwt-format-confusion">
+<div id="jwt-format-confusion">
 <section id="section-2.13">
         <h3 id="name-jwt-format-confusion">
 <a href="#section-2.13" class="section-number selfRef">2.13. </a><a href="#name-jwt-format-confusion" class="section-name selfRef">JWT Format Confusion</a>
@@ -2278,22 +2278,25 @@ for their contributions to the new content in this specification.<a href="#secti
 <p id="appendix-A-1">This document obsoletes RFC 8725 and provides several significant improvements and additions:<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="appendix-A-2">
 <li id="appendix-A-2.1">
-          <p id="appendix-A-2.1.1">Algorithm Verification: Added defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive (<a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>).<a href="#appendix-A-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.1.1">Algorithm Verification: Added defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive (<a href="#alg-verification-threat" class="auto internal xref">Section 2.11</a> and <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>).<a href="#appendix-A-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.2">
-          <p id="appendix-A-2.2.1">Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation (<a href="#preventing-confusion" class="auto internal xref">Section 3.12</a>).<a href="#appendix-A-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.2.1">Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation (<a href="#incorrect-composition-of-encryption-and-signature" class="auto internal xref">Section 2.3</a> and <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>).<a href="#appendix-A-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.3">
-          <p id="appendix-A-2.3.1">PBES2 Count Limits: Added requirements to reject unreasonably large <code>p2c</code> (PBES2 Count) values to prevent DoS attacks (<a href="#limit-iterations" class="auto internal xref">Section 3.13</a>).<a href="#appendix-A-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.3.1">PBES2 Count Limits: Added requirements to reject unreasonably large <code>p2c</code> (PBES2 Count) values to prevent DoS attacks (<a href="#unreasonable-iterations" class="auto internal xref">Section 2.10</a> and <a href="#limit-iterations" class="auto internal xref">Section 3.13</a>).<a href="#appendix-A-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.4">
-          <p id="appendix-A-2.4.1">JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks (<a href="#token-format" class="auto internal xref">Section 3.14</a>).<a href="#appendix-A-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.4.1">JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks (<a href="#jwt-format-confusion" class="auto internal xref">Section 2.13</a> and <a href="#token-format" class="auto internal xref">Section 3.14</a>).<a href="#appendix-A-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.5">
-          <p id="appendix-A-2.5.1">Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE (<a href="#limit-decompression" class="auto internal xref">Section 3.15</a>).<a href="#appendix-A-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.5.1">Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE (<a href="#jwe-decompression-bomb" class="auto internal xref">Section 2.12</a> and <a href="#limit-decompression" class="auto internal xref">Section 3.15</a>).<a href="#appendix-A-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.6">
-          <p id="appendix-A-2.6.1">Described relationship between explicit typing and kinds of JWTs not already employing it.<a href="#appendix-A-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.6.1">Explicit Typing: Expanded the guidance on explicit typing by defining recommended <code>typ</code> and media type conventions, recipient processing rules, and deployment guidance for new and existing JWT types (<a href="#use-typ" class="auto internal xref">Section 3.11</a> and <a href="#preventing-confusion" class="auto internal xref">Section 3.12</a>).<a href="#appendix-A-2.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-A-2.7">
+          <p id="appendix-A-2.7.1">Untrusted Header Parameters and SSRF: Added guidance on treating <code>kid</code>, <code>jku</code>, and <code>x5u</code> as potentially attacker-controlled input, including SSRF mitigations and DNS resolution checks when processing untrusted URLs (<a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>).<a href="#appendix-A-2.7.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 </section>
@@ -2315,6 +2318,9 @@ for their contributions to the new content in this specification.<a href="#secti
 </li>
           <li class="normal" id="appendix-B.1-1.2">
             <p id="appendix-B.1-1.2.1">Applied IESG ballot comments by Ketan Talaulikar (Introduction relationships, Compact Serialization and <code>typ</code> prefix citations).<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.3">
+            <p id="appendix-B.1-1.3.1">Updated Appendix A (Changes from RFC 8725) with complete bullets and section references.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
