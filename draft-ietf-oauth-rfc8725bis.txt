@@ -179,6 +179,14 @@ Table of Contents
    statement.  Readers are advised to seek out any errata or updates
    that apply to this document.
 
+   This document obsoletes [RFC8725].  In addition to retaining the
+   guidance from that BCP, it adds recommendations addressing attacks
+   and vulnerabilities discovered since its publication; Appendix A
+   summarizes those additions.  This document also updates [RFC7519] by
+   tightening claim and "typ" usage and validation (especially audience,
+   issuer/subject, and explicit typing), and by restricting how
+   Unsecured JWTs (alg value "none") are used.
+
 1.1.  Target Audience
 
    The intended audiences of this document are:
@@ -370,12 +378,13 @@ Table of Contents
 2.13.  JWT Format Confusion
 
    Some JWS implementations support both the Compact and JSON
-   Serializations.  While JWTs must use the Compact Serialization, if an
-   application by mistake verifies a JWT using the JSON Serialization
-   but extracts claims by parsing it as a JWT using the Compact
-   Serialization (e.g., via string splitting), an attacker can craft a
-   valid JSON JWS with a forged payload.  This mismatch in format
-   handling can lead to authentication bypass or impersonation.
+   Serializations.  While JWTs must use the Compact Serialization
+   (Section 1 of [RFC7519]), if an application by mistake verifies a JWT
+   using the JSON Serialization but extracts claims by parsing it as a
+   JWT using the Compact Serialization (e.g., via string splitting), an
+   attacker can craft a valid JSON JWS with a forged payload.  This
+   mismatch in format handling can lead to authentication bypass or
+   impersonation.
 
    For mitigations, see Section 3.14.
 
@@ -624,8 +633,9 @@ Table of Contents
    media type and "typ" pairing MAY be omitted.
 
    Distinct types make cross-JWT substitution harder when validators
-   check "typ".  Misapplying the Section 4.1.9 prefix rule can cause
-   validators to reject otherwise valid tokens or accept the wrong type.
+   check "typ".  Misapplying the prefix rule in Section 4.1.9 of
+   [RFC7515] can cause validators to reject otherwise valid tokens or
+   accept the wrong type.
 
    For example, for Security Event Tokens (SETs) [RFC8417], the media
    type is "application/secevent+jwt" and the "typ" value should be
@@ -762,9 +772,9 @@ Table of Contents
 6.2.  Acknowledgements for [[ this specification ]]
 
    We would like to thank Brian Campbell, Deb Cooley, Jianjun Chen, Dan
-   Moore, Aaron Parecki, Filip Skokan, Tom Tervoort, Enze Wang, and
-   Jesse Yang for their contributions to the new content in this
-   specification.
+   Moore, Aaron Parecki, Filip Skokan, Ketan Talaulikar, Tom Tervoort,
+   Enze Wang, and Jesse Yang for their contributions to the new content
+   in this specification.
 
 7.  References
 
@@ -986,6 +996,9 @@ B.1.  draft-ietf-oauth-rfc8725bis-08
 
    *  Clarified that Nested JWT validation applies when Nested JWTs are
       supported (SECDIR review).
+
+   *  Applied IESG ballot comments by Ketan Talaulikar (Introduction
+      relationships, Compact Serialization and typ prefix citations).
 
    *  Updated Appendix A (Changes from RFC 8725) with complete bullets
       and section references.
