@@ -1731,6 +1731,11 @@ without new algorithm identifiers being required.<a href="#section-3.2-5.2.1" cl
         </ul>
 <p id="section-3.2-6">Readers are advised that <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>
 proposes deprecating the "none" and "RSA1_5" algorithms.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.2-7">Readers are advised that <span>[<a href="#RFC9864" class="cite xref">RFC9864</a>]</span> defines fully-specified JOSE
+algorithm identifiers and deprecates polymorphic identifiers such as "EdDSA".
+New deployments <span class="bcp14">SHOULD</span> prefer fully-specified identifiers (for example,
+"Ed25519" rather than "EdDSA") when negotiating and configuring algorithms,
+unless backward compatibility requires use of the older polymorphic identifiers.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validate-crypto">
@@ -2257,6 +2262,10 @@ for their contributions to the new content in this specification.<a href="#secti
         <dd>
 <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Labunets, A.</span>, and <span class="refAuthor">D. Fett</span>, <span class="refTitle">"Best Current Practice for OAuth 2.0 Security"</span>, <span class="seriesInfo">BCP 240</span>, <span class="seriesInfo">RFC 9700</span>, <span class="seriesInfo">DOI 10.17487/RFC9700</span>, <time datetime="2025-01" class="refDate">January 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9700">https://www.rfc-editor.org/rfc/rfc9700</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9864">[RFC9864]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"Fully-Specified Algorithms for JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)"</span>, <span class="seriesInfo">RFC 9864</span>, <span class="seriesInfo">DOI 10.17487/RFC9864</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9864">https://www.rfc-editor.org/rfc/rfc9864</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Sanso">[Sanso]</dt>
         <dd>
 <span class="refAuthor">Sanso, A.</span>, <span class="refTitle">"Critical Vulnerability in JSON Web Encryption"</span>, <time datetime="2017-03" class="refDate">March 2017</time>, <span>&lt;<a href="https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/">https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/</a>&gt;</span>. </dd>
@@ -2321,6 +2330,9 @@ for their contributions to the new content in this specification.<a href="#secti
 </li>
           <li class="normal" id="appendix-B.1-1.3">
             <p id="appendix-B.1-1.3.1">Updated Appendix A (Changes from RFC 8725) with complete bullets and section references.<a href="#appendix-B.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.4">
+            <p id="appendix-B.1-1.4.1">Added an informative mention of fully-specified JOSE algorithm identifiers (<span>[<a href="#RFC9864" class="cite xref">RFC9864</a>]</span>).<a href="#appendix-B.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
