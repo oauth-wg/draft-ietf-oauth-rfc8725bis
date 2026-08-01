@@ -432,7 +432,7 @@ thereby imposing an unreasonable computational burden on recipients.
 For mitigations, see {{limit-iterations}}.
 
 
-## Algorithm Verification Code Not Defensively Written
+## Algorithm Verification Code Not Defensively Written {#alg-verification-threat}
 
 Some JWT implementations included a list of disallowed algorithm names,
 e.g., do not use "none".
@@ -443,7 +443,7 @@ could change the "alg" value to "noNE" and bypass the security check.
 
 For mitigations, see {{algorithm-verification}}.
 
-## JWE Decompression Bomb Attack
+## JWE Decompression Bomb Attack {#jwe-decompression-bomb}
 
 
 JWE supports the optional compression of the plaintext prior to encryption via the "zip" header parameter as defined in {{RFC7516}} Section 4.1.3. Upon decryption, recipients are expected to decompress the payload before further processing. However, if the recipient does not enforce limits on the size of the decompressed output, an attacker can craft a malicious JWE with a highly compressed, arbitrarily large payload. This can cause excessive resource consumption (CPU, memory), resulting in Denial of Service (DoS).
@@ -451,7 +451,7 @@ JWE supports the optional compression of the plaintext prior to encryption via t
 For mitigation, see {{limit-decompression}}.
 
 
-## JWT Format Confusion
+## JWT Format Confusion {#jwt-format-confusion}
 
 Some JWS implementations support both the Compact and JSON Serializations. While JWTs must use the Compact Serialization ({{Section 1 of RFC7519}}), if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.
 
@@ -897,17 +897,19 @@ for their contributions to the new content in this specification.
 
 This document obsoletes RFC 8725 and provides several significant improvements and additions:
 
-1. Algorithm Verification: Added defensive checking to address incorrect reading of `alg` values as being case-insensitive ({{algorithm-verification}}).
+1. Algorithm Verification: Added defensive checking to address incorrect reading of `alg` values as being case-insensitive ({{alg-verification-threat}} and {{algorithm-verification}}).
 
-2. Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation ({{preventing-confusion}}).
+2. Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation ({{incorrect-composition-of-encryption-and-signature}} and {{validate-crypto}}).
 
-3. PBES2 Count Limits: Added requirements to reject unreasonably large `p2c` (PBES2 Count) values to prevent DoS attacks ({{limit-iterations}}).
+3. PBES2 Count Limits: Added requirements to reject unreasonably large `p2c` (PBES2 Count) values to prevent DoS attacks ({{unreasonable-iterations}} and {{limit-iterations}}).
 
-4. JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks ({{token-format}}).
+4. JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks ({{jwt-format-confusion}} and {{token-format}}).
 
-5. Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE ({{limit-decompression}}).
+5. Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE ({{jwe-decompression-bomb}} and {{limit-decompression}}).
 
-6. Described relationship between explicit typing and kinds of JWTs not already employing it.
+6. Explicit Typing: Expanded the guidance on explicit typing by defining recommended `typ` and media type conventions, recipient processing rules, and deployment guidance for new and existing JWT types ({{use-typ}} and {{preventing-confusion}}).
+
+7. Untrusted Header Parameters and SSRF: Added guidance on treating `kid`, `jku`, and `x5u` as potentially attacker-controlled input, including SSRF mitigations and DNS resolution checks when processing untrusted URLs ({{do-not-trust-claims}}).
 
 # Document History
 
@@ -917,6 +919,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 * Clarified that Nested JWT validation applies when Nested JWTs are supported (SECDIR review).
 * Applied IESG ballot comments by Ketan Talaulikar (Introduction relationships, Compact Serialization and `typ` prefix citations).
+* Updated Appendix A (Changes from RFC 8725) with complete bullets and section references.
 
 ## draft-ietf-oauth-rfc8725bis-07
 
