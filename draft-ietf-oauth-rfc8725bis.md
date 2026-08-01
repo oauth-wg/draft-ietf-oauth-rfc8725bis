@@ -541,6 +541,12 @@ without new algorithm identifiers being required.
 Readers are advised that {{I-D.ietf-jose-deprecate-none-rsa15}}
 proposes deprecating the "none" and "RSA1_5" algorithms.
 
+Readers are advised that {{?RFC9864}} defines fully-specified JOSE
+algorithm identifiers and deprecates polymorphic identifiers such as "EdDSA".
+New deployments SHOULD prefer fully-specified identifiers (for example,
+"Ed25519" rather than "EdDSA") when negotiating and configuring algorithms,
+unless backward compatibility requires use of the older polymorphic identifiers.
+
 
 ## Validate All Cryptographic Operations {#validate-crypto}
 
@@ -920,6 +926,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 * Clarified that Nested JWT validation applies when Nested JWTs are supported (SECDIR review).
 * Applied IESG ballot comments by Ketan Talaulikar (Introduction relationships, Compact Serialization and `typ` prefix citations).
 * Updated Appendix A (Changes from RFC 8725) with complete bullets and section references.
+* Added an informative mention of fully-specified JOSE algorithm identifiers ({{?RFC9864}}).
 
 ## draft-ietf-oauth-rfc8725bis-07
 
