@@ -722,7 +722,7 @@ kinds of JWTs in its application context, in which case the media type and
 "typ" pairing MAY be omitted.
 
 Distinct types make cross-JWT substitution harder when validators check "typ".
-Misapplying the prefix rule in Section 4.1.9 of {{RFC7515}} can cause validators to reject
+Misapplying the prefix rule in {{Section 4.1.9 of RFC7515}} can cause validators to reject
 otherwise valid tokens or accept the wrong type.
 
 For example, for Security Event Tokens (SETs) {{RFC8417}}, the media type is
