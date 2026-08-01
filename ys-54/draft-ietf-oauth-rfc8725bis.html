@@ -1920,7 +1920,7 @@ of JWT.<a href="#section-3.11-4.1.1" class="pilcrow">¶</a></p>
 kinds of JWTs in its application context, in which case the media type and
 "typ" pairing <span class="bcp14">MAY</span> be omitted.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
 <p id="section-3.11-6">Distinct types make cross-JWT substitution harder when validators check "typ".
-Misapplying the prefix rule in Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> can cause validators to reject
+Misapplying the prefix rule in <span><a href="https://rfc-editor.org/rfc/rfc7515#section-4.1.9" class="relref">Section 4.1.9</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> can cause validators to reject
 otherwise valid tokens or accept the wrong type.<a href="#section-3.11-6" class="pilcrow">¶</a></p>
 <p id="section-3.11-7">For example, for Security Event Tokens (SETs) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>, the media type is
 "application/secevent+jwt" and the "typ" value should be "secevent+jwt", because
