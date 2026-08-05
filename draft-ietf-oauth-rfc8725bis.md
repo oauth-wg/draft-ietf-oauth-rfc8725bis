@@ -513,9 +513,9 @@ The "none" algorithm should only be used when the JWT is cryptographically prote
 JWTs using "none" are often used in application contexts in which the content is optionally signed.
 The URL-safe claims representation and processing in this context can be the same in both
 the signed and unsigned cases.
-JWT libraries  SHOULD NOT generate JWTs using "none" unless
+JWT libraries  MUST NOT generate JWTs using "none" unless
 explicitly requested to do so by the caller.
-Similarly, JWT libraries  SHOULD NOT consume JWTs using "none"
+Similarly, JWT libraries  MUST NOT consume JWTs using "none"
  unless explicitly requested by the caller.
 
  Applications  SHOULD follow these algorithm-specific recommendations,
