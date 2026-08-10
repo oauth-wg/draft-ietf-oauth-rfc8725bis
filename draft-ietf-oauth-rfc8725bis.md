@@ -5,7 +5,7 @@ author:
 - email: yaronf.ietf@gmail.com
   ins: Y. Sheffer
   name: Yaron Sheffer
-  organization: Intuit
+  organization: Independent
 - email: dick.hardt@gmail.com
   ins: D. Hardt
   name: Dick Hardt
