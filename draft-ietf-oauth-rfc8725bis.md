@@ -526,6 +526,7 @@ encrypted JWTs (JWEs), and
 signed and encrypted JWTs (Nested JWTs).
 This allows recipients to easily apply policies that only accept
 appropriate JWTs for the application context.
+Note that authentication use cases typically require the use of signed JWTs.
 
 ## Validate Cryptographic Inputs {#validate-inputs}
 
@@ -856,6 +857,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 6. Explicit Typing: Expanded the guidance on explicit typing by defining recommended `typ` and media type conventions, recipient processing rules, and deployment guidance for new and existing JWT types ({{use-typ}} and {{preventing-confusion}}).
 
 7. Untrusted Header Parameters and SSRF: Added guidance on treating `kid`, `jku`, and `x5u` as potentially attacker-controlled input, including SSRF mitigations and DNS resolution checks when processing untrusted URLs ({{do-not-trust-claims}}).
+
+8. Normatively references {{I-D.ietf-jose-deprecate-none-rsa15}},
+   makes the text requiring application opt-in to use JWTs with algorithm "none" a "MUST",
+   and states that the RSA-PKCS1 v1.5 algorithms are deprecated.
 
 # Document History
 
