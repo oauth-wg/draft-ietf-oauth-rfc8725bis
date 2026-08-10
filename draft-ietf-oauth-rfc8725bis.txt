@@ -3,12 +3,12 @@
 
 
 Web Authorization Protocol                                    Y. Sheffer
-Internet-Draft                                                    Intuit
+Internet-Draft                                               Independent
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 2 February 2027                          Self-Issued Consulting
-                                                           1 August 2026
+Expires: 11 February 2027                         Self-Issued Consulting
+                                                          10 August 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 February 2027.
+   This Internet-Draft will expire on 11 February 2027.
 
 Copyright Notice
 
@@ -1086,7 +1086,7 @@ B.12.  draft-sheffer-oauth-rfc8725bis-00
 Authors' Addresses
 
    Yaron Sheffer
-   Intuit
+   Independent
    Email: yaronf.ietf@gmail.com
 
 
