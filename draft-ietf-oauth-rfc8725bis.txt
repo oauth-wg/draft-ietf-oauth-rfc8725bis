@@ -231,7 +231,7 @@ Table of Contents
       the signature using HMAC-SHA256 and using the RSA public key as
       the HMAC shared secret (see [McLean] and [CVE-2015-9235]).
 
-   For mitigations, see Section 3.1 and Section 3.2.
+   For mitigations, see Sections 3.1 and 3.2.
 
 2.2.  Weak Symmetric Keys
 
@@ -279,7 +279,7 @@ Table of Contents
 
 2.5.  Insecure Use of Elliptic Curve Encryption
 
-   Per [Sanso], several Javascript Object Signing and Encryption (JOSE)
+   Per [Sanso], several JavaScript Object Signing and Encryption (JOSE)
    libraries fail to validate their inputs correctly when performing
    elliptic curve key agreement (the "ECDH-ES" algorithm).  An attacker
    that is able to send JWEs of its choosing that use invalid curve
@@ -442,19 +442,22 @@ Table of Contents
    cryptographically protected by other means.  JWTs using "none" are
    often used in application contexts in which the content is optionally
    signed.  The URL-safe claims representation and processing in this
-   context can be the same in both the signed and unsigned cases.  JWT
-   libraries SHOULD NOT generate JWTs using "none" unless explicitly
-   requested to do so by the caller.  Similarly, JWT libraries SHOULD
-   NOT consume JWTs using "none" unless explicitly requested by the
-   caller.
+   context can be the same in both the signed and unsigned cases.
+
+   The "none" algorithm is deprecated by
+   [I-D.ietf-jose-deprecate-none-rsa15].  JWT libraries MUST NOT
+   generate JWTs using "none" unless explicitly requested to do so by
+   the caller.  Similarly, JWT libraries MUST NOT consume JWTs using
+   "none" unless explicitly allowed by the caller.
 
    Applications SHOULD follow these algorithm-specific recommendations,
    because deviating from them may re-enable known attacks on the listed
    algorithms unless an application-specific threat analysis shows the
    risk is acceptable:
 
-   *  Avoid all RSA-PKCS1 v1.5 encryption algorithms ([RFC8017],
-      Section 7.2), preferring RSAES-OAEP ([RFC8017], Section 7.1).
+   *  Deprecate all RSA-PKCS1 v1.5 encryption algorithms (Section 7.2 of
+      [RFC8017]), as specified in [I-D.ietf-jose-deprecate-none-rsa15],
+      preferring RSAES-OAEP (Section 7.1 of [RFC8017]).
 
    *  Elliptic Curve Digital Signature Algorithm (ECDSA) signatures
       [ANSI-X962-2005] require a unique random value for every message
@@ -468,15 +471,12 @@ Table of Contents
       with existing ECDSA verifiers and so can be implemented without
       new algorithm identifiers being required.
 
-   Readers are advised that [I-D.ietf-jose-deprecate-none-rsa15]
-   proposes deprecating the "none" and "RSA1_5" algorithms.
-
    Readers are advised that [RFC9864] defines fully-specified JOSE
    algorithm identifiers and deprecates polymorphic identifiers such as
-   "EdDSA".  New deployments SHOULD prefer fully-specified identifiers
-   (for example, "Ed25519" rather than "EdDSA") when negotiating and
-   configuring algorithms, unless backward compatibility requires use of
-   the older polymorphic identifiers.
+   "EdDSA".  New deployments SHOULD prefer fully-specified algorithm
+   identifiers (for example, "Ed25519" rather than "EdDSA") when
+   negotiating and configuring algorithms, unless backward compatibility
+   requires use of the older polymorphic identifiers.
 
 3.3.  Validate All Cryptographic Operations
 
@@ -487,16 +487,19 @@ Table of Contents
    [RFC7519], then both the outer and inner operations MUST be validated
    using the keys and algorithms supplied by the application.
 
-   Libraries MUST allow the verifier to distinguish between signed JWTs
-   (JWSes) and encrypted JWTs (JWEs).  This allows verifiers to easily
-   establish a policy of only accepting signed JWTs.
+   Libraries MUST allow the recipient to distinguish between Unsecured
+   JWTs, signed JWTs (JWSes), encrypted JWTs (JWEs), and signed and
+   encrypted JWTs (Nested JWTs).  This allows recipients to easily apply
+   policies that only accept appropriate JWTs for the application
+   context.  Note that authentication use cases typically require the
+   use of signed JWTs.
 
 3.4.  Validate Cryptographic Inputs
 
    Some cryptographic operations, such as Elliptic Curve Diffie-Hellman
    key agreement ("ECDH-ES"), take inputs that may contain invalid
    values.  This includes points not on the specified elliptic curve or
-   other invalid points (e.g., [Valenta], Section 7.1).  The JWS/JWE
+   other invalid points (e.g., Section 7.1 of [Valenta]).  The JWS/JWE
    library MUST validate these inputs before using them or use
    underlying cryptographic libraries that do so (or both).
 
@@ -787,6 +790,13 @@ Table of Contents
 
 7.1.  Normative References
 
+   [I-D.ietf-jose-deprecate-none-rsa15]
+              Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
+              Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
+              rsa15-05, 23 June 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
+              deprecate-none-rsa15-05>.
+
    [nist-sp-800-56a-r3]
               Barker, E., Chen, L., Roginsky, A., Vassilev, A., and R.
               Davis, "Recommendation for pair-wise key-establishment
@@ -870,13 +880,6 @@ Table of Contents
               NIST, "CVE-2023-51774 Detail", National Vulnerability
               Database, February 2024,
               <https://nvd.nist.gov/vuln/detail/CVE-2023-51774>.
-
-   [I-D.ietf-jose-deprecate-none-rsa15]
-              Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
-              Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
-              rsa15-05, 23 June 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              deprecate-none-rsa15-05>.
 
    [JWT-Cracker]
               Rius, B., "JWT Cracker",
@@ -1001,6 +1004,11 @@ Appendix A.  Changes from RFC 8725
        including SSRF mitigations and DNS resolution checks when
        processing untrusted URLs (Section 3.10).
 
+   8.  Normatively references [I-D.ietf-jose-deprecate-none-rsa15],
+       makes the text requiring application opt-in to use JWTs with
+       algorithm "none" a "MUST", and states that the RSA-PKCS1 v1.5
+       algorithms are deprecated.
+
 Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
@@ -1019,6 +1027,15 @@ B.1.  draft-ietf-oauth-rfc8725bis-08
    *  Added an informative mention of fully-specified JOSE algorithm
       identifiers ([RFC9864]).
 
+   *  Made the [I-D.ietf-jose-deprecate-none-rsa15] reference normative
+      and rewrote the text on "alg":"none" and RSA-PKCS1 v1.5
+      accordingly.
+
+   *  Corrected section reference and itemized list syntax and removed
+      extraneous spaces in the source.
+
+   *  Applied spelling and grammar corrections.
+
 B.2.  draft-ietf-oauth-rfc8725bis-07
 
    *  Applied ARTART review suggestions for SHOULD language in Sections
@@ -1029,7 +1046,7 @@ B.2.  draft-ietf-oauth-rfc8725bis-07
 
 B.3.  draft-ietf-oauth-rfc8725bis-06
 
-   *  AD review followup: promoted selected lowercase must/should
+   *  AD review follow-up: Promoted selected lowercase must/should
       guidance to normative MUST language.
 
 B.4.  draft-ietf-oauth-rfc8725bis-05
