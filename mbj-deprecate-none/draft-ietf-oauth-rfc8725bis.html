@@ -1752,7 +1752,8 @@ signed JWTs (JWSes),
 encrypted JWTs (JWEs), and
 signed and encrypted JWTs (Nested JWTs).
 This allows recipients to easily apply policies that only accept
-appropriate JWTs for the application context.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+appropriate JWTs for the application context.
+Note that authentication use cases typically require the use of signed JWTs.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validate-inputs">
@@ -2308,6 +2309,11 @@ for their contributions to the new content in this specification.<a href="#secti
 </li>
         <li id="appendix-A-2.7">
           <p id="appendix-A-2.7.1">Untrusted Header Parameters and SSRF: Added guidance on treating <code>kid</code>, <code>jku</code>, and <code>x5u</code> as potentially attacker-controlled input, including SSRF mitigations and DNS resolution checks when processing untrusted URLs (<a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>).<a href="#appendix-A-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-A-2.8">
+          <p id="appendix-A-2.8.1">Normatively references <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>,
+makes the text requiring application opt-in to use JWTs with algorithm "none" a "<span class="bcp14">MUST</span>",
+and states that the RSA-PKCS1 v1.5 algorithms are deprecated.<a href="#appendix-A-2.8.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 </section>
