@@ -751,9 +751,10 @@ Table of Contents
 3.15.  Limit JWE Decompression Size
 
    Implementations are RECOMMENDED to set a reasonable upper limit on
-   the decompressed size of a JWE such as 250 KB, because without such a
-   limit, decompression can impose an unreasonable memory or CPU burden
-   on recipients.
+   the decompressed size of a JWE, because without such a limit,
+   decompression can impose an unreasonable memory or CPU burden on
+   recipients.  Deployed JOSE libraries commonly use limits on the order
+   of a few hundred kilobytes, e.g., 250 KB in one implementation.
 
 4.  Security Considerations
 
@@ -783,9 +784,9 @@ Table of Contents
 6.2.  Acknowledgements for [[ this specification ]]
 
    We would like to thank Brian Campbell, Deb Cooley, Jianjun Chen, Dan
-   Moore, Aaron Parecki, Filip Skokan, Ketan Talaulikar, Tom Tervoort,
-   Enze Wang, and Jesse Yang for their contributions to the new content
-   in this specification.
+   Moore, Aaron Parecki, Filip Skokan, Ketan Talaulikar, Mike Bishop,
+   Tom Tervoort, Enze Wang, and Jesse Yang for their contributions to
+   the new content in this specification.
 
 7.  References
 
@@ -1015,6 +1016,9 @@ Appendix B.  Document History
    [[Note to RFC Editor: please remove before publication.]]
 
 B.1.  draft-ietf-oauth-rfc8725bis-09
+
+   *  Clarified that the JWE decompression size limit is a ballpark
+      drawn from deployed libraries (IESG review).
 
    *  IESG nits: replaced "blindly" and added a missing comma after
       "However".

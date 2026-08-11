@@ -2049,8 +2049,9 @@ marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#s
         <h3 id="name-limit-jwe-decompression-siz">
 <a href="#section-3.15" class="section-number selfRef">3.15. </a><a href="#name-limit-jwe-decompression-siz" class="section-name selfRef">Limit JWE Decompression Size</a>
         </h3>
-<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB,
-because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
+<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE,
+because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.
+Deployed JOSE libraries commonly use limits on the order of a few hundred kilobytes, e.g., 250 KB in one implementation.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2111,6 +2112,7 @@ Dan Moore,
 Aaron Parecki,
 Filip Skokan,
 Ketan Talaulikar,
+Mike Bishop,
 Tom Tervoort,
 Enze Wang,
 and
@@ -2334,7 +2336,10 @@ and states that the RSA-PKCS1 v1.5 algorithms are deprecated.<a href="#appendix-
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">IESG nits: replaced "blindly" and added a missing comma after "However".<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Clarified that the JWE decompression size limit is a ballpark drawn from deployed libraries (IESG review).<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.2">
+            <p id="appendix-B.1-1.2.1">IESG nits: replaced "blindly" and added a missing comma after "However".<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
