@@ -789,7 +789,7 @@ marks - is not a JWT and MUST be rejected.
 
 Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE,
 because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.
-Deployed JOSE libraries commonly use limits on the order of a few hundred kilobytes, e.g. 250 KB in one implementation.
+Deployed JOSE libraries commonly use limits on the order of a few hundred kilobytes, e.g., 250 KB in one implementation.
 
 
 # Security Considerations {#security-considerations}
