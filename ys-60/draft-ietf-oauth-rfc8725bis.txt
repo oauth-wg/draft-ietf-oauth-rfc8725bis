@@ -248,7 +248,7 @@ Table of Contents
 2.3.  Incorrect Use and Composition of Encryption and Signature
 
    Most authentication use cases only require a simple signed JWT as
-   their token.  However verifiers don't always check that the received
+   their token.  However, verifiers don't always check that the received
    JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted
    structure).  This can result in vulnerabilities when the verifier's
    library does not distinguish between successful decryption and
@@ -586,9 +586,9 @@ Table of Contents
    create SQL or LDAP injection vulnerabilities by validating and/or
    sanitizing the received value.
 
-   Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509
-   URL) header, which may contain an arbitrary URL, could result in
-   server-side request forgery (SSRF) attacks.  Applications SHOULD
+   Similarly, uncritically following a "jku" (JWK set URL) or "x5u"
+   (X.509 URL) header, which may contain an arbitrary URL, could result
+   in server-side request forgery (SSRF) attacks.  Applications SHOULD
    protect against such attacks, e.g., by matching the URL to an
    allowlist of permitted locations and ensuring no cookies are sent in
    the GET request, unless there are no local resources to protect
@@ -1019,6 +1019,9 @@ B.1.  draft-ietf-oauth-rfc8725bis-09
 
    *  Clarified that the JWE decompression size limit is a ballpark
       drawn from deployed libraries (IESG review).
+
+   *  IESG nits: replaced "blindly" and added a missing comma after
+      "However".
 
 B.2.  draft-ietf-oauth-rfc8725bis-08
 

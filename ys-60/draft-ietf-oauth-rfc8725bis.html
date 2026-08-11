@@ -1503,7 +1503,7 @@ attacker gets hold of such a token <span>[<a href="#Langkemper" class="cite xref
         <h3 id="name-incorrect-use-and-compositi">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-incorrect-use-and-compositi" class="section-name selfRef">Incorrect Use and Composition of Encryption and Signature</a>
         </h3>
-<p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However, verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
 <p id="section-2.3-3">For mitigations, see <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
@@ -1873,7 +1873,7 @@ value is present or none of the values are associated with the recipient, it <sp
 <p id="section-3.10-2">The "kid" (key ID) header is used by the relying application to
 perform key lookup. Applications <span class="bcp14">MUST</span> ensure that this does not create SQL or LDAP injection vulnerabilities by validating
 and/or sanitizing the received value.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
-<p id="section-3.10-3">Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
+<p id="section-3.10-3">Similarly, uncritically following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
 which may contain an arbitrary URL,
 could result in server-side request forgery (SSRF) attacks. Applications <span class="bcp14">SHOULD</span> protect against such
 attacks, e.g., by matching the URL to an allowlist of permitted locations
@@ -2337,6 +2337,9 @@ and states that the RSA-PKCS1 v1.5 algorithms are deprecated.<a href="#appendix-
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
             <p id="appendix-B.1-1.1.1">Clarified that the JWE decompression size limit is a ballpark drawn from deployed libraries (IESG review).<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.1-1.2">
+            <p id="appendix-B.1-1.2.1">IESG nits: replaced "blindly" and added a missing comma after "However".<a href="#appendix-B.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
