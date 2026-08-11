@@ -783,10 +783,10 @@ Table of Contents
 
 6.2.  Acknowledgements for [[ this specification ]]
 
-   We would like to thank Brian Campbell, Deb Cooley, Jianjun Chen, Dan
-   Moore, Aaron Parecki, Filip Skokan, Ketan Talaulikar, Mike Bishop,
-   Tom Tervoort, Enze Wang, and Jesse Yang for their contributions to
-   the new content in this specification.
+   We would like to thank Mike Bishop, Brian Campbell, Jianjun Chen, Deb
+   Cooley, Dan Moore, Aaron Parecki, Filip Skokan, Ketan Talaulikar, Tom
+   Tervoort, Enze Wang, and Jesse Yang for their contributions to the
+   new content in this specification.
 
 7.  References
 
