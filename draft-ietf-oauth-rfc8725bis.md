@@ -299,7 +299,7 @@ For mitigations, see {{key-entropy}}.
 
 ## Incorrect Use and Composition of Encryption and Signature {#incorrect-composition-of-encryption-and-signature}
 
-Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.
+Most authentication use cases only require a simple signed JWT as their token. However, verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation {{CVE-2023-51774}}.
 
 In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.
@@ -626,7 +626,7 @@ The "kid" (key ID) header is used by the relying application to
 perform key lookup. Applications MUST ensure that this does not create SQL or LDAP injection vulnerabilities by validating
 and/or sanitizing the received value.
 
-Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
+Similarly, uncritically following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
 which may contain an arbitrary URL,
 could result in server-side request forgery (SSRF) attacks. Applications SHOULD protect against such
 attacks, e.g., by matching the URL to an allowlist of permitted locations
@@ -865,6 +865,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-09
+
+* IESG nits: replaced "blindly" and added a missing comma after "However".
 
 ## draft-ietf-oauth-rfc8725bis-08
 
