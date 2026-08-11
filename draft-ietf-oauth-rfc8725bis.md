@@ -826,14 +826,14 @@ for their reviews.
 ## Acknowledgements for [[ this specification ]]
 
 We would like to thank
+Mike Bishop,
 Brian Campbell,
-Deb Cooley,
 Jianjun Chen,
+Deb Cooley,
 Dan Moore,
 Aaron Parecki,
 Filip Skokan,
 Ketan Talaulikar,
-Mike Bishop,
 Tom Tervoort,
 Enze Wang,
 and
