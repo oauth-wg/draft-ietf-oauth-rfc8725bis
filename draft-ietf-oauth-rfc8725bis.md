@@ -787,8 +787,9 @@ marks - is not a JWT and MUST be rejected.
 
 ## Limit JWE Decompression Size {#limit-decompression}
 
-Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB,
+Implementations are RECOMMENDED to set a reasonable upper limit on the decompressed size of a JWE,
 because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.
+Deployed JOSE libraries commonly use limits on the order of a few hundred kilobytes, e.g. 250 KB in one implementation.
 
 
 # Security Considerations {#security-considerations}
@@ -832,6 +833,7 @@ Dan Moore,
 Aaron Parecki,
 Filip Skokan,
 Ketan Talaulikar,
+Mike Bishop,
 Tom Tervoort,
 Enze Wang,
 and
@@ -865,6 +867,10 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+## draft-ietf-oauth-rfc8725bis-09
+
+* Clarified that the JWE decompression size limit is a ballpark drawn from deployed libraries (IESG review).
 
 ## draft-ietf-oauth-rfc8725bis-08
 
