@@ -754,7 +754,7 @@ Table of Contents
    the decompressed size of a JWE, because without such a limit,
    decompression can impose an unreasonable memory or CPU burden on
    recipients.  Deployed JOSE libraries commonly use limits on the order
-   of a few hundred kilobytes, e.g. 250 KB in one implementation.
+   of a few hundred kilobytes, e.g., 250 KB in one implementation.
 
 4.  Security Considerations
 
