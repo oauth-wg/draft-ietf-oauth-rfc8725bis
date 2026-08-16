@@ -10,16 +10,16 @@
 <meta content="Michael B. Jones" name="author">
 <meta content="
        JSON Web Tokens, also known as JWTs, are URL-safe JSON-based security
- tokens that contain a set of claims that can be signed and/or encrypted.
- JWTs are being widely used and deployed as a simple security token
- format in numerous protocols and applications, both in the area of
- digital identity and in other application areas.  This Best Current
- Practices (BCP) specification updates RFC 7519 to provide actionable guidance
- leading to secure implementation and deployment of JWTs. 
+tokens that contain a set of claims that can be signed and/or encrypted.
+JWTs are being widely used and deployed as a simple security token
+format in numerous protocols and applications, both in the area of
+digital identity and in other application areas.  This Best Current
+Practices (BCP) specification updates RFC 7519 to provide actionable guidance
+leading to secure implementation and deployment of JWTs. 
        This BCP specification furthermore obsoletes the existing JWT BCP
- specification RFC 8725 to provide additional actionable guidance
- covering threats and attacks that have been discovered
- since RFC 8725 was published. 
+specification RFC 8725 to provide additional actionable guidance
+covering threats and attacks that have been discovered
+since RFC 8725 was published. 
     " name="description">
 <meta content="xml2rfc 3.34.0" name="generator">
 <meta content="JSON Web Token" name="keyword">
@@ -44,7 +44,7 @@
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.10.0
+    platformdirs 4.11.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
@@ -84,7 +84,6 @@
   src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
   unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: italic;
@@ -133,7 +132,6 @@
   src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
 @font-face {
   font-family: 'Lora';
   font-style: normal;
@@ -198,7 +196,6 @@
   font-display: swap;
   src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 }
 
 @font-face {
@@ -1067,11 +1064,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JWT BCP</td>
-<td class="right">July 2026</td>
+<td class="right">August 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sheffer, et al.</td>
-<td class="center">Expires 14 January 2027</td>
+<td class="center">Expires 17 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1090,17 +1087,17 @@ svg {
 <a href="https://www.rfc-editor.org/rfc/rfc7519" class="eref">7519</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-07-13" class="published">13 July 2026</time>
+<time datetime="2026-08-16" class="published">16 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-01-14">14 January 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-17">17 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">Y. Sheffer</div>
-<div class="org">Intuit</div>
+<div class="org">Independent</div>
 </div>
 <div class="author">
       <div class="author-name">D. Hardt</div>
@@ -1116,16 +1113,16 @@ svg {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">JSON Web Tokens, also known as JWTs, are URL-safe JSON-based security
- tokens that contain a set of claims that can be signed and/or encrypted.
- JWTs are being widely used and deployed as a simple security token
- format in numerous protocols and applications, both in the area of
- digital identity and in other application areas.  This Best Current
- Practices (BCP) specification updates RFC 7519 to provide actionable guidance
- leading to secure implementation and deployment of JWTs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+tokens that contain a set of claims that can be signed and/or encrypted.
+JWTs are being widely used and deployed as a simple security token
+format in numerous protocols and applications, both in the area of
+digital identity and in other application areas.  This Best Current
+Practices (BCP) specification updates RFC 7519 to provide actionable guidance
+leading to secure implementation and deployment of JWTs.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This BCP specification furthermore obsoletes the existing JWT BCP
- specification RFC 8725 to provide additional actionable guidance
- covering threats and attacks that have been discovered
- since RFC 8725 was published.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
+specification RFC 8725 to provide additional actionable guidance
+covering threats and attacks that have been discovered
+since RFC 8725 was published.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1161,7 +1158,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 14 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1330,37 +1327,46 @@ svg {
             <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
-                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis" class="internal xref">draft-ietf-oauth-rfc8725bis-07</a></p>
+                <p id="section-toc.1-1.9.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis" class="internal xref">draft-ietf-oauth-rfc8725bis-10</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
-                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-" class="internal xref">draft-ietf-oauth-rfc8725bis-06</a></p>
+                <p id="section-toc.1-1.9.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-" class="internal xref">draft-ietf-oauth-rfc8725bis-09</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
-                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-0" class="internal xref">draft-ietf-oauth-rfc8725bis-05</a></p>
+                <p id="section-toc.1-1.9.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-0" class="internal xref">draft-ietf-oauth-rfc8725bis-08</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
-                <p id="section-toc.1-1.9.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-04" class="internal xref">draft-ietf-oauth-rfc8725bis-04</a></p>
+                <p id="section-toc.1-1.9.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-07" class="internal xref">draft-ietf-oauth-rfc8725bis-07</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
-                <p id="section-toc.1-1.9.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-03" class="internal xref">draft-ietf-oauth-rfc8725bis-03</a></p>
+                <p id="section-toc.1-1.9.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-06" class="internal xref">draft-ietf-oauth-rfc8725bis-06</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.6">
-                <p id="section-toc.1-1.9.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-02" class="internal xref">draft-ietf-oauth-rfc8725bis-02</a></p>
+                <p id="section-toc.1-1.9.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-05" class="internal xref">draft-ietf-oauth-rfc8725bis-05</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.7">
-                <p id="section-toc.1-1.9.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-01" class="internal xref">draft-ietf-oauth-rfc8725bis-01</a></p>
+                <p id="section-toc.1-1.9.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-04" class="internal xref">draft-ietf-oauth-rfc8725bis-04</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.8">
-                <p id="section-toc.1-1.9.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-00" class="internal xref">draft-ietf-oauth-rfc8725bis-00</a></p>
+                <p id="section-toc.1-1.9.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-03" class="internal xref">draft-ietf-oauth-rfc8725bis-03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.9">
-                <p id="section-toc.1-1.9.2.9.1"><a href="#appendix-B.9" class="auto internal xref">B.9</a>.  <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-02</a></p>
+                <p id="section-toc.1-1.9.2.9.1"><a href="#appendix-B.9" class="auto internal xref">B.9</a>.  <a href="#name-draft-ietf-oauth-rfc8725bis-02" class="internal xref">draft-ietf-oauth-rfc8725bis-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.10">
-                <p id="section-toc.1-1.9.2.10.1"><a href="#appendix-B.10" class="auto internal xref">B.10</a>. <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+                <p id="section-toc.1-1.9.2.10.1"><a href="#appendix-B.10" class="auto internal xref">B.10</a>. <a href="#name-draft-ietf-oauth-rfc8725bis-01" class="internal xref">draft-ietf-oauth-rfc8725bis-01</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.11">
-                <p id="section-toc.1-1.9.2.11.1"><a href="#appendix-B.11" class="auto internal xref">B.11</a>. <a href="#name-draft-sheffer-oauth-rfc8725bi" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
+                <p id="section-toc.1-1.9.2.11.1"><a href="#appendix-B.11" class="auto internal xref">B.11</a>. <a href="#name-draft-ietf-oauth-rfc8725bis-00" class="internal xref">draft-ietf-oauth-rfc8725bis-00</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.12">
+                <p id="section-toc.1-1.9.2.12.1"><a href="#appendix-B.12" class="auto internal xref">B.12</a>. <a href="#name-draft-sheffer-oauth-rfc8725" class="internal xref">draft-sheffer-oauth-rfc8725bis-02</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.13">
+                <p id="section-toc.1-1.9.2.13.1"><a href="#appendix-B.13" class="auto internal xref">B.13</a>. <a href="#name-draft-sheffer-oauth-rfc8725b" class="internal xref">draft-sheffer-oauth-rfc8725bis-01</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.14">
+                <p id="section-toc.1-1.9.2.14.1"><a href="#appendix-B.14" class="auto internal xref">B.14</a>. <a href="#name-draft-sheffer-oauth-rfc8725bi" class="internal xref">draft-sheffer-oauth-rfc8725bis-00</a></p>
 </li>
             </ul>
 </li>
@@ -1376,7 +1382,7 @@ svg {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">JSON Web Tokens, also known as JWTs  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, are URL-safe JSON-based security tokens
+<p id="section-1-1">JSON Web Tokens, also known as JWTs <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>, are URL-safe JSON-based security tokens
 that contain a set of claims that can be signed and/or encrypted.
 The JWT specification has seen rapid adoption because it encapsulates
 security-relevant information in one easy-to-protect location, and because
@@ -1392,9 +1398,9 @@ implementations and incorrect usage by applications.<a href="#section-1-2" class
 <p id="section-1-3">The goal of this document is to facilitate secure implementation and deployment of JWTs.
 Many of the recommendations in this document are about
 implementation and use of the cryptographic mechanisms underlying JWTs that are defined by
-JSON Web Signature (JWS)  <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>,
-JSON Web Encryption (JWE)  <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>, and
-JSON Web Algorithms (JWA)  <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.
+JSON Web Signature (JWS) <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>,
+JSON Web Encryption (JWE) <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>, and
+JSON Web Algorithms (JWA) <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.
 Others are about use of the JWT claims themselves.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">These are intended to be minimum recommendations for the use of JWTs
 in the vast majority of implementation
@@ -1408,6 +1414,12 @@ importance of cryptographic strength vs. computational load).<a href="#section-1
 change quickly, and experience shows that a Best Current Practice (BCP) document about
 security is a point-in-time statement. Readers are advised to seek out any errata or
 updates that apply to this document.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document obsoletes <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>. In addition to retaining the guidance from that BCP,
+it adds recommendations addressing attacks and vulnerabilities discovered since its
+publication; <a href="#changes-from-rfc8725" class="auto internal xref">Appendix A</a> summarizes those additions. This document also
+updates <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> by tightening claim and "typ" usage and validation (especially
+audience, issuer/subject, and explicit typing), and by restricting how Unsecured JWTs
+(<code>alg</code> value "none") are used.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="target-audience">
 <section id="section-1.1">
         <h3 id="name-target-audience">
@@ -1417,7 +1429,7 @@ updates that apply to this document.<a href="#section-1-5" class="pilcrow">¶</a
 <ul class="normal">
 <li class="normal" id="section-1.1-2.1">
             <p id="section-1.1-2.1.1">Implementers of JWT libraries (and the JWS and JWE libraries
- used by those libraries),<a href="#section-1.1-2.1.1" class="pilcrow">¶</a></p>
+used by those libraries),<a href="#section-1.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-1.1-2.2">
             <p id="section-1.1-2.2.1">Implementers of code that uses such libraries (to the extent that some mechanisms may
@@ -1425,7 +1437,7 @@ not be provided by libraries, or until they are), and<a href="#section-1.1-2.2.1
 </li>
           <li class="normal" id="section-1.1-2.3">
             <p id="section-1.1-2.3.1">Developers of specifications that rely on JWTs, both inside and
- outside the IETF.<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
+outside the IETF.<a href="#section-1.1-2.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1449,7 +1461,7 @@ appear in all capitals, as shown here.<a href="#section-1.2-1" class="pilcrow">�
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-threats-and-vulnerabilities" class="section-name selfRef">Threats and Vulnerabilities</a>
       </h2>
 <p id="section-2-1">This section lists some known and possible problems with JWT
- implementations and deployments.
+implementations and deployments.
 Each problem description is followed by references to one or more mitigations to those problems.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <div id="weak-signatures-and-insufficient-signature-validation">
 <section id="section-2.1">
@@ -1459,7 +1471,7 @@ Each problem description is followed by references to one or more mitigations to
 <p id="section-2.1-1">Signed JSON Web Tokens carry an explicit indication of the signing algorithm,
 in the form of the "alg" Header Parameter, to facilitate cryptographic agility.
 This, in conjunction with design flaws in some libraries and applications,
- has led to several attacks:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+has led to several attacks:<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.1-2.1">
             <p id="section-2.1-2.1.1">The algorithm can be changed to "none" by an attacker, and some libraries would trust
@@ -1468,12 +1480,11 @@ this value and "validate" the JWT without checking any signature.<a href="#secti
           <li class="normal" id="section-2.1-2.2">
             <p id="section-2.1-2.2.1">An "RS256" (RSA, 2048 bit) parameter value can be changed into
 "HS256" (HMAC, SHA-256), and some libraries
-would try to validate the signature using HMAC-SHA256 and using the RSA public key as the
-HMAC shared secret (see  <span>[<a href="#McLean" class="cite xref">McLean</a>]</span> and
-  <span>[<a href="#CVE-2015-9235" class="cite xref">CVE-2015-9235</a>]</span>).<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
+would try to validate the signature using HMAC-SHA256 and using the RSA public key
+as the HMAC shared secret (see <span>[<a href="#McLean" class="cite xref">McLean</a>]</span> and <span>[<a href="#CVE-2015-9235" class="cite xref">CVE-2015-9235</a>]</span>).<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.1-3">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a> and <a href="#appropriate-algorithms" class="auto internal xref">Section 3.2</a>.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">For mitigations, see Sections <a href="#algorithm-verification" class="auto internal xref">3.1</a> and <a href="#appropriate-algorithms" class="auto internal xref">3.2</a>.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="weak-symmetric-keys">
@@ -1482,12 +1493,12 @@ HMAC shared secret (see  <span>[<a href="#McLean" class="cite xref">McLean</a>]<
 <a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-weak-symmetric-keys" class="section-name selfRef">Weak Symmetric Keys</a>
         </h3>
 <p id="section-2.2-1">In addition, some applications use a keyed Message Authentication
- Code (MAC) algorithm, such as
+Code (MAC) algorithm, such as
 "HS256", to sign tokens but supply a weak symmetric key with
 insufficient entropy (such as a human-memorable password). Such keys
 are vulnerable to offline brute-force or dictionary attacks once an
-attacker gets hold of such a token  <span>[<a href="#Langkemper" class="cite xref">Langkemper</a>]</span><span>[<a href="#JWT-Cracker" class="cite xref">JWT-Cracker</a>]</span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">For mitigations, see  <a href="#key-entropy" class="auto internal xref">Section 3.5</a>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+attacker gets hold of such a token <span>[<a href="#Langkemper" class="cite xref">Langkemper</a>]</span><span>[<a href="#JWT-Cracker" class="cite xref">JWT-Cracker</a>]</span>.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">For mitigations, see <a href="#key-entropy" class="auto internal xref">Section 3.5</a>.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="incorrect-composition-of-encryption-and-signature">
@@ -1495,10 +1506,10 @@ attacker gets hold of such a token  <span>[<a href="#Langkemper" class="cite xre
         <h3 id="name-incorrect-use-and-compositi">
 <a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-incorrect-use-and-compositi" class="section-name selfRef">Incorrect Use and Composition of Encryption and Signature</a>
         </h3>
-<p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.3-1">Most authentication use cases only require a simple signed JWT as their token. However, verifiers don't always check that the received JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted structure). This can result in vulnerabilities when the verifier's library does not distinguish between successful decryption and successful signature validation <span>[<a href="#CVE-2023-51774" class="cite xref">CVE-2023-51774</a>]</span>.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
 <p id="section-2.3-2">In the more complicated use cases where confidentiality is required, some libraries that decrypt a JWE-encrypted JWT to obtain a JWS-signed object
 do not always validate the internal signature.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
-<p id="section-2.3-3">For mitigations, see  <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
+<p id="section-2.3-3">For mitigations, see <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>.<a href="#section-2.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="plaintext-leakage-through-analysis-of-ciphertext-length">
@@ -1507,7 +1518,7 @@ do not always validate the internal signature.<a href="#section-2.3-2" class="pi
 <a href="#section-2.4" class="section-number selfRef">2.4. </a><a href="#name-plaintext-leakage-through-a" class="section-name selfRef">Plaintext Leakage through Analysis of Ciphertext Length</a>
         </h3>
 <p id="section-2.4-1">Many encryption algorithms leak information about the length of the
- plaintext, with a varying amount of
+plaintext, with a varying amount of
 leakage depending on the algorithm and mode of operation. JWEs are vulnerable to this leakage. This problem is exacerbated
 when the plaintext is initially compressed, because the length of the
 compressed plaintext and, thus,
@@ -1517,9 +1528,9 @@ on its content.
 Compression attacks are particularly
 powerful when there is attacker-controlled data in the same compression
 space as secret data, which is the case for some attacks on HTTPS.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
-<p id="section-2.4-2">See  <span>[<a href="#Kelsey" class="cite xref">Kelsey</a>]</span> for general background
-on compression and encryption and  <span>[<a href="#Alawatugoda" class="cite xref">Alawatugoda</a>]</span> for a specific example of attacks on HTTP cookies.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
-<p id="section-2.4-3">For mitigations, see  <a href="#no-compression" class="auto internal xref">Section 3.6</a>.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
+<p id="section-2.4-2">See <span>[<a href="#Kelsey" class="cite xref">Kelsey</a>]</span> for general background
+on compression and encryption and <span>[<a href="#Alawatugoda" class="cite xref">Alawatugoda</a>]</span> for a specific example of attacks on HTTP cookies.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
+<p id="section-2.4-3">For mitigations, see <a href="#no-compression" class="auto internal xref">Section 3.6</a>.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="insecure-use-of-elliptic-curve-encryption">
@@ -1527,14 +1538,14 @@ on compression and encryption and  <span>[<a href="#Alawatugoda" class="cite xre
         <h3 id="name-insecure-use-of-elliptic-cu">
 <a href="#section-2.5" class="section-number selfRef">2.5. </a><a href="#name-insecure-use-of-elliptic-cu" class="section-name selfRef">Insecure Use of Elliptic Curve Encryption</a>
         </h3>
-<p id="section-2.5-1">Per  <span>[<a href="#Sanso" class="cite xref">Sanso</a>]</span>, several Javascript
- Object Signing and Encryption (JOSE) libraries
- fail to validate their inputs correctly
+<p id="section-2.5-1">Per <span>[<a href="#Sanso" class="cite xref">Sanso</a>]</span>, several JavaScript
+Object Signing and Encryption (JOSE) libraries
+fail to validate their inputs correctly
 when performing elliptic curve key agreement (the "ECDH-ES" algorithm).
 An attacker that is able to send JWEs of its choosing that use invalid curve points and
 observe the cleartext outputs resulting from decryption with the invalid curve points
 can use this vulnerability to recover the recipient's private key.<a href="#section-2.5-1" class="pilcrow">¶</a></p>
-<p id="section-2.5-2">For mitigations, see  <a href="#validate-inputs" class="auto internal xref">Section 3.4</a>.<a href="#section-2.5-2" class="pilcrow">¶</a></p>
+<p id="section-2.5-2">For mitigations, see <a href="#validate-inputs" class="auto internal xref">Section 3.4</a>.<a href="#section-2.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="multiplicity-of-json-encodings">
@@ -1542,16 +1553,16 @@ can use this vulnerability to recover the recipient's private key.<a href="#sect
         <h3 id="name-multiplicity-of-json-encodi">
 <a href="#section-2.6" class="section-number selfRef">2.6. </a><a href="#name-multiplicity-of-json-encodi" class="section-name selfRef">Multiplicity of JSON Encodings</a>
         </h3>
-<p id="section-2.6-1">Previous versions of the JSON format, such as the obsoleted  <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span>,
+<p id="section-2.6-1">Previous versions of the JSON format, such as the obsoleted <span>[<a href="#RFC7159" class="cite xref">RFC7159</a>]</span>,
 allowed several different character
 encodings: UTF-8, UTF-16, and UTF-32. This is not the case anymore, with the latest
-standard  <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> only allowing UTF-8 except
+standard <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span> only allowing UTF-8 except
 for internal use within a "closed ecosystem".
 This ambiguity, where older implementations and those used within closed environments may generate
 non-standard encodings, may result in the JWT being
 misinterpreted by its recipient. This, in turn, could be used by a malicious sender to bypass
 the recipient's validation checks.<a href="#section-2.6-1" class="pilcrow">¶</a></p>
-<p id="section-2.6-2">For mitigations, see  <a href="#use-utf8" class="auto internal xref">Section 3.7</a>.<a href="#section-2.6-2" class="pilcrow">¶</a></p>
+<p id="section-2.6-2">For mitigations, see <a href="#use-utf8" class="auto internal xref">Section 3.7</a>.<a href="#section-2.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="substitution">
@@ -1561,13 +1572,13 @@ the recipient's validation checks.<a href="#section-2.6-1" class="pilcrow">¶</a
         </h3>
 <p id="section-2.7-1">There are attacks in which one recipient will be given a JWT that was intended for it
 and will attempt to use it at a different recipient for which that JWT was not intended.
-For instance, if an OAuth 2.0  <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> access
+For instance, if an OAuth 2.0 <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span> access
 token is legitimately presented to an
 OAuth 2.0 protected resource for which it is intended, that protected resource might then present
 that same access token to a different protected resource for which the access token is not intended,
 in an attempt to gain access. If such situations are not caught, this can result in
 the attacker gaining access to resources that it is not entitled to access.<a href="#section-2.7-1" class="pilcrow">¶</a></p>
-<p id="section-2.7-2">For mitigations, see Sections  <a href="#validate-iss-sub" class="auto internal xref">3.8</a> and  <a href="#use-aud" class="auto internal xref">3.9</a>.<a href="#section-2.7-2" class="pilcrow">¶</a></p>
+<p id="section-2.7-2">For mitigations, see Sections <a href="#validate-iss-sub" class="auto internal xref">3.8</a> and <a href="#use-aud" class="auto internal xref">3.9</a>.<a href="#section-2.7-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="cross-jwt-confusion">
@@ -1582,7 +1593,7 @@ Note that this is a specific type of substitution attack.
 If the JWT could be used in an application context in which it could be
 confused with other kinds of JWTs,
 then mitigations can be employed to prevent these substitution attacks.<a href="#section-2.8-1" class="pilcrow">¶</a></p>
-<p id="section-2.8-2">For mitigations, see Sections  <a href="#validate-iss-sub" class="auto internal xref">3.8</a>,  <a href="#use-aud" class="auto internal xref">3.9</a>,  <a href="#use-typ" class="auto internal xref">3.11</a>, and  <a href="#preventing-confusion" class="auto internal xref">3.12</a>.<a href="#section-2.8-2" class="pilcrow">¶</a></p>
+<p id="section-2.8-2">For mitigations, see Sections <a href="#validate-iss-sub" class="auto internal xref">3.8</a>, <a href="#use-aud" class="auto internal xref">3.9</a>, <a href="#use-typ" class="auto internal xref">3.11</a>, and <a href="#preventing-confusion" class="auto internal xref">3.12</a>.<a href="#section-2.8-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="indirect-attacks-on-the-server">
@@ -1594,7 +1605,7 @@ then mitigations can be employed to prevent these substitution attacks.<a href="
 such as database and Lightweight Directory Access Protocol (LDAP) searches.
 Others include URLs that are similarly looked up by the server. Any of these claims can be used by
 an attacker as vectors for injection attacks or server-side request forgery (SSRF) attacks.<a href="#section-2.9-1" class="pilcrow">¶</a></p>
-<p id="section-2.9-2">For mitigations, see  <a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>.<a href="#section-2.9-2" class="pilcrow">¶</a></p>
+<p id="section-2.9-2">For mitigations, see <a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>.<a href="#section-2.9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="unreasonable-iterations">
@@ -1609,7 +1620,7 @@ thereby imposing an unreasonable computational burden on recipients.<a href="#se
 <p id="section-2.10-2">For mitigations, see <a href="#limit-iterations" class="auto internal xref">Section 3.13</a>.<a href="#section-2.10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-algorithm-verification-code-not-defensively-written">
+<div id="alg-verification-threat">
 <section id="section-2.11">
         <h3 id="name-algorithm-verification-code">
 <a href="#section-2.11" class="section-number selfRef">2.11. </a><a href="#name-algorithm-verification-code" class="section-name selfRef">Algorithm Verification Code Not Defensively Written</a>
@@ -1623,7 +1634,7 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
 <p id="section-2.11-2">For mitigations, see <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>.<a href="#section-2.11-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-jwe-decompression-bomb-attack">
+<div id="jwe-decompression-bomb">
 <section id="section-2.12">
         <h3 id="name-jwe-decompression-bomb-atta">
 <a href="#section-2.12" class="section-number selfRef">2.12. </a><a href="#name-jwe-decompression-bomb-atta" class="section-name selfRef">JWE Decompression Bomb Attack</a>
@@ -1632,12 +1643,12 @@ could change the "alg" value to "noNE" and bypass the security check.<a href="#s
 <p id="section-2.12-2">For mitigation, see <a href="#limit-decompression" class="auto internal xref">Section 3.15</a>.<a href="#section-2.12-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="autogen-jwt-format-confusion">
+<div id="jwt-format-confusion">
 <section id="section-2.13">
         <h3 id="name-jwt-format-confusion">
 <a href="#section-2.13" class="section-number selfRef">2.13. </a><a href="#name-jwt-format-confusion" class="section-name selfRef">JWT Format Confusion</a>
         </h3>
-<p id="section-2.13-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs must use the Compact Serialization, if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.13-1" class="pilcrow">¶</a></p>
+<p id="section-2.13-1">Some JWS implementations support both the Compact and JSON Serializations. While JWTs must use the Compact Serialization (<span><a href="https://rfc-editor.org/rfc/rfc7519#section-1" class="relref">Section 1</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>), if an application by mistake verifies a JWT using the JSON Serialization but extracts claims by parsing it as a JWT using the Compact Serialization (e.g., via string splitting), an attacker can craft a valid JSON JWS with a forged payload. This mismatch in format handling can lead to authentication bypass or impersonation.<a href="#section-2.13-1" class="pilcrow">¶</a></p>
 <p id="section-2.13-2">For mitigations, see <a href="#token-format" class="auto internal xref">Section 3.14</a>.<a href="#section-2.13-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1669,10 +1680,10 @@ are among those supported by the intended recipient.<a href="#section-3.1-3" cla
 <p id="section-3.1-4">In accordance with established cryptographic best practices, each key <span class="bcp14">MUST</span> be used with
 exactly one algorithm. Compliance with this requirement <span class="bcp14">MUST</span> be enforced and
 validated at the time the cryptographic operation is executed.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">Libraries <span class="bcp14">SHOULD</span> opt for defensive security policies to cope
+<p id="section-3.1-5">As a best practice, libraries should opt for defensive security policies to cope
 with potential issues in the underlying infrastructure, such
 as the JSON parser.
-In particular, libraries <span class="bcp14">SHOULD</span> use allowlists for critical
+In particular, libraries should use allowlists for critical
 parameters such as "alg" instead of blocklists, because blocklists
 cannot anticipate every unsafe or misspelled value an attacker might use.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 </section>
@@ -1682,49 +1693,52 @@ cannot anticipate every unsafe or misspelled value an attacker might use.<a href
         <h3 id="name-use-appropriate-algorithms">
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-use-appropriate-algorithms" class="section-name selfRef">Use Appropriate Algorithms</a>
         </h3>
-<p id="section-3.2-1">As  Section 5.2 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> says,
+<p id="section-3.2-1">As <span><a href="https://rfc-editor.org/rfc/rfc7515#section-5.2" class="relref">Section 5.2</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> says,
 "it is an application decision which algorithms may
 be used in a given context. Even if a JWS can be successfully
 validated, unless the algorithm(s) used in the JWS are acceptable to
-the application, it  <span class="bcp14">SHOULD</span> consider the JWS to be invalid."<a href="#section-3.2-1" class="pilcrow">¶</a></p>
-<p id="section-3.2-2">Therefore, applications  <span class="bcp14">MUST</span> only allow the use of
- cryptographically current algorithms
+the application, it <span class="bcp14">SHOULD</span> consider the JWS to be invalid."<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">Therefore, applications <span class="bcp14">MUST</span> only allow the use of
+cryptographically current algorithms
 that meet the security requirements of the application.
 This set will vary over time as new algorithms are introduced
 and existing algorithms are deprecated due to discovered cryptographic weaknesses.
-Applications  <span class="bcp14">MUST</span> therefore be designed to enable cryptographic agility.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+Applications <span class="bcp14">MUST</span> therefore be designed to enable cryptographic agility.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The "none" algorithm should only be used when the JWT is cryptographically protected by other means.
 JWTs using "none" are often used in application contexts in which the content is optionally signed.
 The URL-safe claims representation and processing in this context can be the same in both
-the signed and unsigned cases.
-JWT libraries  <span class="bcp14">SHOULD NOT</span> generate JWTs using "none" unless
+the signed and unsigned cases.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">The "none" algorithm is deprecated by <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>.
+JWT libraries <span class="bcp14">MUST NOT</span> generate JWTs using "none" unless
 explicitly requested to do so by the caller.
-Similarly, JWT libraries  <span class="bcp14">SHOULD NOT</span> consume JWTs using "none"
- unless explicitly requested by the caller.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
-<p id="section-3.2-4">Applications  <span class="bcp14">SHOULD</span> follow these algorithm-specific recommendations,
+Similarly, JWT libraries <span class="bcp14">MUST NOT</span> consume JWTs using "none"
+unless explicitly allowed by the caller.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<p id="section-3.2-5">Applications <span class="bcp14">SHOULD</span> follow these algorithm-specific recommendations,
 because deviating from them may re-enable known attacks on the listed algorithms
-unless an application-specific threat analysis shows the risk is acceptable:<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+unless an application-specific threat analysis shows the risk is acceptable:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-5.1">
-            <p id="section-3.2-5.1.1">Avoid all RSA-PKCS1 v1.5 encryption algorithms (<span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>, Section 7.2), preferring
- RSAES-OAEP
- (<span>[<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>, Section 7.1).<a href="#section-3.2-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-3.2-6.1">
+            <p id="section-3.2-6.1.1">Deprecate all RSA-PKCS1 v1.5 encryption algorithms (<span><a href="https://rfc-editor.org/rfc/rfc8017#section-7.2" class="relref">Section 7.2</a> of [<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>),
+as specified in <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>,
+preferring RSAES-OAEP (<span><a href="https://rfc-editor.org/rfc/rfc8017#section-7.1" class="relref">Section 7.1</a> of [<a href="#RFC8017" class="cite xref">RFC8017</a>]</span>).<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-5.2">
-            <p id="section-3.2-5.2.1">Elliptic Curve Digital Signature Algorithm (ECDSA) signatures  <span>[<a href="#ANSI-X962-2005" class="cite xref">ANSI-X962-2005</a>]</span> require a unique random value for
-every message
- that is signed.
+          <li class="normal" id="section-3.2-6.2">
+            <p id="section-3.2-6.2.1">Elliptic Curve Digital Signature Algorithm (ECDSA) signatures <span>[<a href="#ANSI-X962-2005" class="cite xref">ANSI-X962-2005</a>]</span> require a unique random value for
+every message that is signed.
 If even just a few bits of the random value are predictable across multiple messages, then
 the security of the signature scheme may be compromised. In the worst case,
 the private key may be recoverable by an attacker. To counter these attacks,
-JWT libraries  <span class="bcp14">SHOULD</span> implement ECDSA using the deterministic
-approach defined in  <span>[<a href="#RFC6979" class="cite xref">RFC6979</a>]</span>.
+JWT libraries <span class="bcp14">SHOULD</span> implement ECDSA using the deterministic
+approach defined in <span>[<a href="#RFC6979" class="cite xref">RFC6979</a>]</span>, unless this is not reasonably implementable.
 This approach is completely compatible with existing ECDSA verifiers and so can be implemented
-without new algorithm identifiers being required.<a href="#section-3.2-5.2.1" class="pilcrow">¶</a></p>
+without new algorithm identifiers being required.<a href="#section-3.2-6.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-3.2-6">Readers are advised that <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>
-proposes deprecating the "none" and "RSA1_5" algorithms.<a href="#section-3.2-6" class="pilcrow">¶</a></p>
+<p id="section-3.2-7">Readers are advised that <span>[<a href="#RFC9864" class="cite xref">RFC9864</a>]</span> defines fully-specified JOSE
+algorithm identifiers and deprecates polymorphic identifiers such as "EdDSA".
+New deployments <span class="bcp14">SHOULD</span> prefer fully-specified algorithm identifiers (for example,
+"Ed25519" rather than "EdDSA") when negotiating and configuring algorithms,
+unless backward compatibility requires use of the older polymorphic identifiers.<a href="#section-3.2-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validate-crypto">
@@ -1734,12 +1748,18 @@ proposes deprecating the "none" and "RSA1_5" algorithms.<a href="#section-3.2-6"
         </h3>
 <p id="section-3.3-1">All cryptographic operations used in the JWT <span class="bcp14">MUST</span> be validated and the entire JWT <span class="bcp14">MUST</span> be rejected
 if any of them fail to validate.
-This is true not only of JWTs with a single set of Header Parameters
-but also for Nested JWTs, as defined in <span><a href="https://rfc-editor.org/rfc/rfc7519#section-2" class="relref">Section 2</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
-in which both outer and inner operations <span class="bcp14">MUST</span> be validated
+This is true of JWTs with a single set of Header Parameters.
+If an implementation supports Nested JWTs, as defined in <span><a href="https://rfc-editor.org/rfc/rfc7519#section-2" class="relref">Section 2</a> of [<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
+then both the outer and inner operations <span class="bcp14">MUST</span> be validated
 using the keys and algorithms supplied by the application.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
-<p id="section-3.3-2">Libraries <span class="bcp14">MUST</span> allow the verifier to distinguish between signed JWTs (JWSes) and encrypted JWTs (JWEs).
-This allows verifiers to easily establish a policy of only accepting signed JWTs.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Libraries <span class="bcp14">MUST</span> allow the recipient to distinguish between
+Unsecured JWTs,
+signed JWTs (JWSes),
+encrypted JWTs (JWEs), and
+signed and encrypted JWTs (Nested JWTs).
+This allows recipients to easily apply policies that only accept
+appropriate JWTs for the application context.
+Note that authentication use cases typically require the use of signed JWTs.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validate-inputs">
@@ -1750,19 +1770,19 @@ This allows verifiers to easily establish a policy of only accepting signed JWTs
 <p id="section-3.4-1">Some cryptographic operations, such as Elliptic Curve Diffie-Hellman key agreement
 ("ECDH-ES"), take inputs that may contain invalid values. This includes points not on
 the specified elliptic curve
-or other invalid points (e.g.,  <span>[<a href="#Valenta" class="cite xref">Valenta</a>]</span>, Section 7.1).
+or other invalid points (e.g., Section 7.1 of <span>[<a href="#Valenta" class="cite xref">Valenta</a>]</span>).
 The JWS/JWE library <span class="bcp14">MUST</span> validate these inputs before using them or use
 underlying cryptographic libraries that do so (or both).<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <p id="section-3.4-2">Elliptic Curve Diffie-Hellman Ephemeral Static (ECDH-ES) ephemeral
- public key (epk) inputs should be validated
- according to the recipient's
+public key (epk) inputs should be validated
+according to the recipient's
 chosen elliptic curve. For the NIST prime-order curves P-256, P-384, and P-521,
-validation  <span class="bcp14">MUST</span>
+validation <span class="bcp14">MUST</span>
 be performed according to Section 5.6.2.3.4 (ECC Partial Public-Key Validation
 Routine) of "Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography"
 <span>[<a href="#nist-sp-800-56a-r3" class="cite xref">nist-sp-800-56a-r3</a>]</span>.
-If the "X25519" or "X448"  <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span> algorithms are used,
-then the security considerations in  <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span> apply.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
+If the "X25519" or "X448" <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span> algorithms are used,
+then the security considerations in <span>[<a href="#RFC8037" class="cite xref">RFC8037</a>]</span> apply.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="key-entropy">
@@ -1770,16 +1790,17 @@ then the security considerations in  <span>[<a href="#RFC8037" class="cite xref"
         <h3 id="name-ensure-cryptographic-keys-h">
 <a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-ensure-cryptographic-keys-h" class="section-name selfRef">Ensure Cryptographic Keys Have Sufficient Entropy</a>
         </h3>
-<p id="section-3.5-1">The Key Entropy and Random Values advice in  Section 10.1 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, the
- Password Considerations in  Section 8.8 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>, and PBKDF2 as specified in <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>
+<p id="section-3.5-1">The Key Entropy and Random Values advice in <span><a href="https://rfc-editor.org/rfc/rfc7515#section-10.1" class="relref">Section 10.1</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>,
+the Password Considerations in <span><a href="https://rfc-editor.org/rfc/rfc7518#section-8.8" class="relref">Section 8.8</a> of [<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>,
+and PBKDF2 as specified in <span>[<a href="#RFC8018" class="cite xref">RFC8018</a>]</span>
           <span class="bcp14">MUST</span> be followed.
-In particular, human-memorizable passwords  <span class="bcp14">MUST NOT</span> be directly used
+In particular, human-memorizable passwords <span class="bcp14">MUST NOT</span> be directly used
 as the key to a keyed-MAC algorithm such as "HS256".
 Moreover, passwords should only be used to perform key encryption, rather
 than content encryption,
-as described in  Section 4.8 of <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.
+as described in <span><a href="https://rfc-editor.org/rfc/rfc7518#section-4.8" class="relref">Section 4.8</a> of [<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>.
 Note that even when used for key encryption, password-based encryption is
- still subject to brute-force attacks.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
+still subject to brute-force attacks.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="no-compression">
@@ -1789,7 +1810,8 @@ Note that even when used for key encryption, password-based encryption is
         </h3>
 <p id="section-3.6-1">Compression of data <span class="bcp14">SHOULD NOT</span> be used when creating a JWE, because
 such compressed data often reveals information about the plaintext,
-as described in <span>[<a href="#Kelsey" class="cite xref">Kelsey</a>]</span>.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
+as described in <span>[<a href="#Kelsey" class="cite xref">Kelsey</a>]</span>, unless this risk is outside the applicable
+threat model.<a href="#section-3.6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="use-utf8">
@@ -1797,10 +1819,10 @@ as described in <span>[<a href="#Kelsey" class="cite xref">Kelsey</a>]</span>.<a
         <h3 id="name-use-utf-8">
 <a href="#section-3.7" class="section-number selfRef">3.7. </a><a href="#name-use-utf-8" class="section-name selfRef">Use UTF-8</a>
         </h3>
-<p id="section-3.7-1"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>,  <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>, and  <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> all
- specify that UTF-8 be used for encoding and decoding JSON
+<p id="section-3.7-1"><span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, <span>[<a href="#RFC7516" class="cite xref">RFC7516</a>]</span>, and <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span> all
+specify that UTF-8 be used for encoding and decoding JSON
 used in Header Parameters and JWT Claims Sets. This is also in line with the
-latest JSON specification  <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.
+latest JSON specification <span>[<a href="#RFC8259" class="cite xref">RFC8259</a>]</span>.
 Implementations and applications <span class="bcp14">MUST</span> do this and not use or allow the use of
 other Unicode encodings for these purposes.<a href="#section-3.7-1" class="pilcrow">¶</a></p>
 </section>
@@ -1811,18 +1833,18 @@ other Unicode encodings for these purposes.<a href="#section-3.7-1" class="pilcr
 <a href="#section-3.8" class="section-number selfRef">3.8. </a><a href="#name-validate-issuer-and-subject" class="section-name selfRef">Validate Issuer and Subject</a>
         </h3>
 <p id="section-3.8-1">When a JWT contains an "iss" (issuer) claim, the application
-  <span class="bcp14">MUST</span> validate that the cryptographic keys
+<span class="bcp14">MUST</span> validate that the cryptographic keys
 used for the cryptographic operations in the JWT belong to the issuer.
-If they do not, the application  <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
+If they do not, the application <span class="bcp14">MUST</span> reject the JWT.<a href="#section-3.8-1" class="pilcrow">¶</a></p>
 <p id="section-3.8-2">The means of determining the keys owned by an issuer is application-specific.
 As one example, OAuth 2.0 authorization server "issuer" values <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
 are "https" URLs
 that reference a JSON metadata document that contains a "jwks_uri" value that is
-an "https" URL from which the issuer's keys are retrieved as a JWK Set  <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>.
+an "https" URL from which the issuer's keys are retrieved as a JWK Set <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>.
 This same mechanism is used by OpenID Connect <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>.
 Other applications may use different means of binding keys to issuers.<a href="#section-3.8-2" class="pilcrow">¶</a></p>
 <p id="section-3.8-3">Similarly, when the JWT contains a "sub" (subject) claim, the
- application  <span class="bcp14">MUST</span> validate that
+application <span class="bcp14">MUST</span> validate that
 the subject value corresponds to a valid subject and/or issuer-subject pair at the application.
 This may include confirming that the issuer is trusted by the application.
 In the OAuth context, <span><a href="https://rfc-editor.org/rfc/rfc9700#section-4.15" class="relref">Section 4.15</a> of [<a href="#RFC9700" class="cite xref">RFC9700</a>]</span> discusses the possibility of
@@ -1837,8 +1859,8 @@ If the issuer, subject, or the pair are invalid, the application
 <a href="#section-3.9" class="section-number selfRef">3.9. </a><a href="#name-use-and-validate-audience" class="section-name selfRef">Use and Validate Audience</a>
         </h3>
 <p id="section-3.9-1">If the same issuer can issue JWTs that are intended for use by more
- than one relying party or application, or may do so in the future,
-the JWT  <span class="bcp14">MUST</span> contain an "aud" (audience) claim that can be used
+than one relying party or application, or may do so in the future,
+the JWT <span class="bcp14">MUST</span> contain an "aud" (audience) claim that can be used
 to determine whether the JWT
 is being used by an intended party or was substituted by an attacker.<a href="#section-3.9-1" class="pilcrow">¶</a></p>
 <p id="section-3.9-2">In such cases, the relying party or application <span class="bcp14">MUST</span> validate the audience value, and if no audience
@@ -1852,14 +1874,15 @@ value is present or none of the values are associated with the recipient, it <sp
         </h3>
 <p id="section-3.10-1">Treat claim values as being potentially attacker-provided input.<a href="#section-3.10-1" class="pilcrow">¶</a></p>
 <p id="section-3.10-2">The "kid" (key ID) header is used by the relying application to
- perform key lookup. Applications <span class="bcp14">MUST</span> ensure that this does not create SQL or LDAP injection vulnerabilities by validating
+perform key lookup. Applications <span class="bcp14">MUST</span> ensure that this does not create SQL or LDAP injection vulnerabilities by validating
 and/or sanitizing the received value.<a href="#section-3.10-2" class="pilcrow">¶</a></p>
-<p id="section-3.10-3">Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
+<p id="section-3.10-3">Similarly, uncritically following a "jku" (JWK set URL) or "x5u" (X.509 URL) header,
 which may contain an arbitrary URL,
 could result in server-side request forgery (SSRF) attacks. Applications <span class="bcp14">SHOULD</span> protect against such
 attacks, e.g., by matching the URL to an allowlist of permitted locations
-and ensuring no cookies are sent in the GET request.<a href="#section-3.10-3" class="pilcrow">¶</a></p>
-<p id="section-3.10-4">When such an allowlist is not available, the authorization server <span class="bcp14">SHOULD</span> check what a hostname resolves to
+and ensuring no cookies are sent in the GET request, unless there are no
+local resources to protect (e.g., a hosted sandbox).<a href="#section-3.10-3" class="pilcrow">¶</a></p>
+<p id="section-3.10-4">When such an allowlist is not available, the authorization server <span class="bcp14">MUST</span> check what a hostname resolves to
 and avoid making a request if it resolves to a loopback or local IP address,
 because otherwise an attacker-chosen URL can cause the server to fetch arbitrary content from within the security domain.
 An example of this is when "attacker.example.com/etc/passwd" is used
@@ -1879,7 +1902,7 @@ kind of JWT is subject to such confusion, that JWT can include an explicit
 JWT type value, and the validation rules can specify checking the type.
 This mechanism can prevent such confusion.
 Explicit JWT typing is accomplished by using the "typ" Header Parameter.
-For instance, the  <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> specification uses
+For instance, the <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span> specification uses
 the "application/secevent+jwt" media type
 to perform explicit typing of Security Event Tokens (SETs).<a href="#section-3.11-1" class="pilcrow">¶</a></p>
 <p id="section-3.11-2">An example of an ad-hoc means of preventing confusion
@@ -1889,7 +1912,7 @@ so that Logout Tokens will fail the validation rules for ID Tokens <span>[<a hre
 The use of explicit typing avoids the need for employing such ad-hoc mechanisms
 when the validation rules for both kinds of JWTs include validating the "typ" values
 and the acceptable "typ" values for the two kinds of JWTs are distinct.<a href="#section-3.11-2" class="pilcrow">¶</a></p>
-<p id="section-3.11-3">Per Section 4.1.9 of <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, the "typ" Header Parameter declares the
+<p id="section-3.11-3">Per <span><a href="https://rfc-editor.org/rfc/rfc7515#section-4.1.9" class="relref">Section 4.1.9</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span>, the "typ" Header Parameter declares the
 media type of the complete JWS.
 To keep header values compact, producers are <span class="bcp14">RECOMMENDED</span> to omit the
 "application/" prefix from "typ" when no other "/" appears in the media type,
@@ -1912,19 +1935,19 @@ of JWT.<a href="#section-3.11-4.1.1" class="pilcrow">¶</a></p>
 kinds of JWTs in its application context, in which case the media type and
 "typ" pairing <span class="bcp14">MAY</span> be omitted.<a href="#section-3.11-5" class="pilcrow">¶</a></p>
 <p id="section-3.11-6">Distinct types make cross-JWT substitution harder when validators check "typ".
-Misapplying the Section 4.1.9 prefix rule can cause validators to reject
+Misapplying the prefix rule in <span><a href="https://rfc-editor.org/rfc/rfc7515#section-4.1.9" class="relref">Section 4.1.9</a> of [<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> can cause validators to reject
 otherwise valid tokens or accept the wrong type.<a href="#section-3.11-6" class="pilcrow">¶</a></p>
 <p id="section-3.11-7">For example, for Security Event Tokens (SETs) <span>[<a href="#RFC8417" class="cite xref">RFC8417</a>]</span>, the media type is
 "application/secevent+jwt" and the "typ" value should be "secevent+jwt", because
 SETs are often issued in contexts where they could otherwise be mistaken for
 other kinds of JWTs.<a href="#section-3.11-7" class="pilcrow">¶</a></p>
 <p id="section-3.11-8">When applying explicit typing to a Nested JWT, the "typ" Header
- Parameter containing the explicit type value  <span class="bcp14">MUST</span> be present in the inner JWT of the Nested JWT (the JWT
+Parameter containing the explicit type value <span class="bcp14">MUST</span> be present in the inner JWT of the Nested JWT (the JWT
 whose payload is the JWT Claims Set).
 In some cases, the same "typ" Header Parameter value will be present in the outer JWT as well,
 to explicitly type the entire Nested JWT.<a href="#section-3.11-8" class="pilcrow">¶</a></p>
 <p id="section-3.11-9">Note that the use of explicit typing may not achieve disambiguation
- from existing kinds of JWTs,
+from existing kinds of JWTs,
 as the validation rules for kinds of JWTs defined before
 the guidance on explicit typing in <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span> was available
 often do not use the "typ" Header Parameter value.<a href="#section-3.11-9" class="pilcrow">¶</a></p>
@@ -1950,10 +1973,10 @@ confusion becomes more likely.<a href="#section-3.11-12" class="pilcrow">¶</a><
 <a href="#section-3.12" class="section-number selfRef">3.12. </a><a href="#name-use-mutually-exclusive-vali" class="section-name selfRef">Use Mutually Exclusive Validation Rules for Different Kinds of JWTs</a>
         </h3>
 <p id="section-3.12-1">Each application of JWTs defines a profile specifying the required
- and optional JWT claims
+and optional JWT claims
 and the validation rules associated with them.
 If more than one kind of JWT can be issued by the same issuer,
-the validation rules for those JWTs  <span class="bcp14">MUST</span> be written such that
+the validation rules for those JWTs <span class="bcp14">MUST</span> be written such that
 they are mutually exclusive,
 rejecting JWTs of the wrong kind.<a href="#section-3.12-1" class="pilcrow">¶</a></p>
 <p id="section-3.12-2">To prevent substitution of JWTs from one context into another,
@@ -1962,18 +1985,18 @@ application developers may employ a number of strategies:<a href="#section-3.12-
 <li class="normal" id="section-3.12-3.1">
             <p id="section-3.12-3.1.1">Use explicit typing for different kinds of JWTs.
 Then the distinct "typ" values can be used to differentiate between the
- different kinds of JWTs.<a href="#section-3.12-3.1.1" class="pilcrow">¶</a></p>
+different kinds of JWTs.<a href="#section-3.12-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.12-3.2">
             <p id="section-3.12-3.2.1">Use different sets of required claims or different required claim values.
 Then the validation rules for one kind of JWT will reject those with different
- claims or values.<a href="#section-3.12-3.2.1" class="pilcrow">¶</a></p>
+claims or values.<a href="#section-3.12-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.12-3.3">
             <p id="section-3.12-3.3.1">Use different sets of required Header Parameters or different
- required Header Parameter values.
+required Header Parameter values.
 Then the validation rules for one kind of JWT will reject those with different
- Header Parameters or values.<a href="#section-3.12-3.3.1" class="pilcrow">¶</a></p>
+Header Parameters or values.<a href="#section-3.12-3.3.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-3.12-3.4">
             <p id="section-3.12-3.4.1">Use different keys for different kinds of JWTs.
@@ -1992,9 +2015,8 @@ Then the distinct "iss" values can be used to segregate the different kinds of J
 the best combination of types, required claims, values, Header Parameters, key usages, and issuers
 to differentiate among different kinds of JWTs
 will, in general, be application-specific.
-As discussed in  <a href="#use-typ" class="auto internal xref">Section 3.11</a>, for new JWT
- applications, the use of explicit typing is
-  <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.12-4" class="pilcrow">¶</a></p>
+As discussed in <a href="#use-typ" class="auto internal xref">Section 3.11</a>, for new JWT applications,
+the use of explicit typing is <span class="bcp14">RECOMMENDED</span>.<a href="#section-3.12-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="limit-iterations">
@@ -2030,8 +2052,9 @@ marks - is not a JWT and <span class="bcp14">MUST</span> be rejected.<a href="#s
         <h3 id="name-limit-jwe-decompression-siz">
 <a href="#section-3.15" class="section-number selfRef">3.15. </a><a href="#name-limit-jwe-decompression-siz" class="section-name selfRef">Limit JWE Decompression Size</a>
         </h3>
-<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE such as 250 KB,
-because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
+<p id="section-3.15-1">Implementations are <span class="bcp14">RECOMMENDED</span> to set a reasonable upper limit on the decompressed size of a JWE,
+because without such a limit, decompression can impose an unreasonable memory or CPU burden on recipients.
+Deployed JOSE libraries commonly use limits on the order of a few hundred kilobytes, e.g., 250 KB in one implementation.<a href="#section-3.15-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2042,7 +2065,7 @@ because without such a limit, decompression can impose an unreasonable memory or
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
 <p id="section-4-1">This entire document is about security considerations when
- implementing and deploying JSON Web Tokens.<a href="#section-4-1" class="pilcrow">¶</a></p>
+implementing and deploying JSON Web Tokens.<a href="#section-4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -2065,12 +2088,12 @@ because without such a limit, decompression can impose an unreasonable memory or
         </h3>
 <p id="section-6.1-1">The following acknowledgements from <span>[<a href="#RFC8725" class="cite xref">RFC8725</a>]</span>,
 the text of which is incorporated into this specification, are retained.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
-<p id="section-6.1-2">Thanks to  Antonio Sanso for bringing the
- "ECDH-ES" invalid point attack to the attention
+<p id="section-6.1-2">Thanks to Antonio Sanso for bringing the
+"ECDH-ES" invalid point attack to the attention
 of JWE and JWT implementers.  Tim McLean published the
-RSA/HMAC confusion attack  <span>[<a href="#McLean" class="cite xref">McLean</a>]</span>.
-Thanks to  Nat Sakimura for advocating the use of
-explicit typing. Thanks to  Neil Madden for his
+RSA/HMAC confusion attack <span>[<a href="#McLean" class="cite xref">McLean</a>]</span>.
+Thanks to Nat Sakimura for advocating the use of
+explicit typing. Thanks to Neil Madden for his
 numerous comments, and to Carsten Bormann, Brian Campbell, Brian Carpenter, Alissa Cooper, Roman Danyliw, Ben Kaduk,
 Mirja Kühlewind, Barry Leiba,
 Dan Moore,
@@ -2085,12 +2108,15 @@ for their reviews.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-acknowledgements-for-this-s" class="section-name selfRef">Acknowledgements for [[ this specification ]]</a>
         </h3>
 <p id="section-6.2-1">We would like to thank
+Mike Bishop,
 Brian Campbell,
-Deb Cooley,
 Jianjun Chen,
+Deb Cooley,
+Charles Eckel,
 Dan Moore,
 Aaron Parecki,
 Filip Skokan,
+Ketan Talaulikar,
 Tom Tervoort,
 Enze Wang,
 and
@@ -2111,6 +2137,10 @@ for their contributions to the new content in this specification.<a href="#secti
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-jose-deprecate-none-rsa15">[I-D.ietf-jose-deprecate-none-rsa15]</dt>
+        <dd>
+<span class="refAuthor">Madden, N.</span>, <span class="refTitle">"JOSE: Deprecate 'none' and 'RSA1_5'"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-deprecate-none-rsa15-05</span>, <time datetime="2026-06-23" class="refDate">23 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-05">https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-05</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="nist-sp-800-56a-r3">[nist-sp-800-56a-r3]</dt>
         <dd>
 <span class="refAuthor">Barker, E.</span>, <span class="refAuthor">Chen, L.</span>, <span class="refAuthor">Roginsky, A.</span>, <span class="refAuthor">Vassilev, A.</span>, and <span class="refAuthor">R. Davis</span>, <span class="refTitle">"Recommendation for pair-wise key-establishment schemes using discrete logarithm cryptography"</span>, <span class="refContent">National Institute of Standards and Technology</span>, <span class="seriesInfo">DOI 10.6028/nist.sp.800-56ar3</span>, <time datetime="2018-04" class="refDate">April 2018</time>, <span>&lt;<a href="https://doi.org/10.6028/nist.sp.800-56ar3">https://doi.org/10.6028/nist.sp.800-56ar3</a>&gt;</span>. </dd>
@@ -2184,13 +2214,9 @@ for their contributions to the new content in this specification.<a href="#secti
         <dd>
 <span class="refAuthor">NIST</span>, <span class="refTitle">"CVE-2023-51774 Detail"</span>, <span class="refContent">National Vulnerability Database</span>, <time datetime="2024-02" class="refDate">February 2024</time>, <span>&lt;<a href="https://nvd.nist.gov/vuln/detail/CVE-2023-51774">https://nvd.nist.gov/vuln/detail/CVE-2023-51774</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-jose-deprecate-none-rsa15">[I-D.ietf-jose-deprecate-none-rsa15]</dt>
-        <dd>
-<span class="refAuthor">Madden, N.</span>, <span class="refTitle">"JOSE: Deprecate 'none' and 'RSA1_5'"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-deprecate-none-rsa15-05</span>, <time datetime="2026-06-23" class="refDate">23 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-05">https://datatracker.ietf.org/doc/html/draft-ietf-jose-deprecate-none-rsa15-05</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="JWT-Cracker">[JWT-Cracker]</dt>
         <dd>
-<span class="refAuthor">Rius, B.</span>, <span class="refTitle">"JWT Cracker"</span>, <span>n.d.</span>, <span>&lt;<a href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a>&gt;</span>. </dd>
+<span class="refAuthor">Rius, B.</span>, <span class="refTitle">"JWT Cracker"</span>, <span>&lt;<a href="https://github.com/brendan-rius/c-jwt-cracker">https://github.com/brendan-rius/c-jwt-cracker</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="Kelsey">[Kelsey]</dt>
         <dd>
@@ -2248,6 +2274,10 @@ for their contributions to the new content in this specification.<a href="#secti
         <dd>
 <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Labunets, A.</span>, and <span class="refAuthor">D. Fett</span>, <span class="refTitle">"Best Current Practice for OAuth 2.0 Security"</span>, <span class="seriesInfo">BCP 240</span>, <span class="seriesInfo">RFC 9700</span>, <span class="seriesInfo">DOI 10.17487/RFC9700</span>, <time datetime="2025-01" class="refDate">January 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9700">https://www.rfc-editor.org/rfc/rfc9700</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC9864">[RFC9864]</dt>
+        <dd>
+<span class="refAuthor">Jones, M.B.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"Fully-Specified Algorithms for JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)"</span>, <span class="seriesInfo">RFC 9864</span>, <span class="seriesInfo">DOI 10.17487/RFC9864</span>, <time datetime="2025-10" class="refDate">October 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9864">https://www.rfc-editor.org/rfc/rfc9864</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="Sanso">[Sanso]</dt>
         <dd>
 <span class="refAuthor">Sanso, A.</span>, <span class="refTitle">"Critical Vulnerability in JSON Web Encryption"</span>, <time datetime="2017-03" class="refDate">March 2017</time>, <span>&lt;<a href="https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/">https://auth0.com/blog/critical-vulnerability-in-json-web-encryption/</a>&gt;</span>. </dd>
@@ -2269,22 +2299,30 @@ for their contributions to the new content in this specification.<a href="#secti
 <p id="appendix-A-1">This document obsoletes RFC 8725 and provides several significant improvements and additions:<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="normal type-1" id="appendix-A-2">
 <li id="appendix-A-2.1">
-          <p id="appendix-A-2.1.1">Algorithm Verification: Added defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive (<a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>).<a href="#appendix-A-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.1.1">Algorithm Verification: Added defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive (<a href="#alg-verification-threat" class="auto internal xref">Section 2.11</a> and <a href="#algorithm-verification" class="auto internal xref">Section 3.1</a>).<a href="#appendix-A-2.1.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.2">
-          <p id="appendix-A-2.2.1">Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation (<a href="#preventing-confusion" class="auto internal xref">Section 3.12</a>).<a href="#appendix-A-2.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.2.1">Encryption-Signature Confusion: Added mitigation for attacks where verifiers don't distinguish between successful decryption and successful signature validation (<a href="#incorrect-composition-of-encryption-and-signature" class="auto internal xref">Section 2.3</a> and <a href="#validate-crypto" class="auto internal xref">Section 3.3</a>).<a href="#appendix-A-2.2.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.3">
-          <p id="appendix-A-2.3.1">PBES2 Count Limits: Added requirements to reject unreasonably large <code>p2c</code> (PBES2 Count) values to prevent DoS attacks (<a href="#limit-iterations" class="auto internal xref">Section 3.13</a>).<a href="#appendix-A-2.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.3.1">PBES2 Count Limits: Added requirements to reject unreasonably large <code>p2c</code> (PBES2 Count) values to prevent DoS attacks (<a href="#unreasonable-iterations" class="auto internal xref">Section 2.10</a> and <a href="#limit-iterations" class="auto internal xref">Section 3.13</a>).<a href="#appendix-A-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.4">
-          <p id="appendix-A-2.4.1">JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks (<a href="#token-format" class="auto internal xref">Section 3.14</a>).<a href="#appendix-A-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.4.1">JWT Format Confusion: Added mitigation for JWT serialization format confusion attacks (<a href="#jwt-format-confusion" class="auto internal xref">Section 2.13</a> and <a href="#token-format" class="auto internal xref">Section 3.14</a>).<a href="#appendix-A-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.5">
-          <p id="appendix-A-2.5.1">Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE (<a href="#limit-decompression" class="auto internal xref">Section 3.15</a>).<a href="#appendix-A-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.5.1">Compression DoS: Added mitigation for DoS attacks resulting from abuse of compression in JWE (<a href="#jwe-decompression-bomb" class="auto internal xref">Section 2.12</a> and <a href="#limit-decompression" class="auto internal xref">Section 3.15</a>).<a href="#appendix-A-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li id="appendix-A-2.6">
-          <p id="appendix-A-2.6.1">Described relationship between explicit typing and kinds of JWTs not already employing it.<a href="#appendix-A-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-2.6.1">Explicit Typing: Expanded the guidance on explicit typing by defining recommended <code>typ</code> and media type conventions, recipient processing rules, and deployment guidance for new and existing JWT types (<a href="#use-typ" class="auto internal xref">Section 3.11</a> and <a href="#preventing-confusion" class="auto internal xref">Section 3.12</a>).<a href="#appendix-A-2.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-A-2.7">
+          <p id="appendix-A-2.7.1">Untrusted Header Parameters and SSRF: Added guidance on treating <code>kid</code>, <code>jku</code>, and <code>x5u</code> as potentially attacker-controlled input, including SSRF mitigations and DNS resolution checks when processing untrusted URLs (<a href="#do-not-trust-claims" class="auto internal xref">Section 3.10</a>).<a href="#appendix-A-2.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li id="appendix-A-2.8">
+          <p id="appendix-A-2.8.1">Normatively references <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span>,
+makes the text requiring application opt-in to use JWTs with algorithm "none" a "<span class="bcp14">MUST</span>",
+and states that the RSA-PKCS1 v1.5 algorithms are deprecated.<a href="#appendix-A-2.8.1" class="pilcrow">¶</a></p>
 </li>
       </ol>
 </section>
@@ -2295,152 +2333,214 @@ for their contributions to the new content in this specification.<a href="#secti
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
 <p id="appendix-B-1">[[Note to RFC Editor: please remove before publication.]]<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div id="autogen-draft-ietf-oauth-rfc8725bis-07">
+<div id="autogen-draft-ietf-oauth-rfc8725bis-10">
 <section id="appendix-B.1">
         <h3 id="name-draft-ietf-oauth-rfc8725bis">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-draft-ietf-oauth-rfc8725bis" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-07</a>
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-draft-ietf-oauth-rfc8725bis" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-10</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">
-            <p id="appendix-B.1-1.1.1">Applied ARTART review suggestions regarding explicit typing (Section 3.11).<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-B.1-1.1.1">Added Charles Eckel to the Acknowledgements.<a href="#appendix-B.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="autogen-draft-ietf-oauth-rfc8725bis-09">
+<section id="appendix-B.2">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-draft-ietf-oauth-rfc8725bis-" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-09</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.2-1.1">
+            <p id="appendix-B.2-1.1.1">Clarified that the JWE decompression size limit is a ballpark drawn from deployed libraries (IESG review).<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.2-1.2">
+            <p id="appendix-B.2-1.2.1">IESG nits: replaced "blindly" and added a missing comma after "However".<a href="#appendix-B.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="autogen-draft-ietf-oauth-rfc8725bis-08">
+<section id="appendix-B.3">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-0">
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-draft-ietf-oauth-rfc8725bis-0" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-08</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.3-1.1">
+            <p id="appendix-B.3-1.1.1">Clarified that Nested JWT validation applies when Nested JWTs are supported (SECDIR review).<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.3-1.2">
+            <p id="appendix-B.3-1.2.1">Applied IESG ballot comments by Ketan Talaulikar (Introduction relationships, Compact Serialization and <code>typ</code> prefix citations).<a href="#appendix-B.3-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.3-1.3">
+            <p id="appendix-B.3-1.3.1">Updated Appendix A (Changes from RFC 8725) with complete bullets and section references.<a href="#appendix-B.3-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.3-1.4">
+            <p id="appendix-B.3-1.4.1">Added an informative mention of fully-specified JOSE algorithm identifiers (<span>[<a href="#RFC9864" class="cite xref">RFC9864</a>]</span>).<a href="#appendix-B.3-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.3-1.5">
+            <p id="appendix-B.3-1.5.1">Made the <span>[<a href="#I-D.ietf-jose-deprecate-none-rsa15" class="cite xref">I-D.ietf-jose-deprecate-none-rsa15</a>]</span> reference normative and
+rewrote the text on "alg":"none" and RSA-PKCS1 v1.5 accordingly.<a href="#appendix-B.3-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.3-1.6">
+            <p id="appendix-B.3-1.6.1">Corrected section reference and itemized list syntax and
+removed extraneous spaces in the source.<a href="#appendix-B.3-1.6.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.3-1.7">
+            <p id="appendix-B.3-1.7.1">Applied spelling and grammar corrections.<a href="#appendix-B.3-1.7.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="autogen-draft-ietf-oauth-rfc8725bis-07">
+<section id="appendix-B.4">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-07">
+<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-draft-ietf-oauth-rfc8725bis-07" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-07</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.4-1.1">
+            <p id="appendix-B.4-1.1.1">Applied ARTART review suggestions for <span class="bcp14">SHOULD</span> language in Sections 3.1, 3.2, 3.6, and 3.10.<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-B.4-1.2">
+            <p id="appendix-B.4-1.2.1">Applied ARTART review suggestions regarding explicit typing (Section 3.11).<a href="#appendix-B.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-06">
-<section id="appendix-B.2">
-        <h3 id="name-draft-ietf-oauth-rfc8725bis-">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-draft-ietf-oauth-rfc8725bis-" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-06</a>
+<section id="appendix-B.5">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-06">
+<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-draft-ietf-oauth-rfc8725bis-06" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-06</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.2-1.1">
-            <p id="appendix-B.2-1.1.1">AD review followup: promoted selected lowercase must/should guidance to normative <span class="bcp14">MUST</span> language.<a href="#appendix-B.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.5-1.1">
+            <p id="appendix-B.5-1.1.1">AD review follow-up: Promoted selected lowercase must/should guidance to normative <span class="bcp14">MUST</span> language.<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-05">
-<section id="appendix-B.3">
-        <h3 id="name-draft-ietf-oauth-rfc8725bis-0">
-<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-draft-ietf-oauth-rfc8725bis-0" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-05</a>
+<section id="appendix-B.6">
+        <h3 id="name-draft-ietf-oauth-rfc8725bis-05">
+<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-draft-ietf-oauth-rfc8725bis-05" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-05</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.3-1.1">
-            <p id="appendix-B.3-1.1.1">Applied suggestions by responsible AD Deb Cooley.<a href="#appendix-B.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.6-1.1">
+            <p id="appendix-B.6-1.1.1">Applied suggestions by responsible AD Deb Cooley.<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-04">
-<section id="appendix-B.4">
+<section id="appendix-B.7">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-04">
-<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-draft-ietf-oauth-rfc8725bis-04" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-04</a>
+<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-draft-ietf-oauth-rfc8725bis-04" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-04</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.4-1.1">
-            <p id="appendix-B.4-1.1.1">Applied suggestions by document shepherd Hannes Tschofenig.<a href="#appendix-B.4-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.7-1.1">
+            <p id="appendix-B.7-1.1.1">Applied suggestions by document shepherd Hannes Tschofenig.<a href="#appendix-B.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-03">
-<section id="appendix-B.5">
+<section id="appendix-B.8">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-03">
-<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-draft-ietf-oauth-rfc8725bis-03" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-03</a>
+<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-draft-ietf-oauth-rfc8725bis-03" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.5-1.1">
-            <p id="appendix-B.5-1.1.1">Described relationship between explicit typing and kinds of JWTs not already employing it.<a href="#appendix-B.5-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.8-1.1">
+            <p id="appendix-B.8-1.1.1">Described relationship between explicit typing and kinds of JWTs not already employing it.<a href="#appendix-B.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-02">
-<section id="appendix-B.6">
+<section id="appendix-B.9">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-02">
-<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-draft-ietf-oauth-rfc8725bis-02" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-02</a>
+<a href="#appendix-B.9" class="section-number selfRef">B.9. </a><a href="#name-draft-ietf-oauth-rfc8725bis-02" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.6-1.1">
-            <p id="appendix-B.6-1.1.1">Incorporated Aaron Parecki's review suggestions.<a href="#appendix-B.6-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.9-1.1">
+            <p id="appendix-B.9-1.1.1">Incorporated Aaron Parecki's review suggestions.<a href="#appendix-B.9-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.6-1.2">
-            <p id="appendix-B.6-1.2.1">Acknowledged contributors to the new content in this specification.<a href="#appendix-B.6-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.9-1.2">
+            <p id="appendix-B.9-1.2.1">Acknowledged contributors to the new content in this specification.<a href="#appendix-B.9-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-01">
-<section id="appendix-B.7">
+<section id="appendix-B.10">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-01">
-<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-draft-ietf-oauth-rfc8725bis-01" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-01</a>
+<a href="#appendix-B.10" class="section-number selfRef">B.10. </a><a href="#name-draft-ietf-oauth-rfc8725bis-01" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.7-1.1">
-            <p id="appendix-B.7-1.1.1">Applied editorial suggestions by Dan Moore.<a href="#appendix-B.7-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.10-1.1">
+            <p id="appendix-B.10-1.1.1">Applied editorial suggestions by Dan Moore.<a href="#appendix-B.10-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.7-1.2">
-            <p id="appendix-B.7-1.2.1">Described changes relative to RFC 8725.<a href="#appendix-B.7-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.10-1.2">
+            <p id="appendix-B.10-1.2.1">Described changes relative to RFC 8725.<a href="#appendix-B.10-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-ietf-oauth-rfc8725bis-00">
-<section id="appendix-B.8">
+<section id="appendix-B.11">
         <h3 id="name-draft-ietf-oauth-rfc8725bis-00">
-<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-draft-ietf-oauth-rfc8725bis-00" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-00</a>
+<a href="#appendix-B.11" class="section-number selfRef">B.11. </a><a href="#name-draft-ietf-oauth-rfc8725bis-00" class="section-name selfRef">draft-ietf-oauth-rfc8725bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.8-1.1">
-            <p id="appendix-B.8-1.1.1">Draft adopted, no textual changes<a href="#appendix-B.8-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.11-1.1">
+            <p id="appendix-B.11-1.1.1">Draft adopted, no textual changes<a href="#appendix-B.11-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-02">
-<section id="appendix-B.9">
+<section id="appendix-B.12">
         <h3 id="name-draft-sheffer-oauth-rfc8725">
-<a href="#appendix-B.9" class="section-number selfRef">B.9. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-02</a>
+<a href="#appendix-B.12" class="section-number selfRef">B.12. </a><a href="#name-draft-sheffer-oauth-rfc8725" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.9-1.1">
-            <p id="appendix-B.9-1.1.1">Obsoletes RFC 8725 and updates RFC 7519.<a href="#appendix-B.9-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.12-1.1">
+            <p id="appendix-B.12-1.1.1">Obsoletes RFC 8725 and updates RFC 7519.<a href="#appendix-B.12-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-01">
-<section id="appendix-B.10">
+<section id="appendix-B.13">
         <h3 id="name-draft-sheffer-oauth-rfc8725b">
-<a href="#appendix-B.10" class="section-number selfRef">B.10. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
+<a href="#appendix-B.13" class="section-number selfRef">B.13. </a><a href="#name-draft-sheffer-oauth-rfc8725b" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.10-1.1">
-            <p id="appendix-B.10-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-B.10-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.13-1.1">
+            <p id="appendix-B.13-1.1.1">Mitigate encryption-signature confusion.<a href="#appendix-B.13-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.10-1.2">
-            <p id="appendix-B.10-1.2.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-B.10-1.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.13-1.2">
+            <p id="appendix-B.13-1.2.1">Reject unreasonably large <code>p2c</code> (PBES2 Count) values.<a href="#appendix-B.13-1.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.10-1.3">
-            <p id="appendix-B.10-1.3.1">Defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-B.10-1.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.13-1.3">
+            <p id="appendix-B.13-1.3.1">Defensive checking to address incorrect reading of <code>alg</code> values as being case-insensitive.<a href="#appendix-B.13-1.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.10-1.4">
-            <p id="appendix-B.10-1.4.1">Mitigate DoS attacks resulting from abuse of compression.<a href="#appendix-B.10-1.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.13-1.4">
+            <p id="appendix-B.13-1.4.1">Mitigate DoS attacks resulting from abuse of compression.<a href="#appendix-B.13-1.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-B.10-1.5">
-            <p id="appendix-B.10-1.5.1">Mitigate JWT serialization format confusion.<a href="#appendix-B.10-1.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="appendix-B.13-1.5">
+            <p id="appendix-B.13-1.5.1">Mitigate JWT serialization format confusion.<a href="#appendix-B.13-1.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
 </div>
 <div id="autogen-draft-sheffer-oauth-rfc8725bis-00">
-<section id="appendix-B.11">
+<section id="appendix-B.14">
         <h3 id="name-draft-sheffer-oauth-rfc8725bi">
-<a href="#appendix-B.11" class="section-number selfRef">B.11. </a><a href="#name-draft-sheffer-oauth-rfc8725bi" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
+<a href="#appendix-B.14" class="section-number selfRef">B.14. </a><a href="#name-draft-sheffer-oauth-rfc8725bi" class="section-name selfRef">draft-sheffer-oauth-rfc8725bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.11-1.1">
-            <p id="appendix-B.11-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-B.11-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="appendix-B.14-1.1">
+            <p id="appendix-B.14-1.1.1">Initial version, text is identical to RFC 8725.<a href="#appendix-B.14-1.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -2454,7 +2554,7 @@ for their contributions to the new content in this specification.<a href="#secti
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Yaron Sheffer</span></div>
-<div dir="auto" class="left"><span class="org">Intuit</span></div>
+<div dir="auto" class="left"><span class="org">Independent</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:yaronf.ietf@gmail.com" class="email">yaronf.ietf@gmail.com</a>

@@ -3,12 +3,12 @@
 
 
 Web Authorization Protocol                                    Y. Sheffer
-Internet-Draft                                                    Intuit
+Internet-Draft                                               Independent
 Obsoletes: 8725 (if approved)                                   D. Hardt
 Updates: 7519 (if approved)                                             
 Intended status: Best Current Practice                          M. Jones
-Expires: 14 January 2027                          Self-Issued Consulting
-                                                            13 July 2026
+Expires: 17 February 2027                         Self-Issued Consulting
+                                                          16 August 2026
 
 
                  JSON Web Token Best Current Practices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 January 2027.
+   This Internet-Draft will expire on 17 February 2027.
 
 Copyright Notice
 
@@ -122,17 +122,20 @@ Table of Contents
      7.2.  Informative References
    Appendix A.  Changes from RFC 8725
    Appendix B.  Document History
-     B.1.  draft-ietf-oauth-rfc8725bis-07
-     B.2.  draft-ietf-oauth-rfc8725bis-06
-     B.3.  draft-ietf-oauth-rfc8725bis-05
-     B.4.  draft-ietf-oauth-rfc8725bis-04
-     B.5.  draft-ietf-oauth-rfc8725bis-03
-     B.6.  draft-ietf-oauth-rfc8725bis-02
-     B.7.  draft-ietf-oauth-rfc8725bis-01
-     B.8.  draft-ietf-oauth-rfc8725bis-00
-     B.9.  draft-sheffer-oauth-rfc8725bis-02
-     B.10. draft-sheffer-oauth-rfc8725bis-01
-     B.11. draft-sheffer-oauth-rfc8725bis-00
+     B.1.  draft-ietf-oauth-rfc8725bis-10
+     B.2.  draft-ietf-oauth-rfc8725bis-09
+     B.3.  draft-ietf-oauth-rfc8725bis-08
+     B.4.  draft-ietf-oauth-rfc8725bis-07
+     B.5.  draft-ietf-oauth-rfc8725bis-06
+     B.6.  draft-ietf-oauth-rfc8725bis-05
+     B.7.  draft-ietf-oauth-rfc8725bis-04
+     B.8.  draft-ietf-oauth-rfc8725bis-03
+     B.9.  draft-ietf-oauth-rfc8725bis-02
+     B.10. draft-ietf-oauth-rfc8725bis-01
+     B.11. draft-ietf-oauth-rfc8725bis-00
+     B.12. draft-sheffer-oauth-rfc8725bis-02
+     B.13. draft-sheffer-oauth-rfc8725bis-01
+     B.14. draft-sheffer-oauth-rfc8725bis-00
    Authors' Addresses
 
 1.  Introduction
@@ -178,6 +181,14 @@ Table of Contents
    statement.  Readers are advised to seek out any errata or updates
    that apply to this document.
 
+   This document obsoletes [RFC8725].  In addition to retaining the
+   guidance from that BCP, it adds recommendations addressing attacks
+   and vulnerabilities discovered since its publication; Appendix A
+   summarizes those additions.  This document also updates [RFC7519] by
+   tightening claim and "typ" usage and validation (especially audience,
+   issuer/subject, and explicit typing), and by restricting how
+   Unsecured JWTs (alg value "none") are used.
+
 1.1.  Target Audience
 
    The intended audiences of this document are:
@@ -222,7 +233,7 @@ Table of Contents
       the signature using HMAC-SHA256 and using the RSA public key as
       the HMAC shared secret (see [McLean] and [CVE-2015-9235]).
 
-   For mitigations, see Section 3.1 and Section 3.2.
+   For mitigations, see Sections 3.1 and 3.2.
 
 2.2.  Weak Symmetric Keys
 
@@ -238,7 +249,7 @@ Table of Contents
 2.3.  Incorrect Use and Composition of Encryption and Signature
 
    Most authentication use cases only require a simple signed JWT as
-   their token.  However verifiers don't always check that the received
+   their token.  However, verifiers don't always check that the received
    JWT is a JWS (a signed JWT) as opposed to a JWE (a JWT with encrypted
    structure).  This can result in vulnerabilities when the verifier's
    library does not distinguish between successful decryption and
@@ -270,7 +281,7 @@ Table of Contents
 
 2.5.  Insecure Use of Elliptic Curve Encryption
 
-   Per [Sanso], several Javascript Object Signing and Encryption (JOSE)
+   Per [Sanso], several JavaScript Object Signing and Encryption (JOSE)
    libraries fail to validate their inputs correctly when performing
    elliptic curve key agreement (the "ECDH-ES" algorithm).  An attacker
    that is able to send JWEs of its choosing that use invalid curve
@@ -369,12 +380,13 @@ Table of Contents
 2.13.  JWT Format Confusion
 
    Some JWS implementations support both the Compact and JSON
-   Serializations.  While JWTs must use the Compact Serialization, if an
-   application by mistake verifies a JWT using the JSON Serialization
-   but extracts claims by parsing it as a JWT using the Compact
-   Serialization (e.g., via string splitting), an attacker can craft a
-   valid JSON JWS with a forged payload.  This mismatch in format
-   handling can lead to authentication bypass or impersonation.
+   Serializations.  While JWTs must use the Compact Serialization
+   (Section 1 of [RFC7519]), if an application by mistake verifies a JWT
+   using the JSON Serialization but extracts claims by parsing it as a
+   JWT using the Compact Serialization (e.g., via string splitting), an
+   attacker can craft a valid JSON JWS with a forged payload.  This
+   mismatch in format handling can lead to authentication bypass or
+   impersonation.
 
    For mitigations, see Section 3.14.
 
@@ -406,12 +418,12 @@ Table of Contents
    requirement MUST be enforced and validated at the time the
    cryptographic operation is executed.
 
-   Libraries SHOULD opt for defensive security policies to cope with
-   potential issues in the underlying infrastructure, such as the JSON
-   parser.  In particular, libraries SHOULD use allowlists for critical
-   parameters such as "alg" instead of blocklists, because blocklists
-   cannot anticipate every unsafe or misspelled value an attacker might
-   use.
+   As a best practice, libraries should opt for defensive security
+   policies to cope with potential issues in the underlying
+   infrastructure, such as the JSON parser.  In particular, libraries
+   should use allowlists for critical parameters such as "alg" instead
+   of blocklists, because blocklists cannot anticipate every unsafe or
+   misspelled value an attacker might use.
 
 3.2.  Use Appropriate Algorithms
 
@@ -432,19 +444,22 @@ Table of Contents
    cryptographically protected by other means.  JWTs using "none" are
    often used in application contexts in which the content is optionally
    signed.  The URL-safe claims representation and processing in this
-   context can be the same in both the signed and unsigned cases.  JWT
-   libraries SHOULD NOT generate JWTs using "none" unless explicitly
-   requested to do so by the caller.  Similarly, JWT libraries SHOULD
-   NOT consume JWTs using "none" unless explicitly requested by the
-   caller.
+   context can be the same in both the signed and unsigned cases.
+
+   The "none" algorithm is deprecated by
+   [I-D.ietf-jose-deprecate-none-rsa15].  JWT libraries MUST NOT
+   generate JWTs using "none" unless explicitly requested to do so by
+   the caller.  Similarly, JWT libraries MUST NOT consume JWTs using
+   "none" unless explicitly allowed by the caller.
 
    Applications SHOULD follow these algorithm-specific recommendations,
    because deviating from them may re-enable known attacks on the listed
    algorithms unless an application-specific threat analysis shows the
    risk is acceptable:
 
-   *  Avoid all RSA-PKCS1 v1.5 encryption algorithms ([RFC8017],
-      Section 7.2), preferring RSAES-OAEP ([RFC8017], Section 7.1).
+   *  Deprecate all RSA-PKCS1 v1.5 encryption algorithms (Section 7.2 of
+      [RFC8017]), as specified in [I-D.ietf-jose-deprecate-none-rsa15],
+      preferring RSAES-OAEP (Section 7.1 of [RFC8017]).
 
    *  Elliptic Curve Digital Signature Algorithm (ECDSA) signatures
       [ANSI-X962-2005] require a unique random value for every message
@@ -453,32 +468,40 @@ Table of Contents
       signature scheme may be compromised.  In the worst case, the
       private key may be recoverable by an attacker.  To counter these
       attacks, JWT libraries SHOULD implement ECDSA using the
-      deterministic approach defined in [RFC6979].  This approach is
-      completely compatible with existing ECDSA verifiers and so can be
-      implemented without new algorithm identifiers being required.
+      deterministic approach defined in [RFC6979], unless this is not
+      reasonably implementable.  This approach is completely compatible
+      with existing ECDSA verifiers and so can be implemented without
+      new algorithm identifiers being required.
 
-   Readers are advised that [I-D.ietf-jose-deprecate-none-rsa15]
-   proposes deprecating the "none" and "RSA1_5" algorithms.
+   Readers are advised that [RFC9864] defines fully-specified JOSE
+   algorithm identifiers and deprecates polymorphic identifiers such as
+   "EdDSA".  New deployments SHOULD prefer fully-specified algorithm
+   identifiers (for example, "Ed25519" rather than "EdDSA") when
+   negotiating and configuring algorithms, unless backward compatibility
+   requires use of the older polymorphic identifiers.
 
 3.3.  Validate All Cryptographic Operations
 
    All cryptographic operations used in the JWT MUST be validated and
    the entire JWT MUST be rejected if any of them fail to validate.
-   This is true not only of JWTs with a single set of Header Parameters
-   but also for Nested JWTs, as defined in Section 2 of [RFC7519], in
-   which both outer and inner operations MUST be validated using the
-   keys and algorithms supplied by the application.
+   This is true of JWTs with a single set of Header Parameters.  If an
+   implementation supports Nested JWTs, as defined in Section 2 of
+   [RFC7519], then both the outer and inner operations MUST be validated
+   using the keys and algorithms supplied by the application.
 
-   Libraries MUST allow the verifier to distinguish between signed JWTs
-   (JWSes) and encrypted JWTs (JWEs).  This allows verifiers to easily
-   establish a policy of only accepting signed JWTs.
+   Libraries MUST allow the recipient to distinguish between Unsecured
+   JWTs, signed JWTs (JWSes), encrypted JWTs (JWEs), and signed and
+   encrypted JWTs (Nested JWTs).  This allows recipients to easily apply
+   policies that only accept appropriate JWTs for the application
+   context.  Note that authentication use cases typically require the
+   use of signed JWTs.
 
 3.4.  Validate Cryptographic Inputs
 
    Some cryptographic operations, such as Elliptic Curve Diffie-Hellman
    key agreement ("ECDH-ES"), take inputs that may contain invalid
    values.  This includes points not on the specified elliptic curve or
-   other invalid points (e.g., [Valenta], Section 7.1).  The JWS/JWE
+   other invalid points (e.g., Section 7.1 of [Valenta]).  The JWS/JWE
    library MUST validate these inputs before using them or use
    underlying cryptographic libraries that do so (or both).
 
@@ -508,7 +531,8 @@ Table of Contents
 
    Compression of data SHOULD NOT be used when creating a JWE, because
    such compressed data often reveals information about the plaintext,
-   as described in [Kelsey].
+   as described in [Kelsey], unless this risk is outside the applicable
+   threat model.
 
 3.7.  Use UTF-8
 
@@ -563,18 +587,19 @@ Table of Contents
    create SQL or LDAP injection vulnerabilities by validating and/or
    sanitizing the received value.
 
-   Similarly, blindly following a "jku" (JWK set URL) or "x5u" (X.509
-   URL) header, which may contain an arbitrary URL, could result in
-   server-side request forgery (SSRF) attacks.  Applications SHOULD
+   Similarly, uncritically following a "jku" (JWK set URL) or "x5u"
+   (X.509 URL) header, which may contain an arbitrary URL, could result
+   in server-side request forgery (SSRF) attacks.  Applications SHOULD
    protect against such attacks, e.g., by matching the URL to an
    allowlist of permitted locations and ensuring no cookies are sent in
-   the GET request.
+   the GET request, unless there are no local resources to protect
+   (e.g., a hosted sandbox).
 
    When such an allowlist is not available, the authorization server
-   SHOULD check what a hostname resolves to and avoid making a request
-   if it resolves to a loopback or local IP address, because otherwise
-   an attacker-chosen URL can cause the server to fetch arbitrary
-   content from within the security domain.  An example of this is when
+   MUST check what a hostname resolves to and avoid making a request if
+   it resolves to a loopback or local IP address, because otherwise an
+   attacker-chosen URL can cause the server to fetch arbitrary content
+   from within the security domain.  An example of this is when
    "attacker.example.com/etc/passwd" is used as the "jwks_uri" value and
    there is a DNS entry for "attacker.example.com" that resolves to
    "127.0.0.1" or other local IP address values.
@@ -620,8 +645,9 @@ Table of Contents
    media type and "typ" pairing MAY be omitted.
 
    Distinct types make cross-JWT substitution harder when validators
-   check "typ".  Misapplying the Section 4.1.9 prefix rule can cause
-   validators to reject otherwise valid tokens or accept the wrong type.
+   check "typ".  Misapplying the prefix rule in Section 4.1.9 of
+   [RFC7515] can cause validators to reject otherwise valid tokens or
+   accept the wrong type.
 
    For example, for Security Event Tokens (SETs) [RFC8417], the media
    type is "application/secevent+jwt" and the "typ" value should be
@@ -726,9 +752,10 @@ Table of Contents
 3.15.  Limit JWE Decompression Size
 
    Implementations are RECOMMENDED to set a reasonable upper limit on
-   the decompressed size of a JWE such as 250 KB, because without such a
-   limit, decompression can impose an unreasonable memory or CPU burden
-   on recipients.
+   the decompressed size of a JWE, because without such a limit,
+   decompression can impose an unreasonable memory or CPU burden on
+   recipients.  Deployed JOSE libraries commonly use limits on the order
+   of a few hundred kilobytes, e.g., 250 KB in one implementation.
 
 4.  Security Considerations
 
@@ -757,14 +784,21 @@ Table of Contents
 
 6.2.  Acknowledgements for [[ this specification ]]
 
-   We would like to thank Brian Campbell, Deb Cooley, Jianjun Chen, Dan
-   Moore, Aaron Parecki, Filip Skokan, Tom Tervoort, Enze Wang, and
-   Jesse Yang for their contributions to the new content in this
-   specification.
+   We would like to thank Mike Bishop, Brian Campbell, Jianjun Chen, Deb
+   Cooley, Charles Eckel, Dan Moore, Aaron Parecki, Filip Skokan, Ketan
+   Talaulikar, Tom Tervoort, Enze Wang, and Jesse Yang for their
+   contributions to the new content in this specification.
 
 7.  References
 
 7.1.  Normative References
+
+   [I-D.ietf-jose-deprecate-none-rsa15]
+              Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
+              Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
+              rsa15-05, 23 June 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
+              deprecate-none-rsa15-05>.
 
    [nist-sp-800-56a-r3]
               Barker, E., Chen, L., Roginsky, A., Vassilev, A., and R.
@@ -850,15 +884,8 @@ Table of Contents
               Database, February 2024,
               <https://nvd.nist.gov/vuln/detail/CVE-2023-51774>.
 
-   [I-D.ietf-jose-deprecate-none-rsa15]
-              Madden, N., "JOSE: Deprecate 'none' and 'RSA1_5'", Work in
-              Progress, Internet-Draft, draft-ietf-jose-deprecate-none-
-              rsa15-05, 23 June 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-jose-
-              deprecate-none-rsa15-05>.
-
    [JWT-Cracker]
-              Rius, B., "JWT Cracker", n.d.,
+              Rius, B., "JWT Cracker",
               <https://github.com/brendan-rius/c-jwt-cracker>.
 
    [Kelsey]   Kelsey, J., "Compression and Information Leakage of
@@ -931,6 +958,12 @@ Table of Contents
               RFC 9700, DOI 10.17487/RFC9700, January 2025,
               <https://www.rfc-editor.org/rfc/rfc9700>.
 
+   [RFC9864]  Jones, M.B. and O. Steele, "Fully-Specified Algorithms for
+              JSON Object Signing and Encryption (JOSE) and CBOR Object
+              Signing and Encryption (COSE)", RFC 9864,
+              DOI 10.17487/RFC9864, October 2025,
+              <https://www.rfc-editor.org/rfc/rfc9864>.
+
    [Sanso]    Sanso, A., "Critical Vulnerability in JSON Web
               Encryption", March 2017, <https://auth0.com/blog/critical-
               vulnerability-in-json-web-encryption/>.
@@ -947,74 +980,125 @@ Appendix A.  Changes from RFC 8725
 
    1.  Algorithm Verification: Added defensive checking to address
        incorrect reading of alg values as being case-insensitive
-       (Section 3.1).
+       (Section 2.11 and Section 3.1).
 
    2.  Encryption-Signature Confusion: Added mitigation for attacks
        where verifiers don't distinguish between successful decryption
-       and successful signature validation (Section 3.12).
+       and successful signature validation (Section 2.3 and
+       Section 3.3).
 
    3.  PBES2 Count Limits: Added requirements to reject unreasonably
        large p2c (PBES2 Count) values to prevent DoS attacks
-       (Section 3.13).
+       (Section 2.10 and Section 3.13).
 
    4.  JWT Format Confusion: Added mitigation for JWT serialization
-       format confusion attacks (Section 3.14).
+       format confusion attacks (Section 2.13 and Section 3.14).
 
    5.  Compression DoS: Added mitigation for DoS attacks resulting from
-       abuse of compression in JWE (Section 3.15).
+       abuse of compression in JWE (Section 2.12 and Section 3.15).
 
-   6.  Described relationship between explicit typing and kinds of JWTs
-       not already employing it.
+   6.  Explicit Typing: Expanded the guidance on explicit typing by
+       defining recommended typ and media type conventions, recipient
+       processing rules, and deployment guidance for new and existing
+       JWT types (Section 3.11 and Section 3.12).
+
+   7.  Untrusted Header Parameters and SSRF: Added guidance on treating
+       kid, jku, and x5u as potentially attacker-controlled input,
+       including SSRF mitigations and DNS resolution checks when
+       processing untrusted URLs (Section 3.10).
+
+   8.  Normatively references [I-D.ietf-jose-deprecate-none-rsa15],
+       makes the text requiring application opt-in to use JWTs with
+       algorithm "none" a "MUST", and states that the RSA-PKCS1 v1.5
+       algorithms are deprecated.
 
 Appendix B.  Document History
 
    [[Note to RFC Editor: please remove before publication.]]
 
-B.1.  draft-ietf-oauth-rfc8725bis-07
+B.1.  draft-ietf-oauth-rfc8725bis-10
+
+   *  Added Charles Eckel to the Acknowledgements.
+
+B.2.  draft-ietf-oauth-rfc8725bis-09
+
+   *  Clarified that the JWE decompression size limit is a ballpark
+      drawn from deployed libraries (IESG review).
+
+   *  IESG nits: replaced "blindly" and added a missing comma after
+      "However".
+
+B.3.  draft-ietf-oauth-rfc8725bis-08
+
+   *  Clarified that Nested JWT validation applies when Nested JWTs are
+      supported (SECDIR review).
+
+   *  Applied IESG ballot comments by Ketan Talaulikar (Introduction
+      relationships, Compact Serialization and typ prefix citations).
+
+   *  Updated Appendix A (Changes from RFC 8725) with complete bullets
+      and section references.
+
+   *  Added an informative mention of fully-specified JOSE algorithm
+      identifiers ([RFC9864]).
+
+   *  Made the [I-D.ietf-jose-deprecate-none-rsa15] reference normative
+      and rewrote the text on "alg":"none" and RSA-PKCS1 v1.5
+      accordingly.
+
+   *  Corrected section reference and itemized list syntax and removed
+      extraneous spaces in the source.
+
+   *  Applied spelling and grammar corrections.
+
+B.4.  draft-ietf-oauth-rfc8725bis-07
+
+   *  Applied ARTART review suggestions for SHOULD language in Sections
+      3.1, 3.2, 3.6, and 3.10.
 
    *  Applied ARTART review suggestions regarding explicit typing
       (Section 3.11).
 
-B.2.  draft-ietf-oauth-rfc8725bis-06
+B.5.  draft-ietf-oauth-rfc8725bis-06
 
-   *  AD review followup: promoted selected lowercase must/should
+   *  AD review follow-up: Promoted selected lowercase must/should
       guidance to normative MUST language.
 
-B.3.  draft-ietf-oauth-rfc8725bis-05
+B.6.  draft-ietf-oauth-rfc8725bis-05
 
    *  Applied suggestions by responsible AD Deb Cooley.
 
-B.4.  draft-ietf-oauth-rfc8725bis-04
+B.7.  draft-ietf-oauth-rfc8725bis-04
 
    *  Applied suggestions by document shepherd Hannes Tschofenig.
 
-B.5.  draft-ietf-oauth-rfc8725bis-03
+B.8.  draft-ietf-oauth-rfc8725bis-03
 
    *  Described relationship between explicit typing and kinds of JWTs
       not already employing it.
 
-B.6.  draft-ietf-oauth-rfc8725bis-02
+B.9.  draft-ietf-oauth-rfc8725bis-02
 
    *  Incorporated Aaron Parecki's review suggestions.
 
    *  Acknowledged contributors to the new content in this
       specification.
 
-B.7.  draft-ietf-oauth-rfc8725bis-01
+B.10.  draft-ietf-oauth-rfc8725bis-01
 
    *  Applied editorial suggestions by Dan Moore.
 
    *  Described changes relative to RFC 8725.
 
-B.8.  draft-ietf-oauth-rfc8725bis-00
+B.11.  draft-ietf-oauth-rfc8725bis-00
 
    *  Draft adopted, no textual changes
 
-B.9.  draft-sheffer-oauth-rfc8725bis-02
+B.12.  draft-sheffer-oauth-rfc8725bis-02
 
    *  Obsoletes RFC 8725 and updates RFC 7519.
 
-B.10.  draft-sheffer-oauth-rfc8725bis-01
+B.13.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate encryption-signature confusion.
 
@@ -1027,14 +1111,14 @@ B.10.  draft-sheffer-oauth-rfc8725bis-01
 
    *  Mitigate JWT serialization format confusion.
 
-B.11.  draft-sheffer-oauth-rfc8725bis-00
+B.14.  draft-sheffer-oauth-rfc8725bis-00
 
    *  Initial version, text is identical to RFC 8725.
 
 Authors' Addresses
 
    Yaron Sheffer
-   Intuit
+   Independent
    Email: yaronf.ietf@gmail.com
 
 
