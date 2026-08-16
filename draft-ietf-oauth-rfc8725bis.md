@@ -830,6 +830,7 @@ Mike Bishop,
 Brian Campbell,
 Jianjun Chen,
 Deb Cooley,
+Charles Eckel,
 Dan Moore,
 Aaron Parecki,
 Filip Skokan,
@@ -867,6 +868,11 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 # Document History
 
 [[Note to RFC Editor: please remove before publication.]]
+
+
+## draft-ietf-oauth-rfc8725bis-10
+
+* Added Charles Eckel to the Acknowledgements.
 
 ## draft-ietf-oauth-rfc8725bis-09
 
