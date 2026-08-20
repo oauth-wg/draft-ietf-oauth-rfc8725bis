@@ -185,8 +185,7 @@ digital identity and in other application areas.  This Best Current
 Practices (BCP) specification updates RFC 7519 to provide actionable guidance
 leading to secure implementation and deployment of JWTs.
 
-This BCP specification furthermore obsoletes the existing JWT BCP
-specification RFC 8725 to provide additional actionable guidance
+This BCP specification furthermore obsoletes RFC 8725 to provide additional actionable guidance
 covering threats and attacks that have been discovered
 since RFC 8725 was published.
 
