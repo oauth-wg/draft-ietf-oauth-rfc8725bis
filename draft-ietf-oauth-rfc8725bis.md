@@ -826,6 +826,7 @@ for their reviews.
 
 We would like to thank
 Mike Bishop,
+Mohamed Boucadair,
 Brian Campbell,
 Jianjun Chen,
 Deb Cooley,
@@ -871,7 +872,7 @@ This document obsoletes RFC 8725 and provides several significant improvements a
 
 ## draft-ietf-oauth-rfc8725bis-10
 
-* Added Charles Eckel to the Acknowledgements.
+* Added Charles Eckel and Mohamed Boucadair to the Acknowledgements.
 
 ## draft-ietf-oauth-rfc8725bis-09
 
